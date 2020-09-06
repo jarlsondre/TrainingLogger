@@ -1,0 +1,7 @@
+tasks:
+  - init: mvn install -DskipTests=false
+image:
+  file: .gitpod.Dockerfile
+ports:
+  # used by virtual desktop and vnc, supports JavaFX
+  - port: 6080
