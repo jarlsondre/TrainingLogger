@@ -19,8 +19,6 @@ public class App extends Application{
 
     public static void main(String args[]) {
         launch(args);
-        Module module = App.class.getModule();
-        System.out.println("Module: " + module);
     }
 
 }
