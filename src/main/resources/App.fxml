@@ -9,25 +9,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="624.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="trainingLogger.ui.AppController">
+<AnchorPane prefHeight="624.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trainingLogger.ui.AppController">
 
    <VBox alignment="TOP_CENTER" layoutX="35.0" layoutY="99.0" prefHeight="200.0" prefWidth="531.0">
-      <TextArea fx:id="descriptionTextArea" prefHeight="167.0" prefWidth="531.0"/>
-      <Button fx:id="addDescriptionButton" mnemonicParsing="false" text="Legg til">
+      <TextArea fx:id="descriptionTextArea" prefHeight="167.0" prefWidth="531.0" />
+      <Button fx:id="addDescriptionButton" mnemonicParsing="false" onAction="#handleAddDescriptionButton" text="Legg til">
          <VBox.margin>
-            <Insets top="10.0"/>
+            <Insets top="10.0" />
          </VBox.margin>
       </Button>
    </VBox>
    <Label layoutX="195.0" layoutY="40.0" text="Training Logger">
       <font>
-         <Font size="32.0"/>
+         <Font size="32.0" />
       </font>
    </Label>
    <VBox layoutX="35.0" layoutY="312.0" prefHeight="274.0" prefWidth="531.0">
       <ScrollPane prefHeight="275.0" prefWidth="531.0">
-         <VBox fx:id="sessionOverviewVBox" prefHeight="303.0" prefWidth="512.0"/>
+         <VBox fx:id="sessionOverviewVBox" prefHeight="303.0" prefWidth="512.0" />
       </ScrollPane>
    </VBox>
 </AnchorPane>
