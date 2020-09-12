@@ -21,7 +21,7 @@ public class AppController {
         String description = descriptionTextArea.getText();  // Tar inn teksten fra TextArea
         descriptionTextArea.setText("");    // Fjerne teksten i TextArea
         if (!description.isEmpty()){        // Sjekker om strengen er tom, slik at vi ikke må behnadle en tom streng
-            System.out.println(description);
+            //Her kan du gjøre ting med strengen
         }
     }
 }
