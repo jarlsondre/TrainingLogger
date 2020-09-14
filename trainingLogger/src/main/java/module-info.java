@@ -4,4 +4,5 @@ module gr2001 {
 
     opens trainingLogger.ui to javafx.fxml;
     exports trainingLogger.ui;
+    exports trainingLogger.core;
 }
