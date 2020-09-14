@@ -1,6 +1,7 @@
 package trainingLogger.core;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Session{
 
@@ -10,10 +11,16 @@ public class Session{
 
     private String description; 
     private LocalDateTime date;
-    //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy"): for å formatere
+    private final DateTimeFormatter dtf; //kan endre hvis klokkeslett trengs
 
     public Session(){
         date = LocalDateTime.now();
+        dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    }
+    public Session(String description){
+        date = LocalDateTime.now();
+        dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        this.description = description;
     }
 
     public void setDescription(String description){
@@ -28,8 +35,8 @@ public class Session{
         return this.date;
     }
 
-    public static void main(String[] args){
-        Session s = new Session();
-        System.out.println(s.getDate());
+    public String getDateString(){
+        return dtf.format(date).toString();
     }
+
 }
