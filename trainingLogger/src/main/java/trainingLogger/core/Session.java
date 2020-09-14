@@ -1,5 +1,7 @@
 package trainingLogger.core;
 
+import java.time.LocalDateTime;
+
 public class Session{
 
 /* Et objekt av klassen "Session" tar vare på all informasjon rundt en økt. I førate omgang inneholder objektet:  
@@ -7,10 +9,11 @@ public class Session{
 - Datoen økten foregikk, lagret som en streng. */
 
     private String description; 
-    private final String date;
+    private LocalDateTime date;
+    //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy"): for å formatere
 
-    public Session(String date){
-        this.date = date;
+    public Session(){
+        date = LocalDateTime.now();
     }
 
     public void setDescription(String description){
@@ -21,4 +24,12 @@ public class Session{
         return this.description;
     }
 
+    public LocalDateTime getDate(){
+        return this.date;
+    }
+
+    public static void main(String[] args){
+        Session s = new Session();
+        System.out.println(s.getDate());
+    }
 }
