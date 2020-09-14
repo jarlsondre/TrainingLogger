@@ -10,10 +10,8 @@ public class App extends Application{
 
     @Override
     public void start(final Stage stage) throws Exception {
-        final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("App.fxml"));
-        final Parent root = fxmlLoader.load();
-        final Scene scene = new Scene(root);
-        stage.setScene(scene);
+        Parent parent = FXMLLoader.load(getClass().getResource("App.fxml"));
+        stage.setScene(new Scene(parent));
         stage.show();
     }
 
