@@ -4,7 +4,9 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+import trainingLogger.core.Session;
+
+
 
 public class AppController {
     @FXML
@@ -23,13 +25,8 @@ public class AppController {
         descriptionTextArea.setText("");    // Fjerne teksten i TextArea
         if (!description.isEmpty()){        // Sjekker om strengen er tom, slik at vi ikke må behnadle en tom streng
             //Her kan du gjøre ting med strengen
-            addStringWithTitleToSessionOverview("Økt numemr x", description); //Bare for å ha en funksjon her midlertidig.
+            addSessionToSessionOverview(new Session(description)); //Bare for å ha en funksjon her midlertidig.
         }
-    }
-
-
-    public void addStringToSessionOverview(String string){
-         sessionOverviewVBox.getChildren().add(new Text(string));
     }
 
 
@@ -37,12 +34,16 @@ public class AppController {
     public void addStringWithTitleToSessionOverview(String title, String description){
         VBox vBox = new VBox();
         vBox.getChildren().add(new Label(description));
-        TitledPane titledPane = new TitledPane("Title" ,vBox);
+        TitledPane titledPane = new TitledPane(title ,vBox);
         titledPane.setAlignment(Pos.CENTER_LEFT);
         titledPane.setExpanded(false);
-
-        sessionOverviewVBox.getChildren().add(titledPane);
-
-
+        sessionOverviewVBox.getChildren().add(0, titledPane);
     }
+
+    public void addSessionToSessionOverview(Session session){
+        addStringWithTitleToSessionOverview(session.getDateString(),
+                session.getDescription());
+    }
+
+
 }
