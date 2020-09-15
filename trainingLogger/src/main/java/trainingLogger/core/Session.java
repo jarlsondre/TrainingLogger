@@ -3,7 +3,10 @@ package trainingLogger.core;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Session{
+import javafx.util.converter.LocalDateStringConverter;
+import javafx.util.converter.LocalDateTimeStringConverter;
+
+public class Session {
 
 /* Et objekt av klassen "Session" tar vare på all informasjon rundt en økt. I førate omgang inneholder objektet:  
 - En beskrivelse av økten. 
@@ -39,4 +42,23 @@ public class Session{
         return dtf.format(date).toString();
     }
 
+    //Tar inn en streng på formen "dd/MM/yyyy HH:mm", og setter atributten "date" lik datoen strengen beskriver.
+    public void setDate(String date){
+        LocalDateTimeStringConverter converter = new LocalDateTimeStringConverter();
+        LocalDateTime d = converter.fromString(date);
+        this.date = d;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        if(!(object instanceof Session)){
+            return false;
+        }
+        Session session = (Session) object;
+        if(session.getDate().equals(this.getDate()) &&
+         session.getDescription().equals(this.getDescription())){
+             return true;
+        }
+        return false;
+    }
 }
