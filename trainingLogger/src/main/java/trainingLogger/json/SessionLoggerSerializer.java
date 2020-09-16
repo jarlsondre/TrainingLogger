@@ -9,8 +9,9 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import trainingLogger.core.Session;
+import trainingLogger.core.SessionLogger;
 
-public class SessionListSerializer extends JsonSerializer<ArrayList<Session>> {
+public class SessionLoggerSerializer extends JsonSerializer<SessionLogger> {
 
 
     /*
@@ -19,11 +20,11 @@ public class SessionListSerializer extends JsonSerializer<ArrayList<Session>> {
    */
 
     @Override
-    public void serialize(ArrayList<Session> ar, JsonGenerator gen, SerializerProvider serializers)
+    public void serialize(SessionLogger logger, JsonGenerator gen, SerializerProvider serializers)
             throws IOException {
         gen.writeStartObject();
         gen.writeArrayFieldStart("sessions");
-        for(Session s : ar){
+        for(Session s : logger){
             gen.writeObject(s);
         }
         gen.writeEndArray();
