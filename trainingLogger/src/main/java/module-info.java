@@ -1,5 +1,6 @@
 module gr2001 {
     requires javafx.controls;
+    requires transitive javafx.graphics;
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
 
