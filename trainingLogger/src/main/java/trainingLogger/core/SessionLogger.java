@@ -9,7 +9,7 @@ public class SessionLogger implements Iterable<Session> {
     private List<Session> sessions = new ArrayList<Session>();
 
     @Override
-    public Iterator iterator() {
+    public Iterator<Session> iterator() {
         return sessions.iterator();
     }
 
