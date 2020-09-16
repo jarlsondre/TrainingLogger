@@ -1,6 +1,7 @@
 package trainingLogger.json;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -38,7 +39,7 @@ public class ModuleTest {
     public void testDeserializer() {
         Session session = null;
         try {
-            session = this.mapper.readValue(
+            session = ModuleTest.mapper.readValue(
                     "{\"stringDescription\":\"det var en fin økt\",\"date\":\"15/09/2020 10:02\"}", Session.class);
         } catch (JsonMappingException e) {
             fail();
@@ -49,5 +50,7 @@ public class ModuleTest {
         test_Session.setDate("15/09/2020 10:02");
         assertEquals(test_Session, session);
     }
+
+    //Legge til figur av klassediagram og "endelig" produkt
 
 }

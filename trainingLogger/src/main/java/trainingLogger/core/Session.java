@@ -3,9 +3,6 @@ package trainingLogger.core;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import javafx.util.converter.LocalDateStringConverter;
-import javafx.util.converter.LocalDateTimeStringConverter;
-
 public class Session {
 
 /* Et objekt av klassen "Session" tar vare på all informasjon rundt en økt. I førate omgang inneholder objektet:  
@@ -44,8 +41,7 @@ public class Session {
 
     //Tar inn en streng på formen "dd/MM/yyyy HH:mm", og setter atributten "date" lik datoen strengen beskriver.
     public void setDate(String date){
-        LocalDateTimeStringConverter converter = new LocalDateTimeStringConverter();
-        LocalDateTime d = converter.fromString(date);
+        LocalDateTime d = LocalDateTime.parse(date, this.dtf);
         this.date = d;
     }
 

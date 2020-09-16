@@ -28,7 +28,7 @@ public class SessionDeserializer extends JsonDeserializer<Session> {
             }
             JsonNode textNode2 = node.get("date");
             if (textNode2 instanceof TextNode) {
-                session.setDescription(((TextNode) textNode2).asText());
+                session.setDate(((TextNode) textNode2).asText());
             }
             return session;
         }
