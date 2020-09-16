@@ -1,5 +1,8 @@
 package trainingLogger.json;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import com.fasterxml.jackson.core.util.VersionUtil;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
@@ -15,6 +18,7 @@ public class TrainingLoggerModule extends SimpleModule {
         super(NAME, VERSION_UTIL.version());
         addSerializer(Session.class, new SessionSerializer());
         addDeserializer(Session.class, new SessionDeserializer());
+       // addSerializer(ArrayList.class, new SessionListSerializer());
     }
 
 }

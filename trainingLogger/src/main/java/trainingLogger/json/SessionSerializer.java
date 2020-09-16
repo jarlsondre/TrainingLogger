@@ -12,10 +12,7 @@ public class SessionSerializer extends JsonSerializer<Session>{
 
     /*
     format: 
-    {
-        "stringDescription": " ... "
-        "date": "dd/MM/yyyy HH:mm"
-    }
+    {"stringDescription": " ... ","date": "dd/MM/yyyy HH:mm"}
     */
 
     @Override
