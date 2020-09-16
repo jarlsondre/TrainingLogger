@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import trainingLogger.core.Session;
+import trainingLogger.core.SessionLogger;
 
 public class ModuleTest {
 
@@ -23,7 +24,7 @@ public class ModuleTest {
     }
 
     @Test
-    public void testSerializer() {
+    public void testSessionSerializer() {
         Session session = new Session("det var en fin økt");
         session.setDate("15/09/2020 10:02");
         try {
@@ -35,7 +36,7 @@ public class ModuleTest {
     }
 
     @Test
-    public void testDeserializer() {
+    public void testSessionDeserializer() {
         Session session = null;
         try {
             session = ModuleTest.mapper.readValue(
@@ -50,6 +51,45 @@ public class ModuleTest {
         assertEquals(test_Session, session);
     }
 
-    //Legge til figur av klassediagram og "endelig" produkt
+    @Test
+    public void testSessionLoggerSerializer(){
+        SessionLogger logger = new SessionLogger();
+        Session session1 = new Session("fin og bra");
+        session1.setDate("16/09/2020 15:42");
+        Session session2 = new Session("braa");
+        session2.setDate("16/09/2020 15:42");
+        logger.addSession(session1);
+        logger.addSession(session2);
+        try {
+            assertEquals("{\"sessions\":[{\"stringDescription\":\"fin og bra\",\"date\":\"16/09/2020 15:42\"},{\"stringDescription\":\"braa\",\"date\":\"16/09/2020 15:42\"}]}", 
+            mapper.writeValueAsString(logger));
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testSessionLoggerDeserializer(){
+        SessionLogger logger = null;
+        try {
+            logger = ModuleTest.mapper.readValue(
+                    "{\"sessions\":[{\"stringDescription\":\"fin og bra\",\"date\":\"16/09/2020 15:42\"},{\"stringDescription\":\"braa\",\"date\":\"16/09/2020 15:42\"}]}", SessionLogger.class);
+        } catch (JsonMappingException e) {
+            fail();
+        } catch (JsonProcessingException e) {
+            fail();
+        }
+        SessionLogger test_logger = new SessionLogger();
+        Session session1 = new Session("fin og bra");
+        session1.setDate("16/09/2020 15:42");
+        Session session2 = new Session("braa");
+        session2.setDate("16/09/2020 15:42");
+        test_logger.addSession(session1);
+        test_logger.addSession(session2);
+        //assertEquals(test_logger, logger);
+    }
+
+
+
 
 }

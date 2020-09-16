@@ -2,6 +2,8 @@ package trainingLogger.json;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +18,8 @@ public class FileHandler {
         return mapper;
     }
     
-    public static void writeToFile(Writer writer, SessionLogger logger) throws IOException {
+    public static void writeToFile(OutputStream out, SessionLogger logger) throws IOException {
+        Writer writer = new OutputStreamWriter(out);
         ObjectMapper mapper = FileHandler.makeMapper();
         writer.write(mapper.writeValueAsString(logger));
     }
