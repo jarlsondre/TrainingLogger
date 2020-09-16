@@ -5,9 +5,17 @@ en app som hjelper deg med å loggføre dine gjennomførte treningsøkter, samt 
 
 ## Beskrivelse
 
-// Mer detaljert beskrivelse av den ferdige appen her
+- Mer detaljert beskrivelse av den ferdige appen
+
+ - Om den logiske strukturen, forklarer med klassediagram
+
+![KlassediagramCore](resources/KlasseDiagramCore.png)
+
+- Om hvordan appen ser ut så langt (med bilde) og hva vi ser for oss tilslutt
 
 ![Eksempel](resources/LoggEksempel.png)
+
+
 
 ## Brukerhistorie 1: Loggføre treningsøkten
 
