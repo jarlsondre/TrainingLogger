@@ -7,6 +7,8 @@ en app som hjelper deg med å loggføre dine gjennomførte treningsøkter, samt 
 
 // Mer detaljert beskrivelse av den ferdige appen her
 
+![Eksempel](resources/LoggEksempel.png)
+
 ## Brukerhistorie 1: Loggføre treningsøkten
 
 Vi har brukt følgende brukerhistore som utgangspunkt for hvilken funksjonalitet vi i første omgang har implementert:
