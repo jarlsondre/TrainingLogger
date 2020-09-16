@@ -8,6 +8,4 @@ Repoets innhold:
     - .gitpod.yml
     - .gitpod.Dockerfile
 - Brukerhistorier.md inneholder to brukerhistorier
-- Mappen trainingLogger
-
-Selve kodingsprosjektet ligger i traningLogger/src.
+- Mappen trainingLogger der selve kodingsprosjektet ligger
