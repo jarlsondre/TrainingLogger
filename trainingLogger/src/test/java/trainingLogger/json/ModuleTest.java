@@ -51,45 +51,4 @@ public class ModuleTest {
         assertEquals(test_Session, session);
     }
 
-    @Test
-    public void testSessionLoggerSerializer(){
-        SessionLogger logger = new SessionLogger();
-        Session session1 = new Session("fin og bra");
-        session1.setDate("16/09/2020 15:42");
-        Session session2 = new Session("braa");
-        session2.setDate("16/09/2020 15:42");
-        logger.addSession(session1);
-        logger.addSession(session2);
-        try {
-            assertEquals("{\"sessions\":[{\"stringDescription\":\"fin og bra\",\"date\":\"16/09/2020 15:42\"},{\"stringDescription\":\"braa\",\"date\":\"16/09/2020 15:42\"}]}", 
-            mapper.writeValueAsString(logger));
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void testSessionLoggerDeserializer(){
-        SessionLogger logger = null;
-        try {
-            logger = ModuleTest.mapper.readValue(
-                    "{\"sessions\":[{\"stringDescription\":\"fin og bra\",\"date\":\"16/09/2020 15:42\"},{\"stringDescription\":\"braa\",\"date\":\"16/09/2020 15:42\"}]}", SessionLogger.class);
-        } catch (JsonMappingException e) {
-            fail();
-        } catch (JsonProcessingException e) {
-            fail();
-        }
-        SessionLogger test_logger = new SessionLogger();
-        Session session1 = new Session("fin og bra");
-        session1.setDate("16/09/2020 15:42");
-        Session session2 = new Session("braa");
-        session2.setDate("16/09/2020 15:42");
-        test_logger.addSession(session1);
-        test_logger.addSession(session2);
-        //assertEquals(test_logger, logger);
-    }
-
-
-
-
 }

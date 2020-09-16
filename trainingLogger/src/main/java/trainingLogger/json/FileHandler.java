@@ -5,9 +5,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.List;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import trainingLogger.core.Session;
 import trainingLogger.core.SessionLogger;
 
 public class FileHandler {
@@ -18,16 +21,16 @@ public class FileHandler {
         return mapper;
     }
     
-    public static void writeToFile(OutputStream out, SessionLogger logger) throws IOException {
+    public static void writeToFile(OutputStream out, List<Session> sessions) throws IOException {
         Writer writer = new OutputStreamWriter(out);
         ObjectMapper mapper = FileHandler.makeMapper();
-        writer.write(mapper.writeValueAsString(logger));
+        writer.write(mapper.writeValueAsString(sessions));
     }
 
-    public static SessionLogger readFromFile(InputStream in) throws IOException{
-        ObjectMapper mapper = FileHandler.makeMapper(); 
-        SessionLogger logger = mapper.readValue(in, SessionLogger.class);
-        return logger;
+    public static List<Session> readFromFile(InputStream in) throws IOException{
+        ObjectMapper mapper = FileHandler.makeMapper();  
+        List<Session> sessions = mapper.readValue(in, new TypeReference<List<Session>>() {});
+        return sessions;
     }
 
 
