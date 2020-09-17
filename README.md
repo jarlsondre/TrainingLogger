@@ -7,13 +7,13 @@ selve applikasjonen finnes i [README](trainingLogger/README.md) i applikasjonsma
 
 ## Forklaring av mappestruktur
 Prosjektet er bygd med mappestruktur i henhold til Maven. Strukturen vår ser slik ut:
-- **src/main/java**: Her ligger mappene med alle java-klassene våre
-    - **core**: her ligger alle filene som har med øktene og lagring å gjøre
-    - **json**: her ligger alle filene som har med json å gjøre
-    - **ui**: her ligger alle kontrollerne og filer for kjøring av prosjektet
-- **src/main/resources**: Her ligger alle ressursene som brukes av applikasjonen vår 
+- [**src/main/java**](trainingLogger/src/main/java): Her ligger mappene med alle java-klassene våre
+    - [**core**](trainingLogger/src/main/java/core): her ligger alle filene som har med øktene og lagring å gjøre
+    - [**json**](trainingLogger/src/main/java/json): her ligger alle filene som har med json å gjøre
+    - [**ui**](trainingLogger/src/main/java/ui): her ligger alle kontrollerne og filer for kjøring av prosjektet
+- [**src/main/resources**](trainingLogger/src/main/resources): Her ligger alle ressursene som brukes av applikasjonen vår 
 (fxml-filer, bilder o.l.)
-- **src/test/java**: Her skal alle tester til koden ligge
+- [**src/test/java**](trainingLogger/src/test/java): Her ligger alle testene til klassene i src/main/java
 
 ### Build-filer
 Build-filene vi bruker ligger på rotnivå (utenom pom.xml som ligger under prosjektmappen). 

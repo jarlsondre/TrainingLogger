@@ -79,7 +79,12 @@ Dette er et bilde av hvordan applikasjonen ser ut ved gruppeinnlevering 1.
 
 ## Tenkt utseende til sluttprodukt
 
-[bilde her]
+Det tenkes at sluttproduktet skal ha en startskjerm med brukerinnlogging. Her skal man kunne skrive inn 
+brukernavn og passord, og trykke på en "logg inn"-knapp. Etter dette vil brukeren komme til en oversiktsskjerm
+med en liste med knapper. Disse knappene skal forflytte brukeren inn på riktig skjerm avhengig av valget til brukeren.
+Her skal brukeren kunne velge mellom tidligere økter, progresjon og en oversikt over personlige rekorder. Dersom
+brukeren trykker seg inn for å se tidlgiere økter, så vil denne skjermen se tilsvarende ut til den vi har laget
+til gruppeinnlevering 1. 
 
 
 ## Brukerhistorie 1: Loggføre treningsøkten
