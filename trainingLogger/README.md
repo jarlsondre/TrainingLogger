@@ -52,9 +52,20 @@ Klassediagram:
 
 ### trainingLogger.json
 
-Består av klassene 
+Består av klassene... 
+
+Klassediagram:
 
 ![KlassediagramJson](resources/KlasseDiagramJson.png)
+
+### traningLogger.ui
+
+Består av klassene App og AppController. App er hovedklassen som applikasjonen kjøres fra. AppController 
+binder UI-laget sammen med domenelaget via sin kobling til core.SessionLogger.
+
+Klassediagram:
+
+![KlassediagramUi](resources/KlasseDiagramUi.png)
 
 ## Nåværende utseende av applikasjonen
 Dette er et bilde av hvordan applikasjonen ser ut ved gruppeinnlevering 1. 
