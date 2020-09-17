@@ -40,7 +40,7 @@ public class AppController {
 
     public void updateSessionOverview(){
         sessionOverviewVBox.getChildren().clear();
-        for (Session session: sessionLogger.getSessions()){
+        for (Session session: sessionLogger){
             addSessionToSessionOverview(session);
         }
     }

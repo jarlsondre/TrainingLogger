@@ -20,8 +20,6 @@ public class SessionLogger implements Iterable<Session> {
         sessions.add(session);
     }
 
-    public List<Session> getSessions() {return this.sessions;}
-
     public boolean load(){
         // Kaller statisk metode i FileHandler
         // Resultatet er at sessions fylles opp med Session-objekter
