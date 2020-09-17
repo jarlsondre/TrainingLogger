@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import trainingLogger.core.Session;
+import trainingLogger.core.SessionLogger;
 
 public class ModuleTest {
 
@@ -24,7 +25,7 @@ public class ModuleTest {
     }
 
     @Test
-    public void testSerializer() {
+    public void testSessionSerializer() {
         Session session = new Session("det var en fin økt");
         session.setDate("15/09/2020 10:02");
         try {
@@ -36,7 +37,7 @@ public class ModuleTest {
     }
 
     @Test
-    public void testDeserializer() {
+    public void testSessionDeserializer() {
         Session session = null;
         try {
             session = ModuleTest.mapper.readValue(
@@ -50,7 +51,5 @@ public class ModuleTest {
         test_Session.setDate("15/09/2020 10:02");
         assertEquals(test_Session, session);
     }
-
-    //Legge til figur av klassediagram og "endelig" produkt
 
 }

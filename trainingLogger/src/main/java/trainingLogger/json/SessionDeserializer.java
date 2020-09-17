@@ -19,8 +19,12 @@ public class SessionDeserializer extends JsonDeserializer<Session> {
     public Session deserialize(JsonParser parser, DeserializationContext ctxt)
             throws IOException, JsonProcessingException {
         TreeNode treenode = parser.getCodec().readTree(parser);
-        if (treenode instanceof ObjectNode) {
-            ObjectNode node = (ObjectNode) treenode;
+        return this.deserialize((JsonNode) treenode);
+    }
+
+    public Session deserialize(JsonNode jnode){
+        if (jnode instanceof ObjectNode) {
+            ObjectNode node = (ObjectNode) jnode;
             Session session = new Session();
             JsonNode textNode1 = node.get("stringDescription");
             if (textNode1 instanceof TextNode) {
@@ -33,6 +37,7 @@ public class SessionDeserializer extends JsonDeserializer<Session> {
             return session;
         }
         return null;
+        
     }
 
 }
