@@ -7,6 +7,8 @@ en app som hjelper deg med å loggføre dine gjennomførte treningsøkter, samt 
 
 - Mer detaljert beskrivelse av den ferdige appen
 
+## Logisk struktur
+
  - Om den logiske strukturen, forklarer med klassediagram
 
 ![KlassediagramCore](resources/KlasseDiagramCore.png)
