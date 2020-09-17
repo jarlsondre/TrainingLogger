@@ -52,7 +52,12 @@ Klassediagram:
 
 ### trainingLogger.json
 
-Består av klassene... 
+Består av klassene SessionSerializer, SessionDeserializer, TraingingLoggerModule og FileHandler. FileHandler håndterer operasjonene:
+- Skrive liste med sessions til json formatert fil
+- Lese ut listeobjektet fra json formatert fil
+
+SessionSerializer og SessionDeserializer konverterer henholdsvis Sessions til JSON format og JSON format til Sessions.
+TrainingLoggerModule tar vare på hvilken serialiserer og deserialiserer som hører til Session klassen.
 
 Klassediagram:
 
