@@ -33,11 +33,26 @@ annet kunne holde styr på rundetider, ukentlige kilometer, tempo og personlige 
 
 ## Logisk struktur
 
-Applikasjonen har et SessionLogger-objekt som tar vare på alle øktene (Sessions) som er lagret. Hver Session
-har en streng som inneholder beskrivelsen av økten og et LocalDateTime-objekt som tar vare på når
-økten ble opprettet. 
+Applikasjonen er bygget opp med en typisk trelagsstruktur. De tre arkitekutrlagene domenelogikk, brukergrensesnitt og persistens 
+er håndtert i de tre pakkene traningLogger.core, .ui og .json. Nedenfor følger en konseptuell beskrivelse av de tre pakkene, deres tilhørende klasser 
+og hvordan disse binder appen sammen til en enhet. 
+
+Vedlagt er også klassediagram. Rød markering er private attributter og prikkete linjer er 
+forbindelser til klasser utenfor sin egen pakke.
+
+### traningLogger.core
+
+Består av klassene Session og SessionLogger. Et Session-objekt representerer en enkelt 
+treningsøkt, mens SessionLogger er en container-klasse for Session-objekter. SessionLogger er også ansvarlig 
+for å binde domenelaget sammen med UI-laget og persisenslaget via sine koblinger til ui.AppController og json.FileHandler.
+
+Klassediagram:
 
 ![KlassediagramCore](resources/KlasseDiagramCore.png)
+
+### trainingLogger.json
+
+Består av klassene 
 
 ![KlassediagramJson](resources/KlasseDiagramJson.png)
 
