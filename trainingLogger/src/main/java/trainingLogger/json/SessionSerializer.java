@@ -11,6 +11,7 @@ import trainingLogger.core.Session;
 public class SessionSerializer extends JsonSerializer<Session>{
 
     /*
+    Denne klassen inneholdet metoden serialize for å konvertere et objekt til json format.
     format: 
     {
         "stringDescription": " ... "

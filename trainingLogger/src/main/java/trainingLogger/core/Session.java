@@ -7,16 +7,20 @@ public class Session {
 
 /* Et objekt av klassen "Session" tar vare på all informasjon rundt en økt. I førate omgang inneholder objektet:  
 - En beskrivelse av økten. 
-- Datoen økten foregikk, lagret som en streng. */
+- Datoen økten foregikk, lagret som et LocalDateTime objekt. Datoen skal være formet som dette: dd/MM/yyyy HH:mm.
+Datoen blir generert automatisk ved opprettelse av objektet. */
 
     private String description; 
     private LocalDateTime date;
     private final DateTimeFormatter dtf; //kan endre hvis klokkeslett trengs
 
+    //Konstruktor som ikke tar inn beskrivelse.
     public Session(){
         date = LocalDateTime.now();
         dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     }
+
+    //Konstruktør som tar inn beskrivelse.
     public Session(String description){
         date = LocalDateTime.now();
         dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -45,6 +49,10 @@ public class Session {
         this.date = d;
     }
 
+    /*
+    Sammenlikner dette objektet med objektet som blir tatt inn som argument.
+    Objektene er like om de har samme beskivelse og dato.
+    */
     @Override
     public boolean equals(Object object){
         if(!(object instanceof Session)){
