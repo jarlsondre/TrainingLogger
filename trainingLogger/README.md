@@ -11,6 +11,8 @@ en app som hjelper deg med å loggføre dine gjennomførte treningsøkter, samt 
 
 ![KlassediagramCore](resources/KlasseDiagramCore.png)
 
+![KlassediagramJson](resources/KlasseDiagramJson.png)
+
 - Om hvordan appen ser ut så langt (med bilde) og hva vi ser for oss tilslutt
 
 ![Eksempel](resources/LoggEksempel.png)
