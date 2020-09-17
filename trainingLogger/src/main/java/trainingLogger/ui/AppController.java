@@ -13,6 +13,9 @@ public class AppController {
     Button addDescriptionButton;
 
     @FXML
+    Button loadButton, saveButton, deleteButton;
+
+    @FXML
     TextArea descriptionTextArea;
 
     @FXML
@@ -44,6 +47,25 @@ public class AppController {
         addStringWithTitleToSessionOverview(session.getDateString(),
                 session.getDescription());
     }
+
+    @FXML
+    public void saveButtonHandler(){
+        System.out.println("Save");
+
+    }
+
+    @FXML
+    public void loadButtonHandler(){
+        System.out.println("Load");
+    }
+
+    @FXML
+    public void deleteButtonHandler(){
+        System.out.println("Delete");
+
+    }
+
+
 
 
 }
