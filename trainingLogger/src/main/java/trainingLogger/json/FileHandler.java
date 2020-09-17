@@ -11,7 +11,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import trainingLogger.core.Session;
-import trainingLogger.core.SessionLogger;
 
 public class FileHandler {
 
@@ -24,7 +23,8 @@ public class FileHandler {
     public static void writeToFile(OutputStream out, List<Session> sessions) throws IOException {
         Writer writer = new OutputStreamWriter(out);
         ObjectMapper mapper = FileHandler.makeMapper();
-        writer.write(mapper.writeValueAsString(sessions));
+        mapper.writeValue(writer, sessions);
+
     }
 
     public static List<Session> readFromFile(InputStream in) throws IOException{
