@@ -2,7 +2,7 @@
 
 # Training Logger
 
-Dette er mappen som ligger i rot-nivået til applikasjonen Training Logger. Mer informasjone om
+Dette er mappen som ligger i rot-nivået til applikasjonen Training Logger. Mer informasjon om
 selve applikasjonen finnes i [README](trainingLogger/README.md) i applikasjonsmappen. 
 
 ## Forklaring av mappestruktur
@@ -13,7 +13,7 @@ Prosjektet er bygd med mappestruktur i henhold til Maven. Strukturen vår ser sl
     - **ui**: her ligger alle kontrollerne og filer for kjøring av prosjektet
 - **src/main/resources**: Her ligger alle ressursene som brukes av applikasjonen vår 
 (fxml-filer, bilder o.l.)
-- **src/java/java**: Her skal alle tester til koden ligge
+- **src/test/java**: Her skal alle tester til koden ligge
 
 ### Build-filer
 Build-filene vi bruker ligger på rotnivå (utenom pom.xml som ligger under prosjektmappen). 
@@ -21,5 +21,5 @@ Filer for Gitpod-konfigurasjon
 - .gitpod.yml
 - .gitpod.Dockerfile
 
-Brukerhistorier.md inneholder to brukerhistorier
-Mappen trainingLogger der selve kodingsprosjektet ligger
+Brukerhistorier.md inneholder to brukerhistorier.
+Mappen trainingLogger inneholder selve kodingsprosjektet.
