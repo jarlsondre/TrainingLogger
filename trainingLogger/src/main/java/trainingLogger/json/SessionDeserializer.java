@@ -15,6 +15,15 @@ import trainingLogger.core.Session;
 
 public class SessionDeserializer extends JsonDeserializer<Session> {
 
+    /*
+    Denne klassen inneholder metoden deserializer, som konverterer et json formatert session objekt tilbake til objektet.
+    Objektet må ha formatet:
+     {
+        "stringDescription": " ... "
+        "date": "dd/MM/yyyy HH:mm"
+    }
+    */
+
     @Override
     public Session deserialize(JsonParser parser, DeserializationContext ctxt)
             throws IOException, JsonProcessingException {
