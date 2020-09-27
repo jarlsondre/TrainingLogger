@@ -8,25 +8,20 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import trainingLogger.core.Session;
 
-public class SessionSerializer extends JsonSerializer<Session>{
+public class SessionSerializer extends JsonSerializer<Session> {
 
-    /*
-    Denne klassen inneholdet metoden serialize for å konvertere et objekt til json format.
-    format: 
-    {
-        "stringDescription": " ... "
-        "date": "dd/MM/yyyy HH:mm"
-    }
-    */
+  /*
+   * Denne klassen inneholdet metoden serialize for å konvertere et objekt til
+   * json format. format: { "stringDescription": " ... " "date":
+   * "dd/MM/yyyy HH:mm" }
+   */
 
-    @Override
-    public void serialize(Session session, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
-        jGen.writeStartObject();
-        jGen.writeStringField("stringDescription", session.getDescription());
-        jGen.writeStringField("date", session.getDateString());
-        jGen.writeEndObject();
-    }
-
-
+  @Override
+  public void serialize(Session session, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
+    jGen.writeStartObject();
+    jGen.writeStringField("stringDescription", session.getDescription());
+    jGen.writeStringField("date", session.getDateString());
+    jGen.writeEndObject();
+  }
 
 }
