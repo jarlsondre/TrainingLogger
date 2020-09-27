@@ -28,7 +28,7 @@ public class FileHandler {
     
     //Statisk metode som skriver en liste med sessions til fil med bruk av json.
     public static void writeToFile(OutputStream out, List<Session> sessions) throws IOException {
-        Writer writer = new OutputStreamWriter(out);
+        Writer writer = new OutputStreamWriter(out, "UTF-8");
         ObjectMapper mapper = FileHandler.makeMapper();
         mapper.writeValue(writer, sessions);
 
