@@ -2,7 +2,10 @@ package trainingLogger.ui;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import trainingLogger.core.Session;
 import trainingLogger.core.SessionLogger;
@@ -12,13 +15,19 @@ public class AppController {
   Button addDescriptionButton;
 
   @FXML
-  Button loadButton, saveButton, deleteButton;
+  Button loadButton;
+  
+  @FXML 
+  Button saveButton;
+
+  @FXML
+  Button deleteButton;
 
   @FXML
   TextArea descriptionTextArea;
 
   @FXML
-  VBox sessionOverviewVBox;
+  VBox sessionOverviewBox;
 
   SessionLogger sessionLogger = new SessionLogger();
 
@@ -26,7 +35,8 @@ public class AppController {
   public void handleAddDescriptionButton() {
     String description = descriptionTextArea.getText(); // Tar inn teksten fra TextArea
     descriptionTextArea.setText(""); // Fjerne teksten i TextArea
-    if (!description.isEmpty()) { // Sjekker om strengen er tom, slik at vi ikke må behnadle en tom streng
+    if (!description.isEmpty()) { // Sjekker om strengen er tom, 
+      // slik at vi ikke må behnadle en tom streng.
       // Her kan du gjøre ting med strengen
       // addSessionToSessionOverview(new Session(description)); //Bare for å ha en
       // funksjon her midlertidig.
@@ -36,21 +46,21 @@ public class AppController {
   }
 
   public void updateSessionOverview() {
-    sessionOverviewVBox.getChildren().clear();
+    sessionOverviewBox.getChildren().clear();
     for (Session session : sessionLogger) {
       addSessionToSessionOverview(session);
     }
   }
 
-  // Legger til en titlePane med en vBox som kan fylles med innhold. Her blir
+  // Legger til en titlePane med en VBox som kan fylles med innhold. Her blir
   // descrption lagt til som en label i vboxen
   public void addStringWithTitleToSessionOverview(String title, String description) {
-    VBox vBox = new VBox();
-    vBox.getChildren().add(new Label(description));
-    TitledPane titledPane = new TitledPane(title, vBox);
+    VBox box = new VBox();
+    box.getChildren().add(new Label(description));
+    TitledPane titledPane = new TitledPane(title, box);
     titledPane.setAlignment(Pos.CENTER_LEFT);
     titledPane.setExpanded(false);
-    sessionOverviewVBox.getChildren().add(0, titledPane);
+    sessionOverviewBox.getChildren().add(0, titledPane);
   }
 
   public void addSessionToSessionOverview(Session session) {

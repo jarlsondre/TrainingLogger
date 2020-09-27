@@ -1,11 +1,9 @@
 package trainingLogger.json;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
+import java.io.IOException;
 import trainingLogger.core.Session;
 
 public class SessionSerializer extends JsonSerializer<Session> {
@@ -17,11 +15,12 @@ public class SessionSerializer extends JsonSerializer<Session> {
    */
 
   @Override
-  public void serialize(Session session, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
-    jGen.writeStartObject();
-    jGen.writeStringField("stringDescription", session.getDescription());
-    jGen.writeStringField("date", session.getDateString());
-    jGen.writeEndObject();
+  public void serialize(Session session, JsonGenerator gen, SerializerProvider serializerProvider)
+      throws IOException {
+    gen.writeStartObject();
+    gen.writeStringField("stringDescription", session.getDescription());
+    gen.writeStringField("date", session.getDateString());
+    gen.writeEndObject();
   }
 
 }
