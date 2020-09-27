@@ -1,4 +1,4 @@
-package trainingLogger.json;
+package traininglogger.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
-import trainingLogger.core.Session;
+import traininglogger.core.Session;
 
 public class FileHandler {
 

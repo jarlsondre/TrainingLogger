@@ -1,4 +1,4 @@
-package trainingLogger.ui;
+package traininglogger.ui;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -7,8 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
-import trainingLogger.core.Session;
-import trainingLogger.core.SessionLogger;
+import traininglogger.core.Session;
+import traininglogger.core.SessionLogger;
 
 public class AppController {
   @FXML

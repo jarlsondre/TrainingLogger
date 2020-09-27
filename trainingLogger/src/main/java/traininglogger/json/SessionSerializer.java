@@ -1,10 +1,10 @@
-package trainingLogger.json;
+package traininglogger.json;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
-import trainingLogger.core.Session;
+import traininglogger.core.Session;
 
 public class SessionSerializer extends JsonSerializer<Session> {
 

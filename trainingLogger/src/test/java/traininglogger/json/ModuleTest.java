@@ -1,4 +1,4 @@
-package trainingLogger.json;
+package traininglogger.json;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import trainingLogger.core.Session;
+import traininglogger.core.Session;
 
 public class ModuleTest {
 

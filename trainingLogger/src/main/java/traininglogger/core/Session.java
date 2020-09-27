@@ -1,4 +1,4 @@
-package trainingLogger.core;
+package traininglogger.core;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

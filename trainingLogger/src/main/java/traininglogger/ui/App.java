@@ -1,4 +1,4 @@
-package trainingLogger.ui;
+package traininglogger.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

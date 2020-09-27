@@ -1,4 +1,4 @@
-package trainingLogger.core;
+package traininglogger.core;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import trainingLogger.json.FileHandler;
+import traininglogger.json.FileHandler;
 
 public class SessionLogger implements Iterable<Session> {
 
