@@ -68,13 +68,26 @@ public class Session {
         }
         return false;
     }
-    // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å plassere Session-objekter
+
+    // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
+    // plassere Session-objekter
     // i et HashMap eller en HashTable.
-    // Hvis man ønsker å ha denne muligheten så antar jeg at man kan implementere en metode som baserer seg på atributtenes egne
-    // hashCode-metoder, men det koker ned til hvordan man definereer "likhet": To like objekter skal returnere samme hashverdi.
     @Override
     public int hashCode() {
         assert false : "hashCode not designed";
         return 1;
     }
+
+    // Hvis man ønsker å ha denne muligheten så antar jeg at man kan implementere en
+    // metode som baserer seg på atributtenes egne
+    // hashCode-metoder, men det koker ned til hvordan man definereer "likhet": To
+    // like objekter skal returnere samme hashverdi.
+    // Kan f.eks. gjøre noe sånt:
+    
+    // @Override
+    // public int hashCode() {
+    // return this.date.hashCode() + this.description.hashCode();
+    // }
+
 }
+
