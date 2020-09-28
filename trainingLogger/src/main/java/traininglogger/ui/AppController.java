@@ -27,7 +27,7 @@ public class AppController {
   TextArea descriptionTextArea;
 
   @FXML
-  VBox sessionOverviewBox;
+  VBox sessionOverviewVbox;
 
   SessionLogger sessionLogger = new SessionLogger();
 
@@ -46,7 +46,7 @@ public class AppController {
   }
 
   public void updateSessionOverview() {
-    sessionOverviewBox.getChildren().clear();
+    sessionOverviewVbox.getChildren().clear();
     for (Session session : sessionLogger) {
       addSessionToSessionOverview(session);
     }
@@ -60,7 +60,7 @@ public class AppController {
     TitledPane titledPane = new TitledPane(title, box);
     titledPane.setAlignment(Pos.CENTER_LEFT);
     titledPane.setExpanded(false);
-    sessionOverviewBox.getChildren().add(0, titledPane);
+    sessionOverviewVbox.getChildren().add(0, titledPane);
   }
 
   public void addSessionToSessionOverview(Session session) {
