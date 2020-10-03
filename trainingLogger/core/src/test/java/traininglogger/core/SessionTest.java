@@ -4,9 +4,40 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.jupiter.api.Test;
 
 public class SessionTest {
+
+
+  @Test
+  public void testConstructor(){
+    Exercise e1 = new Exercise("Knebøy", 5,5,5,5,4,4);
+    Exercise e2 = new Exercise("Benkpress", 5,5,5,5,4,3);
+    Exercise e3 = new Exercise("Markløft", 5,5,5,5,4,2);
+    Collection<Exercise> col = new ArrayList<>(Arrays.asList(e1,e2,e3));
+    Session session = new Session("Bra!", e1,e2,e3);
+    assertEquals(col, session.getListOfExercises());
+    try {
+      new Session("Flott!");
+    } catch (Exception e) {
+      fail();
+    }
+  }
+
+  @Test
+  public void testExerciseList(){
+    Exercise e1 = new Exercise("Knebøy", 5,5,5,5,4,4);
+    Exercise e2 = new Exercise("Benkpress", 5,5,5,5,4,3);
+    Exercise e3 = new Exercise("Markløft", 5,5,5,5,4,2);
+    Session session = new Session("Bra!", e1,e2);
+    Collection<Exercise> col = session.getListOfExercises();
+    col.add(e3);
+    assertFalse(session.getListOfExercises().equals(col));
+  }
 
   @Test
   public void testGetDescription_returnsNullInitially() {
@@ -19,7 +50,6 @@ public class SessionTest {
     Session session1 = new Session("Dette er en økt.");
     Session session2 = new Session("Dette er en økt.");
     assertFalse(session1.equals(session2));
-    System.out.println(session1.getDateString());
   }
 
   @Test

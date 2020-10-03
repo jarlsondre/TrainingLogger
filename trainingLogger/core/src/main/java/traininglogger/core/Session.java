@@ -2,6 +2,10 @@ package traininglogger.core;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Session {
 
@@ -16,6 +20,7 @@ public class Session {
   private String description;
   private LocalDateTime date;
   private final DateTimeFormatter dtf; // kan endre hvis klokkeslett trengs
+  private List<Exercise> exercises = new ArrayList<>();
 
   // Konstruktor som ikke tar inn beskrivelse.
   public Session() {
@@ -24,10 +29,10 @@ public class Session {
   }
 
   // Konstruktør som tar inn beskrivelse.
-  public Session(String description) {
-    date = LocalDateTime.now();
-    dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+  public Session(String description, Exercise... exercises) {
+    this();
     this.description = description;
+    this.addExercises(exercises);
   }
 
   public void setDescription(String description) {
@@ -37,6 +42,30 @@ public class Session {
   public String getDescription() {
     return this.description;
   }
+
+
+//Metoder på listen med exercise-objekter. 
+
+  public void addExercises(Exercise... exercises) {
+    for (Exercise e : exercises) {
+      this.exercises.add(e);
+    }
+  }
+
+  //Henter øvelse nr. i
+  public Exercise getExercise(int i){
+    return this.exercises.get(i);
+  }
+
+  public Collection<Exercise> getListOfExercises(){
+    return this.exercises.stream().collect(Collectors.toList());
+  }
+
+  public void removeExercise(int i){
+    this.exercises.remove(i);
+  }
+
+
 
   public LocalDateTime getDate() {
     return this.date;
@@ -63,7 +92,8 @@ public class Session {
       return false;
     }
     Session session = (Session) object;
-    if (session.getDate().equals(this.getDate()) && session.getDescription().equals(this.getDescription())) {
+    if (session.getDate().equals(this.getDate()) && session.getDescription().equals(this.getDescription())
+    && this.exercises.equals(session.getListOfExercises())) {
       return true;
     }
     return false;
