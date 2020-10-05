@@ -48,7 +48,7 @@ public class Exercise {
     }
     Exercise obj = (Exercise) object;
     if(Exercise.isEqual(obj.getSets(), this.getSets()) &&
-    this.getSets().equals(obj.getName()){
+    this.getName().equals(obj.getName())){
       return true;
     }
     return false;

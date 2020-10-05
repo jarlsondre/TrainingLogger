@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 
 public class ModuleTest {
@@ -24,10 +25,14 @@ public class ModuleTest {
 
   @Test
   public void testSessionSerializer() {
-    Session session = new Session("det var en fin økt");
+    Exercise e1 = new Exercise("Knebøy", 5,5,6,6);
+    Exercise e2 = new Exercise("Knebøy", 5,5,6,7);
+    Exercise e3 = new Exercise("Knebøy", 5,5,6,9);
+    Session session = new Session("Det var en fin økt!", e1,e2,e3);
     session.setDate("15/09/2020 10:02");
     try {
-      assertEquals("{\"stringDescription\":\"det var en fin økt\",\"date\":\"15/09/2020 10:02\"}",
+      assertEquals(
+        "{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,7]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,9]}]}",
           mapper.writeValueAsString(session));
     } catch (JsonProcessingException e) {
       fail();
@@ -39,15 +44,47 @@ public class ModuleTest {
     Session session = null;
     try {
       session = ModuleTest.mapper
-          .readValue("{\"stringDescription\":\"det var en fin økt\",\"date\":\"15/09/2020 10:02\"}", Session.class);
+          .readValue("{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,7]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,9]}]}", Session.class);
     } catch (JsonMappingException e) {
       fail();
     } catch (JsonProcessingException e) {
       fail();
     }
-    Session test_Session = new Session("det var en fin økt");
-    test_Session.setDate("15/09/2020 10:02");
-    assertEquals(test_Session, session);
+    Exercise e1 = new Exercise("Knebøy", 5,5,6,6);
+    Exercise e2 = new Exercise("Knebøy", 5,5,6,7);
+    Exercise e3 = new Exercise("Knebøy", 5,5,6,9);
+    Session session_test = new Session("Det var en fin økt!", e1,e2,e3);
+    session_test.setDate("15/09/2020 10:02");
+    assertEquals(session_test, session);
   }
+
+  @Test
+  public void testExerciseSerializer() {
+    Exercise exercise = new Exercise("Knebøy",5,5,6,6);
+    try {
+      assertEquals("{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]}",
+          mapper.writeValueAsString(exercise));
+    } catch (JsonProcessingException e) {
+      fail();
+    }
+  }
+
+  @Test
+  public void testExerciseDeserializer() {
+    Exercise exercise = null;
+    try {
+      exercise = ModuleTest.mapper
+          .readValue("{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]}", Exercise.class);
+    } catch (JsonMappingException e) {
+      e.printStackTrace();
+      fail();
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+      fail();
+    }
+    Exercise test_exercise = new Exercise("Knebøy",5,5,6,6);
+    assertEquals(test_exercise, exercise);
+  }
+
 
 }
