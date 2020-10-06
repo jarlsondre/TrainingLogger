@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="418.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="traininglogger.ui.SessionScreenController">
+<AnchorPane prefHeight="400.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="traininglogger.ui.SessionScreenController">
    <children>
       <Button fx:id="startScreenButton" layoutX="86.0" layoutY="62.0" mnemonicParsing="false" onAction="#switchToStartScreen" prefHeight="25.0" prefWidth="119.0" text="Gå til startskjerm" />
       <Label layoutX="55.0" layoutY="14.0" prefHeight="40.0" prefWidth="180.0" text="Tidligere økter">
