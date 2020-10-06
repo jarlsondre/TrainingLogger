@@ -29,5 +29,6 @@ public class NewExerciseScreenController {
 
     @FXML
     private void addSetButtonHandler(){
+        // Legg til ting her
     }
 }
