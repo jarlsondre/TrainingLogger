@@ -64,12 +64,18 @@ public class Exercise {
       Integer[] t1 = iterator1.next();
       Integer[] t2 = iterator2.next();
       for (int j = 0; j < 2; j++) {
-        if (t1[j] != t2[j]) {
+        if (!t1[j].equals(t2[j])) {
           return false;
         }
       }
     }
     return true;
+  }
+
+  @Override
+  public int hashCode() {
+    assert false : "hashCode not designed";
+    return 1;
   }
 
 }
