@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
+import traininglogger.json.FileHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,6 +39,9 @@ public class NewExerciseScreenController {
         }
         System.out.println(exercise);
         //HER MÅ DET GJØRES NOE MED exercise
+
+        // skriver til fil
+        FileHandler.writeExerciseToFile("src/main/resources/exercise_controller_data.json", exercise);
         switchToNewExerciseScreen();
     }
 
