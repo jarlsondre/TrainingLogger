@@ -60,4 +60,22 @@ public class NewSessionScreenController {
     private void switchToNewExerciseScreen() throws IOException {
         App.setRoot("NewExerciseScreen");
     }
+
+    /**
+     * Funksjon som legger til nåværende økt i 'tidligere økter'
+     */
+    @FXML
+    private void addSessionButtonHandler() throws IOException{
+        // Henter først et session-objekt fra filen det er lagret på:
+        Session session = FileHandler.readSessionFromFile("src/main/resources/session_controller_data.json");
+
+        // Deretter lages et sessionLogger-objekt som henter sin info fra fil
+        SessionLogger logger = new SessionLogger();
+        logger.load();
+        logger.addSession(session);
+        logger.save();
+
+        // Nå vil vi bytte til startskjermen
+        switchToStartScreen();
+    }
 }
