@@ -16,7 +16,7 @@ public class App extends Application {
 
   @Override @SuppressFBWarnings
   public void start(final Stage stage) throws IOException {
-    scene = new Scene(loadFXML("startScreen"));
+    scene = new Scene(loadFXML("StartScreen"));
     stage.setScene(scene);
     stage.show();
   }
