@@ -6,11 +6,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Et exercise-objekt skal ta vare på informasjonen rundt en øvelse.
+ * Objektet inneholder informanjon om:
+ * - Øvelsens navn
+ * - Antall sett
+ * - Hvor mye vekt og hvor mange reps hvert sett består av.
+ */
 public class Exercise {
 
   private List<Integer[]> sets = new ArrayList<Integer[]>();
   private String exerciseName;
 
+  /**
+   * Konstruktør som tar initsialiserer objektet med navn på øvelsen og en array med sett.
+   * @param String name
+   * @param Integer[] integers
+   */
   public Exercise(String name, Integer... integers) {
     this.exerciseName = name;
     this.addSets(integers);
@@ -26,10 +38,17 @@ public class Exercise {
     }
   }
 
+  /**
+   * Fjrner sett nr. i fra liten med sett.
+   */
   public void removeSet(int i) {
     this.sets.remove(i);
   }
 
+  /**
+   * @param i
+   * @return Sett nr. i
+   */
   public Integer[] getSet(int i) {
     return this.sets.get(i);
   }
@@ -38,6 +57,9 @@ public class Exercise {
     return this.exerciseName;
   }
 
+  /**
+   * @return En liste bestående av alle settene som er utført.
+   */
   public Collection<Integer[]> getSets() {
     return this.sets.stream().collect(Collectors.toList());
   }
@@ -54,6 +76,12 @@ public class Exercise {
     return false;
   }
 
+  /**
+   * Statisk metode som sammenlikner to lister av heltall.
+   * @param col1 
+   * @param col2
+   * @return true eller false, avhengig av om listene består av de samme elementene.
+   */
   public static boolean isEqual(Collection<Integer[]> col1, Collection<Integer[]> col2) {
     if (col1.size() != col2.size()) {
       return false;
@@ -72,6 +100,9 @@ public class Exercise {
     return true;
   }
 
+  // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
+  // plassere exercise-objekter
+  // i et HashMap eller en HashTable.
   @Override
   public int hashCode() {
     assert false : "hashCode not designed";
