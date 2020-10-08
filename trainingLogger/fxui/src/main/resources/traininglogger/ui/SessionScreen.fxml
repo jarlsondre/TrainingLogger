@@ -22,7 +22,7 @@
       </ToolBar>
       <ScrollPane layoutY="100.0" prefHeight="300.0" prefWidth="308.0">
          <content>
-            <VBox prefHeight="298.0" prefWidth="306.0" />
+            <VBox fx:id="sessionOverviewVbox" prefHeight="298.0" prefWidth="306.0" />
          </content>
       </ScrollPane>
    </children>

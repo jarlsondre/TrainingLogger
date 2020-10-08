@@ -65,8 +65,6 @@ public class Session {
     this.exercises.remove(i);
   }
 
-
-
   public LocalDateTime getDate() {
     return this.date;
   }
