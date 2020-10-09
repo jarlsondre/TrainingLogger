@@ -18,7 +18,7 @@ public class SessionLogger implements Iterable<Session> {
    */
 
   private List<Session> sessions = new ArrayList<>();
-  final private String fileLocationString = "src/main/resources/traininglogger/core/session_logger_data.json";
+  private String fileLocationString = "src/main/resources/traininglogger/core/session_logger_data.json";
 
   @Override
   public Iterator<Session> iterator() {
