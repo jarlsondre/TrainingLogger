@@ -15,6 +15,8 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
+import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
+
 public class NewSessionScreenController {
 
     @FXML
@@ -38,16 +40,7 @@ public class NewSessionScreenController {
         FileHandler.writeSessionToFile("src/main/resources/session_controller_data.json", session);
 
         // Vise nåværende session
-        for (Exercise e : session.getListOfExercises()) {
-            Label label = new Label(e.getName() + ": ");
-            String temp = "";
-            for (Integer[] set : e.getSets()) {
-                temp += Integer.toString((Integer) Array.get(set, 0)) +"x"+ Integer.toString((Integer) Array.get(set, 1)) + " ";
-                label.setText(label.getText() + temp);
-                temp = "";
-            }
-            exerciseOverviewVbox.getChildren().add(exerciseOverviewVbox.getChildren().size()-1, label);
-        }
+        exerciseOverviewVbox.getChildren().add(0, sessionToVboxConverter(session));
 
     }
 
