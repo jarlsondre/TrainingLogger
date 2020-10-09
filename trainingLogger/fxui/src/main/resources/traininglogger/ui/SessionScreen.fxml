@@ -18,6 +18,7 @@
       <ToolBar prefHeight="40.0" prefWidth="308.0">
          <items>
             <Button fx:id="startScreenButton" mnemonicParsing="false" onAction="#switchToStartScreen" prefHeight="25.0" prefWidth="119.0" text="Gå til startskjerm" />
+            <Button mnemonicParsing="false" text="Slett alle økter" />
          </items>
       </ToolBar>
       <ScrollPane layoutY="100.0" prefHeight="300.0" prefWidth="308.0">
