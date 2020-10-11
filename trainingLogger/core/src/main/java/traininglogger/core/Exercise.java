@@ -16,6 +16,12 @@ public class Exercise {
     this.addSets(integers);
   }
 
+  /**
+   * Metode for å legge til sett til et exercise-objekt. Denne krever at antall argumenter som tas inn
+   * er delelig på 2, slik at man kan koble en vekt mot et antall reps.
+   *
+   * @param integers: Tar inn et array ov integeres. Må være delelig på 2.
+   */
   public void addSets(Integer... integers) {
     if (integers.length % 2 != 0) {
       throw new IllegalArgumentException("The number of integers most be even.");
@@ -26,6 +32,11 @@ public class Exercise {
     }
   }
 
+  /**
+   * Fjerner et sett basert på indexen som tas inn.
+   *
+   * @param i: indexen til settet som skal fjernes
+   */
   public void removeSet(int i) {
     this.sets.remove(i);
   }
@@ -36,6 +47,10 @@ public class Exercise {
 
   public String getName() {
     return this.exerciseName;
+  }
+
+  public void setName(String name) {
+    this.exerciseName = name;
   }
 
   public Collection<Integer[]> getSets() {
