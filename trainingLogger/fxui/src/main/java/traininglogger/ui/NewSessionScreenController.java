@@ -22,18 +22,12 @@ public class NewSessionScreenController {
     @FXML
     VBox exerciseOverviewVbox;
 
+
     @FXML
     public void initialize() {
         // Her henter vi et session-objekt fra fil og deretter fyller vi på med den siste exercisen. Etter dette vises session-objektet
         Session session = FileHandler.readSessionFromFile("src/main/resources/session_controller_data.json");
         Exercise exercise = FileHandler.readExerciseFromFile("src/main/resources/exercise_controller_data.json");
-        File exerciseFile = new File("src/main/resources/exercise_controller_data.json");
-        if (exerciseFile.delete() == false) {
-            System.out.println("Could not delete file");
-        }
-        else {
-            System.out.println("Successfully deleted file");
-        }
         if (!(exercise == null)) {
             session.addExercises(exercise);
         }
@@ -46,12 +40,24 @@ public class NewSessionScreenController {
 
     @FXML
     private void switchToStartScreen() throws IOException {
-        App.setRoot("StartScreen");
+        try {
+            App.setRoot("StartScreen");
+            FileDeleter.deleteFile("src/main/resources/exercise_controller_data.json");
+        }
+        catch(Exception e) {
+            System.out.println("Kunne ikke bytte fra New Session Screen til Start Screen");
+        }
     }
 
     @FXML
     private void switchToNewExerciseScreen() throws IOException {
-        App.setRoot("NewExerciseScreen");
+        try {
+            App.setRoot("NewExerciseScreen");
+            FileDeleter.deleteFile("src/main/resources/exercise_controller_data.json");
+        }
+        catch(Exception e) {
+            System.out.println("Kunne ikke bytte fra New Session Screen til New Exercise Screen");
+        }
     }
 
     /**
