@@ -94,4 +94,5 @@ public class NewExerciseScreenController {
     public Exercise getExercise() {
         return this.exercise;
     }
+
 }

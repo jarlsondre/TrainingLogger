@@ -13,15 +13,15 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="traininglogger.ui.NewExerciseScreenController">
    <children>
-      <TextField fx:id="titleTextField" layoutX="37.0" layoutY="40.0" text="Skriv navn på øvelse">
+      <TextField fx:id="titleTextField" layoutX="37.0" layoutY="40.0" promptText="Skriv navn på øvelse">
          <font>
             <Font size="19.0" />
          </font>
       </TextField>
       <ToolBar prefHeight="40.0" prefWidth="308.0">
-        <items>
-          <Button mnemonicParsing="false" onAction="#switchToNewExerciseScreen" text="Forkast" />
-        </items>
+         <items>
+            <Button mnemonicParsing="false" onAction="#switchToNewSessionScreen" text="Forkast" />
+         </items>
       </ToolBar>
       <ScrollPane layoutY="89.0" prefHeight="275.0" prefWidth="308.0">
          <content>
@@ -71,6 +71,6 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Button layoutX="106.0" layoutY="364.0" mnemonicParsing="false" onAction="#addExerciseButtonHandler" text="Legg til øvelse" />
+      <Button fx:id="addExerciseButton" layoutX="106.0" layoutY="364.0" mnemonicParsing="false" onAction="#addExerciseButtonHandler" text="Legg til øvelse" />
    </children>
 </AnchorPane>
