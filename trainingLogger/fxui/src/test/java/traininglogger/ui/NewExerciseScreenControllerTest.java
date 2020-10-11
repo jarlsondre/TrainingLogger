@@ -11,6 +11,9 @@ import org.testfx.framework.junit5.ApplicationTest;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class NewExerciseScreenControllerTest extends ApplicationTest {
@@ -29,5 +32,19 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
   @Test
   public void testController_initial() {
     assertNotNull(this.controller);
+  }
+
+  @Test
+  public void testAddSet(){
+    TextField titleTextField = lookup("#titleTextField").query();
+    clickOn(titleTextField).write("Benkpress");
+    TextField weightTextField = lookup("#weightTextField").query();
+    TextField repsTextField = lookup("#repsTextField").query();
+    Button addSetButton = lookup("#addSetHbox > .button").query();
+    clickOn(weightTextField).write("100");
+    clickOn(repsTextField).write("5");
+    clickOn(addSetButton);
+    // Og så sjekk om data-objektene har blitt endret riktig.
+    
   }
 }
