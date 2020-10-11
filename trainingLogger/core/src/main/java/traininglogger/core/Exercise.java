@@ -11,6 +11,13 @@ public class Exercise {
   private List<Integer[]> sets = new ArrayList<Integer[]>();
   private String exerciseName;
 
+  /**
+   * Tom konstruktør som kun instansierer et objekt uten noe informasjon
+   */
+  public Exercise() {
+
+  }
+
   public Exercise(String name, Integer... integers) {
     this.exerciseName = name;
     this.addSets(integers);
