@@ -11,11 +11,7 @@ import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 import traininglogger.json.FileHandler;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

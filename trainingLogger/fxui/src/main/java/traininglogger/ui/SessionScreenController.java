@@ -2,15 +2,11 @@ package traininglogger.ui;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
-import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
-
 import java.io.IOException;
-import java.lang.reflect.Array;
 
 import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
 

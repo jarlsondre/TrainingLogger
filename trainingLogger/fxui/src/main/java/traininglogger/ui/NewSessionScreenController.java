@@ -1,19 +1,12 @@
 package traininglogger.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 import traininglogger.json.FileHandler;
-
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.stream.IntStream;
 
 import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
 

@@ -3,7 +3,6 @@ package traininglogger.ui;
 import javafx.fxml.FXML;
 import traininglogger.core.Session;
 import traininglogger.json.FileHandler;
-
 import java.io.File;
 import java.io.IOException;
 

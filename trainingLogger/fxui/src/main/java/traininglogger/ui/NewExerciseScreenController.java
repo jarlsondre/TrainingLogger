@@ -3,6 +3,8 @@ package traininglogger.ui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -10,8 +12,6 @@ import traininglogger.core.Exercise;
 import traininglogger.json.FileHandler;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class NewExerciseScreenController {
 

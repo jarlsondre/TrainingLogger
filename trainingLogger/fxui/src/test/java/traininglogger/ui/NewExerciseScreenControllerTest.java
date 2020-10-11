@@ -1,9 +1,6 @@
 package traininglogger.ui;
 
 import java.io.IOException;
-import java.util.Collection;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
