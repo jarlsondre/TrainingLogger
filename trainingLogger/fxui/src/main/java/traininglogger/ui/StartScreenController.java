@@ -11,8 +11,12 @@ public class StartScreenController {
 
     @FXML
     private void switchToSessionScreen() throws IOException {
-
-        App.setRoot("SessionScreen");
+        try {
+            App.setRoot("SessionScreen");
+        }
+        catch(Exception e) {
+            System.out.println("Kunne ikke bytte fra Start Screen til Session Screen");
+        }
     }
 
     @FXML
@@ -22,13 +26,19 @@ public class StartScreenController {
         // deleting the file and recreating it
         File sessionFile = new File("src/main/resources/session_controller_data.json");
         if (sessionFile.delete() == false) {
-            System.out.println("Could not delete file");
+            System.out.println("Could not session delete file");
         }
         else {
-            System.out.println("Successfully deleted file");
+            System.out.println("Successfully deleted session file");
         }
         FileHandler.writeSessionToFile("src/main/resources/session_controller_data.json", session);
 
-        App.setRoot("NewSessionScreen");
+        try {
+            App.setRoot("NewSessionScreen");
+        }
+        catch(Exception e) {
+            System.out.println("Kunne ikke bytte fra Start Screen til New Session Screen");
+        }
+
     }
 }
