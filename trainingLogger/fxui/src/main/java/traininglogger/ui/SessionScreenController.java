@@ -44,7 +44,12 @@ public class SessionScreenController {
 
     @FXML
     private void switchToStartScreen() throws IOException {
-        App.setRoot("StartScreen");
+        try {
+            App.setRoot("StartScreen");
+        }
+        catch(Exception e) {
+            System.out.println("Kunne ikke bytte fra Session Screen til Start Screen");
+        }
     }
 
 
