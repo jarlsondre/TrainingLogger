@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class NewExerciseScreenControllerTest extends ApplicationTest {
@@ -44,7 +43,9 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
     clickOn(weightTextField).write("100");
     clickOn(repsTextField).write("5");
     clickOn(addSetButton);
-    // Og så sjekk om data-objektene har blitt endret riktig.
-    
+    /* Her mener jeg at controlleren burde inneholdt en Exercise i stedet for
+    en liste av Integers (sets). Hadde vært naturlig å sjekke om denne Exercisen hadde blitt oppdatert som forventet.*/
+    assertTrue(controller.getSetElementByIndex(0) == 100);
+    assertTrue(controller.getSetElementByIndex(1) == 5);
   }
 }

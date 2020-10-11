@@ -70,4 +70,9 @@ public class NewExerciseScreenController {
             ex.printStackTrace();
         }
     }
+
+    // Lager metoden for å kunne teste. Burde egentlig ikke finnes spør du meg, blir bare rotete.
+    public int getSetElementByIndex(int i) {
+      return sets.get(i);
+    }
 }
