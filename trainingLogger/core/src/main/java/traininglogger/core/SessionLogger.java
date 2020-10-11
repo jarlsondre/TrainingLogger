@@ -56,8 +56,16 @@ public class SessionLogger implements Iterable<Session> {
     }
   }
 
-  public void delete() {
+  public void deleteAll() {
     this.sessions = new ArrayList<>();
+  }
+
+  public void deleteLast() {
+    this.sessions.remove(this.sessions.size()-1);
+  }
+
+  public Session getLastSession() {
+    return this.sessions.get(this.sessions.size()-1);
   }
 
 }
