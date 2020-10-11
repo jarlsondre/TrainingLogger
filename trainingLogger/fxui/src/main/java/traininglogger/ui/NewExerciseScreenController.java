@@ -15,7 +15,7 @@ import java.util.List;
 
 public class NewExerciseScreenController {
 
-    private List<Integer> sets = new ArrayList<>();
+    private Exercise exercise = new Exercise();
 
     @FXML
     VBox addSetVbox;
@@ -27,33 +27,46 @@ public class NewExerciseScreenController {
     TextField weightTextField, repsTextField, titleTextField;
 
     @FXML
-    private void switchToNewExerciseScreen() throws IOException {
-        App.setRoot("NewSessionScreen");
+    Button addExerciseButton;
+
+    @FXML
+    private void switchToNewSessionScreen() throws IOException {
+        try {
+            App.setRoot("NewSessionScreen");
+        }
+        catch(Exception e) {
+            System.out.println("Kunne ikke bytte fra New Exercise Screen til New Session Screen");
+        }
+
     }
 
     @FXML
     private void addExerciseButtonHandler() throws IOException {
-        Exercise exercise = new Exercise(titleTextField.getText());
-        for(int i = 0; i < sets.size(); i = i + 2){
-            exercise.addSets(sets.get(i), sets.get(i+1));
-        }
-        System.out.println(exercise);
-        //HER MÅ DET GJØRES NOE MED exercise
-
-        // skriver til fil
+        exercise.setName(titleTextField.getText());
+        // Mellomlagrer exercise slik at den kan brukes på neste skjerm
         FileHandler.writeExerciseToFile("src/main/resources/exercise_controller_data.json", exercise);
-        switchToNewExerciseScreen();
+        switchToNewSessionScreen();
     }
 
     @FXML
     private void addSetButtonHandler(){
-        int weight = Integer.parseInt(weightTextField.getText());
-        int reps = Integer.parseInt(repsTextField.getText());
-        sets.add(weight);
-        sets.add(reps);
-        addHboxToVbox();
-        weightTextField.setText("");
-        repsTextField.setText("");
+        try {
+            int weight = Integer.parseInt(weightTextField.getText());
+            int reps = Integer.parseInt(repsTextField.getText());
+            if (addSetVbox.getChildren().get(0) instanceof Label) {
+                addSetVbox.getChildren().remove(0);
+            }
+            exercise.addSets(weight, reps);
+            addHboxToVbox();
+            weightTextField.setText("");
+            repsTextField.setText("");
+        }
+        catch (Exception e) {
+            Label errorLabel = new Label("Input må være et heltall");
+            addSetVbox.getChildren().add(0, errorLabel);
+            System.out.println("Input må være heltall");
+        }
+
     }
 
 
@@ -71,8 +84,14 @@ public class NewExerciseScreenController {
         }
     }
 
-    // Lager metoden for å kunne teste. Burde egentlig ikke finnes spør du meg, blir bare rotete.
-    public int getSetElementByIndex(int i) {
-      return sets.get(i);
+    /**
+     * Metode for å hente ut hvilken exercise som er lagret i controlleren. Denne kan blant annet brukes for å
+     * teste om exercise-objektet blir instansiert riktig
+     *
+     * @return Exercise-objektet til controlleren
+     */
+
+    public Exercise getExercise() {
+        return this.exercise;
     }
 }
