@@ -37,6 +37,13 @@ public class SessionScreenController {
         }
     }
 
+    @FXML
+    private void deleteButtonHandler(){
+        logger.deleteAll();
+        sessionOverviewUpdate();
+        logger.save();
+    }
+
 
     @FXML
     private void switchToStartScreen() throws IOException {
