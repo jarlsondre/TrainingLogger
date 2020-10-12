@@ -7,15 +7,18 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Et objekt av klassen "Session" tar vare på all informasjon rundt en økt. I
+ * Ojektet inneholder: 
+ * - En beskrivelse av økten. 
+ * - Datoen økten foregikk, lagret som et LocalDateTime objekt.
+ * - En liste med session-objekter, som beskriver hvilke øvelser som ble gjort.
+ * Datoen skal være formet som
+ * dette: dd/MM/yyyy HH:mm. Datoen blir generert automatisk ved opprettelse av
+ * objektet.
+ */
 public class Session {
 
-  /*
-   * Et objekt av klassen "Session" tar vare på all informasjon rundt en økt. I
-   * førate omgang inneholder objektet: - En beskrivelse av økten. - Datoen økten
-   * foregikk, lagret som et LocalDateTime objekt. Datoen skal være formet som
-   * dette: dd/MM/yyyy HH:mm. Datoen blir generert automatisk ved opprettelse av
-   * objektet.
-   */
 
   private String description;
   private LocalDateTime date;
@@ -43,24 +46,33 @@ public class Session {
     return this.description;
   }
 
-
-//Metoder på listen med exercise-objekter. 
-
   public void addExercises(Exercise... exercises) {
     for (Exercise e : exercises) {
       this.exercises.add(e);
     }
   }
 
-  //Henter øvelse nr. i
+  /** 
+   *Denne metoden henter øvelse nr. i 
+   *@param int i
+   *@return øvelkse nr. i
+  */
   public Exercise getExercise(int i){
     return this.exercises.get(i);
   }
 
+  /**
+   * Gir ut en liste av alle exercise-objektebe dette session-objektet inneholder.
+   * @return En liste med alle øvelsene som er gjort.
+   */
   public Collection<Exercise> getListOfExercises(){
     return this.exercises.stream().collect(Collectors.toList());
   }
 
+  /**
+   * Fjerner exercise-objektet på plass nummer i.
+   * @param int i
+   */
   public void removeExercise(int i){
     this.exercises.remove(i);
   }
@@ -69,12 +81,18 @@ public class Session {
     return this.date;
   }
 
+  /**
+   * @return Datoen økten foregikk som en formatert streng
+   */
   public String getDateString() {
     return dtf.format(date).toString();
   }
 
-  // Tar inn en streng på formen "dd/MM/yyyy HH:mm", og setter atributten "date"
-  // lik datoen strengen beskriver.
+  /**
+   *Tar inn en streng på formen "dd/MM/yyyy HH:mm", og setter atributten "date"
+   *lik datoen strengen beskriver. 
+   *@param date datoen som økten foregikk som en formatert streng.
+   */
   public void setDate(String date) {
     LocalDateTime d = LocalDateTime.parse(date, this.dtf);
     this.date = d;

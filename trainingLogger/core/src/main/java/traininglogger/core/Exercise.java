@@ -6,18 +6,33 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Et exercise-objekt skal ta vare på informasjonen rundt en øvelse.
+ * Objektet inneholder informanjon om:
+ * - Øvelsens navn
+ * - Antall sett
+ * - Hvor mye vekt og hvor mange reps hvert sett består av.
+ */
 public class Exercise {
 
   private List<Integer[]> sets = new ArrayList<Integer[]>();
   private String exerciseName;
 
-  /**
+
+=======
    * Tom konstruktør som kun instansierer et objekt uten noe informasjon
    */
   public Exercise() {
 
   }
-
+  
+    /**
+<<<<<<< trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
+   * Konstruktør som tar initsialiserer objektet med navn på øvelsen og en array med sett.
+   * @param String name
+   * @param Integer[] integers
+   */
+>>>>>>> trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
   public Exercise(String name, Integer... integers) {
     this.exerciseName = name;
     this.addSets(integers);
@@ -40,14 +55,22 @@ public class Exercise {
   }
 
   /**
+<<<<<<< trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
+   * Fjrner sett nr. i fra liten med sett.
+=======
    * Fjerner et sett basert på indexen som tas inn.
    *
    * @param i: indexen til settet som skal fjernes
+>>>>>>> trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
    */
   public void removeSet(int i) {
     this.sets.remove(i);
   }
 
+  /**
+   * @param i
+   * @return Sett nr. i
+   */
   public Integer[] getSet(int i) {
     return this.sets.get(i);
   }
@@ -56,10 +79,16 @@ public class Exercise {
     return this.exerciseName;
   }
 
+<<<<<<< trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
+  /**
+   * @return En liste bestående av alle settene som er utført.
+   */
+=======
   public void setName(String name) {
     this.exerciseName = name;
   }
 
+>>>>>>> trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
   public Collection<Integer[]> getSets() {
     return this.sets.stream().collect(Collectors.toList());
   }
@@ -76,6 +105,12 @@ public class Exercise {
     return false;
   }
 
+  /**
+   * Statisk metode som sammenlikner to lister av heltall.
+   * @param col1 
+   * @param col2
+   * @return true eller false, avhengig av om listene består av de samme elementene.
+   */
   public static boolean isEqual(Collection<Integer[]> col1, Collection<Integer[]> col2) {
     if (col1.size() != col2.size()) {
       return false;
@@ -94,6 +129,12 @@ public class Exercise {
     return true;
   }
 
+<<<<<<< trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
+  // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
+  // plassere exercise-objekter
+  // i et HashMap eller en HashTable.
+=======
+>>>>>>> trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
   @Override
   public int hashCode() {
     assert false : "hashCode not designed";

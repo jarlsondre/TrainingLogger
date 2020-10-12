@@ -1,5 +1,6 @@
 package traininglogger.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -10,7 +11,6 @@ import java.util.Collection;
 import org.junit.jupiter.api.Test;
 
 public class ExerciseTest {
-
 
   @Test
   public void contructorTest(){
@@ -62,6 +62,9 @@ public class ExerciseTest {
     col.add(set3);
     assertTrue(Exercise.isEqual(col, exercise.getSets()));
     assertTrue(Exercise.isEqual(new ArrayList<>(), new Exercise("Knebøy").getSets()));
+    exercise.removeSet(2);
+    col.remove(set3);
+    assertTrue(Exercise.isEqual(col, exercise.getSets()));
     try {
       exercise.addSets(2,2,2);
       fail();
@@ -70,12 +73,23 @@ public class ExerciseTest {
   }
 
   @Test
-  public void setsListTest(){
+  public void setsListEncapsulationTest(){
    Exercise exercise = new Exercise("Knebøy", 5,5);
    Collection<Integer[]> col = exercise.getSets(); 
    Integer[] i = {1,1};
    col.add(i); 
    assertFalse(Exercise.isEqual(exercise.getSets(), col));
+  }
+
+  @Test
+  public void equalsMethodTest(){
+    Exercise exercise1 = new Exercise("Benkpress", 1,1,1,1,1,1);
+    Exercise exercise2 = new Exercise("Benkpress", 1,1,1,1,1,1);
+    assertEquals(exercise1, exercise2);
+    exercise2.addSets(2,2);
+    assertFalse(exercise1.equals(exercise2));
+    exercise2.removeSet(3);
+    assertEquals(exercise1, exercise2);
   }
 
 

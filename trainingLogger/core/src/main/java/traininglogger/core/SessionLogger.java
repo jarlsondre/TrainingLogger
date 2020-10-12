@@ -10,12 +10,12 @@ import java.util.Iterator;
 import java.util.List;
 import traininglogger.json.FileHandler;
 
-public class SessionLogger implements Iterable<Session> {
 
-  /*
-   * SessionLogger objektet inneholder en liste med sessions. objektet er ment å
-   * kunne lagre, manipulere og endre på lista med sessions.
-   */
+/** 
+ * SessionLogger objektet inneholder en liste med sessions. objektet er ment å
+ * kunne lagre, manipulere og endre på lista med sessions.
+ */
+public class SessionLogger implements Iterable<Session> {
 
   private List<Session> sessions = new ArrayList<>();
   private String fileLocationString = "src/main/resources/traininglogger/core/session_logger_data.json";
@@ -29,8 +29,10 @@ public class SessionLogger implements Iterable<Session> {
     sessions.add(session);
   }
 
-  // Kaller statisk metode i FileHandler
-  // Resultatet er at sessions fylles opp med Session-objekter
+  /**
+   *Kaller statisk metode i FileHandler
+   *Resultatet er at sessions fylles opp med Session-objekter 
+   */
   public boolean load() {
     try {
       InputStream inputstream = new FileInputStream(fileLocationString);
@@ -42,8 +44,10 @@ public class SessionLogger implements Iterable<Session> {
     }
   }
 
-  // Kaller statisk metode i FileHandler
-  // Resultatet er at Session-objektene i sessions lagres på disk i JSON-format
+  /**
+  Kaller statisk metode i FileHandler
+  Resultatet er at Session-objektene i sessions lagres på disk i JSON-format
+   */
   public boolean save() {
     try {
       File file = new File(fileLocationString);

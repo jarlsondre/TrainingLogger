@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,7 +16,7 @@ public class SessionTest {
 
 
   @Test
-  public void testConstructor(){
+  public void constructorTest(){
     Exercise e1 = new Exercise("Knebøy", 5,5,5,5,4,4);
     Exercise e2 = new Exercise("Benkpress", 5,5,5,5,4,3);
     Exercise e3 = new Exercise("Markløft", 5,5,5,5,4,2);
@@ -29,7 +31,7 @@ public class SessionTest {
   }
 
   @Test
-  public void testExerciseList(){
+  public void exerciseListEncapsulationTest(){
     Exercise e1 = new Exercise("Knebøy", 5,5,5,5,4,4);
     Exercise e2 = new Exercise("Benkpress", 5,5,5,5,4,3);
     Exercise e3 = new Exercise("Markløft", 5,5,5,5,4,2);
@@ -40,20 +42,20 @@ public class SessionTest {
   }
 
   @Test
-  public void testGetDescription_returnsNullInitially() {
+  public void getDescription_returnsNullInitiallTest() {
     Session session = new Session();
     assertEquals(null, session.getDescription());
   }
 
   @Test
-  public void testEquals_SameDescriptionButDifferentDatesAreNotEqual() {
+  public void sameDescriptionButDifferentDatesAreNotEqualTest() {
     Session session1 = new Session("Dette er en økt.");
     Session session2 = new Session("Dette er en økt.");
     assertFalse(session1.equals(session2));
   }
 
   @Test
-  public void testEquals_DifferentObjectsAreNotEqual() {
+  public void differentObjectsAreNotEqualTest() {
     Session session1 = new Session("Dette er en økt.");
     Session session2 = new Session("Dette er en ANNEN økt.");
     if (session1.equals(session2)) {
@@ -66,6 +68,24 @@ public class SessionTest {
     if (session3.equals(session4)) {
       fail();
     }
+  }
+
+  @Test
+  public void equalsTest(){
+    Exercise exercise1 = new Exercise("Benkpress", 2,2,5,5);
+    Exercise exercise2 = new Exercise("Benkpress", 2,2,5,5);
+    assertEquals(exercise1, exercise2);
+    Exercise exercise3 = new Exercise("Benkpress", 9,9);
+    Exercise exercise4 = new Exercise("Benkpress", 9,9);
+    assertEquals(exercise3, exercise4);
+  }
+
+  @Test
+  public void dateTest(){
+    Session session = new Session();
+    session.setDate("08/10/2020 17:29");
+    assertEquals("08/10/2020 17:29", session.getDateString());
+    assertEquals(LocalDateTime.parse("08/10/2020 17:29", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), session.getDate());
   }
 
 }
