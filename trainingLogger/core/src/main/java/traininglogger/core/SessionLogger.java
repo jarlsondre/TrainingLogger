@@ -18,6 +18,7 @@ import traininglogger.json.FileHandler;
 public class SessionLogger implements Iterable<Session> {
 
   private List<Session> sessions = new ArrayList<>();
+  private String fileLocationString = "src/main/resources/traininglogger/core/session_logger_data.json";
 
   @Override
   public Iterator<Session> iterator() {
@@ -34,7 +35,7 @@ public class SessionLogger implements Iterable<Session> {
    */
   public boolean load() {
     try {
-      InputStream inputstream = new FileInputStream("session_data.txt");
+      InputStream inputstream = new FileInputStream(fileLocationString);
       this.sessions = FileHandler.readFromFile(inputstream);
       return true;
     } catch (Exception e) {
@@ -49,7 +50,7 @@ public class SessionLogger implements Iterable<Session> {
    */
   public boolean save() {
     try {
-      File file = new File("session_data.txt");
+      File file = new File(fileLocationString);
       OutputStream fop = new FileOutputStream(file);
       FileHandler.writeToFile(fop, this.sessions);
       return true;
@@ -59,12 +60,16 @@ public class SessionLogger implements Iterable<Session> {
     }
   }
 
-  /**
-   * Sletter listen med exercise-objekter. 
-   * Resulterer i en tom sessionLogger.
-   */
-  public void delete() {
+  public void deleteAll() {
     this.sessions = new ArrayList<>();
+  }
+
+  public void deleteLast() {
+    this.sessions.remove(this.sessions.size()-1);
+  }
+
+  public Session getLastSession() {
+    return this.sessions.get(this.sessions.size()-1);
   }
 
 }

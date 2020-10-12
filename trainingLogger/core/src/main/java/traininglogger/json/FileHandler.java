@@ -2,12 +2,12 @@ package traininglogger.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+
+import java.io.*;
 import java.util.List;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 
 public class FileHandler {
@@ -39,5 +39,64 @@ public class FileHandler {
     });
     return sessions;
   }
+
+  public static void writeExerciseToFile(String fileName, Exercise exercise) {
+    try {
+      ObjectMapper mapper = FileHandler.makeMapper();
+      File file = new File(fileName);
+      OutputStream out = new FileOutputStream(file);
+      Writer writer = new OutputStreamWriter(out, "UTF-8");
+      mapper.writeValue(writer, exercise);
+
+    }
+    catch(IOException e) {
+      System.out.println("writeExerciseToFile klarte ikke å skrive til: " + fileName);
+    }
+  }
+  @SuppressFBWarnings
+  public static Exercise readExerciseFromFile(String fileName) {
+    Exercise exercise = null;
+    try {
+      ObjectMapper mapper = FileHandler.makeMapper();
+      InputStream in = new FileInputStream(fileName);
+      exercise = mapper.readValue(in, new TypeReference<Exercise>() {
+      });
+      in.close();
+    }
+    catch(IOException e) {
+      System.out.println("readExerciseFromFile klarte ikke å lese: " + fileName);
+    }
+    return exercise;
+  }
+  public static void writeSessionToFile(String fileName, Session session) {
+    try {
+      ObjectMapper mapper = FileHandler.makeMapper();
+      File file = new File(fileName);
+      OutputStream out = new FileOutputStream(file);
+      Writer writer = new OutputStreamWriter(out, "UTF-8");
+      mapper.writeValue(writer, session);
+
+    }
+    catch(IOException e) {
+      System.out.println("writeSessionToFile klarte ikke å skrive til: " + fileName);
+    }
+  }
+
+  @SuppressFBWarnings
+  public static Session readSessionFromFile(String fileName) {
+    Session session = null;
+    try {
+      ObjectMapper mapper = FileHandler.makeMapper();
+      InputStream in = new FileInputStream(fileName);
+      session = mapper.readValue(in, new TypeReference<Session>() {
+      });
+      in.close();
+    }
+    catch(IOException e) {
+      System.out.println("readSessionFromFile klarte ikke å lese: " + fileName);
+    }
+    return session;
+  }
+
 
 }

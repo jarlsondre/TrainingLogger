@@ -98,7 +98,11 @@ public class Session {
     this.date = d;
   }
 
-  /**
+  public void setDate(LocalDateTime ldt) {
+      this.date = ldt; 
+  }
+
+  /*
    * Sammenlikner dette objektet med objektet som blir tatt inn som argument.
    * Objektene er like om de har samme beskivelse og dato.
    */
@@ -124,15 +128,5 @@ public class Session {
     return 1;
   }
 
-  // Hvis man ønsker å ha denne muligheten så antar jeg at man kan implementere en
-  // metode som baserer seg på atributtenes egne
-  // hashCode-metoder, men det koker ned til hvordan man definereer "likhet": To
-  // like objekter skal returnere samme hashverdi.
-  // Kan f.eks. gjøre noe sånt:
-
-  // @Override
-  // public int hashCode() {
-  // return this.date.hashCode() + this.description.hashCode();
-  // }
 
 }
