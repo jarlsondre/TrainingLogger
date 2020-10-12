@@ -14,7 +14,7 @@ public class SessionLoggerTest {
     SessionLogger sessionLogger = new SessionLogger(); 
     sessionLogger.addSession(session); 
     assertTrue(sessionLogger.iterator().hasNext());
-    sessionLogger.delete();
+    sessionLogger.deleteAll();
     assertFalse(sessionLogger.iterator().hasNext());
   }
 
