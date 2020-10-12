@@ -6,17 +6,22 @@ import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
+
+import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 
 public class SessionDeserializer extends JsonDeserializer<Session> {
 
+  private ExerciseDeserializer exerciseDeserializer = new ExerciseDeserializer();
+
   /*
    * Denne klassen inneholder metoden deserializer, som konverterer et json
    * formatert session objekt tilbake til objektet. Objektet må ha formatet: {
-   * "stringDescription": " ... " "date": "dd/MM/yyyy HH:mm" }
+   * "stringDescription": " ... " "date": "dd/MM/yyyy HH:mm" "exercises": " ... " }
    */
 
   @Override
@@ -38,10 +43,23 @@ public class SessionDeserializer extends JsonDeserializer<Session> {
       if (textNode2 instanceof TextNode) {
         session.setDate(((TextNode) textNode2).asText());
       }
+      JsonNode setsNode = node.get("exercises");
+      if (setsNode instanceof ArrayNode) {
+        ArrayNode setsNodeArray = (ArrayNode) setsNode;
+        Exercise[] exercises = new Exercise[setsNodeArray.size()];
+        int counter = 0;
+        for (JsonNode element : ((ArrayNode) setsNode)) {
+          Exercise exercise = this.exerciseDeserializer.deserialize(element);
+          if(exercise != null){
+            exercises[counter] = exercise;
+          }
+          counter++;
+        }
+        session.addExercises(exercises);
+      }
       return session;
     }
     return null;
-
   }
 
 }

@@ -33,6 +33,14 @@ annet kunne holde styr på rundetider, ukentlige kilometer, tempo og personlige 
 
 ## Logisk struktur
 
+### Pakkediagram med plantUML: 
+
+![PakkediagramPUML](resources/PakkeDiagramPUML.png) 
+
+### Klassediagram med plantUML: 
+
+![KlassediagramPUML](resources/KlasseDiagramPUML.png) 
+
 Applikasjonen er bygget opp med en typisk trelagsstruktur. De tre arkitekutrlagene domenelogikk, brukergrensesnitt og persistens 
 er håndtert i de tre pakkene traningLogger.core, .ui og .json. Nedenfor følger en konseptuell beskrivelse av de tre pakkene, deres tilhørende klasser 
 og hvordan disse binder appen sammen til en enhet. 
@@ -72,7 +80,7 @@ Klassediagram:
 
 ![KlassediagramUi](resources/KlasseDiagramUi.png)
 
-## Nåværende utseende av applikasjonen
+## Tidligere utseende av applikasjonen
 Dette er et bilde av hvordan applikasjonen ser ut ved gruppeinnlevering 1. 
 
 ![Eksempel](resources/LoggEksempel.png)

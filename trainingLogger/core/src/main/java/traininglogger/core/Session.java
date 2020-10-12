@@ -2,20 +2,28 @@ package traininglogger.core;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Et objekt av klassen "Session" tar vare på all informasjon rundt en økt. I
+ * Ojektet inneholder: 
+ * - En beskrivelse av økten. 
+ * - Datoen økten foregikk, lagret som et LocalDateTime objekt.
+ * - En liste med session-objekter, som beskriver hvilke øvelser som ble gjort.
+ * Datoen skal være formet som
+ * dette: dd/MM/yyyy HH:mm. Datoen blir generert automatisk ved opprettelse av
+ * objektet.
+ */
 public class Session {
 
-  /*
-   * Et objekt av klassen "Session" tar vare på all informasjon rundt en økt. I
-   * førate omgang inneholder objektet: - En beskrivelse av økten. - Datoen økten
-   * foregikk, lagret som et LocalDateTime objekt. Datoen skal være formet som
-   * dette: dd/MM/yyyy HH:mm. Datoen blir generert automatisk ved opprettelse av
-   * objektet.
-   */
 
   private String description;
   private LocalDateTime date;
   private final DateTimeFormatter dtf; // kan endre hvis klokkeslett trengs
+  private List<Exercise> exercises = new ArrayList<>();
 
   // Konstruktor som ikke tar inn beskrivelse.
   public Session() {
@@ -24,10 +32,10 @@ public class Session {
   }
 
   // Konstruktør som tar inn beskrivelse.
-  public Session(String description) {
-    date = LocalDateTime.now();
-    dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+  public Session(String description, Exercise... exercises) {
+    this();
     this.description = description;
+    this.addExercises(exercises);
   }
 
   public void setDescription(String description) {
@@ -38,19 +46,60 @@ public class Session {
     return this.description;
   }
 
+  public void addExercises(Exercise... exercises) {
+    for (Exercise e : exercises) {
+      this.exercises.add(e);
+    }
+  }
+
+  /** 
+   *Denne metoden henter øvelse nr. i 
+   *@param int i
+   *@return øvelkse nr. i
+  */
+  public Exercise getExercise(int i){
+    return this.exercises.get(i);
+  }
+
+  /**
+   * Gir ut en liste av alle exercise-objektebe dette session-objektet inneholder.
+   * @return En liste med alle øvelsene som er gjort.
+   */
+  public Collection<Exercise> getListOfExercises(){
+    return this.exercises.stream().collect(Collectors.toList());
+  }
+
+  /**
+   * Fjerner exercise-objektet på plass nummer i.
+   * @param int i
+   */
+  public void removeExercise(int i){
+    this.exercises.remove(i);
+  }
+
   public LocalDateTime getDate() {
     return this.date;
   }
 
+  /**
+   * @return Datoen økten foregikk som en formatert streng
+   */
   public String getDateString() {
     return dtf.format(date).toString();
   }
 
-  // Tar inn en streng på formen "dd/MM/yyyy HH:mm", og setter atributten "date"
-  // lik datoen strengen beskriver.
+  /**
+   *Tar inn en streng på formen "dd/MM/yyyy HH:mm", og setter atributten "date"
+   *lik datoen strengen beskriver. 
+   *@param date datoen som økten foregikk som en formatert streng.
+   */
   public void setDate(String date) {
     LocalDateTime d = LocalDateTime.parse(date, this.dtf);
     this.date = d;
+  }
+
+  public void setDate(LocalDateTime ldt) {
+      this.date = ldt; 
   }
 
   /*
@@ -63,7 +112,8 @@ public class Session {
       return false;
     }
     Session session = (Session) object;
-    if (session.getDate().equals(this.getDate()) && session.getDescription().equals(this.getDescription())) {
+    if (session.getDate().equals(this.getDate()) && session.getDescription().equals(this.getDescription())
+    && this.exercises.equals(session.getListOfExercises())) {
       return true;
     }
     return false;
@@ -78,15 +128,5 @@ public class Session {
     return 1;
   }
 
-  // Hvis man ønsker å ha denne muligheten så antar jeg at man kan implementere en
-  // metode som baserer seg på atributtenes egne
-  // hashCode-metoder, men det koker ned til hvordan man definereer "likhet": To
-  // like objekter skal returnere samme hashverdi.
-  // Kan f.eks. gjøre noe sånt:
-
-  // @Override
-  // public int hashCode() {
-  // return this.date.hashCode() + this.description.hashCode();
-  // }
 
 }

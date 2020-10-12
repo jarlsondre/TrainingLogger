@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
+
+import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 
 public class SessionSerializer extends JsonSerializer<Session> {
@@ -11,7 +13,7 @@ public class SessionSerializer extends JsonSerializer<Session> {
   /*
    * Denne klassen inneholdet metoden serialize for å konvertere et objekt til
    * json format. format: { "stringDescription": " ... " "date":
-   * "dd/MM/yyyy HH:mm" }
+   * "dd/MM/yyyy HH:mm" "exercises": " ... "}
    */
 
   @Override
@@ -20,6 +22,11 @@ public class SessionSerializer extends JsonSerializer<Session> {
     gen.writeStartObject();
     gen.writeStringField("stringDescription", session.getDescription());
     gen.writeStringField("date", session.getDateString());
+    gen.writeArrayFieldStart("exercises");
+    for(Exercise e : session.getListOfExercises()){
+      gen.writeObject(e);
+    }
+    gen.writeEndArray();
     gen.writeEndObject();
   }
 

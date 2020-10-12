@@ -34,5 +34,5 @@ Filer for Gitpod-konfigurasjon
 - .gitpod.yml
 - .gitpod.Dockerfile
 
-Brukerhistorier.md inneholder to brukerhistorier.
+Brukerhistorier.md inneholder fire brukerhistorier.
 Mappen trainingLogger inneholder selve kodingsprosjektet.
