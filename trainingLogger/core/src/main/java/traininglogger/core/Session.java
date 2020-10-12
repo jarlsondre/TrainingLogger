@@ -80,6 +80,10 @@ public class Session {
     this.date = d;
   }
 
+  public void setDate(LocalDateTime ldt) {
+      this.date = ldt; 
+  }
+
   /*
    * Sammenlikner dette objektet med objektet som blir tatt inn som argument.
    * Objektene er like om de har samme beskivelse og dato.
