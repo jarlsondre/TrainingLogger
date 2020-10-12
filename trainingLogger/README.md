@@ -80,7 +80,7 @@ Klassediagram:
 
 ![KlassediagramUi](resources/KlasseDiagramUi.png)
 
-## Nåværende utseende av applikasjonen
+## Tidligere utseende av applikasjonen
 Dette er et bilde av hvordan applikasjonen ser ut ved gruppeinnlevering 1. 
 
 ![Eksempel](resources/LoggEksempel.png)
