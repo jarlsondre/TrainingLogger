@@ -13,7 +13,7 @@ Etter å ha bygget prosjektet, kjør `mvn javafx:run` i fxui-mappen.
 **Merk**: For å kjøre applikasjonen i GitPod må man vente til dependencies har blitt lastet inn. Dette kan man se nede i venstre hjørne av skjermen.  
 Dette skjer mye raskere dersom man trykker inne i en java-fil, for da gjenkjenner GitPod Java-språket. Etter at man har lastet inn dependencies så kan man installere  
 ved hjelp av `mvn clean install`. GitPod har noen ganger problemer med installeringen. Dette skyldes trolig problemer med GitPod eller VM-en som brukes i GitPod, da 
-det virker å være tilfeldig om det funker eller ikke. Dersom install ikke fungerer så kan dere prøve å laste inn et nytt workspace eller kjøre `mvn clean install` på nytt. 
+det virker å være tilfeldig om det funker eller ikke. Dessuten funker installeringen hver gang i Intellij. Dersom install ikke fungerer så kan dere prøve å laste inn et nytt workspace eller kjøre `mvn clean install` på nytt. 
 
 ## Forklaring av mappestruktur
 Prosjektet er bygd med mappestruktur i henhold til Maven. Strukturen vår ser slik ut:
