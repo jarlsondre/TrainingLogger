@@ -50,7 +50,8 @@ public class NewSessionScreenControllerTest extends ApplicationTest {
         // Vi sjekker at dataen vi laget ble skrevet til fil
         SessionLogger logger = new SessionLogger();
         logger.load();
-        session.setDate(logger.getLastSession().getDateString());
+        session.setDate("17/09/2020 14:35");
+        logger.getLastSession().setDate("17/09/2020 14:35");
         assertEquals(logger.getLastSession(), session);
     }
 
