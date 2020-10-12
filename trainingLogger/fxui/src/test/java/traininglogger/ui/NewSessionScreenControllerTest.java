@@ -20,12 +20,17 @@ public class NewSessionScreenControllerTest extends ApplicationTest {
     NewSessionScreenController newSessionScreenController;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
+      try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("NewSessionScreen_test.fxml"));
         Parent root = loader.load();
         this.newSessionScreenController = loader.getController();
         stage.setScene(new Scene(root));
         stage.show();
+      }
+      catch(Exception e) {
+        System.out.println("Feilet under start");
+      }
     }
 
     @Test
@@ -48,4 +53,6 @@ public class NewSessionScreenControllerTest extends ApplicationTest {
         session.setDate(logger.getLastSession().getDateString());
         assertEquals(logger.getLastSession(), session);
     }
+
+    
 }

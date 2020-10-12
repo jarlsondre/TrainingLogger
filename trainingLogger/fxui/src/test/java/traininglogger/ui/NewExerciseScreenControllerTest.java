@@ -1,6 +1,9 @@
 package traininglogger.ui;
 
 import java.io.IOException;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
@@ -20,14 +23,18 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
   private NewExerciseScreenController newExerciseScreenController;
 
 
-
   @Override
-  public void start(Stage stage) throws IOException {
+  public void start(Stage stage) {
+    try {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("NewExerciseScreen_test.fxml"));
     Parent root = loader.load();
     this.newExerciseScreenController = loader.getController();
     stage.setScene(new Scene(root));
     stage.show();
+    }
+    catch(Exception e) {
+      System.out.println("Feilet under start"); 
+    }
   }
 
 
@@ -116,4 +123,5 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
 
 
   }
+
 }
