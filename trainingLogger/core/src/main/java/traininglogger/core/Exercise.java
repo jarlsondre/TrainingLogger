@@ -18,21 +18,18 @@ public class Exercise {
   private List<Integer[]> sets = new ArrayList<Integer[]>();
   private String exerciseName;
 
-
-=======
+  /**
    * Tom konstruktør som kun instansierer et objekt uten noe informasjon
    */
   public Exercise() {
 
   }
   
-    /**
-<<<<<<< trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
+  /**
    * Konstruktør som tar initsialiserer objektet med navn på øvelsen og en array med sett.
    * @param String name
    * @param Integer[] integers
    */
->>>>>>> trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
   public Exercise(String name, Integer... integers) {
     this.exerciseName = name;
     this.addSets(integers);
@@ -55,13 +52,10 @@ public class Exercise {
   }
 
   /**
-<<<<<<< trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
-   * Fjrner sett nr. i fra liten med sett.
-=======
+   * Fjerner sett nr. i fra liten med sett.
    * Fjerner et sett basert på indexen som tas inn.
    *
    * @param i: indexen til settet som skal fjernes
->>>>>>> trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
    */
   public void removeSet(int i) {
     this.sets.remove(i);
@@ -79,16 +73,13 @@ public class Exercise {
     return this.exerciseName;
   }
 
-<<<<<<< trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
   /**
    * @return En liste bestående av alle settene som er utført.
    */
-=======
   public void setName(String name) {
     this.exerciseName = name;
   }
 
->>>>>>> trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
   public Collection<Integer[]> getSets() {
     return this.sets.stream().collect(Collectors.toList());
   }
@@ -129,12 +120,9 @@ public class Exercise {
     return true;
   }
 
-<<<<<<< trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
   // plassere exercise-objekter
   // i et HashMap eller en HashTable.
-=======
->>>>>>> trainingLogger/core/src/main/java/traininglogger/core/Exercise.java
   @Override
   public int hashCode() {
     assert false : "hashCode not designed";
