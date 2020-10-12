@@ -34,7 +34,8 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
     }
     catch(Exception e) {
         System.out.println("Feilet under start"); 
-        System.out.println(e.getStackTrace()); 
+        e.printStackTrace();
+        System.out.println(e); 
     }
   }
 

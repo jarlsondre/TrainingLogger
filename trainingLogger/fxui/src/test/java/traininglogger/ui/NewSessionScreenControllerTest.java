@@ -29,8 +29,9 @@ public class NewSessionScreenControllerTest extends ApplicationTest {
         stage.show();
       }
       catch(Exception e) {
-        System.out.println("Feilet under start"); 
-        System.out.println(e.getStackTrace());
+        System.out.println("Feilet under start");
+        e.printStackTrace(); 
+        System.out.println(e);
       }
     }
 
