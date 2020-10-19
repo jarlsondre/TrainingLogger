@@ -1,8 +1,7 @@
 package traininglogger.core;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,12 +9,11 @@ import java.util.stream.Collectors;
  * Et exercise-objekt skal ta vare på informasjonen rundt en øvelse.
  * Objektet inneholder informanjon om:
  * - Øvelsens navn
- * - Antall sett
- * - Hvor mye vekt og hvor mange reps hvert sett består av.
+ * - sett
  */
 public class Exercise {
 
-  private List<Integer[]> sets = new ArrayList<Integer[]>();
+  private List<Set> sets = new ArrayList<Set>();
   private String exerciseName;
 
   /**
@@ -26,36 +24,29 @@ public class Exercise {
   }
   
   /**
-   * Konstruktør som tar initsialiserer objektet med navn på øvelsen og en array med sett.
-   * @param String name
-   * @param Integer[] integers
+   * Konstruktør som instansierer objektet med navn på øvelsen og en array med sett.
+   * @param name Et navn på øvelsen.
+   * @param sets En array med set som objektet skal bestå av.
    */
-  public Exercise(String name, Integer... integers) {
+  public Exercise(String name, Set... sets) {
     this.exerciseName = name;
-    this.addSets(integers);
+    this.addSets(sets);
   }
 
   /**
-   * Metode for å legge til sett til et exercise-objekt. Denne krever at antall argumenter som tas inn
-   * er delelig på 2, slik at man kan koble en vekt mot et antall reps.
+   * Metode for å legge til sett til exercise-objektet. 
    *
-   * @param integers: Tar inn et array ov integeres. Må være delelig på 2.
+   * @param sets Tar inn et array av sett.
    */
-  public void addSets(Integer... integers) {
-    if (integers.length % 2 != 0) {
-      throw new IllegalArgumentException("The number of integers most be even.");
-    }
-    for (int i = 0; i < integers.length; i = i + 2) {
-      Integer[] t = { integers[i], integers[i + 1] };
-      this.sets.add(t);
-    }
+  public void addSets(Set...sets) {
+    this.sets.addAll(Arrays.asList(sets));
   }
 
   /**
    * Fjerner sett nr. i fra liten med sett.
    * Fjerner et sett basert på indexen som tas inn.
    *
-   * @param i: indexen til settet som skal fjernes
+   * @param i indeksen til settet som skal fjernes
    */
   public void removeSet(int i) {
     this.sets.remove(i);
@@ -65,59 +56,45 @@ public class Exercise {
    * @param i
    * @return Sett nr. i
    */
-  public Integer[] getSet(int i) {
+  public Set getSet(int i) {
     return this.sets.get(i);
   }
 
+  /**
+   * 
+   * @return Henter navn på øvelsen.
+   */
   public String getName() {
     return this.exerciseName;
   }
 
   /**
-   * @return En liste bestående av alle settene som er utført.
+   * 
+   * @param name Setter navn på øvelsen.
    */
   public void setName(String name) {
     this.exerciseName = name;
   }
 
-  public Collection<Integer[]> getSets() {
+  /**
+   * 
+   * @return En liste med settene.
+   */
+  public List<Set> getSets() {
     return this.sets.stream().collect(Collectors.toList());
   }
 
+  /**
+   * Sammenlikner dette objektet med object.
+   * @param object Objektet instansen skal sammenliknes med
+   * @return Returnerer true dersom objektene har de samme settene, i samme rekkefølge, og det samme navnet.
+   */
   public boolean equals(Object object) {
     if(!(object instanceof Exercise)){
       return false;
     }
     Exercise obj = (Exercise) object;
-    if(Exercise.isEqual(obj.getSets(), this.getSets()) &&
-    this.getName().equals(obj.getName())){
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Statisk metode som sammenlikner to lister av heltall.
-   * @param col1 
-   * @param col2
-   * @return true eller false, avhengig av om listene består av de samme elementene.
-   */
-  public static boolean isEqual(Collection<Integer[]> col1, Collection<Integer[]> col2) {
-    if (col1.size() != col2.size()) {
-      return false;
-    }
-    Iterator<Integer[]> iterator1 = col1.iterator();
-    Iterator<Integer[]> iterator2 = col2.iterator();
-    while (iterator1.hasNext() && iterator2.hasNext()) {
-      Integer[] t1 = iterator1.next();
-      Integer[] t2 = iterator2.next();
-      for (int j = 0; j < 2; j++) {
-        if (!t1[j].equals(t2[j])) {
-          return false;
-        }
-      }
-    }
-    return true;
+    return this.getName().equals(obj.getName()) && this.sets.equals(obj.getSets());
   }
 
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å

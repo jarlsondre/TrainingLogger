@@ -14,15 +14,14 @@ import java.io.IOException;
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 
-public class SessionDeserializer extends JsonDeserializer<Session> {
-
-  private ExerciseDeserializer exerciseDeserializer = new ExerciseDeserializer();
-
-  /*
+  /**
    * Denne klassen inneholder metoden deserializer, som konverterer et json
    * formatert session objekt tilbake til objektet. Objektet må ha formatet: {
    * "stringDescription": " ... " "date": "dd/MM/yyyy HH:mm" "exercises": " ... " }
    */
+public class SessionDeserializer extends JsonDeserializer<Session> {
+
+  private ExerciseDeserializer exerciseDeserializer = new ExerciseDeserializer();
 
   @Override
   public Session deserialize(JsonParser parser, DeserializationContext ctxt)

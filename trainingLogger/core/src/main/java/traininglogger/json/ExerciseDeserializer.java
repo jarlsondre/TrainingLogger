@@ -13,15 +13,18 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 
 import traininglogger.core.Exercise;
+import traininglogger.core.Set;
 
-public class ExerciseDeserializer extends JsonDeserializer<Exercise> {
 
-  /*
+/**
    * Denne klassen inneholder metoden deserializer, som konverterer et json
    * formatert exercise objekt tilbake til objektet. Objektet må ha formatet: {
    * "name": " ... " "sets": " ... " }, hvor sets er en liste av tupler, henholdsvis reps og vekt.
    * Eksempel: {\"name\":\"Knebøy\",\"sets\":[5,5,6,6]}
-   */
+*/
+public class ExerciseDeserializer extends JsonDeserializer<Exercise> {
+
+  private SetDeserializer deserializer = new SetDeserializer();
 
   @Override
   public Exercise deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
@@ -40,14 +43,14 @@ public class ExerciseDeserializer extends JsonDeserializer<Exercise> {
       JsonNode setsNode = node.get("sets");
       if (setsNode instanceof ArrayNode) {
         ArrayNode setsNodeArray = (ArrayNode) setsNode;
-        Integer[] integers = new Integer[setsNodeArray.size()];
+        Set[] sets = new Set[setsNodeArray.size()];
         int counter = 0;
         for (JsonNode element : setsNodeArray) {
-          Integer integer = element.asInt();
-          integers[counter] = integer;
+          Set set = this.deserializer.deserialize(element);
+          sets[counter] = set;
           counter++;
         }
-        exercise.addSets(integers);
+        exercise.addSets(sets);
       }
       return exercise;
     }
