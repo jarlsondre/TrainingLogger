@@ -7,37 +7,27 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import traininglogger.core.Exercise;
+import traininglogger.core.Set;
 
-public class ExerciseSerializer extends JsonSerializer<Exercise> {
-
-
-
-  /*
+  /**
    * Denne klassen inneholdet metoden serialize for å konvertere et objekt til
    * json format. format: 
    * { "name": " ... " 
    * "sets": " ... "}
    * Eksempel: {\"name\":\"Knebøy\",\"sets\":[5,5,6,6]}
    */
-
-
-
+public class ExerciseSerializer extends JsonSerializer<Exercise> {
 
   @Override
   public void serialize(Exercise exercise, JsonGenerator gen, SerializerProvider arg2) throws IOException {
     gen.writeStartObject();
     gen.writeStringField("name", exercise.getName());
     gen.writeArrayFieldStart("sets");
-    for (Integer[] integers : exercise.getSets()) {
-      gen.writeObject(integers[0]);
-      gen.writeObject(integers[1]);
+    for (Set set : exercise.getSets()) {
+      gen.writeObject(set);
     }
     gen.writeEndArray();
     gen.writeEndObject();
-
-
-
   }
-
 
 }

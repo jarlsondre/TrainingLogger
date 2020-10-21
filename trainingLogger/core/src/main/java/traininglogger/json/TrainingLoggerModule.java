@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
+import traininglogger.core.Set;
 
 public class TrainingLoggerModule extends SimpleModule {
 
@@ -18,6 +19,8 @@ public class TrainingLoggerModule extends SimpleModule {
     addDeserializer(Session.class, new SessionDeserializer());
     addSerializer(Exercise.class, new ExerciseSerializer());
     addDeserializer(Exercise.class, new ExerciseDeserializer());
+    addSerializer(Set.class, new SetSerializer());
+    addDeserializer(Set.class, new SetDeserializer());
   }
 
 }
