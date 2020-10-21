@@ -36,14 +36,6 @@ public class FileHandlerTest {
     sessionsList = new ArrayList<>();
     sessionsList.add(s1);
     sessionsList.add(s2);
-    try {
-     ObjectMapper mapper = new ObjectMapper();
-     mapper.registerModule(new TrainingLoggerModule());
-     System.out.println(mapper.writeValueAsString(sessionsList));
-    }
-    catch (Exception e) {
-
-    }
   }
 
   @Test
