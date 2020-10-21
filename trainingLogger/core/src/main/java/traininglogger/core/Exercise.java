@@ -89,6 +89,7 @@ public class Exercise {
    * @param object Objektet instansen skal sammenliknes med
    * @return Returnerer true dersom objektene har de samme settene, i samme rekkefølge, og det samme navnet.
    */
+  @Override
   public boolean equals(Object object) {
     if(!(object instanceof Exercise)){
       return false;
@@ -102,7 +103,7 @@ public class Exercise {
   // i et HashMap eller en HashTable.
   @Override
   public int hashCode() {
-    assert false : "hashCode not designed";
+    //assert false : "hashCode not designed";
     return 1;
   }
 

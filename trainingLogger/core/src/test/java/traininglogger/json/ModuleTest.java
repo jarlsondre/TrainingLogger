@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
+import traininglogger.core.Set;
 
 public class ModuleTest {
 
@@ -25,14 +26,14 @@ public class ModuleTest {
 
   @Test
   public void testSessionSerializer() {
-    Exercise e1 = new Exercise("Knebøy", 5,5,6,6);
-    Exercise e2 = new Exercise("Knebøy", 5,5,6,7);
-    Exercise e3 = new Exercise("Knebøy", 5,5,6,9);
+    Exercise e1 = new Exercise("Knebøy", new Set(5,5), new Set(6,6));
+    Exercise e2 = new Exercise("Knebøy", new Set(5,5), new Set(6,7));
+    Exercise e3 = new Exercise("Knebøy", new Set(5,5), new Set(6,9));
     Session session = new Session("Det var en fin økt!", e1,e2,e3);
     session.setDate("15/09/2020 10:02");
     try {
       assertEquals(
-        "{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,7]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,9]}]}",
+        "{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"6.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"7.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"9.0\"}]}]}",
           mapper.writeValueAsString(session));
     } catch (JsonProcessingException e) {
       fail();
@@ -44,15 +45,15 @@ public class ModuleTest {
     Session session = null;
     try {
       session = ModuleTest.mapper
-          .readValue("{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,7]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,9]}]}", Session.class);
+          .readValue("{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"6.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"7.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"9.0\"}]}]}", Session.class);
     } catch (JsonMappingException e) {
       fail();
     } catch (JsonProcessingException e) {
       fail();
     }
-    Exercise e1 = new Exercise("Knebøy", 5,5,6,6);
-    Exercise e2 = new Exercise("Knebøy", 5,5,6,7);
-    Exercise e3 = new Exercise("Knebøy", 5,5,6,9);
+    Exercise e1 = new Exercise("Knebøy", new Set(5,5), new Set(6,6));
+    Exercise e2 = new Exercise("Knebøy", new Set(5,5), new Set(6,7));
+    Exercise e3 = new Exercise("Knebøy", new Set(5,5), new Set(6,9));
     Session session_test = new Session("Det var en fin økt!", e1,e2,e3);
     session_test.setDate("15/09/2020 10:02");
     assertEquals(session_test, session);
@@ -60,9 +61,9 @@ public class ModuleTest {
 
   @Test
   public void testExerciseSerializer() {
-    Exercise exercise = new Exercise("Knebøy",5,5,6,6);
+    Exercise exercise = new Exercise("Knebøy", new Set(5,5), new Set(6,6));
     try {
-      assertEquals("{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]}",
+      assertEquals("{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"6.0\"}]}",
           mapper.writeValueAsString(exercise));
     } catch (JsonProcessingException e) {
       fail();
@@ -74,7 +75,7 @@ public class ModuleTest {
     Exercise exercise = null;
     try {
       exercise = ModuleTest.mapper
-          .readValue("{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]}", Exercise.class);
+          .readValue("{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"6.0\"}]}", Exercise.class);
     } catch (JsonMappingException e) {
       e.printStackTrace();
       fail();
@@ -82,7 +83,7 @@ public class ModuleTest {
       e.printStackTrace();
       fail();
     }
-    Exercise test_exercise = new Exercise("Knebøy",5,5,6,6);
+    Exercise test_exercise = new Exercise("Knebøy", new Set(5,5), new Set(6,6));
     assertEquals(test_exercise, exercise);
   }
 

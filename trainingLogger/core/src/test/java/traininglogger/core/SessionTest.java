@@ -17,9 +17,9 @@ public class SessionTest {
 
   @Test
   public void constructorTest(){
-    Exercise e1 = new Exercise("Knebøy", 5,5,5,5,4,4);
-    Exercise e2 = new Exercise("Benkpress", 5,5,5,5,4,3);
-    Exercise e3 = new Exercise("Markløft", 5,5,5,5,4,2);
+    Exercise e1 = new Exercise("Knebøy", new Set(5,5), new Set(5,5), new Set(4,4));
+    Exercise e2 = new Exercise("Benkpress", new Set(5,5), new Set(5,5), new Set(4,3));
+    Exercise e3 = new Exercise("Markløft", new Set(5,5), new Set(5,5), new Set(4,2));
     Collection<Exercise> col = new ArrayList<>(Arrays.asList(e1,e2,e3));
     Session session = new Session("Bra!", e1,e2,e3);
     assertEquals(col, session.getListOfExercises());
@@ -32,9 +32,9 @@ public class SessionTest {
 
   @Test
   public void exerciseListEncapsulationTest(){
-    Exercise e1 = new Exercise("Knebøy", 5,5,5,5,4,4);
-    Exercise e2 = new Exercise("Benkpress", 5,5,5,5,4,3);
-    Exercise e3 = new Exercise("Markløft", 5,5,5,5,4,2);
+    Exercise e1 = new Exercise("Knebøy", new Set(5,5), new Set(5,5), new Set(4,4));
+    Exercise e2 = new Exercise("Benkpress", new Set(5,5), new Set(5,5), new Set(4,3));
+    Exercise e3 = new Exercise("Markløft", new Set(5,5), new Set(5,5), new Set(4,2));
     Session session = new Session("Bra!", e1,e2);
     Collection<Exercise> col = session.getListOfExercises();
     col.add(e3);
@@ -72,12 +72,15 @@ public class SessionTest {
 
   @Test
   public void equalsTest(){
-    Exercise exercise1 = new Exercise("Benkpress", 2,2,5,5);
-    Exercise exercise2 = new Exercise("Benkpress", 2,2,5,5);
+    Exercise exercise1 = new Exercise("Benkpress", new Set(2,2), new Set(3,3));
+    Exercise exercise2 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
     assertEquals(exercise1, exercise2);
-    Exercise exercise3 = new Exercise("Benkpress", 9,9);
-    Exercise exercise4 = new Exercise("Benkpress", 9,9);
+    Exercise exercise3 = new Exercise("Benkpress", new Set(9,9));
+    Exercise exercise4 = new Exercise("Benkpress", new Set(9,9));
     assertEquals(exercise3, exercise4);
+    Exercise exercise5 = new Exercise("Benkpress", new Set(2,2), new Set(3,2));
+    Exercise exercise6 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
+    assertFalse(exercise5.equals(exercise6));
   }
 
   @Test

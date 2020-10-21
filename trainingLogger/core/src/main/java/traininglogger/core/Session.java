@@ -102,7 +102,7 @@ public class Session {
       this.date = ldt; 
   }
 
-  /*
+  /**
    * Sammenlikner dette objektet med objektet som blir tatt inn som argument.
    * Objektene er like om de har samme beskivelse og dato.
    */
@@ -112,11 +112,7 @@ public class Session {
       return false;
     }
     Session session = (Session) object;
-    if (session.getDate().equals(this.getDate()) && session.getDescription().equals(this.getDescription())
-    && this.exercises.equals(session.getListOfExercises())) {
-      return true;
-    }
-    return false;
+    return session.getDate().equals(this.getDate()) && session.getDescription().equals(this.getDescription()) && this.exercises.equals(session.getListOfExercises());
   }
 
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
@@ -124,7 +120,7 @@ public class Session {
   // i et HashMap eller en HashTable.
   @Override
   public int hashCode() {
-    assert false : "hashCode not designed";
+    //assert false : "hashCode not designed";
     return 1;
   }
 
