@@ -103,8 +103,13 @@ public class Exercise {
   // i et HashMap eller en HashTable.
   @Override
   public int hashCode() {
-    //assert false : "hashCode not designed";
+    assert false : "hashCode not designed";
     return 1;
+  }
+
+  @Override
+  public String toString() {
+    return exerciseName + sets.toString();
   }
 
 }

@@ -51,6 +51,8 @@ public class SessionTest {
   public void sameDescriptionButDifferentDatesAreNotEqualTest() {
     Session session1 = new Session("Dette er en økt.");
     Session session2 = new Session("Dette er en økt.");
+    session1.setDate("17/09/2020 14:35");
+    session1.setDate("18/09/2020 14:35");
     assertFalse(session1.equals(session2));
   }
 
@@ -72,7 +74,7 @@ public class SessionTest {
 
   @Test
   public void equalsTest(){
-    Exercise exercise1 = new Exercise("Benkpress", new Set(2,2), new Set(3,3));
+    Exercise exercise1 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
     Exercise exercise2 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
     assertEquals(exercise1, exercise2);
     Exercise exercise3 = new Exercise("Benkpress", new Set(9,9));

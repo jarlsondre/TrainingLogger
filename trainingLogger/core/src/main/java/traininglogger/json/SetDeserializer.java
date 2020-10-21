@@ -30,9 +30,9 @@ public class SetDeserializer extends JsonDeserializer<Set> {
       if (repsNode instanceof TextNode) {
         set.setReps(Integer.parseInt(((TextNode) repsNode).asText()));
       }
-      JsonNode weightNode = node.get("sets");
+      JsonNode weightNode = node.get("weight");
       if (weightNode instanceof TextNode) {
-        set.setWeight(Double.parseDouble(((TextNode) repsNode).asText()));
+        set.setWeight(Double.parseDouble(((TextNode) weightNode).asText()));
       }
       return set;
     }

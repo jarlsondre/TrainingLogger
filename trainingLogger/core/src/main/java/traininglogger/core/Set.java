@@ -75,4 +75,9 @@ public class Set {
     return 1;
   }
 
+  @Override
+  public String toString() {
+    return "reps: " + Integer.toString(reps) + ", weight: " + Double.toString(weight);
+  }
+
 }

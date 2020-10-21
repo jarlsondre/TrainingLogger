@@ -83,7 +83,7 @@ public class ModuleTest {
       e.printStackTrace();
       fail();
     }
-    Exercise test_exercise = new Exercise("Knebøy", new Set(5,5), new Set(6,6));
+    Exercise test_exercise = new Exercise("Knebøy", new Set(5,5.0), new Set(6,6.0));
     assertEquals(test_exercise, exercise);
   }
 

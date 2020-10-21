@@ -120,7 +120,7 @@ public class Session {
   // i et HashMap eller en HashTable.
   @Override
   public int hashCode() {
-    //assert false : "hashCode not designed";
+    assert false : "hashCode not designed";
     return 1;
   }
 

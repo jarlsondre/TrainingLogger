@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,7 @@ public class FileHandlerTest {
 
   private static String sessionsString = "[{\"stringDescription\":\"Bra\",\"date\":\"02/10/2020 16:37\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"6\",\"weight\":\"7.0\"}]}]},{\"stringDescription\":\"Strålende\",\"date\":\"02/10/2020 16:37\",\"exercises\":[]}]";
 
+
   @BeforeAll
   public static void setUp() {
     Exercise e1 = new Exercise("Knebøy", new Set(5, 5));
@@ -34,6 +36,14 @@ public class FileHandlerTest {
     sessionsList = new ArrayList<>();
     sessionsList.add(s1);
     sessionsList.add(s2);
+    try {
+     ObjectMapper mapper = new ObjectMapper();
+     mapper.registerModule(new TrainingLoggerModule());
+     System.out.println(mapper.writeValueAsString(sessionsList));
+    }
+    catch (Exception e) {
+
+    }
   }
 
   @Test
@@ -43,6 +53,7 @@ public class FileHandlerTest {
     try {
       s = FileHandler.readFromFile(in);
     } catch (IOException e) {
+      e.printStackTrace();
       fail();
     }
     assertEquals(sessionsList, s);
