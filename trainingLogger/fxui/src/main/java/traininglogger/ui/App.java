@@ -1,38 +1,25 @@
 package traininglogger.ui;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOError;
 import java.io.IOException;
 
 public class App extends Application {
 
-  private static Scene scene;
-
-  @Override @SuppressFBWarnings
+  @Override
   public void start(final Stage stage) throws IOException {
-    scene = new Scene(loadFXML("StartScreen"));
+    Scene scene = new Scene(new FXMLLoader(App.class.getResource("TrainingLogger.fxml")).load());
     stage.setScene(scene);
     stage.show();
-  }
-
-  static void setRoot(String fxml) throws IOException {
-    scene.setRoot((loadFXML(fxml)));
-  }
-
-  private static Parent loadFXML(String fxml) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-    return fxmlLoader.load();
   }
 
   @Override
   public void stop() {
     FileDeleter.deleteFile("src/main/resources/exercise_controller_data.json");
+    FileDeleter.deleteFile("src/main/resources/session_controller_data.json");
   }
 
   public static void main(String[] args) {
