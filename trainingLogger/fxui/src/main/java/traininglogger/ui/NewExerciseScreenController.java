@@ -52,6 +52,7 @@ public class NewExerciseScreenController {
     private void switchToNewSessionScreen() throws IOException {
         try {
             mainController.changeToNewSessionScreen();
+            resetInputFields();
         }
         catch(Exception e) {
             System.out.println("Kunne ikke bytte fra New Exercise Screen til New Session Screen");
@@ -65,6 +66,9 @@ public class NewExerciseScreenController {
         newSessionScreenController.addExerciseToSession(exercise);
         exercise = new Exercise();
         mainController.changeToNewSessionScreen();
+        resetInputFields();
+
+
     }
 
     @FXML
@@ -86,6 +90,13 @@ public class NewExerciseScreenController {
             System.out.println("Input må være heltall");
         }
 
+    }
+
+    private void resetInputFields(){
+        Node temp = addSetVbox.getChildren().get(addSetVbox.getChildren().size()-1);
+        addSetVbox.getChildren().clear();
+        addSetVbox.getChildren().add(temp);
+        titleTextField.setText("");
     }
 
 
