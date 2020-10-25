@@ -1,9 +1,11 @@
 package traininglogger.ui;
 
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
+import traininglogger.core.Set;
 
 import java.lang.reflect.Array;
 
@@ -14,8 +16,8 @@ public class UpdateOverview {
         for (Exercise exercise : session.getListOfExercises()) {
             Label label = new Label(exercise.getName() + ": ");
             String temp = "";
-            for (Integer[] set : exercise.getSets()) {
-                temp += Integer.toString((Integer) Array.get(set, 0)) +"KG x "+ Integer.toString((Integer) Array.get(set, 1)) + ", ";
+            for (Set set : exercise.getSets()) {
+                temp += Double.toString(set.getWeight()) +"KG x "+ Integer.toString(set.getReps()) + ", ";
                 label.setText(label.getText() + temp);
                 temp = "";
             }

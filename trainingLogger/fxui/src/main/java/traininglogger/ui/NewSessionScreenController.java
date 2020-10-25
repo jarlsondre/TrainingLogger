@@ -11,10 +11,15 @@ import java.io.IOException;
 import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
 
 public class NewSessionScreenController {
+    @FXML
+    TrainingLoggerController mainController;
 
     @FXML
     VBox exerciseOverviewVbox;
 
+    public void setMainController(TrainingLoggerController main){
+        this.mainController = main;
+    }
 
     @FXML
     public void initialize() {
@@ -34,7 +39,7 @@ public class NewSessionScreenController {
     @FXML
     private void switchToStartScreen() throws IOException {
         try {
-            App.setRoot("StartScreen");
+            mainController.changeToStartScreen();
             FileDeleter.deleteFile("src/main/resources/exercise_controller_data.json");
         }
         catch(Exception e) {
@@ -45,7 +50,7 @@ public class NewSessionScreenController {
     @FXML
     private void switchToNewExerciseScreen() throws IOException {
         try {
-            App.setRoot("NewExerciseScreen");
+            mainController.changeToNewExerciseScreen();
             FileDeleter.deleteFile("src/main/resources/exercise_controller_data.json");
         }
         catch(Exception e) {
@@ -68,6 +73,6 @@ public class NewSessionScreenController {
         logger.save();
 
         // Nå vil vi bytte til startskjermen
-        switchToStartScreen();
+        mainController.changeToStartScreen();
     }
 }

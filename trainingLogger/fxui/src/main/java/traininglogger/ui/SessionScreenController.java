@@ -11,8 +11,12 @@ import java.io.IOException;
 import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
 
 public class SessionScreenController {
+    @FXML
+    TrainingLoggerController mainController;
 
-    @FXML VBox sessionOverviewVbox;
+
+    @FXML
+    VBox sessionOverviewVbox;
 
     SessionLogger logger;
 
@@ -22,6 +26,11 @@ public class SessionScreenController {
         logger = new SessionLogger();
         logger.load();
         sessionOverviewUpdate();
+    }
+
+    @FXML
+    public void setMainController(TrainingLoggerController main){
+        this.mainController = main;
     }
 
     @FXML
@@ -48,7 +57,7 @@ public class SessionScreenController {
     @FXML
     private void switchToStartScreen() throws IOException {
         try {
-            App.setRoot("StartScreen");
+            mainController.changeToStartScreen();
         }
         catch(Exception e) {
             System.out.println("Kunne ikke bytte fra Session Screen til Start Screen");

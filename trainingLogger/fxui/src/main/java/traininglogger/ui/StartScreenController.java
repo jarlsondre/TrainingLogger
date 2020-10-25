@@ -7,11 +7,17 @@ import java.io.File;
 import java.io.IOException;
 
 public class StartScreenController {
+    @FXML
+    TrainingLoggerController mainController;
+
+    public void setMainController(TrainingLoggerController main){
+        this.mainController = main;
+    }
 
     @FXML
     private void switchToSessionScreen() throws IOException {
         try {
-            App.setRoot("SessionScreen");
+            mainController.changeToSessionScreen();
         }
         catch(Exception e) {
             System.out.println("Kunne ikke bytte fra Start Screen til Session Screen");
@@ -32,8 +38,18 @@ public class StartScreenController {
         }
         FileHandler.writeSessionToFile("src/main/resources/session_controller_data.json", session);
 
+        // deleting the file and recreating it
+        File exerciseFile = new File("src/main/resources/exercise_controller_data.json");
+        if (exerciseFile.delete() == false) {
+            System.out.println("Could not exercise delete file");
+        }
+        else {
+            System.out.println("Successfully exercise session file");
+        }
+        FileHandler.writeSessionToFile("src/main/resources/exercise_controller_data.json", session);
+
         try {
-            App.setRoot("NewSessionScreen");
+            mainController.changeToNewSessionScreen();
         }
         catch(Exception e) {
             System.out.println("Kunne ikke bytte fra Start Screen til New Session Screen");
