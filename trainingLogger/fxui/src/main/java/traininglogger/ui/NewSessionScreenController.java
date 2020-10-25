@@ -70,7 +70,8 @@ public class NewSessionScreenController {
     @FXML
     private void addSessionButtonHandler() throws IOException{
         mainController.addSessionToSessionLogger(session);
-
+        session = new Session();
+        exerciseOverviewVbox.getChildren().clear();
         // Nå vil vi bytte til startskjermen
         mainController.changeToStartScreen();
     }
