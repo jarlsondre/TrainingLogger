@@ -18,7 +18,6 @@ import traininglogger.json.FileHandler;
 public class SessionLogger implements Iterable<Session> {
 
   private List<Session> sessions = new ArrayList<>();
-  private String fileLocationString = "src/main/resources/traininglogger/core/session_logger_data.json";
 
   @Override
   public Iterator<Session> iterator() {
@@ -32,7 +31,6 @@ public class SessionLogger implements Iterable<Session> {
   /**
    *Kaller statisk metode i FileHandler
    *Resultatet er at sessions fylles opp med Session-objekter 
-   */
   public boolean load() {
     try {
       InputStream inputstream = new FileInputStream(fileLocationString);
@@ -44,10 +42,9 @@ public class SessionLogger implements Iterable<Session> {
     }
   }
 
-  /**
   Kaller statisk metode i FileHandler
   Resultatet er at Session-objektene i sessions lagres på disk i JSON-format
-   */
+
   public boolean save() {
     try {
       File file = new File(fileLocationString);
@@ -58,7 +55,7 @@ public class SessionLogger implements Iterable<Session> {
       System.out.println(e);
       return false;
     }
-  }
+  }*/
 
   public void deleteAll() {
     this.sessions = new ArrayList<>();
