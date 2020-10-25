@@ -54,7 +54,7 @@ public class SessionScreenController {
     private void deleteButtonHandler(){
         sessionLogger.deleteAll();
         sessionOverviewUpdate();
-        sessionLogger.save();
+        mainController.saveSessionLogger();
     }
 
 
