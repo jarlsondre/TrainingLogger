@@ -30,11 +30,17 @@ public class NewExerciseScreenController {
     @FXML
     Button addExerciseButton;
 
-    @FXML
     TrainingLoggerController mainController;
+
+    NewSessionScreenController newSessionScreenController;
+
 
     public void setMainController(TrainingLoggerController main){
         this.mainController = main;
+    }
+
+    public void setNewSessionScreenController(NewSessionScreenController newSessionScreenController){
+        this.newSessionScreenController = newSessionScreenController;
     }
 
     @FXML
@@ -56,9 +62,8 @@ public class NewExerciseScreenController {
     @FXML
     private void addExerciseButtonHandler() throws IOException {
         exercise.setName(titleTextField.getText());
-        // Mellomlagrer exercise slik at den kan brukes på neste skjerm
-        FileHandler.writeExerciseToFile("src/main/resources/exercise_controller_data.json", exercise);
-
+        newSessionScreenController.addExerciseToSession(exercise);
+        exercise = new Exercise();
         mainController.changeToNewSessionScreen();
     }
 
