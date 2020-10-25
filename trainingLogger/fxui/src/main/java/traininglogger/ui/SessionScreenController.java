@@ -18,13 +18,17 @@ public class SessionScreenController {
     @FXML
     VBox sessionOverviewVbox;
 
-    SessionLogger logger;
+    SessionLogger sessionLogger;
 
     @FXML
     public void initialize() {
         // we want to fill the VBox with the sesssions we have. First we need to load our sessionLogger-object
-        logger = new SessionLogger();
-        logger.load();
+        // sessionLogger = new SessionLogger();
+        // sessionOverviewUpdate();
+    }
+
+    public void setSessionLogger(SessionLogger sessionLogger){
+        this.sessionLogger = sessionLogger;
         sessionOverviewUpdate();
     }
 
@@ -34,9 +38,9 @@ public class SessionScreenController {
     }
 
     @FXML
-    private void sessionOverviewUpdate() {
+    public void sessionOverviewUpdate() {
         sessionOverviewVbox.getChildren().clear();
-        for (Session session : logger) {
+        for (Session session : sessionLogger) {
             VBox box = sessionToVboxConverter(session);
             TitledPane titledPane = new TitledPane(session.getDateString(), box);
             titledPane.setAlignment(Pos.CENTER_LEFT);
@@ -48,9 +52,9 @@ public class SessionScreenController {
 
     @FXML
     private void deleteButtonHandler(){
-        logger.deleteAll();
+        sessionLogger.deleteAll();
         sessionOverviewUpdate();
-        logger.save();
+        sessionLogger.save();
     }
 
 

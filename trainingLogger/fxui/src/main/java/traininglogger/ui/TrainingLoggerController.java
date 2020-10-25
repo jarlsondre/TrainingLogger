@@ -3,7 +3,10 @@ package traininglogger.ui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
+import traininglogger.core.Session;
+import traininglogger.core.SessionLogger;
 
 import java.io.IOException;
 
@@ -12,15 +15,42 @@ public class TrainingLoggerController {
     VBox mainVbox;
 
     @FXML
+    Node sessionScreen;
+
+    @FXML
+    Node startScreen;
+
+    SessionScreenController sessionScreenController;
+
+    private SessionLogger sessionLogger;
+
+    @FXML
     public void initialize(){FXMLLoader loader = new FXMLLoader();
+        sessionLogger = new SessionLogger();
+        sessionLogger.load();
+
         try {
-            Node node  =  loader.load(getClass().getResource("StartScreen.fxml").openStream());
-            mainVbox.getChildren().add(node);
+            sessionScreen = loader.load(getClass().getResource("SessionScreen.fxml").openStream());
+            sessionScreenController = loader.getController();
+            sessionScreenController.setMainController(this);
+            sessionScreenController.setSessionLogger(this.sessionLogger);
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        loader = new FXMLLoader();
+        try {
+            startScreen  =  loader.load(getClass().getResource("StartScreen.fxml").openStream());
+            mainVbox.getChildren().add(startScreen);
             StartScreenController controller = loader.getController();
             controller.setMainController(this);
         } catch (IOException ex) {
-            System.out.println("HEIIIIIIIII");
+            ex.printStackTrace();
         }
+
+        changeToStartScreen();
     }
 
     public void changeToNewSessionScreen(){
@@ -29,40 +59,25 @@ public class TrainingLoggerController {
         FXMLLoader loader = new FXMLLoader();
         try {
             Node node  =  loader.load(getClass().getResource("NewSessionScreen.fxml").openStream());
-            mainVbox.getChildren().add(node);
             NewSessionScreenController controller = loader.getController();
             controller.setMainController(this);
+            mainVbox.getChildren().add(node);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+
+
     }
 
     public void changeToSessionScreen(){
         mainVbox.getChildren().clear();
-
-        FXMLLoader loader = new FXMLLoader();
-        try {
-            Node node  =  loader.load(getClass().getResource("SessionScreen.fxml").openStream());
-            mainVbox.getChildren().add(node);
-            SessionScreenController controller = loader.getController();
-            controller.setMainController(this);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        mainVbox.getChildren().add(sessionScreen);
     }
 
     public void changeToStartScreen(){
         mainVbox.getChildren().clear();
-
-        FXMLLoader loader = new FXMLLoader();
-        try {
-            Node node  =  loader.load(getClass().getResource("StartScreen.fxml").openStream());
-            mainVbox.getChildren().add(node);
-            StartScreenController controller = loader.getController();
-            controller.setMainController(this);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        mainVbox.getChildren().add(startScreen);
     }
 
     public void changeToNewExerciseScreen(){
@@ -79,6 +94,11 @@ public class TrainingLoggerController {
         }
     }
 
+    public void addSessionToSessionLogger(Session session){
+        sessionLogger.addSession(session);
+        sessionScreenController.sessionOverviewUpdate();
+
+    }
 
 
 }

@@ -67,10 +67,7 @@ public class NewSessionScreenController {
         Session session = FileHandler.readSessionFromFile("src/main/resources/session_controller_data.json");
 
         // Deretter lages et sessionLogger-objekt som henter sin info fra fil
-        SessionLogger logger = new SessionLogger();
-        logger.load();
-        logger.addSession(session);
-        logger.save();
+       mainController.addSessionToSessionLogger(session);
 
         // Nå vil vi bytte til startskjermen
         mainController.changeToStartScreen();
