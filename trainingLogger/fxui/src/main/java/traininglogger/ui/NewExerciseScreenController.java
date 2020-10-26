@@ -9,13 +9,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
+import traininglogger.core.Set;
 import traininglogger.json.FileHandler;
 
 import java.io.IOException;
 
 public class NewExerciseScreenController {
 
-    private Exercise exercise = new Exercise();
+    private Exercise exercise;
 
     @FXML
     VBox addSetVbox;
@@ -29,10 +30,28 @@ public class NewExerciseScreenController {
     @FXML
     Button addExerciseButton;
 
+    private TrainingLoggerController mainController;
+    private NewSessionScreenController newSessionScreenController;
+
+
+    public void setMainController(TrainingLoggerController main){
+        this.mainController = main;
+    }
+
+    public void setNewSessionScreenController(NewSessionScreenController newSessionScreenController){
+        this.newSessionScreenController = newSessionScreenController;
+    }
+
+    @FXML
+    public void initialize(){
+        exercise = new Exercise();
+    }
+
     @FXML
     private void switchToNewSessionScreen() throws IOException {
         try {
-            App.setRoot("NewSessionScreen");
+            mainController.changeToNewSessionScreen();
+            resetInputFields();
         }
         catch(Exception e) {
             System.out.println("Kunne ikke bytte fra New Exercise Screen til New Session Screen");
@@ -43,20 +62,23 @@ public class NewExerciseScreenController {
     @FXML
     private void addExerciseButtonHandler() throws IOException {
         exercise.setName(titleTextField.getText());
-        // Mellomlagrer exercise slik at den kan brukes på neste skjerm
-        FileHandler.writeExerciseToFile("src/main/resources/exercise_controller_data.json", exercise);
-        switchToNewSessionScreen();
+        newSessionScreenController.addExerciseToSession(exercise);
+        exercise = new Exercise();
+        mainController.changeToNewSessionScreen();
+        resetInputFields();
+
+
     }
 
     @FXML
     private void addSetButtonHandler(){
         try {
-            int weight = Integer.parseInt(weightTextField.getText());
+            double weight = Double.parseDouble(weightTextField.getText());
             int reps = Integer.parseInt(repsTextField.getText());
             if (addSetVbox.getChildren().get(0) instanceof Label) {
                 addSetVbox.getChildren().remove(0);
             }
-            exercise.addSets(weight, reps);
+            exercise.addSets(new Set(reps, weight));
             addHboxToVbox();
             weightTextField.setText("");
             repsTextField.setText("");
@@ -69,6 +91,12 @@ public class NewExerciseScreenController {
 
     }
 
+    private void resetInputFields(){
+        Node temp = addSetVbox.getChildren().get(addSetVbox.getChildren().size()-1);
+        addSetVbox.getChildren().clear();
+        addSetVbox.getChildren().add(temp);
+        titleTextField.setText("");
+    }
 
 
     // Legger til en ny hbox i addSetVbox med verdiene fra den nederste Hboxen.

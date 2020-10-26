@@ -6,28 +6,30 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
-import java.io.IOException;
 
 import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
 
 public class SessionScreenController {
 
-    @FXML VBox sessionOverviewVbox;
-
-    SessionLogger logger;
-
     @FXML
-    public void initialize() {
-        // we want to fill the VBox with the sesssions we have. First we need to load our sessionLogger-object
-        logger = new SessionLogger();
-        logger.load();
+    VBox sessionOverviewVbox;
+
+    private TrainingLoggerController mainController;
+    private SessionLogger sessionLogger;
+
+    public void setSessionLogger(SessionLogger sessionLogger){
+        this.sessionLogger = sessionLogger;
         sessionOverviewUpdate();
     }
 
+    public void setMainController(TrainingLoggerController main){
+        this.mainController = main;
+    }
+
     @FXML
-    private void sessionOverviewUpdate() {
+    public void sessionOverviewUpdate() {
         sessionOverviewVbox.getChildren().clear();
-        for (Session session : logger) {
+        for (Session session : sessionLogger) {
             VBox box = sessionToVboxConverter(session);
             TitledPane titledPane = new TitledPane(session.getDateString(), box);
             titledPane.setAlignment(Pos.CENTER_LEFT);
@@ -39,16 +41,16 @@ public class SessionScreenController {
 
     @FXML
     private void deleteButtonHandler(){
-        logger.deleteAll();
+        sessionLogger.deleteAll();
         sessionOverviewUpdate();
-        logger.save();
+        mainController.saveSessionLogger();
     }
 
 
     @FXML
-    private void switchToStartScreen() throws IOException {
+    private void switchToStartScreen() {
         try {
-            App.setRoot("StartScreen");
+            mainController.changeToStartScreen();
         }
         catch(Exception e) {
             System.out.println("Kunne ikke bytte fra Session Screen til Start Screen");
