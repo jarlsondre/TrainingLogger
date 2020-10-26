@@ -19,10 +19,8 @@ public class SetTest {
 
     @Test
     public void constructorTest() {
-        Set set1 = new Set();
-        Set set2 = new Set(5, 70);
-        set1.setReps(5);
-        set1.setWeight(70);
-        assertEquals(set1, set2);
+        Set set = new Set(5, 70);
+        assertEquals(set.getRepetitions(), 5);
+        assertEquals(set.getWeight(), 70);
     }
 }

@@ -10,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
 import traininglogger.core.Set;
-import traininglogger.json.FileHandler;
 
 import java.io.IOException;
 

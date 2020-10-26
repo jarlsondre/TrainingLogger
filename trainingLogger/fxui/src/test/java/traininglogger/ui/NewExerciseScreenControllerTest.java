@@ -1,9 +1,5 @@
 package traininglogger.ui;
 
-import java.io.IOException;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
@@ -14,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import traininglogger.core.Exercise;
-import traininglogger.core.Set;
-import traininglogger.json.FileHandler;
 
 import static org.junit.jupiter.api.Assertions.*;
 

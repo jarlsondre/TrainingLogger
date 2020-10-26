@@ -33,7 +33,7 @@ public class ModuleTest {
     session.setDate("15/09/2020 10:02");
     try {
       assertEquals(
-        "{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"6.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"7.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"9.0\"}]}]}",
+        "{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[{\"repetitions\":\"5\",\"weight\":\"5.0\"},{\"repetitions\":\"6\",\"weight\":\"6.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"repetitions\":\"5\",\"weight\":\"5.0\"},{\"repetitions\":\"6\",\"weight\":\"7.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"repetitions\":\"5\",\"weight\":\"5.0\"},{\"repetitions\":\"6\",\"weight\":\"9.0\"}]}]}",
           mapper.writeValueAsString(session));
     } catch (JsonProcessingException e) {
       fail();
@@ -45,7 +45,7 @@ public class ModuleTest {
     Session session = null;
     try {
       session = ModuleTest.mapper
-          .readValue("{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"6.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"7.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"9.0\"}]}]}", Session.class);
+          .readValue("{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[{\"repetitions\":\"5\",\"weight\":\"5.0\"},{\"repetitions\":\"6\",\"weight\":\"6.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"repetitions\":\"5\",\"weight\":\"5.0\"},{\"repetitions\":\"6\",\"weight\":\"7.0\"}]},{\"name\":\"Knebøy\",\"sets\":[{\"repetitions\":\"5\",\"weight\":\"5.0\"},{\"repetitions\":\"6\",\"weight\":\"9.0\"}]}]}", Session.class);
     } catch (JsonMappingException e) {
       fail();
     } catch (JsonProcessingException e) {
@@ -63,7 +63,7 @@ public class ModuleTest {
   public void testExerciseSerializer() {
     Exercise exercise = new Exercise("Knebøy", new Set(5,5), new Set(6,6));
     try {
-      assertEquals("{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"6.0\"}]}",
+      assertEquals("{\"name\":\"Knebøy\",\"sets\":[{\"repetitions\":\"5\",\"weight\":\"5.0\"},{\"repetitions\":\"6\",\"weight\":\"6.0\"}]}",
           mapper.writeValueAsString(exercise));
     } catch (JsonProcessingException e) {
       fail();
@@ -75,7 +75,7 @@ public class ModuleTest {
     Exercise exercise = null;
     try {
       exercise = ModuleTest.mapper
-          .readValue("{\"name\":\"Knebøy\",\"sets\":[{\"reps\":\"5\",\"weight\":\"5.0\"},{\"reps\":\"6\",\"weight\":\"6.0\"}]}", Exercise.class);
+          .readValue("{\"name\":\"Knebøy\",\"sets\":[{\"repetitions\":\"5\",\"weight\":\"5.0\"},{\"repetitions\":\"6\",\"weight\":\"6.0\"}]}", Exercise.class);
     } catch (JsonMappingException e) {
       e.printStackTrace();
       fail();

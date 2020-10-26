@@ -7,8 +7,6 @@ import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 import traininglogger.core.Set;
 
-import java.lang.reflect.Array;
-
 public class UpdateOverview {
 
     public static VBox sessionToVboxConverter(Session session) {
@@ -17,7 +15,7 @@ public class UpdateOverview {
             Label label = new Label(exercise.getName() + ": ");
             String temp = "";
             for (Set set : exercise.getSets()) {
-                temp += Double.toString(set.getWeight()) +"KG x "+ Integer.toString(set.getReps()) + ", ";
+                temp += Double.toString(set.getWeight()) +"KG x "+ Integer.toString(set.getRepetitions()) + ", ";
                 label.setText(label.getText() + temp);
                 temp = "";
             }

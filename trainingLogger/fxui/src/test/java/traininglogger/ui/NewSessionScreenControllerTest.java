@@ -3,15 +3,8 @@ package traininglogger.ui;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
-import traininglogger.core.Exercise;
-import traininglogger.core.Session;
-import traininglogger.core.SessionLogger;
-import traininglogger.json.FileHandler;
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

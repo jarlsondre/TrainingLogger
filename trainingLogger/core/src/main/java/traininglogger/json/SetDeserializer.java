@@ -23,18 +23,19 @@ public class SetDeserializer extends JsonDeserializer<Set> {
   }
 
   public Set deserialize(JsonNode jnode) {
+    int reps = 0;
+    double weight = 0;
     if (jnode instanceof ObjectNode) {
-      Set set = new Set();
       ObjectNode node = (ObjectNode) jnode;
-      JsonNode repsNode = node.get("reps");
+      JsonNode repsNode = node.get("repetitions");
       if (repsNode instanceof TextNode) {
-        set.setReps(Integer.parseInt(((TextNode) repsNode).asText()));
+        reps = (Integer.parseInt(((TextNode) repsNode).asText()));
       }
       JsonNode weightNode = node.get("weight");
       if (weightNode instanceof TextNode) {
-        set.setWeight(Double.parseDouble(((TextNode) weightNode).asText()));
+        weight = (Double.parseDouble(((TextNode) weightNode).asText()));
       }
-      return set;
+      return new Set(reps, weight);
     }
     return null;
   }

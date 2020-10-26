@@ -6,7 +6,7 @@ package traininglogger.core;
  */
 public class Set {
 
-  private int reps; 
+  private int repetitions;
   private double weight;
 
   // Denne er jeg usikker på om er nødvendig. Lar den stå midlertidig.
@@ -15,19 +15,19 @@ public class Set {
 
   /**
    * Konstruktør som instansierer objektet med antall repetisjoner og vekt.
-   * @param reps En integer som representerer antall reps
+   * @param repetitions En integer som representerer antall reps
    * @param weight En double som representerer vekt.
    */
-  public Set(int reps, double weight){
-    this.reps = reps; 
+  public Set(int repetitions, double weight){
+    this.repetitions = repetitions;
     this.weight = weight; 
   }
 
   /**
    * @return reps En integer som representerer antall reps
    */
-  public int getReps() {
-    return this.reps; 
+  public int getRepetitions() {
+    return this.repetitions;
   }
 
   /**
@@ -39,22 +39,6 @@ public class Set {
   }
 
   /**
-   * 
-   * @param reps En integer som representerer antall reps
-   */
-  public void setReps(int reps) {
-    this.reps = reps;
-  }
-
-  /**
-   * 
-   * @param weight En double som representerer vekt.
-   */
-  public void setWeight(double weight) {
-    this.weight = weight;
-  }
-
-  /**
    * @param object Sjekker om object er lik dette objektet
    */
   @Override
@@ -63,7 +47,7 @@ public class Set {
       return false;
     }
     Set set = (Set) object;
-    return set.getWeight() == this.getWeight() && set.getReps() == this.getReps();
+    return set.getWeight() == this.getWeight() && set.getRepetitions() == this.getRepetitions();
   }
 
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
@@ -77,7 +61,7 @@ public class Set {
 
   @Override
   public String toString() {
-    return "reps: " + Integer.toString(reps) + ", weight: " + Double.toString(weight);
+    return "repetitions: " + repetitions + ", weight: " + weight;
   }
 
 }

@@ -4,8 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
-import traininglogger.core.SessionLogger;
-import traininglogger.json.FileHandler;
+
 import java.io.IOException;
 
 import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
