@@ -52,29 +52,12 @@ public class Session {
     }
   }
 
-  /** 
-   *Denne metoden henter øvelse nr. i 
-   *@param int i
-   *@return øvelkse nr. i
-  */
-  public Exercise getExercise(int i){
-    return this.exercises.get(i);
-  }
-
   /**
    * Gir ut en liste av alle exercise-objektebe dette session-objektet inneholder.
    * @return En liste med alle øvelsene som er gjort.
    */
   public Collection<Exercise> getListOfExercises(){
     return this.exercises.stream().collect(Collectors.toList());
-  }
-
-  /**
-   * Fjerner exercise-objektet på plass nummer i.
-   * @param int i
-   */
-  public void removeExercise(int i){
-    this.exercises.remove(i);
   }
 
   public LocalDateTime getDate() {
