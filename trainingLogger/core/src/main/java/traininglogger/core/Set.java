@@ -6,12 +6,8 @@ package traininglogger.core;
  */
 public class Set {
 
-  private int repetitions;
-  private double weight;
-
-  // Denne er jeg usikker på om er nødvendig. Lar den stå midlertidig.
-  public Set() {
-  }
+  private final int repetitions;
+  private final double weight;
 
   /**
    * Konstruktør som instansierer objektet med antall repetisjoner og vekt.
