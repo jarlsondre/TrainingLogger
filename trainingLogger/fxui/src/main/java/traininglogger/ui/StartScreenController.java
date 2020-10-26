@@ -1,9 +1,6 @@
 package traininglogger.ui;
 
 import javafx.fxml.FXML;
-import traininglogger.core.Session;
-
-import java.io.IOException;
 
 public class StartScreenController {
 
@@ -14,25 +11,12 @@ public class StartScreenController {
     }
 
     @FXML
-    private void switchToSessionScreen() throws IOException {
-        try {
-            mainController.changeToSessionScreen();
-        }
-        catch(Exception e) {
-            System.out.println("Kunne ikke bytte fra Start Screen til Session Screen");
-        }
+    private void switchToSessionScreen() {
+        mainController.changeToSessionScreen();
     }
 
     @FXML
-    private void switchToNewSessionScreen() throws IOException {
-        Session session = new Session();
-
-        try {
-            mainController.changeToNewSessionScreen();
-        }
-        catch(Exception e) {
-            System.out.println("Kunne ikke bytte fra Start Screen til New Session Screen");
-        }
-
+    private void switchToNewSessionScreen() {
+        mainController.changeToNewSessionScreen();
     }
 }
