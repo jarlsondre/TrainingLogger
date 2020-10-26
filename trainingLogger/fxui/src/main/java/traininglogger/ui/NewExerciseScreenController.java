@@ -30,9 +30,8 @@ public class NewExerciseScreenController {
     @FXML
     Button addExerciseButton;
 
-    TrainingLoggerController mainController;
-
-    NewSessionScreenController newSessionScreenController;
+    private TrainingLoggerController mainController;
+    private NewSessionScreenController newSessionScreenController;
 
 
     public void setMainController(TrainingLoggerController main){

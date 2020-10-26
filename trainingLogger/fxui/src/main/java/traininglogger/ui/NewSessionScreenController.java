@@ -11,13 +11,12 @@ import java.io.IOException;
 import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
 
 public class NewSessionScreenController {
-    @FXML
-    TrainingLoggerController mainController;
 
     @FXML
     VBox exerciseOverviewVbox;
 
-    Session session;
+    private TrainingLoggerController mainController;
+    private Session session;
 
     public NewSessionScreenController(){
         session = new Session();
@@ -29,17 +28,13 @@ public class NewSessionScreenController {
 
     @FXML
     public void initialize() {
-
-        // Vise nåværende session
         exerciseOverviewVbox.getChildren().add(0, sessionToVboxConverter(session));
-
     }
 
     public void addExerciseToSession(Exercise exercise){
         session.addExercises(exercise);
         exerciseOverviewVbox.getChildren().clear();
         exerciseOverviewVbox.getChildren().add(0, sessionToVboxConverter(session));
-
     }
 
     @FXML

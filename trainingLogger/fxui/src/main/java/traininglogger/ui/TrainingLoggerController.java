@@ -37,10 +37,9 @@ public class TrainingLoggerController {
   @FXML
   Node newExerciseScreen;
 
-  SessionScreenController sessionScreenController;
-  NewExerciseScreenController newExerciseScreenController;
-  NewSessionScreenController newSessionScreenController;
-
+  private SessionScreenController sessionScreenController;
+  private NewExerciseScreenController newExerciseScreenController;
+  private NewSessionScreenController newSessionScreenController;
   private SessionLogger sessionLogger;
 
   @FXML
@@ -131,8 +130,6 @@ public class TrainingLoggerController {
       this.sessionLogger = new SessionLogger();
     } else {
       this.sessionLogger = mapper.readValue(reader, SessionLogger.class);
-      if (this.sessionLogger == null){
-      }
       reader.close();
     }
   }

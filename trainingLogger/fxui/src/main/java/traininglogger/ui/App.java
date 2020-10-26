@@ -16,12 +16,6 @@ public class App extends Application {
     stage.show();
   }
 
-  @Override
-  public void stop() {
-    FileDeleter.deleteFile("src/main/resources/exercise_controller_data.json");
-    FileDeleter.deleteFile("src/main/resources/session_controller_data.json");
-  }
-
   public static void main(String[] args) {
     launch(args);
   }

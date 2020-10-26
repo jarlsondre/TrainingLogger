@@ -6,33 +6,22 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
-import java.io.IOException;
 
 import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
 
 public class SessionScreenController {
-    @FXML
-    TrainingLoggerController mainController;
-
 
     @FXML
     VBox sessionOverviewVbox;
 
-    SessionLogger sessionLogger;
-
-    @FXML
-    public void initialize() {
-        // we want to fill the VBox with the sesssions we have. First we need to load our sessionLogger-object
-        // sessionLogger = new SessionLogger();
-        // sessionOverviewUpdate();
-    }
+    private TrainingLoggerController mainController;
+    private SessionLogger sessionLogger;
 
     public void setSessionLogger(SessionLogger sessionLogger){
         this.sessionLogger = sessionLogger;
         sessionOverviewUpdate();
     }
 
-    @FXML
     public void setMainController(TrainingLoggerController main){
         this.mainController = main;
     }
@@ -59,7 +48,7 @@ public class SessionScreenController {
 
 
     @FXML
-    private void switchToStartScreen() throws IOException {
+    private void switchToStartScreen() {
         try {
             mainController.changeToStartScreen();
         }
