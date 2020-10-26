@@ -7,21 +7,29 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 public class ExerciseTest {
 
   @Test
-  public void contructorTest(){
+  public void constructorTest(){
     Set set1 = new Set(5,5.0);
     Set set2 = new Set(6,6.0);
     Set set3 = new Set(7,7.0);
-    Exercise exercise_test = new Exercise();
-    exercise_test.addSets(set1, set2, set3);
-    exercise_test.setName("Knebøy");
-    Exercise exercise = new Exercise("Knebøy", set1, set2, set3); 
-    assertTrue(exercise_test.equals(exercise));
+    List<Set> sets = new ArrayList<>();
+    Exercise exercise = new Exercise("Knebøy", set1, set2, set3);
+    Iterator<Set> it = exercise.iterator();
+    assertTrue(it.hasNext());
+    assertEquals(it.next(), set1);
+    assertTrue(it.hasNext());
+    assertEquals(it.next(), set2);
+    assertTrue(it.hasNext());
+    assertEquals(it.next(), set3);
+    assertFalse(it.hasNext());
+    assertTrue(exercise.getName().equals("Knebøy"));
     try {
       new Exercise("Knebøy");
     } catch (Exception e) {

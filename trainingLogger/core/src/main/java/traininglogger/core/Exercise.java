@@ -2,6 +2,7 @@ package traininglogger.core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,9 +12,9 @@ import java.util.stream.Collectors;
  * - Øvelsens navn
  * - sett
  */
-public class Exercise {
+public class Exercise implements Iterable<Set>{
 
-  private List<Set> sets = new ArrayList<Set>();
+  private List<Set> sets = new ArrayList<>();
   private String exerciseName;
 
   /**
@@ -94,4 +95,8 @@ public class Exercise {
     return exerciseName + sets.toString();
   }
 
+  @Override
+  public Iterator<Set> iterator() {
+    return this.sets.iterator();
+  }
 }
