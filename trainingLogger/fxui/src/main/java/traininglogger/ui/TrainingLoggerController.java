@@ -1,5 +1,6 @@
 package traininglogger.ui;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,8 +18,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TrainingLoggerController {
@@ -38,12 +37,11 @@ public class TrainingLoggerController {
   Node newExerciseScreen;
 
   private SessionScreenController sessionScreenController;
-  private NewExerciseScreenController newExerciseScreenController;
   private NewSessionScreenController newSessionScreenController;
   private SessionLogger sessionLogger;
 
   @FXML
-  public void initialize() throws JsonParseException, JsonMappingException, IOException {
+  public void initialize() throws IOException {
     loadSessionLogger();
 
     FXMLLoader loader = new FXMLLoader();
@@ -77,7 +75,7 @@ public class TrainingLoggerController {
     loader = new FXMLLoader();
     try {
       newExerciseScreen = loader.load(getClass().getResource("NewExerciseScreen.fxml").openStream());
-      newExerciseScreenController = loader.getController();
+      NewExerciseScreenController newExerciseScreenController = loader.getController();
       newExerciseScreenController.setMainController(this);
       newExerciseScreenController.setNewSessionScreenController(newSessionScreenController);
     } catch (IOException ex) {
@@ -113,37 +111,37 @@ public class TrainingLoggerController {
     saveSessionLogger();
   }
 
-  private ObjectMapper mapper = new ObjectMapper();
-  private String userSessionLoggerPath = "sessionlogger.json";
+  private final ObjectMapper mapper = new ObjectMapper();
+  private final static String userSessionLoggerPath = "sessionlogger.json";
 
-  public void loadSessionLogger() throws JsonParseException, JsonMappingException, IOException {
+  @SuppressFBWarnings //SpotBug sier at reaader ikke lukkes, men den lukkes. Kjent feil.
+  public void loadSessionLogger() throws IOException {
     this.mapper.registerModule(new TrainingLoggerModule());
     Reader reader = null;
     // Prøv å lese lagret fil fra brukerens hjemmeområde:
     try {
       reader = new FileReader(Paths.get(System.getProperty("user.home"), userSessionLoggerPath).toFile(),
           StandardCharsets.UTF_8);
-    } catch (IOException ioex) {
+    } catch (IOException ioEx) {
       System.err.println("Fant ingen " + userSessionLoggerPath + " på hjemmeområdet.");
     }
     if (reader == null) {
       this.sessionLogger = new SessionLogger();
-    } else {
+    }
+    else {
       this.sessionLogger = mapper.readValue(reader, SessionLogger.class);
-      reader.close();
     }
   }
 
+  @SuppressFBWarnings //SpotBug sier at writer ikke lukkes, men den lukkes. Kjent feil.
   public void saveSessionLogger() {
-    if (userSessionLoggerPath != null) {
       Path path = Paths.get(System.getProperty("user.home"), userSessionLoggerPath);
       try {
-        Writer writer = new FileWriter(path.toFile(), StandardCharsets.UTF_8);
-        this.mapper.writerWithDefaultPrettyPrinter().writeValue(writer, this.sessionLogger);
-      } catch (IOException e) {
-        System.err.println("Fikk ikke skrevet til sessionlog.json på hjemmeområdet.");
+          Writer writer = new FileWriter(path.toFile(), StandardCharsets.UTF_8);
+          this.mapper.writerWithDefaultPrettyPrinter().writeValue(writer, this.sessionLogger);
+          writer.close();
+        } catch (IOException e) {
+          System.err.println("Fikk ikke skrevet til sessionlog.json på hjemmeområdet.");
       }
-    }
   }
-  
 }
