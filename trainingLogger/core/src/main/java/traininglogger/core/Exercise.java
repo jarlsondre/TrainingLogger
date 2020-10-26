@@ -53,14 +53,6 @@ public class Exercise {
   }
 
   /**
-   * @param i
-   * @return Sett nr. i
-   */
-  public Set getSet(int i) {
-    return this.sets.get(i);
-  }
-
-  /**
    * 
    * @return Henter navn på øvelsen.
    */
