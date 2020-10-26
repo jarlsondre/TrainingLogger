@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class Exercise implements Iterable<Set>{
 
   private List<Set> sets = new ArrayList<>();
-  private String exerciseName;
+  private String name;
 
   /**
    * Tom konstruktør som kun instansierer et objekt uten noe informasjon
@@ -30,7 +30,7 @@ public class Exercise implements Iterable<Set>{
    * @param sets En array med set som objektet skal bestå av.
    */
   public Exercise(String name, Set... sets) {
-    this.exerciseName = name;
+    this.name = name;
     this.addSets(sets);
   }
 
@@ -48,7 +48,7 @@ public class Exercise implements Iterable<Set>{
    * @return Henter navn på øvelsen.
    */
   public String getName() {
-    return this.exerciseName;
+    return this.name;
   }
 
   /**
@@ -56,7 +56,7 @@ public class Exercise implements Iterable<Set>{
    * @param name Setter navn på øvelsen.
    */
   public void setName(String name) {
-    this.exerciseName = name;
+    this.name = name;
   }
 
   /**
@@ -78,7 +78,7 @@ public class Exercise implements Iterable<Set>{
       return false;
     }
     Exercise obj = (Exercise) object;
-    return this.getName().equals(obj.getName()) && this.sets.equals(obj.getSets());
+    return this.name.equals(obj.getName()) && this.sets.equals(obj.getSets());
   }
 
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
@@ -92,7 +92,7 @@ public class Exercise implements Iterable<Set>{
 
   @Override
   public String toString() {
-    return exerciseName + sets.toString();
+    return this.name + sets.toString();
   }
 
   @Override

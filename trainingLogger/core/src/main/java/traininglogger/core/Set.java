@@ -1,18 +1,18 @@
 package traininglogger.core; 
 
-
 /**
  * Et set-objekt tar vare på informasjonen om et set, henholdsvis antall repetisjoner og vekt.
  */
+
 public class Set {
 
   private final int repetitions;
-  private double weight;
+  private final double weight;
 
   /**
    * Konstruktør som instansierer objektet med antall repetisjoner og vekt.
-   * @param repetitions En integer som representerer antall reps
-   * @param weight En double som representerer vekt.
+   * @param repetitions antallet repetisjoner
+   * @param weight antallet kilo
    */
   public Set(int repetitions, double weight){
     this.repetitions = repetitions;
@@ -20,7 +20,7 @@ public class Set {
   }
 
   /**
-   * @return reps En integer som representerer antall reps
+   * @return reps antallet repetisjoner
    */
   public int getRepetitions() {
     return this.repetitions;
@@ -28,14 +28,14 @@ public class Set {
 
   /**
    * 
-   * @return weight En double som representerer vekt.
+   * @return weight antallet kilo
    */
   public double getWeight() {
     return this.weight; 
   }
 
   /**
-   * @param object Sjekker om object er lik dette objektet
+   * @param object objektet man sammenlikner med
    */
   @Override
   public boolean equals(Object object) {
@@ -43,7 +43,7 @@ public class Set {
       return false;
     }
     Set set = (Set) object;
-    return set.getWeight() == this.getWeight() && set.getRepetitions() == this.getRepetitions();
+    return set.getRepetitions() == this.getRepetitions() && set.getWeight() == this.getWeight();
   }
 
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
@@ -59,5 +59,4 @@ public class Set {
   public String toString() {
     return "repetitions: " + repetitions + ", weight: " + weight;
   }
-
 }
