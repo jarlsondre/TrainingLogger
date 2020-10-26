@@ -42,9 +42,6 @@ public class ExerciseTest {
     col.add(set3);
     assertEquals(col, exercise.getSets());
     assertEquals(new ArrayList<>(), new Exercise("Knebøy").getSets());
-    exercise.removeSet(2);
-    col.remove(set3);
-    assertEquals(col, exercise.getSets());
   }
 
   @Test
@@ -63,8 +60,6 @@ public class ExerciseTest {
     assertEquals(exercise1, exercise2);
     exercise2.addSets(new Set(2,2));
     assertFalse(exercise1.equals(exercise2));
-    exercise2.removeSet(3);
-    assertEquals(exercise1, exercise2);
   }
 
 
