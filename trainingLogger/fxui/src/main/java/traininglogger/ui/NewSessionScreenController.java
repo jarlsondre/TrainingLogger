@@ -40,7 +40,6 @@ public class NewSessionScreenController {
     private void switchToStartScreen() throws IOException {
         try {
             mainController.changeToStartScreen();
-            FileDeleter.deleteFile("src/main/resources/exercise_controller_data.json");
         }
         catch(Exception e) {
             System.out.println("Kunne ikke bytte fra New Session Screen til Start Screen");
@@ -51,7 +50,6 @@ public class NewSessionScreenController {
     private void switchToNewExerciseScreen() throws IOException {
         try {
             mainController.changeToNewExerciseScreen();
-            FileDeleter.deleteFile("src/main/resources/exercise_controller_data.json");
         }
         catch(Exception e) {
             System.out.println("Kunne ikke bytte fra New Session Screen til New Exercise Screen");

@@ -63,7 +63,7 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
 
 
 
-  @Test
+
   public void testAddExercise() {
     TextField titleTextField = lookup("#titleTextField").query();
     TextField weightTextField = lookup("#weightTextField").query();

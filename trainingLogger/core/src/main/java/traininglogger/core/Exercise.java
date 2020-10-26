@@ -43,6 +43,16 @@ public class Exercise {
   }
 
   /**
+   * Fjerner sett nr. i fra liten med sett.
+   * Fjerner et sett basert på indexen som tas inn.
+   *
+   * @param i indeksen til settet som skal fjernes
+   */
+  // public void removeSet(int i) {
+    //this.sets.remove(i);
+  }
+
+  /**
    * 
    * @return Henter navn på øvelsen.
    */

@@ -7,7 +7,7 @@ package traininglogger.core;
 public class Set {
 
   private final int repetitions;
-  private final double weight;
+  private double weight;
 
   /**
    * Konstruktør som instansierer objektet med antall repetisjoner og vekt.
