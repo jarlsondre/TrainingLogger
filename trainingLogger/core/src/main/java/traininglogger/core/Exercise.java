@@ -7,10 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Et exercise-objekt skal ta vare på informasjonen rundt en øvelse.
- * Objektet inneholder informanjon om:
- * - Øvelsens navn
- * - sett
+ * En Exercise er en navngitt treningsøvelse. En Exercise består av flere Set.
  */
 public class Exercise implements Iterable<Set>{
 

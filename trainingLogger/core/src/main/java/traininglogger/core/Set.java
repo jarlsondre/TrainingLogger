@@ -1,7 +1,9 @@
 package traininglogger.core; 
 
 /**
- * Et set-objekt tar vare på informasjonen om et set, henholdsvis antall repetisjoner og vekt.
+ * Et Set er den "atomiske enheten" i en treningsøkt (Session). 
+ * Et Set representerer at en utøver løfter et visst antall kg (weight) et visst antall ganger (repetitions).
+ * En treningsøkt (Session) består av flere øvelser (Exercise) som i sin tur består av flere Set. 
  */
 
 public class Set {
@@ -10,7 +12,7 @@ public class Set {
   private final double weight;
 
   /**
-   * Konstruktør som instansierer objektet med antall repetisjoner og vekt.
+   * Konstruerer et Set med et gitt antall repetisjoner og en gitt vekt i kg
    * @param repetitions antallet repetisjoner
    * @param weight antallet kilo
    */
@@ -20,7 +22,7 @@ public class Set {
   }
 
   /**
-   * @return reps antallet repetisjoner
+   * @return repetitions antallet repetisjoner
    */
   public int getRepetitions() {
     return this.repetitions;
