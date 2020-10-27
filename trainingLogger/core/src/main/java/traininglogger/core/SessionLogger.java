@@ -6,8 +6,7 @@ import java.util.List;
 
 
 /** 
- * SessionLogger objektet inneholder en liste med sessions. objektet er ment å
- * kunne lagre, manipulere og endre på lista med sessions.
+ * SessionLogger objektet inneholder en liste med sessions.
  */
 public class SessionLogger implements Iterable<Session> {
 
