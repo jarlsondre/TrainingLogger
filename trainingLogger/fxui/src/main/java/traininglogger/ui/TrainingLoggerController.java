@@ -1,14 +1,7 @@
 package traininglogger.ui;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.layout.VBox;
-import traininglogger.core.Session;
-import traininglogger.core.SessionLogger;
-import traininglogger.json.TrainingLoggerModule;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,8 +10,13 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.layout.VBox;
+import traininglogger.core.Session;
+import traininglogger.core.SessionLogger;
+import traininglogger.json.TrainingLoggerModule;
 
 public class TrainingLoggerController {
   @FXML
@@ -114,7 +112,7 @@ public class TrainingLoggerController {
   private final ObjectMapper mapper = new ObjectMapper();
   private final static String userSessionLoggerPath = "sessionlogger.json";
 
-  @SuppressFBWarnings //SpotBug sier at reaader ikke lukkes, men den lukkes. Kjent feil.
+  @SuppressFBWarnings // SpotBug sier at reaader ikke lukkes, men den lukkes. Kjent feil.
   public void loadSessionLogger() throws IOException {
     this.mapper.registerModule(new TrainingLoggerModule());
     Reader reader = null;
@@ -127,21 +125,20 @@ public class TrainingLoggerController {
     }
     if (reader == null) {
       this.sessionLogger = new SessionLogger();
-    }
-    else {
+    } else {
       this.sessionLogger = mapper.readValue(reader, SessionLogger.class);
     }
   }
 
-  @SuppressFBWarnings //SpotBug sier at writer ikke lukkes, men den lukkes. Kjent feil.
+  @SuppressFBWarnings // SpotBug sier at writer ikke lukkes, men den lukkes. Kjent feil.
   public void saveSessionLogger() {
-      Path path = Paths.get(System.getProperty("user.home"), userSessionLoggerPath);
-      try {
-          Writer writer = new FileWriter(path.toFile(), StandardCharsets.UTF_8);
-          this.mapper.writerWithDefaultPrettyPrinter().writeValue(writer, this.sessionLogger);
-          writer.close();
-        } catch (IOException e) {
-          System.err.println("Fikk ikke skrevet til sessionlog.json på hjemmeområdet.");
-      }
+    Path path = Paths.get(System.getProperty("user.home"), userSessionLoggerPath);
+    try {
+      Writer writer = new FileWriter(path.toFile(), StandardCharsets.UTF_8);
+      this.mapper.writerWithDefaultPrettyPrinter().writeValue(writer, this.sessionLogger);
+      writer.close();
+    } catch (IOException e) {
+      System.err.println("Fikk ikke skrevet til sessionlog.json på hjemmeområdet.");
+    }
   }
 }
