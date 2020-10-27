@@ -15,46 +15,41 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import traininglogger.core.Exercise;
 import traininglogger.core.Set;
 
-
 /**
-   * Denne klassen inneholder metoden deserializer, som konverterer et json
-   * formatert exercise objekt tilbake til objektet. Objektet må ha formatet: {
-   * "name": " ... " "sets": " ... " }, hvor sets er en liste av tupler, henholdsvis reps og vekt.
-   * Eksempel: {\"name\":\"Knebøy\",\"sets\":[5,5,6,6]}
-*/
+ * Denne klassen inneholder metoden deserializer, som konverterer et json
+ * formatert exercise objekt tilbake til objektet. Objektet må ha formatet: {
+ * "name": " ... " "sets": " ... " }, hvor sets er en liste av tupler,
+ * henholdsvis reps og vekt. Eksempel: {\"name\":\"Knebøy\",\"sets\":[5,5,6,6]}
+ */
 public class ExerciseDeserializer extends JsonDeserializer<Exercise> {
 
-  private SetDeserializer deserializer = new SetDeserializer();
+  private SetDeserializer setDeserializer = new SetDeserializer();
 
   @Override
-  public Exercise deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-    TreeNode treenode = parser.getCodec().readTree(parser); 
+  public Exercise deserialize(JsonParser parser, DeserializationContext ctxt)
+      throws IOException, JsonProcessingException {
+    TreeNode treenode = parser.getCodec().readTree(parser);
     return deserialize((JsonNode) treenode);
   }
 
-  public Exercise deserialize(JsonNode jnode) {
-    if (jnode instanceof ObjectNode) {
-      ObjectNode node = (ObjectNode) jnode;
-      Exercise exercise = null;
-      JsonNode textNode1 = node.get("name");
-      if (textNode1 instanceof TextNode) {
-        exercise = new Exercise(((TextNode) textNode1).asText());
-      }
-      JsonNode setsNode = node.get("sets");
-      if (setsNode instanceof ArrayNode) {
-        ArrayNode setsNodeArray = (ArrayNode) setsNode;
-        Set[] sets = new Set[setsNodeArray.size()];
-        int counter = 0;
-        for (JsonNode element : setsNodeArray) {
-          Set set = this.deserializer.deserialize(element);
-          sets[counter] = set;
-          counter++;
+  public Exercise deserialize(JsonNode jsonNode) {
+    if (jsonNode instanceof ObjectNode) {
+      ObjectNode objectNode = (ObjectNode) jsonNode;
+      JsonNode nameNode = objectNode.get("name");
+      JsonNode setsNode = objectNode.get("sets");
+      if (nameNode instanceof TextNode && setsNode instanceof ArrayNode) {
+        String name = ((TextNode) nameNode).asText();
+        ArrayNode sets = (ArrayNode) setsNode;
+        Exercise exercise = new Exercise(name);
+        for (JsonNode element : sets) {
+          Set set = this.setDeserializer.deserialize(element);
+          if (set != null) {
+            exercise.addSets(set);
+          }
         }
-        exercise.addSets(sets);
+        return exercise;
       }
-      return exercise;
     }
     return null;
   }
-
 }
