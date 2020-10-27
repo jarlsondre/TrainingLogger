@@ -21,7 +21,7 @@ public class SessionSerializer extends JsonSerializer<Session> {
       throws IOException {
     gen.writeStartObject();
     gen.writeStringField("stringDescription", session.getDescription());
-    gen.writeStringField("date", session.getDateString());
+    gen.writeStringField("date", session.getDateAsString());
     gen.writeArrayFieldStart("exercises");
     for(Exercise e : session.getListOfExercises()){
       gen.writeObject(e);

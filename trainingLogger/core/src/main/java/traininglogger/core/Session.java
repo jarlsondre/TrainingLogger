@@ -22,13 +22,13 @@ public class Session {
 
   private String description;
   private LocalDateTime date;
-  private final DateTimeFormatter dtf; // kan endre hvis klokkeslett trengs
+  private final DateTimeFormatter dateTimeFormatter; // kan endre hvis klokkeslett trengs
   private List<Exercise> exercises = new ArrayList<>();
 
   // Konstruktor som ikke tar inn beskrivelse.
   public Session() {
-    date = LocalDateTime.now();
-    dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    this.date = LocalDateTime.now();
+    this.dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
   }
 
   // Konstruktør som tar inn beskrivelse.
@@ -67,8 +67,8 @@ public class Session {
   /**
    * @return Datoen økten foregikk som en formatert streng
    */
-  public String getDateString() {
-    return dtf.format(date).toString();
+  public String getDateAsString() {
+    return this.date.format(this.dateTimeFormatter);
   }
 
   /**
@@ -77,21 +77,21 @@ public class Session {
    *@param date datoen som økten foregikk som en formatert streng.
    */
   public void setDate(String date) {
-    LocalDateTime d = LocalDateTime.parse(date, this.dtf);
+    LocalDateTime d = LocalDateTime.parse(date, this.dateTimeFormatter);
     this.date = d;
   }
 
   /**
    * Sammenlikner dette objektet med objektet som blir tatt inn som argument.
-   * Objektene er like om de har samme beskivelse og dato.
+   * Objektene er like dersom de har samme dato (representert som String) og består av de samme øvelsene.
    */
   @Override
   public boolean equals(Object object) {
     if (!(object instanceof Session)) {
       return false;
     }
-    Session session = (Session) object;
-    return session.getDate().equals(this.getDate()) && session.getDescription().equals(this.getDescription()) && this.exercises.equals(session.getListOfExercises());
+    Session theOtherSession = (Session) object;
+    return this.getDateAsString().equals(theOtherSession.getDateAsString()) && this.exercises.equals(theOtherSession.exercises);
   }
 
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å

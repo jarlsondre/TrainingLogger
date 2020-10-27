@@ -31,7 +31,7 @@ public class SessionScreenController {
         sessionOverviewVbox.getChildren().clear();
         for (Session session : sessionLogger) {
             VBox box = sessionToVboxConverter(session);
-            TitledPane titledPane = new TitledPane(session.getDateString(), box);
+            TitledPane titledPane = new TitledPane(session.getDateAsString(), box);
             titledPane.setAlignment(Pos.CENTER_LEFT);
             titledPane.setExpanded(false);
             sessionOverviewVbox.getChildren().add(0, titledPane);
