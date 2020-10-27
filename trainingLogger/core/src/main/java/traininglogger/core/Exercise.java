@@ -67,8 +67,7 @@ public class Exercise implements Iterable<Set>{
       return false;
     }
     Exercise theOtherExercise = (Exercise) object;
-
-    return this.name.equals(theOtherExercise.getName()) && this.iterator().equals(theOtherExercise.iterator());
+    return this.name.equals(theOtherExercise.getName()) && this.sets.equals(theOtherExercise.sets);
   }
 
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
