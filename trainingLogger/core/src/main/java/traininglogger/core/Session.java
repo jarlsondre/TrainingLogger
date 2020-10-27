@@ -3,10 +3,8 @@ package traininglogger.core;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * En Session representerer en treningsøkt. Et Session-objekt spesifiseres ved:
