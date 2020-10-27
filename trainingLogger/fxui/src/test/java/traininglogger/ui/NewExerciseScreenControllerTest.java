@@ -108,7 +108,6 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
     }
 
     // Nå vi må sjekke at det vi skrev inn ikke har blitt lagret
-    Exercise exercise = newExerciseScreenController.getExercise();
 
     // Dersom exercise ikke har noen sett så har ikke settet blitt lagret
     //if (!(exercise.getSets().size() == 0)) {
