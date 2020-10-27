@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * En Exercise er en navngitt treningsøvelse. En Exercise består av flere Set.
@@ -57,9 +56,9 @@ public class Exercise implements Iterable<Set>{
   }
 
   /**
-   * Sammenlikner dette objektet med object.
-   * @param object Objektet instansen skal sammenliknes med
-   * @return Returnerer true dersom objektene har de samme settene, i samme rekkefølge, og det samme navnet.
+   * Sammenlikner dette Exercise-objektet med object.
+   * @param object Objektet som instansen skal sammenliknes med
+   * @return true dersom objektene har samme navn og de to sets-attributtene evalueres til å være like
    */
   @Override
   public boolean equals(Object object) {

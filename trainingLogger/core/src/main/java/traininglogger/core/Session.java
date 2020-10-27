@@ -4,21 +4,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Et objekt av klassen "Session" tar vare på all informasjon rundt en økt. I
- * Ojektet inneholder: 
- * - En beskrivelse av økten. 
- * - Datoen økten foregikk, lagret som et LocalDateTime objekt.
- * - En liste med session-objekter, som beskriver hvilke øvelser som ble gjort.
- * Datoen skal være formet som
- * dette: dd/MM/yyyy HH:mm. Datoen blir generert automatisk ved opprettelse av
- * objektet.
+ * En Session representerer en treningsøkt. Et Session-objekt spesifiseres ved:
+ * - En beskrivelse av treningsøkten. - Datoen treningsøkten foregikk, lagret
+ * som et LocalDateTime objekt. - En liste med Exercise-objekter. Disse
+ * representerer øvelsene treningsøkta besto av.
+ * 
+ * Datoen er på formatet dd/MM/yyyy HH:mm.
  */
-public class Session {
-
+public class Session implements Iterable<Exercise> {
 
   private String description;
   private LocalDateTime date;
@@ -52,14 +50,6 @@ public class Session {
     }
   }
 
-  /**
-   * Gir ut en liste av alle exercise-objektebe dette session-objektet inneholder.
-   * @return En liste med alle øvelsene som er gjort.
-   */
-  public Collection<Exercise> getListOfExercises(){
-    return this.exercises.stream().collect(Collectors.toList());
-  }
-
   public LocalDateTime getDate() {
     return this.date;
   }
@@ -72,18 +62,27 @@ public class Session {
   }
 
   /**
-   *Tar inn en streng på formen "dd/MM/yyyy HH:mm", og setter atributten "date"
-   *lik datoen strengen beskriver. 
-   *@param date datoen som økten foregikk som en formatert streng.
+   * Tar inn en streng på formen "dd/MM/yyyy HH:mm", og setter atributten "date"
+   * lik datoen strengen beskriver.
+   * 
+   * @param date datoen som økten foregikk som en formatert streng.
    */
   public void setDate(String date) {
     LocalDateTime d = LocalDateTime.parse(date, this.dateTimeFormatter);
     this.date = d;
   }
 
+  @Override
+  public Iterator<Exercise> iterator() {
+    return this.exercises.iterator();
+  }
+
   /**
-   * Sammenlikner dette objektet med objektet som blir tatt inn som argument.
-   * Objektene er like dersom de har samme dato (representert som String) og består av de samme øvelsene.
+   * Sammenlikner dette Session-objektet med object.
+   * 
+   * @param object Objektet som instansen skal sammenliknes med
+   * @return true dersom objektene har samme formatterte dato (String) og de to
+   *         exercises-attributtene evalueres til å være like.
    */
   @Override
   public boolean equals(Object object) {
@@ -91,7 +90,8 @@ public class Session {
       return false;
     }
     Session theOtherSession = (Session) object;
-    return this.getDateAsString().equals(theOtherSession.getDateAsString()) && this.exercises.equals(theOtherSession.exercises);
+    return this.getDateAsString().equals(theOtherSession.getDateAsString())
+        && this.exercises.equals(theOtherSession.exercises);
   }
 
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
@@ -102,6 +102,4 @@ public class Session {
     assert false : "hashCode not designed";
     return 1;
   }
-
-
 }

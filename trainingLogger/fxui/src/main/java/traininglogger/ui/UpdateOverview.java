@@ -11,7 +11,7 @@ public class UpdateOverview {
 
     public static VBox sessionToVboxConverter(Session session) {
         VBox box = new VBox();
-        for (Exercise exercise : session.getListOfExercises()) {
+        for (Exercise exercise : session) {
             Label label = new Label(exercise.getName() + ": ");
             String temp = "";
             for (Set set : exercise) {

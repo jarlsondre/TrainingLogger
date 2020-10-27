@@ -23,7 +23,7 @@ public class SessionSerializer extends JsonSerializer<Session> {
     gen.writeStringField("stringDescription", session.getDescription());
     gen.writeStringField("date", session.getDateAsString());
     gen.writeArrayFieldStart("exercises");
-    for(Exercise e : session.getListOfExercises()){
+    for(Exercise e : session){
       gen.writeObject(e);
     }
     gen.writeEndArray();
