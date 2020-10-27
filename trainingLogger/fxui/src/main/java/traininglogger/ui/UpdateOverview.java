@@ -14,7 +14,7 @@ public class UpdateOverview {
         for (Exercise exercise : session.getListOfExercises()) {
             Label label = new Label(exercise.getName() + ": ");
             String temp = "";
-            for (Set set : exercise.getSets()) {
+            for (Set set : exercise) {
                 temp += Double.toString(set.getWeight()) +"KG x "+ Integer.toString(set.getRepetitions()) + ", ";
                 label.setText(label.getText() + temp);
                 temp = "";

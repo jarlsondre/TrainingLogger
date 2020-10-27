@@ -57,14 +57,6 @@ public class Exercise implements Iterable<Set>{
   }
 
   /**
-   * 
-   * @return En liste med settene.
-   */
-  public List<Set> getSets() {
-    return this.sets.stream().collect(Collectors.toList());
-  }
-
-  /**
    * Sammenlikner dette objektet med object.
    * @param object Objektet instansen skal sammenliknes med
    * @return Returnerer true dersom objektene har de samme settene, i samme rekkefølge, og det samme navnet.
@@ -74,8 +66,9 @@ public class Exercise implements Iterable<Set>{
     if(!(object instanceof Exercise)){
       return false;
     }
-    Exercise obj = (Exercise) object;
-    return this.name.equals(obj.getName()) && this.sets.equals(obj.getSets());
+    Exercise theOtherExercise = (Exercise) object;
+
+    return this.name.equals(theOtherExercise.getName()) && this.iterator().equals(theOtherExercise.iterator());
   }
 
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å

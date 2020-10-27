@@ -23,7 +23,7 @@ public class ExerciseSerializer extends JsonSerializer<Exercise> {
     gen.writeStartObject();
     gen.writeStringField("name", exercise.getName());
     gen.writeArrayFieldStart("sets");
-    for (Set set : exercise.getSets()) {
+    for (Set set : exercise) {
       gen.writeObject(set);
     }
     gen.writeEndArray();
