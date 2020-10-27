@@ -1,7 +1,5 @@
 package traininglogger.json;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -11,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-
+import java.io.IOException;
 import traininglogger.core.Exercise;
 import traininglogger.core.Set;
 
@@ -32,6 +30,12 @@ public class ExerciseDeserializer extends JsonDeserializer<Exercise> {
     return deserialize((JsonNode) treenode);
   }
 
+  /**
+   * Konstruerer et Exercise-objekt fra en parset JsonNode.
+   *
+   * @param jsonNode templatet for nytt Exercise-objekt
+   * @return det rekonstruerte Exercise-objektet hvis deserialiseringen lykkes, null ellers.
+   */
   public Exercise deserialize(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) jsonNode;

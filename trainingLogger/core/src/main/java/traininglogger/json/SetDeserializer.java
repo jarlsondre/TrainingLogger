@@ -1,7 +1,5 @@
 package traininglogger.json;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -11,17 +9,24 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.DoubleNode;
 import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
+import java.io.IOException;
 import traininglogger.core.Set;
 
 public class SetDeserializer extends JsonDeserializer<Set> {
 
   @Override
-  public Set deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+  public Set deserialize(JsonParser parser, DeserializationContext ctxt) 
+      throws IOException, JsonProcessingException {
     TreeNode treenode = parser.getCodec().readTree(parser);
     return deserialize((JsonNode) treenode);
   }
 
+  /**
+   * Konstruerer et Set-objekt fra en parset JsonNode.
+   *
+   * @param jsonNode templatet for nytt Set-objekt
+   * @return det rekonstruerte Set-objektet hvis deserialiseringen lykkes, null ellers.
+   */
   public Set deserialize(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) jsonNode;

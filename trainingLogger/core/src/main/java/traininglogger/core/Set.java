@@ -1,9 +1,10 @@
-package traininglogger.core; 
+package traininglogger.core;
 
 /**
- * Et Set er den "atomiske enheten" i en treningsøkt (Session). 
- * Et Set representerer at en utøver løfter et visst antall kg (weight) et visst antall ganger (repetitions).
- * En treningsøkt (Session) består av flere øvelser (Exercise) som i sin tur består av flere Set. 
+ * Et Set er den "atomiske enheten" i en treningsøkt (Session). Et Set
+ * representerer at en utøver løfter et visst antall kg (weight), et visst
+ * antall ganger (repetitions). En treningsøkt (Session) består av flere øvelser
+ * (Exercise) som i sin tur består av flere Set.
  */
 
 public class Set {
@@ -12,16 +13,19 @@ public class Set {
   private final double weight;
 
   /**
-   * Konstruerer et Set med et gitt antall repetisjoner og en gitt vekt i kg
+   * Konstruerer et Set med et gitt antall repetisjoner og en gitt vekt i kg.
+   *
    * @param repetitions antallet repetisjoner
-   * @param weight antallet kilo
+   * @param weight      antallet kilo
    */
-  public Set(int repetitions, double weight){
+  public Set(int repetitions, double weight) {
     this.repetitions = repetitions;
-    this.weight = weight; 
+    this.weight = weight;
   }
 
   /**
+   * Returnerer antallet repetisjoner som dette settet besto av.
+   *
    * @return repetitions antallet repetisjoner
    */
   public int getRepetitions() {
@@ -29,19 +33,26 @@ public class Set {
   }
 
   /**
-   * 
+   * Returnerer antallet kg som ble løftet i dette settet.
+   *
    * @return weight antallet kilo
    */
   public double getWeight() {
-    return this.weight; 
+    return this.weight;
   }
 
   /**
-   * @param object objektet man sammenlikner med
+   * Sammenlikner dette Set-objektet med et annet objekt. 
+   * Resultatet av sammenlikningen er sann (true) hvis og bare hvis 
+   * argumentet også er et Set-objekt og dersom de to objektenes attributter (repetitions og weight)
+   * har identiske verdier.
+   *
+   * @param object Objektet som instansen skal sammenliknes med
+   * @return true dersom det andre objektet er et ekvivalent Set-objekt, false ellers
    */
   @Override
   public boolean equals(Object object) {
-    if(!(object instanceof Set)) {
+    if (!(object instanceof Set)) {
       return false;
     }
     Set set = (Set) object;

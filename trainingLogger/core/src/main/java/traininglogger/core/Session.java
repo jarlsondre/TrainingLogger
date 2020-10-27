@@ -8,11 +8,15 @@ import java.util.List;
 
 /**
  * En Session representerer en treningsøkt. Et Session-objekt spesifiseres ved:
- * - En beskrivelse av treningsøkten. - Datoen treningsøkten foregikk, lagret
- * som et LocalDateTime objekt. - En liste med Exercise-objekter. Disse
- * representerer øvelsene treningsøkta besto av.
+ * <ul>
+ * <li>En beskrivelse av treningsøkten</li>
+ * <li>Datoen treningsøkten foregikk</li>
+ * <li>En liste med Exercise-objekter</li>
+ * </ul>
  * 
- * Datoen er på formatet dd/MM/yyyy HH:mm.
+ * <p>
+ * Datoen er på formatet dd/MM/yyyy HH:mm
+ * </p>
  */
 public class Session implements Iterable<Exercise> {
 
@@ -27,7 +31,13 @@ public class Session implements Iterable<Exercise> {
     this.dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
   }
 
-  // Konstruktør som tar inn beskrivelse.
+  /**
+   * Konstruerer en treningsøkt bestående av gitte øvelser og som har en gitt
+   * beskrivelse.
+   *
+   * @param description en beskrivelse av treningsøkta
+   * @param exercises   øvelsene som treningsøkta består av
+   */
   public Session(String description, Exercise... exercises) {
     this();
     this.description = description;
@@ -42,6 +52,11 @@ public class Session implements Iterable<Exercise> {
     return this.description;
   }
 
+  /**
+   * Utivder denne treningsøkta med flere øvelser.
+   *
+   * @param exercises øvelsene som økta skal utvides med
+   */
   public void addExercises(Exercise... exercises) {
     for (Exercise e : exercises) {
       this.exercises.add(e);
@@ -53,7 +68,9 @@ public class Session implements Iterable<Exercise> {
   }
 
   /**
-   * @return Datoen økten foregikk som en formatert streng
+   * Returnerer datoen en økt foregikk, representert som et String-objekt.
+   *
+   * @return datoen som økten foregikk
    */
   public String getDateAsString() {
     return this.date.format(this.dateTimeFormatter);
@@ -62,7 +79,7 @@ public class Session implements Iterable<Exercise> {
   /**
    * Tar inn en streng på formen "dd/MM/yyyy HH:mm", og setter atributten "date"
    * lik datoen strengen beskriver.
-   * 
+   *
    * @param date datoen som økten foregikk som en formatert streng.
    */
   public void setDate(String date) {
@@ -76,11 +93,14 @@ public class Session implements Iterable<Exercise> {
   }
 
   /**
-   * Sammenlikner dette Session-objektet med object.
-   * 
+   * Sammenlikner dette Session-objektet med et annet objekt. Resultatet av
+   * sammenlikningen er sann (true) hvis og bare hvis argumentet også er et
+   * Session-objekt, de to objektenes dato (representert som en String) er like og
+   * hvis øvelsene (Exercise) som øktene består av vurderes som like.
+   *
    * @param object Objektet som instansen skal sammenliknes med
-   * @return true dersom objektene har samme formatterte dato (String) og de to
-   *         exercises-attributtene evalueres til å være like.
+   * @return true dersom det andre objektet er et ekvivalent Session-objekt, false
+   *         ellers
    */
   @Override
   public boolean equals(Object object) {

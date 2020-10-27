@@ -8,13 +8,13 @@ import java.util.List;
 /**
  * En Exercise er en navngitt treningsøvelse. En Exercise består av flere Set.
  */
-public class Exercise implements Iterable<Set>{
+public class Exercise implements Iterable<Set> {
 
   private List<Set> sets = new ArrayList<>();
   private String name;
 
   /**
-   * Tom konstruktør som kun instansierer et objekt uten noe informasjon
+   * Tom konstruktør som kun instansierer et objekt uten noe informasjon.
    */
   public Exercise() {
 
@@ -22,6 +22,7 @@ public class Exercise implements Iterable<Set>{
   
   /**
    * Konstruktør som instansierer objektet med navn på øvelsen og en array med sett.
+   *
    * @param name Et navn på øvelsen.
    * @param sets En array med set som objektet skal bestå av.
    */
@@ -40,29 +41,35 @@ public class Exercise implements Iterable<Set>{
   }
 
   /**
-   * 
-   * @return Henter navn på øvelsen.
+   * Returnerer øvelsens navn.
+   *
+   * @return øvelsens navn
    */
   public String getName() {
     return this.name;
   }
 
   /**
-   * 
-   * @param name Setter navn på øvelsen.
+   * Endrer øvelsens navn.
+   *
+   * @param name øvelsens nye navn
    */
   public void setName(String name) {
     this.name = name;
   }
 
   /**
-   * Sammenlikner dette Exercise-objektet med object.
+   * Sammenlikner dette Exercise-objektet med et annet objekt. 
+   * Resultatet av sammenlikningen er sann (true)
+   * hvis og bare hvis argumentet også er et Exercise-objekt 
+   * og dersom de to objektenes attributter (name og sets) vurderes som like.
+   *
    * @param object Objektet som instansen skal sammenliknes med
-   * @return true dersom objektene har samme navn og de to sets-attributtene evalueres til å være like
+   * @return true dersom det andre objektet er et ekvivalent Exercise-objekt, false ellers
    */
   @Override
   public boolean equals(Object object) {
-    if(!(object instanceof Exercise)){
+    if (!(object instanceof Exercise)) {
       return false;
     }
     Exercise theOtherExercise = (Exercise) object;
