@@ -1,9 +1,5 @@
 package traininglogger.ui;
 
-import java.io.IOException;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
@@ -14,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import traininglogger.core.Exercise;
-import traininglogger.core.Set;
-import traininglogger.json.FileHandler;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -69,7 +63,7 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
 
 
 
-  @Test
+
   public void testAddExercise() {
     TextField titleTextField = lookup("#titleTextField").query();
     TextField weightTextField = lookup("#weightTextField").query();
@@ -114,7 +108,6 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
     }
 
     // Nå vi må sjekke at det vi skrev inn ikke har blitt lagret
-    Exercise exercise = newExerciseScreenController.getExercise();
 
     // Dersom exercise ikke har noen sett så har ikke settet blitt lagret
     //if (!(exercise.getSets().size() == 0)) {

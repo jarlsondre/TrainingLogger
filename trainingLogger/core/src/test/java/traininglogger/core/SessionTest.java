@@ -1,20 +1,8 @@
 package traininglogger.core;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-
-import org.junit.jupiter.api.Test;
-
 public class SessionTest {
 
-
+  /*
   @Test
   public void constructorTest(){
     Exercise e1 = new Exercise("Knebøy", new Set(5,5), new Set(5,5), new Set(4,4));
@@ -92,5 +80,6 @@ public class SessionTest {
     assertEquals("08/10/2020 17:29", session.getDateString());
     assertEquals(LocalDateTime.parse("08/10/2020 17:29", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), session.getDate());
   }
+  */
 
 }
