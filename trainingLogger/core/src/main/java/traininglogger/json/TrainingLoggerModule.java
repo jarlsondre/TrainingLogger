@@ -35,7 +35,7 @@ public class TrainingLoggerModule extends SimpleModule {
     mapper.registerModule(new TrainingLoggerModule());
 
     // Session1:
-    Set set0 = new Set(100, 5);
+    Set set0 = new Set(5, 100);
     Set set1 = new Set(5, 97.5);
     Set set2 = new Set(5, 87.5);
 
@@ -44,12 +44,12 @@ public class TrainingLoggerModule extends SimpleModule {
     sets1[1] = set1;
     sets1[2] = set2;
 
-    Exercise exercise1 = new Exercise("Benkpress", sets1);
+    Exercise exercise1 = new Exercise("Serverbasert Benkpress", sets1);
 
     Session session1 = new Session();
     session1.addExercises(exercise1);
 
-    Set set3 = new Set(130, 8);
+    Set set3 = new Set(8, 130);
     Set set4 = new Set(8, 127.5);
     Set set5 = new Set(7, 125);
 
@@ -58,12 +58,12 @@ public class TrainingLoggerModule extends SimpleModule {
     sets2[1] = set4;
     sets2[2] = set5;
 
-    Exercise exercise2 = new Exercise("Knebøy", sets2);
+    Exercise exercise2 = new Exercise("Serverbasert Knebøy", sets2);
     session1.addExercises(exercise2);
 
     // Session2:
 
-    Set set6 = new Set(120, 8);
+    Set set6 = new Set(8, 120);
     Set set7 = new Set(10, 97.5);
     Set set8 = new Set(15, 87.5);
 
@@ -72,12 +72,12 @@ public class TrainingLoggerModule extends SimpleModule {
     sets3[1] = set7;
     sets3[2] = set8;
 
-    Exercise exercise3 = new Exercise("Markløft", sets3);
+    Exercise exercise3 = new Exercise("Serverbasert Markløft", sets3);
 
     Session session2 = new Session();
     session2.addExercises(exercise3);
 
-    Set set9 = new Set(150, 4);
+    Set set9 = new Set(4, 150);
     Set set10 = new Set(10, 127.5);
     Set set11 = new Set(12, 125);
 
@@ -86,7 +86,7 @@ public class TrainingLoggerModule extends SimpleModule {
     sets4[1] = set10;
     sets4[2] = set11;
 
-    Exercise exercise4 = new Exercise("Bulgarsk utfall", sets4);
+    Exercise exercise4 = new Exercise("Serverbasert Bulgarsk utfall", sets4);
     session2.addExercises(exercise4);
 
     // SessionLog:

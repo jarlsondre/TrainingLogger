@@ -2,14 +2,14 @@
     "sessions": [
         {
             "stringDescription": null,
-            "date": "28/10/2020 15:31",
+            "date": "28/10/2020 19:27",
             "exercises": [
                 {
-                    "name": "Benkpress",
+                    "name": "Lokal Benkpress",
                     "sets": [
                         {
-                            "repetitions": 100,
-                            "weight": 5.0
+                            "repetitions": 5,
+                            "weight": 100.0
                         },
                         {
                             "repetitions": 5,
@@ -22,11 +22,11 @@
                     ]
                 },
                 {
-                    "name": "Knebøy",
+                    "name": "Lokal Knebøy",
                     "sets": [
                         {
-                            "repetitions": 130,
-                            "weight": 8.0
+                            "repetitions": 8,
+                            "weight": 130.0
                         },
                         {
                             "repetitions": 8,
@@ -42,14 +42,14 @@
         },
         {
             "stringDescription": null,
-            "date": "28/10/2020 15:31",
+            "date": "28/10/2020 19:27",
             "exercises": [
                 {
-                    "name": "Markløft",
+                    "name": "Lokal Markløft",
                     "sets": [
                         {
-                            "repetitions": 120,
-                            "weight": 8.0
+                            "repetitions": 8,
+                            "weight": 120.0
                         },
                         {
                             "repetitions": 10,
@@ -62,11 +62,11 @@
                     ]
                 },
                 {
-                    "name": "Bulgarsk utfall",
+                    "name": "Lokal Bulgarsk utfall",
                     "sets": [
                         {
-                            "repetitions": 150,
-                            "weight": 4.0
+                            "repetitions": 4,
+                            "weight": 150.0
                         },
                         {
                             "repetitions": 10,
