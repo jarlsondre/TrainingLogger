@@ -33,6 +33,7 @@ public class DirectTrainingLoggerAccess implements TrainingLoggerAccess {
   @Override
   public void deleteAll() {
     this.sessionLogger.deleteAll();
+    saveSessionLogger();
   }
 
   @Override
