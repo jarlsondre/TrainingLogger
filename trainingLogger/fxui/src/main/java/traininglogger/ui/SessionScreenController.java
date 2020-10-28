@@ -19,7 +19,8 @@ public class SessionScreenController {
 
   public void setSessionLogger(SessionLogger sessionLogger) {
     this.sessionLogger = sessionLogger;
-    System.out.println(this.sessionLogger + "HAHAHAH");
+    System.out.println(this.sessionLogger + "Dette er fra innsiden av SessionScreenController");
+    System.out.println(this.sessionLogger.toString());
     sessionOverviewUpdate();
   }
 
