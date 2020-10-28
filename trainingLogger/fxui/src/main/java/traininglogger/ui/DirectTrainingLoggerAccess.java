@@ -7,9 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 import traininglogger.json.TrainingLoggerPersistence;

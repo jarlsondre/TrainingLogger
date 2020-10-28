@@ -45,6 +45,7 @@ public class AppController {
       }
     }
     if (trainingLoggerAccess == null) {
+      System.out.println("Kjører lokalt"); //DEBUG
       DirectTrainingLoggerAccess directAccess = new DirectTrainingLoggerAccess(getInitialSessionLogger());
       directAccess.setUserSessionLoggerPath(userSessionLoggerPath);
       trainingLoggerAccess = directAccess;
