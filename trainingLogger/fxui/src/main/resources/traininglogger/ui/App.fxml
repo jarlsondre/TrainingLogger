@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<?import javafx.scene.layout.VBox ?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="traininglogger.ui.AppController" prefHeight="400.0" prefWidth="600.0">
+    <fx:define>
+        <String fx:id="userSessionLoggerPath" fx:value="sessionlogger.json"/>
+        <String fx:id="sampleSessionLoggerResource" fx:value="sample-sessionlogger.json"/>
+    </fx:define>
+    <fx:include fx:id="trainingLogger" source="TrainingLogger.fxml"/>
+</VBox>

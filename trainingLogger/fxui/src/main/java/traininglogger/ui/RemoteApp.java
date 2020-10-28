@@ -6,11 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class App extends Application {
+public class RemoteApp extends Application {
 
   @Override
   public void start(final Stage stage) throws IOException {
-    Scene scene = new Scene(new FXMLLoader(App.class.getResource("App.fxml")).load());
+    Scene scene = new Scene(new FXMLLoader(App.class.getResource("RemoteApp.fxml")).load());
     stage.setScene(scene);
     stage.show();
   }

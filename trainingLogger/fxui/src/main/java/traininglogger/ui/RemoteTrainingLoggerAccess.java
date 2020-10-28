@@ -24,7 +24,8 @@ public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
     this.sessionLogger = getSessionLogger();
   }
 
-  private SessionLogger getSessionLogger() {
+  @Override
+  public SessionLogger getSessionLogger() {
     if (this.sessionLogger == null) {
       HttpRequest request = HttpRequest.newBuilder(endpointBaseUri).header("Accept", "application/json").GET().build();
       try {

@@ -1,24 +1,17 @@
 package traininglogger.ui;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Session;
-import traininglogger.core.SessionLogger;
-import traininglogger.json.TrainingLoggerModule;
 
 public class TrainingLoggerController {
+
+  private TrainingLoggerAccess trainingLoggerAccess;
+
   @FXML
   VBox mainVbox;
 
@@ -36,18 +29,15 @@ public class TrainingLoggerController {
 
   private SessionScreenController sessionScreenController;
   private NewSessionScreenController newSessionScreenController;
-  private SessionLogger sessionLogger;
 
   @FXML
   public void initialize() throws IOException {
-    loadSessionLogger();
-
     FXMLLoader loader = new FXMLLoader();
     try {
       sessionScreen = loader.load(getClass().getResource("SessionScreen.fxml").openStream());
       sessionScreenController = loader.getController();
       sessionScreenController.setMainController(this);
-      sessionScreenController.setSessionLogger(this.sessionLogger);
+      sessionScreenController.setSessionLogger(this.trainingLoggerAccess.getSessionLogger());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -104,41 +94,17 @@ public class TrainingLoggerController {
   }
 
   public void addSessionToSessionLogger(Session session) {
-    sessionLogger.addSession(session);
+    this.trainingLoggerAccess.addSession(session);
     sessionScreenController.sessionOverviewUpdate();
-    saveSessionLogger();
   }
 
-  private final ObjectMapper mapper = new ObjectMapper();
-  private final static String userSessionLoggerPath = "sessionlogger.json";
+public void setTrainingLoggerAccess(TrainingLoggerAccess trainingLoggerAccess) {
+  this.trainingLoggerAccess = trainingLoggerAccess;
+  // TODO: Se tilsvarende metode hos Hallvard (TodoModellController.setTodoModelAccess())
+  // Trenger vi siste linja?
+}
 
-  @SuppressFBWarnings // SpotBug sier at reaader ikke lukkes, men den lukkes. Kjent feil.
-  public void loadSessionLogger() throws IOException {
-    this.mapper.registerModule(new TrainingLoggerModule());
-    Reader reader = null;
-    // Prøv å lese lagret fil fra brukerens hjemmeområde:
-    try {
-      reader = new FileReader(Paths.get(System.getProperty("user.home"), userSessionLoggerPath).toFile(),
-          StandardCharsets.UTF_8);
-    } catch (IOException ioEx) {
-      System.err.println("Fant ingen " + userSessionLoggerPath + " på hjemmeområdet.");
-    }
-    if (reader == null) {
-      this.sessionLogger = new SessionLogger();
-    } else {
-      this.sessionLogger = mapper.readValue(reader, SessionLogger.class);
-    }
-  }
-
-  @SuppressFBWarnings // SpotBug sier at writer ikke lukkes, men den lukkes. Kjent feil.
-  public void saveSessionLogger() {
-    Path path = Paths.get(System.getProperty("user.home"), userSessionLoggerPath);
-    try {
-      Writer writer = new FileWriter(path.toFile(), StandardCharsets.UTF_8);
-      this.mapper.writerWithDefaultPrettyPrinter().writeValue(writer, this.sessionLogger);
-      writer.close();
-    } catch (IOException e) {
-      System.err.println("Fikk ikke skrevet til sessionlog.json på hjemmeområdet.");
-    }
-  }
+public void deleteLog(){
+  this.trainingLoggerAccess.deleteAll();
+}
 }
