@@ -54,18 +54,6 @@
             <artifactId>junit-jupiter-engine</artifactId>
         </dependency>
 
-         <dependency>
-            <groupId>jakarta.ws.rs</groupId>
-            <artifactId>jakarta.ws.rs-api</artifactId>
-            <version>2.1.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-        </dependency>
-
         <!-- Her kommer web-server-avhengighetene -->
 
         <!-- Logging med slf4j -->
@@ -78,6 +66,23 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4jVersion}</version>
+        </dependency>
+
+        <!-- Kompileringsavhengigheter for Jersey -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jerseyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jerseyVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>${jerseyVersion}</version>
         </dependency>
 
         <!-- Støtte for testing med Jersey og Grizzly2 -->
@@ -131,6 +136,8 @@
             <version>2.3.0</version>
             <scope>runtime</scope>
         </dependency>
+
+       
     </dependencies>
 
     <build>

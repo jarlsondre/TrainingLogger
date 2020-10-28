@@ -11,6 +11,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 import traininglogger.json.TrainingLoggerPersistence;
+import traininglogger.restapi.TrainingLoggerService;
 
 
 public class TrainingLoggerConfig extends ResourceConfig {
