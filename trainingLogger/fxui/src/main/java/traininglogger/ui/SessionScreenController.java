@@ -19,6 +19,7 @@ public class SessionScreenController {
 
   public void setSessionLogger(SessionLogger sessionLogger) {
     this.sessionLogger = sessionLogger;
+    System.out.println(this.sessionLogger + "HAHAHAH");
     sessionOverviewUpdate();
   }
 

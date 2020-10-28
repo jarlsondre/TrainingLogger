@@ -20,6 +20,7 @@ public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
 
   public RemoteTrainingLoggerAccess(URI endpointBaseUri) {
     this.endpointBaseUri = endpointBaseUri;
+    System.out.println(endpointBaseUri);
     this.objectMapper = new ObjectMapper().registerModule(new TrainingLoggerModule());
     this.sessionLogger = getSessionLogger();
   }
@@ -32,8 +33,10 @@ public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
         final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
             HttpResponse.BodyHandlers.ofString());
         final String responseString = response.body();
+        System.out.println(responseString);
         SessionLogger sessionLogger = this.objectMapper.readValue(responseString, SessionLogger.class);
-        System.out.println("SessionLogger: " + sessionLogger); // TODO: SessionLogger må få seg en toString-metode!
+        System.out.println(sessionLogger == null);
+        System.out.println(sessionLogger.getClass()); // TODO: SessionLogger må få seg en toString-metode!
       } catch (IOException | InterruptedException e) {
         throw new RuntimeException(e);
       }

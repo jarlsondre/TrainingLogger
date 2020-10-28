@@ -120,4 +120,8 @@ public class Session implements Iterable<Exercise> {
     assert false : "hashCode not designed";
     return 1;
   }
+
+  public String toString(){
+    return this.getDateAsString() + this.exercises.toString();
+  }
 }
