@@ -29,12 +29,22 @@ public class TrainingLoggerService {
     return this.sessionLogger;
   }
 
-  @PUT
+  @PUT // Burde denne være POST?
   @Consumes(MediaType.APPLICATION_JSON)
-  public void addSessionToSessionLogger(Session session) {
-    LOG.debug("addSessionToSessionLogger({})", session);
+  @Produces(MediaType.APPLICATION_JSON)
+  public void addSession(Session session) {
+    LOG.debug("addSession({})", session);
     this.sessionLogger.addSession(session);
+    return true;
   }
+
+  @DELETE
+  @Produces(MediaType.APPLICATION_JSON)
+  public boolean deleteAll() {
+    this.sessionLogger.deleteAll();
+    return true;
+  }
+
 
 
 
