@@ -35,7 +35,7 @@ public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
         System.out.println(responseString);
         this.sessionLogger = this.objectMapper.readValue(responseString, SessionLogger.class);
         System.out.println(this.sessionLogger == null);
-        System.out.println(sessionLogger.getClass()); // TODO: SessionLogger må få seg en toString-metode!
+        System.out.println(sessionLogger.getClass());
         System.out.println(sessionLogger + "Dette er fra innsiden av RemoteTrainingLoggerAcess");
       } catch (IOException | InterruptedException e) {
         throw new RuntimeException(e);
