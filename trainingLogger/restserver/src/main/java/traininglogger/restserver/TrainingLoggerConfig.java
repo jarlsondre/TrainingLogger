@@ -63,7 +63,7 @@ public class TrainingLoggerConfig extends ResourceConfig {
             + e + ")");
       }
     }
-
+    
     SessionLogger sessionLogger = new SessionLogger();
     Session session = new Session();
     sessionLogger.addSession(session);

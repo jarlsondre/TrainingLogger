@@ -30,6 +30,7 @@ public class TrainingLoggerModule extends SimpleModule {
     addDeserializer(SessionLogger.class, new SessionLoggerDeserializer());
   }
 
+  // TODO: Bruk dette som utgangspunkt for test:
   public static void main(String[] args) {
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new TrainingLoggerModule());
