@@ -37,7 +37,6 @@ public class TrainingLoggerController {
       sessionScreen = loader.load(getClass().getResource("SessionScreen.fxml").openStream());
       sessionScreenController = loader.getController();
       sessionScreenController.setMainController(this);
-      sessionScreenController.setSessionLogger(this.trainingLoggerAccess.getSessionLogger());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -79,6 +78,7 @@ public class TrainingLoggerController {
   }
 
   public void changeToSessionScreen() {
+    this.sessionScreenController.setSessionLogger(this.trainingLoggerAccess.getSessionLogger());
     mainVbox.getChildren().clear();
     mainVbox.getChildren().add(sessionScreen);
   }
