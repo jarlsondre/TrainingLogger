@@ -23,15 +23,17 @@ public class AppController {
   String userSessionLoggerPath;
 
   @FXML
-  String endpointUri;
+  String sampleSessionLoggerResource;
 
   @FXML
-  String sampleSessionLoggerResource;
+  String endpointUri;
 
   @FXML
   TrainingLoggerController trainingLoggerController;
 
-  @FXML // Setter riktig aksessor (TrainingLogggerAccess for dennes indre TrainingLoggerController), dvs. avgjør om appen skal kjøres lokalt eller over server
+  @FXML // Setter riktig aksessor (TrainingLogggerAccess for dennes indre
+        // TrainingLoggerController), dvs. avgjør om appen skal kjøres lokalt eller over
+        // server
   void initialize() {
     TrainingLoggerAccess trainingLoggerAccess = null;
     if (this.endpointUri != null) {
@@ -52,14 +54,15 @@ public class AppController {
     trainingLoggerController.setTrainingLoggerAccess(trainingLoggerAccess);
   }
 
-  private SessionLogger getInitialSessionLogger(){ // Hvis aksessoren skal være direkte (appen skal kjøres lokalt), finn i riktig oppstarts-logg
-     // setter opp data
+  private SessionLogger getInitialSessionLogger() { // Hvis aksessoren skal være direkte (appen skal kjøres lokalt),
+                                                    // finn i riktig oppstarts-logg
+    // setter opp data
     Reader reader = null;
     // try to read file from home folder first
     if (userSessionLoggerPath != null) {
       try {
-        reader = new FileReader(Paths.get(System.getProperty("user.home"),
-            userSessionLoggerPath).toFile(), StandardCharsets.UTF_8);
+        reader = new FileReader(Paths.get(System.getProperty("user.home"), userSessionLoggerPath).toFile(),
+            StandardCharsets.UTF_8);
       } catch (IOException ioex) {
         System.err.println("Fant ingen " + userSessionLoggerPath + " på hjemmeområdet");
       }
@@ -83,7 +86,7 @@ public class AppController {
       // TODO: use embedded String (se Hallvard sin TodoAppController!)
     }
 
-     SessionLogger sessionLogger = null;
+    SessionLogger sessionLogger = null;
     try {
       TrainingLoggerPersistence trainingLoggerPersistence = new TrainingLoggerPersistence();
       sessionLogger = trainingLoggerPersistence.readSessionLogger(reader);
@@ -108,11 +111,5 @@ public class AppController {
     }
     return sessionLogger;
   }
-
-
-
-
-
-
 
 }
