@@ -25,7 +25,7 @@ public class SessionLogger implements Iterable<Session> {
     this.sessions.clear();
   }
 
-  public String toString(){
+  public String toString() {
     return this.sessions.toString();
   }
 }
