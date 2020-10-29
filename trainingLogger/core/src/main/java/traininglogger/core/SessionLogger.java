@@ -22,7 +22,10 @@ public class SessionLogger implements Iterable<Session> {
   }
 
   public void deleteAll() {
-    this.sessions = new ArrayList<>();
+    this.sessions.clear();
   }
 
+  public String toString() {
+    return this.sessions.toString();
+  }
 }

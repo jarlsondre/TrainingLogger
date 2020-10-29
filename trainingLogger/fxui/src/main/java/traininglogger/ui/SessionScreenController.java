@@ -43,7 +43,7 @@ public class SessionScreenController {
   private void deleteButtonHandler() {
     sessionLogger.deleteAll();
     sessionOverviewUpdate();
-    mainController.saveSessionLogger();
+    mainController.deleteLog();
   }
 
   @FXML
