@@ -22,7 +22,7 @@ public class NewSessionScreenController {
     this.exerciseOverviewVbox.getChildren().clear();
     // VBox currentSessionAsBox = putSessionInABox(this.session); TODO: lage updateExerciseOverview tilsvarende
     // updateSessionOverview i SessionScreenController. 
-    this.exerciseOverviewVbox.getChildren().add(currentSessionAsBox);
+    // this.exerciseOverviewVbox.getChildren().add(currentSessionAsBox);
   }
 
   public void addExerciseToSession(Exercise exercise) {
