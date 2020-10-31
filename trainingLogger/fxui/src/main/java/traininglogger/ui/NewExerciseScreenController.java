@@ -14,7 +14,7 @@ import traininglogger.core.Set;
 
 public class NewExerciseScreenController {
 
-  private Exercise exercise;
+  private Exercise exercise = new Exercise();
 
   @FXML
   VBox addSetVbox;
@@ -46,11 +46,6 @@ public class NewExerciseScreenController {
   }
 
   @FXML
-  public void initialize() {
-    exercise = new Exercise();
-  }
-
-  @FXML
   private void switchToNewSessionScreen() throws IOException {
     try {
       mainController.changeToNewSessionScreen();
@@ -63,10 +58,10 @@ public class NewExerciseScreenController {
 
   @FXML
   private void addExerciseButtonHandler() throws IOException {
-    exercise.setName(titleTextField.getText());
-    newSessionScreenController.addExerciseToSession(exercise);
-    exercise = new Exercise();
-    mainController.changeToNewSessionScreen();
+    this.exercise.setName(this.titleTextField.getText());
+    this.newSessionScreenController.addExerciseToSession(this.exercise);
+    this.exercise = new Exercise();
+    this.mainController.changeToNewSessionScreen();
     resetInputFields();
 
   }
@@ -121,6 +116,8 @@ public class NewExerciseScreenController {
 
   public Exercise getExercise() {
     return this.exercise;
-  }
+  } // TODO: Denne metoden brukes bare i test. Beholde?
+
+  
 
 }

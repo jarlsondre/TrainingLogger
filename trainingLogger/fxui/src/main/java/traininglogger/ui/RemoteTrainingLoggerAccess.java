@@ -21,6 +21,7 @@ public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
   public RemoteTrainingLoggerAccess(URI endpointBaseUri) {
     this.endpointBaseUri = endpointBaseUri;
     this.objectMapper = new ObjectMapper().registerModule(new TrainingLoggerModule());
+    this.sessionLogger = getSessionLogger();
   }
 
   @Override
