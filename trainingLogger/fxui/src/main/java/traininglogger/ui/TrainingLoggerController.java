@@ -32,44 +32,54 @@ public class TrainingLoggerController {
 
   @FXML
   public void initialize() throws IOException {
+    loadSubControllersAndScreenNodes();
+    changeToStartScreen();
+  }
+
+  private void loadSubControllersAndScreenNodes() {
+    // Load StartScreen Node
     FXMLLoader loader = new FXMLLoader();
     try {
-      sessionScreen = loader.load(getClass().getResource("SessionScreen.fxml").openStream());
-      sessionScreenController = loader.getController();
-      sessionScreenController.setMainController(this);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    loader = new FXMLLoader();
-    try {
-      startScreen = loader.load(getClass().getResource("StartScreen.fxml").openStream());
+      this.startScreen = loader.load(getClass().getResource("StartScreen.fxml").openStream());
       StartScreenController controller = loader.getController();
       controller.setMainController(this);
     } catch (IOException ex) {
       ex.printStackTrace();
     }
-
+    // Load Log Screen Node and Controller. Register this as main Controller.
     loader = new FXMLLoader();
     try {
-      newSessionScreen = loader.load(getClass().getResource("NewSessionScreen.fxml").openStream());
-      newSessionScreenController = loader.getController();
-      newSessionScreenController.setMainController(this);
+      this.sessionScreen = loader.load(getClass().getResource("SessionScreen.fxml").openStream());
+      this.sessionScreenController = loader.getController();
+      this.sessionScreenController.setMainController(this);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    // Load New Session Screen Node and Controller. Register this as main
+    // Controller.
+    loader = new FXMLLoader();
+    try {
+      this.newSessionScreen = loader.load(getClass().getResource("NewSessionScreen.fxml").openStream());
+      this.newSessionScreenController = loader.getController();
+      this.newSessionScreenController.setMainController(this);
     } catch (IOException ex) {
       ex.printStackTrace();
     }
-
+    // Load New Exercise Screen Node and Controller. Register controllers.
     loader = new FXMLLoader();
     try {
-      newExerciseScreen = loader.load(getClass().getResource("NewExerciseScreen.fxml").openStream());
+      this.newExerciseScreen = loader.load(getClass().getResource("NewExerciseScreen.fxml").openStream());
       NewExerciseScreenController newExerciseScreenController = loader.getController();
       newExerciseScreenController.setMainController(this);
-      newExerciseScreenController.setNewSessionScreenController(newSessionScreenController);
+      newExerciseScreenController.setNewSessionScreenController(this.newSessionScreenController);
     } catch (IOException ex) {
       ex.printStackTrace();
     }
+  }
 
-    changeToStartScreen();
+  public void changeToStartScreen() {
+    mainVbox.getChildren().clear();
+    mainVbox.getChildren().add(this.startScreen);
   }
 
   public void changeToNewSessionScreen() {
@@ -78,14 +88,9 @@ public class TrainingLoggerController {
   }
 
   public void changeToSessionScreen() {
-    this.sessionScreenController.setSessionLogger(this.trainingLoggerAccess.getSessionLogger());
+    this.sessionScreenController.setSessionLogger(this.trainingLoggerAccess.getSessionLogger()); //TODO: 
     mainVbox.getChildren().clear();
     mainVbox.getChildren().add(sessionScreen);
-  }
-
-  public void changeToStartScreen() {
-    mainVbox.getChildren().clear();
-    mainVbox.getChildren().add(startScreen);
   }
 
   public void changeToNewExerciseScreen() {
@@ -98,13 +103,14 @@ public class TrainingLoggerController {
     sessionScreenController.sessionOverviewUpdate();
   }
 
-public void setTrainingLoggerAccess(TrainingLoggerAccess trainingLoggerAccess) {
-  this.trainingLoggerAccess = trainingLoggerAccess;
-  // TODO: Se tilsvarende metode hos Hallvard (TodoModellController.setTodoModelAccess())
-  // Trenger vi siste linja?
-}
+  public void setTrainingLoggerAccess(TrainingLoggerAccess trainingLoggerAccess) {
+    this.trainingLoggerAccess = trainingLoggerAccess;
+    // TODO: Se tilsvarende metode hos Hallvard
+    // (TodoModellController.setTodoModelAccess())
+    // Trenger vi siste linja?
+  }
 
-public void deleteLog(){
-  this.trainingLoggerAccess.deleteAll();
-}
+  public void deleteLog() {
+    this.trainingLoggerAccess.deleteAll();
+  }
 }
