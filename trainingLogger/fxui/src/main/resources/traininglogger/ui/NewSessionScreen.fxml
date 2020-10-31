@@ -23,7 +23,7 @@
       <Button layoutX="108.0" layoutY="361.0" mnemonicParsing="false" onAction="#addSessionButtonHandler" text="Legg til økten" />
       <ScrollPane layoutY="98.0" prefHeight="255.0" prefWidth="311.0">
          <content>
-            <VBox alignment="TOP_CENTER" prefHeight="256.0" prefWidth="308.0">
+            <VBox alignment="TOP_CENTER" prefWidth="308.0">
                <VBox fx:id="exerciseOverviewVbox" alignment="TOP_CENTER">
                </VBox>
                <Button fx:id="newExerciseButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToNewExerciseScreen" text="Legg til øvelse" />
