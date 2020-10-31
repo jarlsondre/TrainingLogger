@@ -84,6 +84,7 @@ public class TrainingLoggerController {
   }
 
   public void changeToNewSessionScreen() {
+    this.newSessionScreenController.updateExerciseOverview();
     mainVbox.getChildren().clear();
     mainVbox.getChildren().add(this.newSessionScreen);
   }

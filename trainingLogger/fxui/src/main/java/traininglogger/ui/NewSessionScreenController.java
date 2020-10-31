@@ -8,33 +8,27 @@ import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 
-
-
 public class NewSessionScreenController {
 
   @FXML
   VBox exerciseOverviewVbox;
 
   private TrainingLoggerController mainController;
-  private Session session;
-
-  public NewSessionScreenController() {
-    session = new Session();
-  }
+  private Session session = new Session();
 
   public void setMainController(TrainingLoggerController main) {
     this.mainController = main;
   }
 
-  @FXML
-  public void initialize() {
-    exerciseOverviewVbox.getChildren().add(0, sessionToVboxConverter(session));
+  public void updateExerciseOverview() {
+    this.exerciseOverviewVbox.getChildren().clear();
+    VBox currentSessionAsBox = sessionToVboxConverter(this.session);
+    this.exerciseOverviewVbox.getChildren().add(currentSessionAsBox);
   }
 
   public void addExerciseToSession(Exercise exercise) {
-    session.addExercises(exercise);
-    exerciseOverviewVbox.getChildren().clear();
-    exerciseOverviewVbox.getChildren().add(0, sessionToVboxConverter(session));
+    this.session.addExercises(exercise);
+    updateExerciseOverview();
   }
 
   @FXML
@@ -60,10 +54,9 @@ public class NewSessionScreenController {
    */
   @FXML
   private void addSessionButtonHandler() throws IOException {
-    mainController.addSessionToSessionLogger(session);
-    session = new Session();
-    exerciseOverviewVbox.getChildren().clear();
-    // Nå vil vi bytte til startskjermen
+    mainController.addSessionToSessionLogger(this.session);
+    this.session = new Session();
+    updateExerciseOverview();
     mainController.changeToStartScreen();
   }
 }
