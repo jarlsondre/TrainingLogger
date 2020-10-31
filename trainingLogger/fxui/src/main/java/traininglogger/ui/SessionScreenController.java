@@ -12,22 +12,16 @@ import traininglogger.core.SessionLogger;
 public class SessionScreenController {
 
   @FXML
-  VBox sessionOverviewVbox;
+  private VBox sessionOverviewVbox;
 
   private TrainingLoggerController mainController;
-  private SessionLogger sessionLogger;
-
-  public void setSessionLogger(SessionLogger sessionLogger) {
-    this.sessionLogger = sessionLogger;
-    sessionOverviewUpdate();
-  }
 
   public void setMainController(TrainingLoggerController main) {
     this.mainController = main;
   }
 
   @FXML
-  public void sessionOverviewUpdate() {
+  public void updateSessionOverview(SessionLogger sessionLogger) {
     sessionOverviewVbox.getChildren().clear();
     for (Session session : sessionLogger) {
       VBox box = sessionToVboxConverter(session);
@@ -41,9 +35,7 @@ public class SessionScreenController {
 
   @FXML
   private void deleteButtonHandler() {
-    sessionLogger.deleteAll();
-    sessionOverviewUpdate();
-    mainController.deleteLog();
+    this.mainController.deleteLog();
   }
 
   @FXML

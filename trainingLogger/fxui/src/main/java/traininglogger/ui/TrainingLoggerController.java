@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Session;
+import traininglogger.core.SessionLogger;
 
 public class TrainingLoggerController {
 
@@ -84,13 +85,14 @@ public class TrainingLoggerController {
 
   public void changeToNewSessionScreen() {
     mainVbox.getChildren().clear();
-    mainVbox.getChildren().add(newSessionScreen);
+    mainVbox.getChildren().add(this.newSessionScreen);
   }
 
   public void changeToSessionScreen() {
-    this.sessionScreenController.setSessionLogger(this.trainingLoggerAccess.getSessionLogger()); //TODO: 
+    SessionLogger currentSessionLogger = this.trainingLoggerAccess.getSessionLogger();
+    this.sessionScreenController.updateSessionOverview(currentSessionLogger);
     mainVbox.getChildren().clear();
-    mainVbox.getChildren().add(sessionScreen);
+    mainVbox.getChildren().add(this.sessionScreen);
   }
 
   public void changeToNewExerciseScreen() {
@@ -100,7 +102,6 @@ public class TrainingLoggerController {
 
   public void addSessionToSessionLogger(Session session) {
     this.trainingLoggerAccess.addSession(session);
-    sessionScreenController.sessionOverviewUpdate();
   }
 
   public void setTrainingLoggerAccess(TrainingLoggerAccess trainingLoggerAccess) {
@@ -112,5 +113,7 @@ public class TrainingLoggerController {
 
   public void deleteLog() {
     this.trainingLoggerAccess.deleteAll();
+    SessionLogger currentSessionLogger = this.trainingLoggerAccess.getSessionLogger();
+    this.sessionScreenController.updateSessionOverview(currentSessionLogger);
   }
 }
