@@ -31,9 +31,12 @@ public class AppController {
   @FXML
   TrainingLoggerController trainingLoggerController;
 
-  @FXML // Setter riktig aksessor (TrainingLogggerAccess for dennes indre
-        // TrainingLoggerController), dvs. avgjør om appen skal kjøres lokalt eller over
-        // server
+  /*
+   * Sørger for at dennes indre trainingLoggerController får registrert riktigt
+   * aksessor (TrainingLoggerAccess), dvs. avgjør om appen skal kjøres lokalt
+   * eller over server.
+   */
+  @FXML
   void initialize() {
     TrainingLoggerAccess trainingLoggerAccess = null;
     if (this.endpointUri != null) {
@@ -54,11 +57,12 @@ public class AppController {
     trainingLoggerController.setTrainingLoggerAccess(trainingLoggerAccess);
   }
 
-  private SessionLogger getInitialSessionLogger() { // Hvis aksessoren skal være direkte (appen skal kjøres lokalt),
-                                                    // finn i riktig oppstarts-logg
+  // Hvis aksessoren skal være direkte (appen skal kjøres lokalt),
+  // finn i riktig oppstarts-logg:
+  private SessionLogger getInitialSessionLogger() {
     // setter opp data
     Reader reader = null;
-    // try to read file from home folder first
+    // prøv å lese fil fra hjemmeområdet først:
     if (userSessionLoggerPath != null) {
       try {
         reader = new FileReader(Paths.get(System.getProperty("user.home"), userSessionLoggerPath).toFile(),
@@ -67,9 +71,9 @@ public class AppController {
         System.err.println("Fant ingen " + userSessionLoggerPath + " på hjemmeområdet");
       }
     }
-
+    
     if (reader == null && sampleSessionLoggerResource != null) {
-      // try sample session log from resources instead
+      // prøv vedlagt eksempelfil i stedet:
       URL url = getClass().getResource(sampleSessionLoggerResource);
       if (url != null) {
         try {
