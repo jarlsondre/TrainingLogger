@@ -1,13 +1,14 @@
 package traininglogger.ui;
 
-import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
-
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
+import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
+import traininglogger.core.Set;
 
 public class SessionScreenController {
 
@@ -24,13 +25,28 @@ public class SessionScreenController {
   public void updateSessionOverview(SessionLogger sessionLogger) {
     sessionOverviewVbox.getChildren().clear();
     for (Session session : sessionLogger) {
-      VBox box = sessionToVboxConverter(session);
+      VBox box = putSessionInABox(session);
       TitledPane titledPane = new TitledPane(session.getDateAsString(), box);
       titledPane.setAlignment(Pos.CENTER_LEFT);
       titledPane.setExpanded(false);
       sessionOverviewVbox.getChildren().add(0, titledPane);
 
     }
+  }
+
+  private VBox putSessionInABox(Session session) {
+    VBox sessionBox = new VBox();
+    String sessionAsString = "";
+    for (Exercise exercise : session) {
+      sessionAsString += exercise.getName() + ": \n";
+      for (Set set : exercise) {
+        sessionAsString += set.getWeight() + "kg x " + set.getRepetitions() + "\n";
+      }
+      sessionAsString += "\n";
+    }
+    Label sessionInALabel = new Label(sessionAsString);
+    sessionBox.getChildren().add(sessionInALabel);
+    return sessionBox;
   }
 
   @FXML

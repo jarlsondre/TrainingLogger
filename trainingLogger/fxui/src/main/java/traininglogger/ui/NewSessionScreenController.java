@@ -1,7 +1,5 @@
 package traininglogger.ui;
 
-import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
-
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
@@ -22,7 +20,8 @@ public class NewSessionScreenController {
 
   public void updateExerciseOverview() {
     this.exerciseOverviewVbox.getChildren().clear();
-    VBox currentSessionAsBox = sessionToVboxConverter(this.session);
+    // VBox currentSessionAsBox = putSessionInABox(this.session); TODO: lage updateExerciseOverview tilsvarende
+    // updateSessionOverview i SessionScreenController. 
     this.exerciseOverviewVbox.getChildren().add(currentSessionAsBox);
   }
 
