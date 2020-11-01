@@ -22,14 +22,27 @@ public class SessionScreenController {
   }
 
   @FXML
+  private void deleteButtonHandler() {
+    this.mainController.deleteLog();
+  }
+
+  @FXML
+  private void switchToStartScreen() {
+    try {
+      mainController.changeToStartScreen();
+    } catch (Exception e) {
+      System.out.println("Kunne ikke bytte fra Session Screen til Start Screen");
+    }
+  }
+
   public void updateSessionOverview(SessionLogger sessionLogger) {
-    sessionOverviewVbox.getChildren().clear();
+    this.sessionOverviewVbox.getChildren().clear();
     for (Session session : sessionLogger) {
       VBox box = putSessionInABox(session);
       TitledPane titledPane = new TitledPane(session.getDateAsString(), box);
       titledPane.setAlignment(Pos.CENTER_LEFT);
       titledPane.setExpanded(false);
-      sessionOverviewVbox.getChildren().add(0, titledPane);
+      this.sessionOverviewVbox.getChildren().add(0, titledPane);
 
     }
   }
@@ -48,19 +61,4 @@ public class SessionScreenController {
     sessionBox.getChildren().add(sessionInALabel);
     return sessionBox;
   }
-
-  @FXML
-  private void deleteButtonHandler() {
-    this.mainController.deleteLog();
-  }
-
-  @FXML
-  private void switchToStartScreen() {
-    try {
-      mainController.changeToStartScreen();
-    } catch (Exception e) {
-      System.out.println("Kunne ikke bytte fra Session Screen til Start Screen");
-    }
-  }
-
 }

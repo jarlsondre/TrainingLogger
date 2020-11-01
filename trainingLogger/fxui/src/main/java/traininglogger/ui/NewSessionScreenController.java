@@ -2,9 +2,13 @@ package traininglogger.ui;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
+import traininglogger.core.Set;
 
 public class NewSessionScreenController {
 
@@ -20,9 +24,25 @@ public class NewSessionScreenController {
 
   public void updateExerciseOverview() {
     this.exerciseOverviewVbox.getChildren().clear();
-    // VBox currentSessionAsBox = putSessionInABox(this.session); TODO: lage updateExerciseOverview tilsvarende
-    // updateSessionOverview i SessionScreenController. 
-    // this.exerciseOverviewVbox.getChildren().add(currentSessionAsBox);
+    for (Exercise exercise : this.session) {
+      VBox box = putExerciseInABox(exercise);
+      TitledPane titledPane = new TitledPane(exercise.getName(), box);
+      titledPane.setAlignment(Pos.CENTER_LEFT);
+      titledPane.setExpanded(false);
+      this.exerciseOverviewVbox.getChildren().add(titledPane);
+    }
+  }
+
+  private VBox putExerciseInABox(Exercise exercise) {
+    VBox exerciseBox = new VBox();
+    String exerciseAsString = exercise.getName() + ": \n";
+    for (Set set : exercise) {
+      exerciseAsString += set.getWeight() + " kg x " + set.getRepetitions() + "\n";
+    }
+    exerciseAsString += "\n";
+    Label exerciseInALabel = new Label(exerciseAsString);
+    exerciseBox.getChildren().add(exerciseInALabel);
+    return exerciseBox;
   }
 
   public void addExerciseToSession(Exercise exercise) {
