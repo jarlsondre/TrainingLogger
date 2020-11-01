@@ -22,16 +22,32 @@ skal kunne knyttes opp mot en utvikleroppgave så er det svært viktig å alltid
 utvikleroppgavene skal være på følgende form:
 - Tittel: Det skal kort beskrives hva som må gjøres. Eksempel: 
 
-`Lage toString()-metode i klassen "Person"`
+>Lage toString()-metode i klassen "Person"
 - Beskrivelse: Det skal utvetydig beskrives hva som forventes oppfylt før ferdig oppgave. I tillegg til 
 dette skal det begrunnes hvorfor dette skal gjøres. Eksempel:
  
-`toString()-metoden skal returnere en tekststreng som inneholder navn, alder og antall kjæledyr 
+>toString()-metoden skal returnere en tekststreng som inneholder navn, alder og antall kjæledyr 
 til "Person"-objektet på en oversiktlig måte. Dette skal gjøres slik at man kan printe en 
-liste med objekter på en effektiv måte`
+liste med objekter på en effektiv måte
 
 ### Bruk av tavle for utivkleroppgaver
-Inne på 'board' på GitLab så skal utvikleroppgavene sorteres etter ...
+Når en utvikleroppgave blir laget inne på GitLab, så skal denne plasseres i en av tre kategorier: `Må gjøres`, 
+`Burde gjøres` og `Kan gjøres` 
+
+Når en utvikler skal velge (eller få tildelt) en utvikleroppgave så skal alltid de oppgavene som står under
+`Må gjøres` prioriteres. Dersom alle disse utvikleroppgavene har blitt gjort så skal oppgavene som står under
+`Burde gjøres` prioriteres. Dersom begge disse kategoriene er tomme så kan man en utvikler velge eller få 
+tildelt oppgaver under `kan gjøres`. Dette gjøres for å sikre at utviklerne ikke bruker mye tid på utvikleroppgaver
+som ikke er nødvendige når andre utvikleroppgaver heller burde prioriteres.  
+
+I tillegg til disse tre kategoriene, inneholder også tavlen vår kategoriene `Doing` og `Needs review`.
+Etter at en utvikleroppgave har blitt påbegynt så skal den flyttes over i kolonnen `Doing`. Her skal oppgaven forbli
+til utvikleren(e) som jobbet med oppgaven mener at den er ferdig. Da skal den flyttes over i kolonnen `Needs Review`. 
+Deretter må en annen utvikler se over utvikleroppgaven og buntene som har blitt assosiert med oppgaven. Når buntene 
+har blitt sett over skal utvikleren som så over kommentere på utvikleroppgaven. Dersom denne utvikleren mener 
+at oppgaven er ferdig skal utvikleren skrive at arbeidet ser bra ut og at de lukker oppgaven. Så skal oppgaven lukkes. 
+Dersom utvikleren som ser over mener at oppgaven ikke er ferdig skal dette kommenteres og forklares på en utvetydig 
+måte. Deretter skal oppgaven flyttes over til `Doing` igjen.  
 
 ## Retningslinjer for grener (branches)
 Dersom en utvikleroppgave påvirker annet arbeid skal det lages en egen gren til utvikleroppgaven. Hvis flere 
@@ -43,15 +59,32 @@ Prosjeket skal ha en hovedgren som heter `master`. Versjonen som finnes i denne 
 kjørbar. Før man fletter (merger) en gren inn i master-grenen så er det viktig at applikasjonen kan bygges uten problem og
 at den fungerer som planlagt. Ved oppretting av nye grener skal navnet være på følgende form: 
 
-`utviklingsbranch/{issues i tall}/{kortfattet beskrivelse}` 
+`utviklingsgren/{issues i tall}/{kortfattet beskrivelse}` 
 
-Et eksempel på en branch kan være:
+Et eksempel på en gren kan være:
 
-`utvikllingsbranch/47/48/49/rest-api`
+>utvikllingsgren/47/48/49/rest-api
 
 ## Retningslinjer for bunter (commits)
-Når man bunter arbeid man har gjort skal ...
+Når man bunter arbeid som har blitt gjort så skal disse buntene inneholde en buntmelding på 
+følgende form: 
+
+> {utvikleroppgavenummer} <br/> <br/> {Forklaring av hva som har blitt endret og hva disse endringene innebærer} 
 
 ## Retningslinjer for dytting av kode (git push)
-Når man dytter kode opp mot ... checkstyle ... 
+Før man dytte butenene sine opp til GitLab skal man alltid sjekke at det ikke finnes noen 
+checkstyle problemer eller advarsler. Dette sjekkes ved kommandoen `mvn checkstyle:checkstyle`.
+Dersom man får problemer eller advarsler så må disse fikses før buntene dyttes opp til GitLab.
+
+## Forklaring av språk
+I dette dokumentet blir mange begreper fornorsket fra Engelsk. Under følger en liste med gloser:
+
+Fornorskede ord | Engelske ord
+----------|-------------
+Utvikleroppgaver | Issues
+Bunt | Commit
+Tavle | Board
+Gren | Branch
+Dytting av kode | Git Push 
+
 
