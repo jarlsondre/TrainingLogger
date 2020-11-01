@@ -3,6 +3,7 @@ package traininglogger.ui;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
@@ -14,6 +15,9 @@ public class NewSessionScreenController {
 
   @FXML
   VBox exerciseOverviewVbox;
+
+  @FXML
+  Button addSessionButton;
 
   private TrainingLoggerController mainController;
   private Session session = new Session();
@@ -48,6 +52,9 @@ public class NewSessionScreenController {
   public void addExerciseToSession(Exercise exercise) {
     this.session.addExercises(exercise);
     updateExerciseOverview();
+    if (this.addSessionButton.isDisabled()) {
+      this.addSessionButton.setDisable(false);
+    }
   }
 
   @FXML
@@ -76,6 +83,7 @@ public class NewSessionScreenController {
     mainController.addSessionToSessionLogger(this.session);
     this.session = new Session();
     updateExerciseOverview();
+    this.addSessionButton.setDisable(true);
     mainController.changeToStartScreen();
   }
 }
