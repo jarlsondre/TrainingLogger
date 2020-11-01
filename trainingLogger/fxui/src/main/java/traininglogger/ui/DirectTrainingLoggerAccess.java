@@ -44,16 +44,21 @@ public class DirectTrainingLoggerAccess implements TrainingLoggerAccess {
   private TrainingLoggerPersistence trainingLoggerPersistence = null;
 
   private void saveSessionLogger() {
+      Path path;
     if (userSessionLoggerPath != null) {
+      path = Paths.get("target", "jsonSaveTest.json");
+    }
+    else {
+      path = Paths.get(System.getProperty("user.home"), userSessionLoggerPath);
+    }
       if (trainingLoggerPersistence == null) {
         trainingLoggerPersistence = new TrainingLoggerPersistence();
       }
-      Path path = Paths.get(System.getProperty("user.home"), userSessionLoggerPath);
       try (Writer writer = new FileWriter(path.toFile(), StandardCharsets.UTF_8)) {
         trainingLoggerPersistence.writeSessionLogger(this.sessionLogger, writer);
       } catch (IOException e) {
         System.err.println("Fikk ikke skrevet til " + userSessionLoggerPath + " på hjemmeområdet");
       }
     }
-  }
+
 }
