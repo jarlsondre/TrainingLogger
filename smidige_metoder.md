@@ -1,16 +1,17 @@
 # Smidige metoder
 Dette prosjektet gjøres av gruppe 1 i faget IT1901. Her bruker vi smidige metoder og 
-deler arbeidsflyten inn i sprints. Disse smidige metodene blir beskrevet i dette dokumentet.
+deler arbeidsflyten inn i sprints. Disse smidige metodene blir beskrevet i dette dokumentet. Metodene 
+tas i bruk for fullt fra og med Sprint 4 (02.11.20)
 
 ## Retningslinjer for brukerhistorier
 Funksjonaliteten i applikasjonen vår skal basere seg på brukerhistorier som blir beskrevet i filen
 [brukerhistorier](gr2001/Brukerhistorier.md). Disse brukerhistoriene skal være skrevet på følgende form:
 
-`Som en __ ønsker jeg __ slik at`
+`Som en __ ønsker jeg __ slik at__`
 
 I tillegg skal det tas med feltene `viktig å se` og `viktig å kunne gjøre`. Her skal det forklares hva brukeren
 skal kunne se på skjermen og hva brukeren skal kunne gjøre med applikasjonen. Brukerhistoriene skrives på 
-denne måten fordi dette gjøre det enklere for å oss å jobbe målrettet med prosjektet. 
+denne måten fordi dette gjør det enklere for å oss å jobbe målrettet med prosjektet. 
 
 ## Retningslinjer for utvikleroppgaver (issues)
 Alt av bunter og arbeid som gjøres på applikasjonen skal kunne knyttes opp mot en spesifikk utvikleroppgave.
@@ -59,7 +60,7 @@ Prosjeket skal ha en hovedgren som heter `master`. Versjonen som finnes i denne 
 kjørbar. Før man fletter (merger) en gren inn i master-grenen så er det viktig at applikasjonen kan bygges uten problem og
 at den fungerer som planlagt. Ved oppretting av nye grener skal navnet være på følgende form: 
 
-`utviklingsgren/{issues i tall}/{kortfattet beskrivelse}` 
+`utviklingsgren/{utviklingsoppgaver i tall}/{kortfattet beskrivelse}` 
 
 Et eksempel på en gren kan være:
 
@@ -69,7 +70,7 @@ Et eksempel på en gren kan være:
 Når man bunter arbeid som har blitt gjort så skal disse buntene inneholde en buntmelding på 
 følgende form: 
 
-> {utvikleroppgavenummer} <br/> <br/> {Forklaring av hva som har blitt endret og hva disse endringene innebærer} 
+> {#utvikleroppgavenummer} <br/> <br/> {Forklaring av hva som har blitt endret og hva disse endringene innebærer} 
 
 ## Retningslinjer for dytting av kode (git push)
 Før man dytte butenene sine opp til GitLab skal man alltid sjekke at det ikke finnes noen 
