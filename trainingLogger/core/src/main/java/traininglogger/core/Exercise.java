@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * En Exercise er en navngitt treningsøvelse. En Exercise består av flere Set.
@@ -27,8 +29,8 @@ public class Exercise implements Iterable<Set> {
    * @param sets En array med set som objektet skal bestå av.
    */
   public Exercise(String name, Set... sets) {
-    this.name = name;
-    this.addSets(sets);
+      this.setName(name);
+      this.addSets(sets);
   }
 
   /**
@@ -55,7 +57,12 @@ public class Exercise implements Iterable<Set> {
    * @param name øvelsens nye navn
    */
   public void setName(String name) {
-    this.name = name;
+      Pattern p = Pattern.compile("[^a-zA-Z]");
+      Matcher m = p.matcher(name);
+      if ((name.length() > 20) || m.find()) {
+          throw new IllegalArgumentException();
+      }
+      this.name = name;
   }
 
   @Override

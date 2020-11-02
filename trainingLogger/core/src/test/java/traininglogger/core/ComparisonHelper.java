@@ -1,5 +1,7 @@
-package traininglogger.core; 
+package traininglogger.core;
 
+
+import java.util.Iterator;
 
 /**
  * Klasse som inneholder metoder som flere testklasser bruker.
