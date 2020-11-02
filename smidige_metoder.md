@@ -7,7 +7,7 @@ tas i bruk for fullt fra og med Sprint 4 (02.11.20)
 Funksjonaliteten i applikasjonen vår skal basere seg på brukerhistorier som blir beskrevet i filen
 [brukerhistorier](gr2001/Brukerhistorier.md). Disse brukerhistoriene skal være skrevet på følgende form:
 
-`Som en __ ønsker jeg __ slik at__`
+`Som en __ ønsker jeg __ slik at __`
 
 I tillegg skal det tas med feltene `viktig å se` og `viktig å kunne gjøre`. Her skal det forklares hva brukeren
 skal kunne se på skjermen og hva brukeren skal kunne gjøre med applikasjonen. Brukerhistoriene skrives på 
