@@ -58,12 +58,17 @@ public class NewExerciseScreenController {
 
   @FXML
   private void addExerciseButtonHandler() throws IOException {
+    if (this.titleTextField.getText().equals("")) {
+      Label errorLabel = new Label("Øvelsen må ha et navn.");
+      addSetVbox.getChildren().add(0, errorLabel);
+      return;
+    }
     this.exercise.setName(this.titleTextField.getText());
     this.newSessionScreenController.addExerciseToSession(this.exercise);
     this.exercise = new Exercise();
-    this.mainController.changeToNewSessionScreen();
     resetInputFields();
-
+    this.addExerciseButton.setDisable(true);
+    this.mainController.changeToNewSessionScreen();
   }
 
   @FXML
@@ -78,6 +83,7 @@ public class NewExerciseScreenController {
       addHboxToVbox();
       weightTextField.setText("");
       repsTextField.setText("");
+      this.addExerciseButton.setDisable(false);
     } catch (Exception e) {
       Label errorLabel = new Label("Input må være et heltall");
       addSetVbox.getChildren().add(0, errorLabel);
