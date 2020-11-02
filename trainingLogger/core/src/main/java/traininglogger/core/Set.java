@@ -41,33 +41,6 @@ public class Set {
     return this.weight;
   }
 
-  /**
-   * Sammenlikner dette Set-objektet med et annet objekt. 
-   * Resultatet av sammenlikningen er sann (true) hvis og bare hvis 
-   * argumentet også er et Set-objekt og dersom de to objektenes attributter (repetitions og weight)
-   * har identiske verdier.
-   *
-   * @param object Objektet som instansen skal sammenliknes med
-   * @return true dersom det andre objektet er et ekvivalent Set-objekt, false ellers
-   */
-  @Override
-  public boolean equals(Object object) {
-    if (!(object instanceof Set)) {
-      return false;
-    }
-    Set set = (Set) object;
-    return set.getRepetitions() == this.getRepetitions() && set.getWeight() == this.getWeight();
-  }
-
-  // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
-  // plassere set-objekter
-  // i et HashMap eller en HashTable.
-  @Override
-  public int hashCode() {
-    assert false : "hashCode not designed";
-    return 1;
-  }
-
   @Override
   public String toString() {
     return "repetitions: " + repetitions + ", weight: " + weight;

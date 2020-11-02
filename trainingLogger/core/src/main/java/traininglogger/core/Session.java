@@ -92,36 +92,6 @@ public class Session implements Iterable<Exercise> {
     return this.exercises.iterator();
   }
 
-  /**
-   * Sammenlikner dette Session-objektet med et annet objekt. Resultatet av
-   * sammenlikningen er sann (true) hvis og bare hvis argumentet også er et
-   * Session-objekt, de to objektenes dato (representert som en String) er like og
-   * hvis øvelsene (Exercise) som øktene består av vurderes som like.
-   *
-   * @param object Objektet som instansen skal sammenliknes med
-   * @return true dersom det andre objektet er et ekvivalent Session-objekt, false
-   *         ellers
-   */
-  @Override
-  public boolean equals(Object object) {
-    if (!(object instanceof Session)) {
-      return false;
-    }
-    Session theOtherSession = (Session) object;
-    return this.getDateAsString().equals(theOtherSession.getDateAsString())
-        && this.exercises.equals(theOtherSession.exercises)
-        && this.description.equals(theOtherSession.description);
-  }
-
-  // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
-  // plassere Session-objekter
-  // i et HashMap eller en HashTable.
-  @Override
-  public int hashCode() {
-    assert false : "hashCode not designed";
-    return 1;
-  }
-
   public String toString() {
     return this.getDateAsString() + this.exercises.toString();
   }

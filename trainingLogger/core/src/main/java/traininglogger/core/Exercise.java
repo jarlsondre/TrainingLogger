@@ -58,33 +58,6 @@ public class Exercise implements Iterable<Set> {
     this.name = name;
   }
 
-  /**
-   * Sammenlikner dette Exercise-objektet med et annet objekt. 
-   * Resultatet av sammenlikningen er sann (true)
-   * hvis og bare hvis argumentet også er et Exercise-objekt 
-   * og dersom de to objektenes attributter (name og sets) vurderes som like.
-   *
-   * @param object Objektet som instansen skal sammenliknes med
-   * @return true dersom det andre objektet er et ekvivalent Exercise-objekt, false ellers
-   */
-  @Override
-  public boolean equals(Object object) {
-    if (!(object instanceof Exercise)) {
-      return false;
-    }
-    Exercise theOtherExercise = (Exercise) object;
-    return this.name.equals(theOtherExercise.getName()) && this.sets.equals(theOtherExercise.sets);
-  }
-
-  // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
-  // plassere exercise-objekter
-  // i et HashMap eller en HashTable.
-  @Override
-  public int hashCode() {
-    assert false : "hashCode not designed";
-    return 1;
-  }
-
   @Override
   public String toString() {
     return this.name + sets.toString();
