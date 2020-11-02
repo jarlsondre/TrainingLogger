@@ -1,20 +1,42 @@
 package traininglogger.core;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExerciseTest {
 
   @Test
   public void SetNameTest(){
     Exercise ex = new Exercise();
-    ex.setName("Benk");
-    assertEquals(ex.getName(), "Benk");
+    try {
+      ex.setName("benkpress1");  // Prøver å sette et navn som inneholder tall
+      fail();
+    }
+    catch (IllegalArgumentException e) {
+      // Do nothing
+    }
+    try {
+      ex.setName("benk!press");  // Prøver å sette et navn som inneholder spesialtegn
+      fail();
+    }
+    catch (IllegalArgumentException e) {
+      // Do nothing
+    }
+    try {
+      ex.setName("EtNavnSomErAltForLangtSlikAtTestenKanskjeFeiler");  // Prøver å sette et navn på over 20 bokstaver
+    }
+    catch (IllegalArgumentException e) {
+      // Do nothing
+    }
+    try {
+      ex.setName("Benkpress");  // Prøver å sette et gyldig navn
+    }
+    catch (IllegalArgumentException e) {
+      fail();
+    }
   }
 
   //Tester at settene kommer i korrekt rekkefølge og at iteratoren fungerer som den skal.
