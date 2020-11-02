@@ -1,6 +1,9 @@
 package traininglogger.ui;
 
 import java.io.IOException;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,7 +27,7 @@ public class NewExerciseScreenController {
 
   @FXML
   TextField weightTextField;
-  
+
   @FXML
   TextField repsTextField;
 
@@ -36,6 +39,26 @@ public class NewExerciseScreenController {
 
   private TrainingLoggerController mainController;
   private NewSessionScreenController newSessionScreenController;
+  private boolean theTextFieldIsBlank = true;
+
+  @FXML
+  void initialize() {
+    this.titleTextField.textProperty().addListener(new ChangeListener<String>() {
+      @Override
+      public void changed(ObservableValue<? extends String> observableValue, String oldValue,
+          String newValue) {
+            boolean aSetHasBeenAdded = addSetVbox.getChildren().size() > 1;
+            theTextFieldIsBlank = newValue.isBlank();
+            if (theTextFieldIsBlank) {
+              addExerciseButton.setDisable(true);
+            } else {
+              if (aSetHasBeenAdded) {
+                addExerciseButton.setDisable(false);
+              }
+            }
+      }
+    });
+  }
 
   public void setMainController(TrainingLoggerController main) {
     this.mainController = main;
@@ -58,11 +81,6 @@ public class NewExerciseScreenController {
 
   @FXML
   private void addExerciseButtonHandler() throws IOException {
-    if (this.titleTextField.getText().equals("")) {
-      Label errorLabel = new Label("Øvelsen må ha et navn.");
-      addSetVbox.getChildren().add(0, errorLabel);
-      return;
-    }
     this.exercise.setName(this.titleTextField.getText());
     this.newSessionScreenController.addExerciseToSession(this.exercise);
     this.exercise = new Exercise();
@@ -83,13 +101,14 @@ public class NewExerciseScreenController {
       addHboxToVbox();
       weightTextField.setText("");
       repsTextField.setText("");
-      this.addExerciseButton.setDisable(false);
+      if (this.addExerciseButton.isDisabled() && (! theTextFieldIsBlank)) {
+        this.addExerciseButton.setDisable(false);
+      }
     } catch (Exception e) {
       Label errorLabel = new Label("Input må være et heltall");
       addSetVbox.getChildren().add(0, errorLabel);
       System.out.println("Input må være heltall");
     }
-
   }
 
   private void resetInputFields() {
@@ -123,7 +142,5 @@ public class NewExerciseScreenController {
   public Exercise getExercise() {
     return this.exercise;
   } // TODO: Denne metoden brukes bare i test. Beholde?
-
-  
 
 }
