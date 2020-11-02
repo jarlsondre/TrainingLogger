@@ -59,6 +59,7 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
     TextField weightTextField = lookup("#weightTextField").query();
     TextField repsTextField = lookup("#repsTextField").query();
     Button addSetButton = lookup("#addSetHbox > .button").query();
+    TextField titleTextField = lookup("#titleTextField").query();
     Set set1 = new Set(5, 100);
     Set set2 = new Set(8, 102.5);
     clickOn(weightTextField).write(Double.toString(set1.getWeight()));
@@ -67,6 +68,7 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
     clickOn(weightTextField).write(Double.toString(set2.getWeight()));
     clickOn(repsTextField).write(Integer.toString(set2.getRepetitions()));
     clickOn(addSetButton);
+    clickOn(titleTextField).write("Benkpress");
     clickOn("Legg til øvelse");
     clickOn("Legg til økten");
     // Her har vi skrevet til filen "jsonSaveTest.json" lokalisert i target-filen. Nå må vi sjekke hva denne inneholder
