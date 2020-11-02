@@ -1,5 +1,6 @@
 package traininglogger.ui;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
@@ -10,59 +11,74 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import traininglogger.core.Exercise;
+import traininglogger.core.Set;
+
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class NewExerciseScreenControllerTest extends ApplicationTest {
 
   private NewExerciseScreenController newExerciseScreenController;
+  private AppController appController;
 
 
   @Override
   public void start(Stage stage) {
     try {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("NewExerciseScreen_test.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("AppTest.fxml"));
     Parent root = loader.load();
-    this.newExerciseScreenController = loader.getController();
+    this.appController = loader.getController();
     stage.setScene(new Scene(root));
     stage.show();
     }
     catch(Exception e) {
-        System.out.println("Feilet under start"); 
         e.printStackTrace();
         System.out.println(e); 
     }
   }
 
+  @BeforeEach
+  public void setUp() {
+      clickOn("Ny økt");
+      clickOn("Legg til øvelse");
+  }
 
-
-  @Test
+ @Test
   public void testController_initial() {
-    assertNotNull(this.newExerciseScreenController);
+    assertNotNull(this.appController);
   }
 
 
   /**
-   * Denne metoden tester om et sett legges til riktig. Den sammenligner inneholdene til settet, men ikke
-   * navnet på øvelsen.
+   * Denne metoden tester å legge til to sett og sjekker deretter om settene som har blitt lagret er riktige.
    */
   @Test
   public void testAddSet(){
+
     TextField weightTextField = lookup("#weightTextField").query();
     TextField repsTextField = lookup("#repsTextField").query();
     Button addSetButton = lookup("#addSetHbox > .button").query();
-    clickOn(weightTextField).write("100");
-    clickOn(repsTextField).write("5");
+    TextField titleTextField = lookup("#titleTextField").query();
+    Set set1 = new Set(5, 100);
+    Set set2 = new Set(8, 102.5);
+    clickOn(weightTextField).write(Double.toString(set1.getWeight()));
+    clickOn(repsTextField).write(Integer.toString(set1.getRepetitions()));
     clickOn(addSetButton);
+    clickOn(weightTextField).write(Double.toString(set2.getWeight()));
+    clickOn(repsTextField).write(Integer.toString(set2.getRepetitions()));
+    clickOn(addSetButton);
+    clickOn(titleTextField).write("Benkpress");
+    clickOn("Legg til øvelse");
+    clickOn("Legg til økten");
+    // Her har vi skrevet til filen "jsonSaveTest.json" lokalisert i target-filen. Nå må vi sjekke hva denne inneholder
+      //Deretter skal vi bruke equals-metoden for å finne ut om det den inneholder er riktig.
+      //
 
-    // Exercise testExercise = new Exercise();
-    // testExercise.addSets(new Set(100, 5));
-    // assertTrue(Exercise.equal(testExercise.getSets(), newExerciseScreenController.getExercise().getSets()));
-  }
+    // I tillegg må vi sørge for at sampleResources ikke blir lagret inn i denne filen.
 
 
-
-
+ }
 
   public void testAddExercise() {
     TextField titleTextField = lookup("#titleTextField").query();
@@ -80,18 +96,11 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
 
     // Bytte av skjerm kommer til å utløse et unntak som er håndtert av en try/catch i en annen fil :)
     clickOn(addExerciseButton);
-
-    // Nå vil vi sjekke at riktig info er skrevet til mellomlagrings-filen
-    // Exercise exercise = FileHandler.readExerciseFromFile("src/main/resources/exercise_controller_data.json");
-    // FileDeleter.deleteFile("src/main/resources/exercise_controller_data.json");
-    // Exercise testExercise = new Exercise("Benkpress", 100, 5, 100, 5);
-    //assertEquals(exercise, testExercise);
-  }
+ }
 
   /**
    * Denne metoden tester om applikasjonen håndterer feil input
    */
-  @Test
   public void testWrongInput() {
     TextField weightTextField = lookup("#weightTextField").query();
     TextField repsTextField = lookup("#repsTextField").query();
@@ -106,18 +115,5 @@ public class NewExerciseScreenControllerTest extends ApplicationTest {
     catch(Exception e) {
       fail();
     }
-
-    // Nå vi må sjekke at det vi skrev inn ikke har blitt lagret
-
-    // Dersom exercise ikke har noen sett så har ikke settet blitt lagret
-    //if (!(exercise.getSets().size() == 0)) {
-    //  Integer[] set = exercise.getSet(exercise.getSets().size()-1);
-    //  String[] testSet = {"82.5", "askf"};
-    //  assertFalse(testSet[0].equals(set[0].toString()) && testSet[1].equals(set[1].toString()));
-    //}
-
-
-
-  }
-
+ }
 }

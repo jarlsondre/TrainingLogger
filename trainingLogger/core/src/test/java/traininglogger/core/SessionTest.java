@@ -1,85 +1,70 @@
 package traininglogger.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
+
+import org.junit.jupiter.api.Test;
+
 public class SessionTest {
 
-  /*
-  @Test
-  public void constructorTest(){
-    Exercise e1 = new Exercise("Knebøy", new Set(5,5), new Set(5,5), new Set(4,4));
-    Exercise e2 = new Exercise("Benkpress", new Set(5,5), new Set(5,5), new Set(4,3));
-    Exercise e3 = new Exercise("Markløft", new Set(5,5), new Set(5,5), new Set(4,2));
-    Collection<Exercise> col = new ArrayList<>(Arrays.asList(e1,e2,e3));
-    Session session = new Session("Bra!", e1,e2,e3);
-    assertEquals(col, session.getListOfExercises());
-    try {
-      new Session("Flott!");
-    } catch (Exception e) {
-      fail();
-    }
-  }
-
-  @Test
-  public void exerciseListEncapsulationTest(){
-    Exercise e1 = new Exercise("Knebøy", new Set(5,5), new Set(5,5), new Set(4,4));
-    Exercise e2 = new Exercise("Benkpress", new Set(5,5), new Set(5,5), new Set(4,3));
-    Exercise e3 = new Exercise("Markløft", new Set(5,5), new Set(5,5), new Set(4,2));
-    Session session = new Session("Bra!", e1,e2);
-    Collection<Exercise> col = session.getListOfExercises();
-    col.add(e3);
-    assertFalse(session.getListOfExercises().equals(col));
-  }
-
-  @Test
-  public void getDescription_returnsNullInitiallTest() {
-    Session session = new Session();
-    assertEquals(null, session.getDescription());
-  }
-
-  @Test
-  public void sameDescriptionButDifferentDatesAreNotEqualTest() {
+  private void sameDescriptionButDifferentDatesAreNotEqualTest() {
     Session session1 = new Session("Dette er en økt.");
     Session session2 = new Session("Dette er en økt.");
     session1.setDate("17/09/2020 14:35");
     session1.setDate("18/09/2020 14:35");
-    assertFalse(session1.equals(session2));
+    assertNotEquals(session1, session2);
   }
 
-  @Test
-  public void differentObjectsAreNotEqualTest() {
+  private void differentObjectsAreNotEqualTest() {
     Session session1 = new Session("Dette er en økt.");
     Session session2 = new Session("Dette er en ANNEN økt.");
-    if (session1.equals(session2)) {
-      fail();
-    }
+    assertNotEquals(session1, session2);
     Session session3 = new Session("Dette går bra!");
     Session session4 = new Session("Dette går bra!");
     session3.setDate("17/09/2020 14:35");
     session4.setDate("18/09/2020 14:35");
-    if (session3.equals(session4)) {
-      fail();
-    }
+    assertNotEquals(session3, session4);
   }
 
   @Test
   public void equalsTest(){
     Exercise exercise1 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
     Exercise exercise2 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
-    assertEquals(exercise1, exercise2);
-    Exercise exercise3 = new Exercise("Benkpress", new Set(9,9));
-    Exercise exercise4 = new Exercise("Benkpress", new Set(9,9));
-    assertEquals(exercise3, exercise4);
-    Exercise exercise5 = new Exercise("Benkpress", new Set(2,2), new Set(3,2));
-    Exercise exercise6 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
-    assertFalse(exercise5.equals(exercise6));
+    Session session1 = new Session("braa!", exercise1, exercise2);
+    Session session2 = new Session("braa!", exercise1, exercise2);
+    assertEquals(session1, session2);
+    this.differentObjectsAreNotEqualTest(); 
+    this.sameDescriptionButDifferentDatesAreNotEqualTest();
   }
 
   @Test
   public void dateTest(){
     Session session = new Session();
     session.setDate("08/10/2020 17:29");
-    assertEquals("08/10/2020 17:29", session.getDateString());
+    //assertEquals("08/10/2020 17:29", session.getDateAsString());
     assertEquals(LocalDateTime.parse("08/10/2020 17:29", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), session.getDate());
   }
-  */
+
+  @Test 
+  public void iteratorTest(){
+    Exercise exercise1 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
+    Exercise exercise2 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
+    Exercise exercise3 = new Exercise("Knebøy", new Set(2,2), new Set(4,4));
+    Session session1 = new Session("braa!", exercise1, exercise2, exercise3);
+    Iterator<Exercise> it = session1.iterator(); 
+    assertTrue(it.hasNext());
+    assertEquals(exercise1, it.next());
+    assertTrue(it.hasNext());
+    assertEquals(exercise2, it.next());
+    assertTrue(it.hasNext());
+    assertEquals(exercise3, it.next());
+    assertFalse(it.hasNext());
+  }
 
 }

@@ -1,17 +1,23 @@
 package traininglogger.ui;
 
-import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
-
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
+import traininglogger.core.Set;
 
 public class NewSessionScreenController {
 
   @FXML
   VBox exerciseOverviewVbox;
+
+  @FXML
+  Button addSessionButton;
 
   private TrainingLoggerController mainController;
   private Session session = new Session();
@@ -22,13 +28,33 @@ public class NewSessionScreenController {
 
   public void updateExerciseOverview() {
     this.exerciseOverviewVbox.getChildren().clear();
-    VBox currentSessionAsBox = sessionToVboxConverter(this.session);
-    this.exerciseOverviewVbox.getChildren().add(currentSessionAsBox);
+    for (Exercise exercise : this.session) {
+      VBox box = putExerciseInABox(exercise);
+      TitledPane titledPane = new TitledPane(exercise.getName(), box);
+      titledPane.setAlignment(Pos.CENTER_LEFT);
+      titledPane.setExpanded(false);
+      this.exerciseOverviewVbox.getChildren().add(titledPane);
+    }
+  }
+
+  private VBox putExerciseInABox(Exercise exercise) {
+    VBox exerciseBox = new VBox();
+    String exerciseAsString = exercise.getName() + ": \n";
+    for (Set set : exercise) {
+      exerciseAsString += set.getWeight() + " kg x " + set.getRepetitions() + "\n";
+    }
+    exerciseAsString += "\n";
+    Label exerciseInALabel = new Label(exerciseAsString);
+    exerciseBox.getChildren().add(exerciseInALabel);
+    return exerciseBox;
   }
 
   public void addExerciseToSession(Exercise exercise) {
     this.session.addExercises(exercise);
     updateExerciseOverview();
+    if (this.addSessionButton.isDisabled()) {
+      this.addSessionButton.setDisable(false);
+    }
   }
 
   @FXML
@@ -57,6 +83,7 @@ public class NewSessionScreenController {
     mainController.addSessionToSessionLogger(this.session);
     this.session = new Session();
     updateExerciseOverview();
+    this.addSessionButton.setDisable(true);
     mainController.changeToStartScreen();
   }
 }

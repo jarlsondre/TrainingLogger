@@ -109,7 +109,8 @@ public class Session implements Iterable<Exercise> {
     }
     Session theOtherSession = (Session) object;
     return this.getDateAsString().equals(theOtherSession.getDateAsString())
-        && this.exercises.equals(theOtherSession.exercises);
+        && this.exercises.equals(theOtherSession.exercises)
+        && this.description.equals(theOtherSession.description);
   }
 
   // Denne implementasjonen er bare anbefalt dersom man aldri ser for seg å
