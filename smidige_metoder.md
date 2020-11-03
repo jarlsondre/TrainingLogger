@@ -73,7 +73,7 @@ følgende form:
 > {#utvikleroppgavenummer} <br/> <br/> {Forklaring av hva som har blitt endret og hva disse endringene innebærer} 
 
 ## Retningslinjer for dytting av kode (git push)
-Før man dytte butenene sine opp til GitLab skal man alltid sjekke at det ikke finnes noen 
+Før man dytter buntene sine opp til GitLab skal man alltid sjekke at det ikke finnes noen 
 checkstyle problemer eller advarsler. Dette sjekkes ved kommandoen `mvn checkstyle:checkstyle`.
 Dersom man får problemer eller advarsler så må disse fikses før buntene dyttes opp til GitLab.
 
