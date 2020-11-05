@@ -3,12 +3,13 @@ package traininglogger.core;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 
 public class SessionLoggerTest {
 
-
+  @Test
   public void addDelateSessionTest(){
     Session session = new Session(); 
     SessionLogger sessionLogger = new SessionLogger(); 
@@ -18,12 +19,13 @@ public class SessionLoggerTest {
     assertFalse(sessionLogger.iterator().hasNext());
   }
 
+  @Test
   public void sessionIteratorTest(){
     Session session1 = new Session();
     Session session2 = new Session();
     Session session3 = new Session();
     Session session4 = new Session();
-    Session[] sessions = {session1, session2, session3,session4};
+    Session[] sessions = {session1, session2, session3, session4};
     SessionLogger sessionLogger = new SessionLogger();
     sessionLogger.addSession(session1);
     sessionLogger.addSession(session2);
@@ -32,10 +34,9 @@ public class SessionLoggerTest {
     Iterator<Session> iterator = sessionLogger.iterator(); 
     for(int i = 0; i < 4; i++){
       assertTrue(iterator.hasNext());
-      assertEquals(sessions[i], iterator.next());
+      assertTrue(ComparisonHelper.equalSession(sessions[i], iterator.next()));
     }
     assertFalse(iterator.hasNext());
-
   }
 
 }

@@ -22,22 +22,42 @@ public class ComparisonHelper {
   }
 
   public static boolean equalExercise(Exercise e1, Exercise e2) {
-  if(!e1.getName().equals(e2.getName())){
-    return false;
-  }
-  Iterator<Set> it1 = e1.iterator();
-  Iterator<Set> it2 = e2.iterator();
-  while(it1.hasNext() && it2.hasNext()){
-    if(!ComparisonHelper.equalSet(it1.next(), it2.next())) {
+    if(!e1.getName().equals(e2.getName())){
       return false;
     }
+    Iterator<Set> it1 = e1.iterator();
+    Iterator<Set> it2 = e2.iterator();
+    while(it1.hasNext() && it2.hasNext()){
+      if(!ComparisonHelper.equalSet(it1.next(), it2.next())) {
+        return false;
+      }
+    }
+    if(it1.hasNext() || it2.hasNext()){
+      return false;
+    }
+    return true;
   }
-  if(it1.hasNext() || it2.hasNext()){
-    return false;
+
+  public static boolean equalSession(Session s1, Session s2) {
+    if(!(s1.getDescription() == null || s2.getDescription() == null)) {
+      if(s1.getDescription() != null && s2.getDescription() == null || s1.getDescription() == null && s2.getDescription() != null) {
+        return false;
+      }
+      if(!s1.getDescription().equals(s2.getDescription()) || (s1.getDescription() != null && s2.getDescription() != null)) {
+        return false;
+      }
+    }
+    Iterator<Exercise> it1 = s1.iterator();
+    Iterator<Exercise> it2 = s2.iterator();
+    while(it1.hasNext() && it2.hasNext()){
+      if(!ComparisonHelper.equalExercise(it1.next(), it2.next())) {
+        return false;
+      }
+    }
+    if(it1.hasNext() || it2.hasNext()){
+      return false;
+    }
+    return true;
   }
-  return true;
-}
-
-
 
 }

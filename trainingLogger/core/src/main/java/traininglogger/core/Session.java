@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.lang.IllegalArgumentException;
+import java.lang.IllegalStateException;
+
 
 /**
  * En Session representerer en treningsøkt. Et Session-objekt spesifiseres ved:
@@ -40,11 +43,14 @@ public class Session implements Iterable<Exercise> {
    */
   public Session(String description, Exercise... exercises) {
     this();
-    this.description = description;
+    this.setDescription(description);
     this.addExercises(exercises);
   }
 
   public void setDescription(String description) {
+    if(description.length() > 60) {
+      throw new IllegalArgumentException("The description can only contain 60 letters.");
+    }
     this.description = description;
   }
 
@@ -58,6 +64,9 @@ public class Session implements Iterable<Exercise> {
    * @param exercises øvelsene som økta skal utvides med
    */
   public void addExercises(Exercise... exercises) {
+    if(this.exercises.size() + exercises.length > 20) {
+      throw new IllegalArgumentException("You have added to many exercises.");
+    }
     for (Exercise e : exercises) {
       this.exercises.add(e);
     }
@@ -84,6 +93,10 @@ public class Session implements Iterable<Exercise> {
    */
   public void setDate(String date) {
     LocalDateTime d = LocalDateTime.parse(date, this.dateTimeFormatter);
+    LocalDateTime today = LocalDateTime.now();
+    if(d.isAfter(today)) {
+      throw new IllegalStateException("The date cannot be in the future.");
+    }
     this.date = d;
   }
 

@@ -57,10 +57,10 @@ public class Exercise implements Iterable<Set> {
    * @param name øvelsens nye navn
    */
   public void setName(String name) {
-      Pattern p = Pattern.compile("[^a-zA-Z]");
+      Pattern p = Pattern.compile("[a-zA-ZæøåÆØÅ ]*");
       Matcher m = p.matcher(name);
-      if ((name.length() > 20) || m.find()) {
-          throw new IllegalArgumentException();
+      if ((name.length() > 40) || !m.matches()) {
+          throw new IllegalArgumentException("Illegalname: " + name);
       }
       this.name = name;
   }
