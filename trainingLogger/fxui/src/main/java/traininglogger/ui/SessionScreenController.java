@@ -2,59 +2,63 @@ package traininglogger.ui;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
+import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
-import java.io.IOException;
-
-import static traininglogger.ui.UpdateOverview.sessionToVboxConverter;
+import traininglogger.core.Set;
 
 public class SessionScreenController {
 
-    @FXML VBox sessionOverviewVbox;
+  @FXML
+  private VBox sessionOverviewVbox;
 
-    SessionLogger logger;
+  private TrainingLoggerController mainController;
 
-    @FXML
-    public void initialize() {
-        // we want to fill the VBox with the sesssions we have. First we need to load our sessionLogger-object
-        logger = new SessionLogger();
-        logger.load();
-        sessionOverviewUpdate();
+  public void setMainController(TrainingLoggerController main) {
+    this.mainController = main;
+  }
+
+  @FXML
+  private void deleteButtonHandler() {
+    this.mainController.deleteLog();
+  }
+
+  @FXML
+  private void switchToStartScreen() {
+    try {
+      mainController.changeToStartScreen();
+    } catch (Exception e) {
+      System.out.println("Kunne ikke bytte fra Session Screen til Start Screen");
     }
+  }
 
-    @FXML
-    private void sessionOverviewUpdate() {
-        sessionOverviewVbox.getChildren().clear();
-        for (Session session : logger) {
-            VBox box = sessionToVboxConverter(session);
-            TitledPane titledPane = new TitledPane(session.getDateString(), box);
-            titledPane.setAlignment(Pos.CENTER_LEFT);
-            titledPane.setExpanded(false);
-            sessionOverviewVbox.getChildren().add(0, titledPane);
+  public void updateSessionOverview(SessionLogger sessionLogger) {
+    this.sessionOverviewVbox.getChildren().clear();
+    for (Session session : sessionLogger) {
+      VBox box = putSessionInABox(session);
+      TitledPane titledPane = new TitledPane(session.getDateAsString(), box);
+      titledPane.setAlignment(Pos.CENTER_LEFT);
+      titledPane.setExpanded(false);
+      this.sessionOverviewVbox.getChildren().add(0, titledPane);
 
-        }
     }
+  }
 
-    @FXML
-    private void deleteButtonHandler(){
-        logger.deleteAll();
-        sessionOverviewUpdate();
-        logger.save();
+  private VBox putSessionInABox(Session session) {
+    VBox sessionBox = new VBox();
+    String sessionAsString = "";
+    for (Exercise exercise : session) {
+      sessionAsString += exercise.getName() + ": \n";
+      for (Set set : exercise) {
+        sessionAsString += set.getWeight() + "kg x " + set.getRepetitions() + "\n";
+      }
+      sessionAsString += "\n";
     }
-
-
-    @FXML
-    private void switchToStartScreen() throws IOException {
-        try {
-            App.setRoot("StartScreen");
-        }
-        catch(Exception e) {
-            System.out.println("Kunne ikke bytte fra Session Screen til Start Screen");
-        }
-    }
-
-
-
+    Label sessionInALabel = new Label(sessionAsString);
+    sessionBox.getChildren().add(sessionInALabel);
+    return sessionBox;
+  }
 }

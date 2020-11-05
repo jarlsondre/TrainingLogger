@@ -10,19 +10,18 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
-
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 
+/**
+ * Denne klassen inneholder metoden deserializer, som konverterer et json
+ * formatert session objekt tilbake til objektet. Objektet må ha formatet: {
+ * "stringDescription": " ... " "date": "dd/MM/yyyy HH:mm" "exercises": " ... "
+ * }
+ */
 public class SessionDeserializer extends JsonDeserializer<Session> {
 
   private ExerciseDeserializer exerciseDeserializer = new ExerciseDeserializer();
-
-  /*
-   * Denne klassen inneholder metoden deserializer, som konverterer et json
-   * formatert session objekt tilbake til objektet. Objektet må ha formatet: {
-   * "stringDescription": " ... " "date": "dd/MM/yyyy HH:mm" "exercises": " ... " }
-   */
 
   @Override
   public Session deserialize(JsonParser parser, DeserializationContext ctxt)
@@ -31,9 +30,15 @@ public class SessionDeserializer extends JsonDeserializer<Session> {
     return this.deserialize((JsonNode) treenode);
   }
 
-  public Session deserialize(JsonNode jnode) {
-    if (jnode instanceof ObjectNode) {
-      ObjectNode node = (ObjectNode) jnode;
+  /**
+   * Konstruerer et Session-objekt fra en parset JsonNode.
+   *
+   * @param jsonNode templatet for nytt Session-objekt
+   * @return det rekonstruerte Session-objektet hvis deserialiseringen lykkes, null ellers.
+   */
+  public Session deserialize(JsonNode jsonNode) {
+    if (jsonNode instanceof ObjectNode) {
+      ObjectNode node = (ObjectNode) jsonNode;
       Session session = new Session();
       JsonNode textNode1 = node.get("stringDescription");
       if (textNode1 instanceof TextNode) {
@@ -50,7 +55,7 @@ public class SessionDeserializer extends JsonDeserializer<Session> {
         int counter = 0;
         for (JsonNode element : ((ArrayNode) setsNode)) {
           Exercise exercise = this.exerciseDeserializer.deserialize(element);
-          if(exercise != null){
+          if (exercise != null) {
             exercises[counter] = exercise;
           }
           counter++;

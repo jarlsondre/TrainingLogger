@@ -1,17 +1,16 @@
 package traininglogger.json;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import traininglogger.core.ComparisonHelper;
 import traininglogger.core.Exercise;
-import traininglogger.core.Session;
+import traininglogger.core.Set;
 
 public class ModuleTest {
 
@@ -19,51 +18,46 @@ public class ModuleTest {
 
   @BeforeAll
   public static void setUp() {
-    ModuleTest.mapper = new ObjectMapper();
+    mapper = new ObjectMapper();
     mapper.registerModule(new TrainingLoggerModule());
   }
 
   @Test
-  public void testSessionSerializer() {
-    Exercise e1 = new Exercise("Knebøy", 5,5,6,6);
-    Exercise e2 = new Exercise("Knebøy", 5,5,6,7);
-    Exercise e3 = new Exercise("Knebøy", 5,5,6,9);
-    Session session = new Session("Det var en fin økt!", e1,e2,e3);
-    session.setDate("15/09/2020 10:02");
+  public void testSetSerializer() {
+    Set set = new Set(5, 100);
     try {
-      assertEquals(
-        "{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,7]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,9]}]}",
-          mapper.writeValueAsString(session));
+      String howStringShouldLookLike = "{\"repetitions\":5,\"weight\":100.0}";
+      String stringProducedBySerializer = mapper.writeValueAsString(set);
+      assertEquals(howStringShouldLookLike, stringProducedBySerializer);
+
     } catch (JsonProcessingException e) {
       fail();
     }
   }
 
   @Test
-  public void testSessionDeserializer() {
-    Session session = null;
+  public void testSetDeserializer() {
+    String setAsJsonString = "{\"repetitions\":5,\"weight\":100.0}";
     try {
-      session = ModuleTest.mapper
-          .readValue("{\"stringDescription\":\"Det var en fin økt!\",\"date\":\"15/09/2020 10:02\",\"exercises\":[{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,7]},{\"name\":\"Knebøy\",\"sets\":[5,5,6,9]}]}", Session.class);
-    } catch (JsonMappingException e) {
-      fail();
+      Set setFromJsonString = mapper.readValue(setAsJsonString, Set.class);
+      Set set = new Set(5, 100);
+      assertTrue(ComparisonHelper.equalSet(set, setFromJsonString));
     } catch (JsonProcessingException e) {
       fail();
     }
-    Exercise e1 = new Exercise("Knebøy", 5,5,6,6);
-    Exercise e2 = new Exercise("Knebøy", 5,5,6,7);
-    Exercise e3 = new Exercise("Knebøy", 5,5,6,9);
-    Session session_test = new Session("Det var en fin økt!", e1,e2,e3);
-    session_test.setDate("15/09/2020 10:02");
-    assertEquals(session_test, session);
   }
 
   @Test
   public void testExerciseSerializer() {
-    Exercise exercise = new Exercise("Knebøy",5,5,6,6);
+    Exercise exercise = new Exercise("Benk");
+    Set set1 = new Set(5, 100);
+    Set set2 = new Set(10, 200);
+    exercise.addSets(set1, set2);
     try {
-      assertEquals("{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]}",
-          mapper.writeValueAsString(exercise));
+      String howStringShouldLookLike = "{\"name\":\"Benk\",\"sets\":[{\"repetitions\":5,\"weight\":100.0},{\"repetitions\":10,\"weight\":200.0}]}";
+      String stringProducedBySerializer = mapper.writeValueAsString(exercise);
+      assertEquals(howStringShouldLookLike, stringProducedBySerializer);
+
     } catch (JsonProcessingException e) {
       fail();
     }
@@ -71,20 +65,17 @@ public class ModuleTest {
 
   @Test
   public void testExerciseDeserializer() {
-    Exercise exercise = null;
+    String exerciseAsJsonString = "{\"name\":\"Benk\",\"sets\":[{\"repetitions\":5,\"weight\":100.0},{\"repetitions\":10,\"weight\":200.0}]}";
     try {
-      exercise = ModuleTest.mapper
-          .readValue("{\"name\":\"Knebøy\",\"sets\":[5,5,6,6]}", Exercise.class);
-    } catch (JsonMappingException e) {
-      e.printStackTrace();
-      fail();
+      Exercise exerciseFromJsonString = mapper.readValue(exerciseAsJsonString, Exercise.class);
+      Exercise exercise = new Exercise("Benk");
+      Set set1 = new Set(5, 100);
+      Set set2 = new Set(10, 200);
+      exercise.addSets(set1, set2);
+      assertTrue(ComparisonHelper.equalExercise(exercise, exerciseFromJsonString));
     } catch (JsonProcessingException e) {
-      e.printStackTrace();
       fail();
     }
-    Exercise test_exercise = new Exercise("Knebøy",5,5,6,6);
-    assertEquals(test_exercise, exercise);
   }
-
 
 }

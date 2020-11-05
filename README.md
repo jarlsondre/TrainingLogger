@@ -1,4 +1,4 @@
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.idi.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2001/gr2001.git) 
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.idi.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2020/gr2001/gr2001/-/tree/utviklingsbranch) 
 
 # Training Logger
 
@@ -9,6 +9,15 @@ selve applikasjonen finnes i [README](trainingLogger/README.md) i applikasjonsma
 
 Prosjektet vårt bruker Maven til bygging og kjøring. For å bygge, kjør `mvn install` i rot-mappen (traininglogger). Dette kjører alle testene og bygger prosjektet slik det skal. 
 Etter å ha bygget prosjektet, kjør `mvn javafx:run` i fxui-mappen.
+
+SKRIV DETTE ORDENTLIG SENERE!!!!
+
+Fra rotmappe (trainingLogger)...
+
+Starte server: mvn -pl integrationtests jetty:run -D"jetty.port=8999"
+Starte remote-app: mvn -Premoteapp -pl fxui javafx:run
+
+!!!!
 
 **Merk**: For å kjøre applikasjonen i GitPod må man vente til dependencies har blitt lastet inn. Dette kan man se nede i venstre hjørne av skjermen.  
 Dette skjer mye raskere dersom man trykker inne i en java-fil, for da gjenkjenner GitPod Java-språket. Etter at man har lastet inn dependencies så kan man installere  

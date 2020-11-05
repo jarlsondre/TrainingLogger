@@ -1,97 +1,59 @@
 package traininglogger.core;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExerciseTest {
 
   @Test
-  public void contructorTest(){
-    Collection<Integer[]> col = new ArrayList<>();
-    Integer[] set1 = {5,5}; 
-    Integer[] set2 = {6,6};
-    Integer[] set3 = {7,7};
-    col.add(set1); 
-    col.add(set2);
-    col.add(set3);
-    Exercise exercise = new Exercise("Knebøy", 5,5,6,6,7,7); 
-    assertTrue(Exercise.isEqual(col, exercise.getSets()));
+  public void SetNameTest(){
+    Exercise ex = new Exercise();
     try {
-      new Exercise("Knebøy");
-    } catch (Exception e) {
+      ex.setName("benkpress1");  // Prøver å sette et navn som inneholder tall
       fail();
     }
-  } 
-
-  @Test
-  public void ConstructorIllegalArgumentTest(){
-    try {
-      new Exercise("Knebøy", 5,5,5);
-      fail(); 
-    } catch (Exception e) {
+    catch (IllegalArgumentException e) {
+      // Do nothing
     }
     try {
-      new Exercise("Knebøy", 5,5,5,5,5,4,4,4,4);
+      ex.setName("benk!press");  // Prøver å sette et navn som inneholder spesialtegn
       fail();
-    } catch (Exception e) {
+    }
+    catch (IllegalArgumentException e) {
+      // Do nothing
     }
     try {
-      new Exercise("Knebøy", 5);
-      fail();
-    } catch (Exception e) {
+      ex.setName("EtNavnSomErAltForLangtSlikAtTestenKanskjeFeiler");  // Prøver å sette et navn på over 20 bokstaver
     }
-  }
-  
-  @Test
-  public void addSetsTest(){
-    Exercise exercise = new Exercise("Knebøy", 5,5);
-    exercise.addSets(2,2,3,3);
-    Collection<Integer[]> col = new ArrayList<>();
-    Integer[] set1 = {5,5}; 
-    Integer[] set2 = {2,2};
-    Integer[] set3 = {3,3};
-    col.add(set1); 
-    col.add(set2);
-    col.add(set3);
-    assertTrue(Exercise.isEqual(col, exercise.getSets()));
-    assertTrue(Exercise.isEqual(new ArrayList<>(), new Exercise("Knebøy").getSets()));
-    exercise.removeSet(2);
-    col.remove(set3);
-    assertTrue(Exercise.isEqual(col, exercise.getSets()));
+    catch (IllegalArgumentException e) {
+      // Do nothing
+    }
     try {
-      exercise.addSets(2,2,2);
+      ex.setName("Benkpress");  // Prøver å sette et gyldig navn
+    }
+    catch (IllegalArgumentException e) {
       fail();
-    } catch (Exception e) {
     }
   }
 
-  @Test
-  public void setsListEncapsulationTest(){
-   Exercise exercise = new Exercise("Knebøy", 5,5);
-   Collection<Integer[]> col = exercise.getSets(); 
-   Integer[] i = {1,1};
-   col.add(i); 
-   assertFalse(Exercise.isEqual(exercise.getSets(), col));
+  //Tester at settene kommer i korrekt rekkefølge og at iteratoren fungerer som den skal.
+  @Test 
+  public void iteratorTest() {
+    Set set1 = new Set(5, 70.0);
+    Set set2 = new Set(6, 80.0);
+    Set set3 = new Set(7, 90.0);
+    Exercise exercise = new Exercise("Benkpress", set1, set2, set3);
+    Iterator<Set> it = exercise.iterator(); 
+    assertTrue(it.hasNext()); 
+    assertTrue(ComparisonHelper.equalSet(it.next(), set1));
+    assertTrue(it.hasNext()); 
+    assertTrue(ComparisonHelper.equalSet(it.next(), set2));
+    assertTrue(it.hasNext()); 
+    assertTrue(ComparisonHelper.equalSet(it.next(), set3));
+    assertFalse(it.hasNext());
   }
-
-  @Test
-  public void equalsMethodTest(){
-    Exercise exercise1 = new Exercise("Benkpress", 1,1,1,1,1,1);
-    Exercise exercise2 = new Exercise("Benkpress", 1,1,1,1,1,1);
-    assertEquals(exercise1, exercise2);
-    exercise2.addSets(2,2);
-    assertFalse(exercise1.equals(exercise2));
-    exercise2.removeSet(3);
-    assertEquals(exercise1, exercise2);
-  }
-
-
 
 }
