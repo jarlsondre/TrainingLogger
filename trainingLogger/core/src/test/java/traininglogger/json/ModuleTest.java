@@ -1,11 +1,14 @@
 package traininglogger.json;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import traininglogger.core.ComparisonHelper;
 import traininglogger.core.Exercise;
 import traininglogger.core.Set;
 
@@ -38,7 +41,7 @@ public class ModuleTest {
     try {
       Set setFromJsonString = mapper.readValue(setAsJsonString, Set.class);
       Set set = new Set(5, 100);
-      assertEquals(set, setFromJsonString);
+      assertTrue(ComparisonHelper.equalSet(set, setFromJsonString));
     } catch (JsonProcessingException e) {
       fail();
     }
@@ -69,8 +72,7 @@ public class ModuleTest {
       Set set1 = new Set(5, 100);
       Set set2 = new Set(10, 200);
       exercise.addSets(set1, set2);
-      assertEquals(exercise, exerciseFromJsonString);
-
+      assertTrue(ComparisonHelper.equalExercise(exercise, exerciseFromJsonString));
     } catch (JsonProcessingException e) {
       fail();
     }
