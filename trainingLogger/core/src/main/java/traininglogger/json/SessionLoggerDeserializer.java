@@ -46,6 +46,7 @@ public class SessionLoggerDeserializer extends JsonDeserializer<SessionLogger> {
             sessionLogger.addSession(session);
           }
         }
+        sessionLogger.initializeRecords();
         return sessionLogger;
       }
     }
