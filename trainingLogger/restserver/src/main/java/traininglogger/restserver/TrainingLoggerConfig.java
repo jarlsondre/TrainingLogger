@@ -72,16 +72,25 @@ public class TrainingLoggerConfig extends ResourceConfig {
       }
     }
 
+    SessionLogger initialSessionLogger = null;
     if (reader != null) {
-      SessionLogger initialSessionLogger;
       try {
         initialSessionLogger = trainingLoggerPersistence.readSessionLogger(reader);
-        reader.close();
-        return initialSessionLogger;
       } catch (IOException e) {
         System.out.println("Kunne ikke deserialisere fra Reader, så returnerer en helt ny SessionLogger (" + e + ")");
+      } finally {
+        try {
+            reader.close();
+        } catch (IOException e) {
+          System.err.println("Klarte ikke å lukke reader" + "(" + e + ")");
+        }
       }
     }
-    return new SessionLogger();
+
+    if (initialSessionLogger == null) {
+      initialSessionLogger = new SessionLogger();
+    }
+    return initialSessionLogger;
   }
+
 }
