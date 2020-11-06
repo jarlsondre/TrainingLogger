@@ -38,6 +38,10 @@ public class SessionLogger implements Iterable<Session> {
     records.clear();
   }
 
+  public Map<String, Double> getRecords() {
+    return new HashMap<>(this.records);
+  }
+
   @Override
   public Iterator<Session> iterator() {
     return sessions.iterator();
