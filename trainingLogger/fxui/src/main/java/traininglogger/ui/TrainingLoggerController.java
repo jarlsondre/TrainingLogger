@@ -36,7 +36,7 @@ public class TrainingLoggerController {
   private RecordScreenController recordScreenController;
 
   @FXML
-  public void initialize() throws IOException {
+  public void initialize() {
     loadSubControllersAndScreenNodes();
     changeToStartScreen();
   }
@@ -83,9 +83,9 @@ public class TrainingLoggerController {
     // Load Record Screen Node and Controller.
     loader = new FXMLLoader();
     try {
-      this.recordScreen = loader.load(getClass().getResource("recordScreen.fxml").openStream());
+      this.recordScreen = loader.load(getClass().getResource("RecordScreen.fxml").openStream());
       this.recordScreenController = loader.getController();
-      recordScreenController.setMainController(this);
+      this.recordScreenController.setMainController(this);
     } catch (IOException ex) {
       ex.printStackTrace();
     }
