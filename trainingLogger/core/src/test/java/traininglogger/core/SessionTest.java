@@ -31,6 +31,7 @@ public class SessionTest {
     }
   }
 
+  @Test
   public void iteratorTest() {
     Exercise exercise1 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
     Exercise exercise2 = new Exercise("Benkpress", new Set(2,2), new Set(4,4));
