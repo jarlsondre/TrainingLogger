@@ -8,8 +8,17 @@ import java.util.*;
  */
 public class SessionLogger implements Iterable<Session> {
 
-  private List<Session> sessions = new ArrayList<>();
-  private Map<String, Double> records = new HashMap<>();
+  private List<Session> sessions;
+  private Map<String, Double> records;
+
+  public SessionLogger(List<Session> sessions, Map<String, Double> records){
+    this.sessions = sessions;
+    this.records = records;
+  }
+  public SessionLogger(){
+    sessions = new ArrayList<>();
+    records = new HashMap<>();
+  }
 
   public void updateRecordsWithSession(Session session){
     for (Exercise exercise : session){
@@ -24,13 +33,6 @@ public class SessionLogger implements Iterable<Session> {
       else{
         records.put(name, maxWeight);
       }
-    }
-  }
-
-  public void initializeRecords(){
-    records.clear();
-    for(Session session : this){
-      updateRecordsWithSession(session);
     }
   }
 
