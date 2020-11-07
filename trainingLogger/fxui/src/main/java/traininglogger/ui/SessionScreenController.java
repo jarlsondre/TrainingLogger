@@ -51,7 +51,7 @@ public class SessionScreenController {
     VBox sessionBox = new VBox();
     String sessionAsString = "";
     for (Exercise exercise : session) {
-      sessionAsString += exercise.getName() + ": \n";
+      sessionAsString += exercise.getName() + ":\n";
       for (Set set : exercise) {
         sessionAsString += set.getWeight() + "kg x " + set.getRepetitions() + "\n";
       }
