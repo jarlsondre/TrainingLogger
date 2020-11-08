@@ -46,8 +46,8 @@ public class TrainingLoggerTest extends ApplicationTest {
      */
     @BeforeEach
     public void setUp() {
-        clickOn("Ny økt");
-        clickOn("Legg til øvelse");
+        clickOn("#newSessionButton");
+        clickOn("#newExerciseButton");
     }
 
 
