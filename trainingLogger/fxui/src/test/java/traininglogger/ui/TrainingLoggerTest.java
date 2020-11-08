@@ -58,19 +58,39 @@ public class TrainingLoggerTest extends ApplicationTest {
 
 
     /**
-     * Tester om koden kræsjer dersom man forsøker å legge til et sett
+     * Tester om det kommer flere bokser å skrive inn info på dersom man trykker på 'legg til',
+     * i tillegg til om koden kræsjer
      */
     @Test
     public void addSetTest(){
+        // Legger inn info og trykker på knappen
         TextField repsTextField = lookup("#repsTextField").query();
         TextField weightTextField = lookup("#weightTextField").query();
-        try {
-            addSet(8, 102.5, repsTextField, weightTextField);
-            addSet(10, 100, repsTextField, weightTextField);
+        Button addSetButton = lookup("#addSetHbox > .button").query();
+        clickOn(weightTextField).write("100");
+        clickOn(repsTextField).write("10");
+        clickOn(addSetButton);
+
+        // Sjekker at de gamle boksene er tomme
+        if (!repsTextField.getText().equals("")) {
+            fail("Reps-boksen ble ikke tømt etter at man trykte på legg til sett");
         }
-        catch (Exception e) {
-            fail("Koden kræsjet da testen forsøkte å legge til et sett");
+        if (!weightTextField.getText().equals("")) {
+            fail("vekt-boksen ble ikke tømt etter at man trykte på legg til sett");
         }
+
+        // Sjekker at det har kommet nye bokser som inneholder informasjonen vi la inn
+        repsTextField = lookup("#repsTextField").query();
+        weightTextField = lookup("#weightTextField").query();
+
+        if (!repsTextField.getText().equals("10")) {
+            System.out.println(repsTextField.getText());
+            fail("Reps-boksen inneholdt ikke riktig informasjon etter at settet ble lagt til");
+        }
+        if (!weightTextField.getText().equals("100")) {
+            fail("vekt-boksen inneholdt ikke riktig informasjon etter at settet ble lagt til");
+        }
+
     }
 
     /**
@@ -78,6 +98,7 @@ public class TrainingLoggerTest extends ApplicationTest {
      */
     @Test
     public void addExerciseTest() {
+        // Legger til 3 sett
         TextField nameTextField = lookup("#titleTextField").query();
         TextField repsTextField = lookup("#repsTextField").query();
         TextField weightTextField = lookup("#weightTextField").query();
@@ -86,12 +107,16 @@ public class TrainingLoggerTest extends ApplicationTest {
         addSet(10, 122.5, repsTextField, weightTextField);
         addSet(10, 122.5, repsTextField, weightTextField);
         Button addExerciseButton = lookup("Legg til øvelse").query();
-        try {
-            clickOn(addExerciseButton);
-        }
-        catch (Exception e) {
-            fail("Koden kræsjet da testen forsøkte å legge til øvelsen");
-        }
+        clickOn(addExerciseButton);
+
+        // Sjekker om øvelsen som har blitt lagt til kommer frem og stemmer med det som ble skrevet inn
+        VBox exerciseOverview = lookup("#exerciseOverviewVbox").query();
+        TitledPane lastExerciseTitledPane = (TitledPane) exerciseOverview.getChildren().get(0);
+        clickOn(lastExerciseTitledPane);
+        VBox lastExerciseVbox  = ((VBox) lastExerciseTitledPane.getContent());
+        Label lastExerciseLabel = (Label) lastExerciseVbox.getChildren().get(0);
+        String lastExerciseString = lastExerciseLabel.getText();
+        assertEquals("Benkpress:" + "\n" + "122.5 kg x 10" + "\n"+ "122.5 kg x 10" + "\n"+ "122.5 kg x 10" + "\n" + "\n", lastExerciseString);
     }
 
 
