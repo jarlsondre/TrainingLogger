@@ -13,20 +13,21 @@ public class ExerciseTest {
     Exercise ex = new Exercise();
     try {
       ex.setName("benkpress1");  // Prøver å sette et navn som inneholder tall
-      fail();
+      fail("Feilet ikke for tall i navnet.");
     }
     catch (IllegalArgumentException e) {
       // Do nothing
     }
     try {
       ex.setName("benk!press");  // Prøver å sette et navn som inneholder spesialtegn
-      fail();
+      fail("Feilet ikke for spesialtegn i navnet.");
     }
     catch (IllegalArgumentException e) {
       // Do nothing
     }
     try {
       ex.setName("EtNavnSomErAltForLangtSlikAtTestenKanskjeFeiler");  // Prøver å sette et navn på over 20 bokstaver
+      fail("Feilet ikke når navnet var på over 20 bokstaver.");
     }
     catch (IllegalArgumentException e) {
       // Do nothing
@@ -35,7 +36,7 @@ public class ExerciseTest {
       ex.setName("Benkpress");  // Prøver å sette et gyldig navn
     }
     catch (IllegalArgumentException e) {
-      fail();
+      fail("Fikk ikke lov til å sette gyldig navn.");
     }
   }
 
