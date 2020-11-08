@@ -52,7 +52,6 @@ public class SessionLogger implements Iterable<Session> {
   public void addSession(Session session) {
     updateRecordsWithSession(session);
     sessions.add(session);
-    System.out.println(records);
   }
 
   public void deleteAll() {
