@@ -18,6 +18,7 @@
          <children>
             <Button fx:id="earlierSessionsButton" mnemonicParsing="false" onAction="#switchToSessionScreen" prefHeight="25.0" prefWidth="145.0" text="Tidligere økter" />
             <Button fx:id="newSessionButton" mnemonicParsing="false" onAction="#switchToNewSessionScreen" prefHeight="25.0" prefWidth="145.0" text="Ny økt" />
+            <Button fx:id="recordButton" mnemonicParsing="false" onAction="#switchToRecordScreen" prefHeight="25.0" prefWidth="145.0" text="Personlige rekorder" />
          </children>
          <opaqueInsets>
             <Insets />

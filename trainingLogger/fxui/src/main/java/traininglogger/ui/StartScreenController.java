@@ -1,5 +1,6 @@
 package traininglogger.ui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class StartScreenController {
@@ -18,5 +19,10 @@ public class StartScreenController {
   @FXML
   private void switchToNewSessionScreen() {
     mainController.changeToNewSessionScreen();
+  }
+
+  @FXML
+  private void switchToRecordScreen() {
+    mainController.changeToRecordScreen();
   }
 }

@@ -28,11 +28,15 @@ public class TrainingLoggerController {
   @FXML
   Node newExerciseScreen;
 
+  @FXML
+  Node recordScreen;
+
   private SessionScreenController sessionScreenController;
   private NewSessionScreenController newSessionScreenController;
+  private RecordScreenController recordScreenController;
 
   @FXML
-  public void initialize() throws IOException {
+  public void initialize() {
     loadSubControllersAndScreenNodes();
     changeToStartScreen();
   }
@@ -76,6 +80,15 @@ public class TrainingLoggerController {
     } catch (IOException ex) {
       ex.printStackTrace();
     }
+    // Load Record Screen Node and Controller.
+    loader = new FXMLLoader();
+    try {
+      this.recordScreen = loader.load(getClass().getResource("RecordScreen.fxml").openStream());
+      this.recordScreenController = loader.getController();
+      this.recordScreenController.setMainController(this);
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
   }
 
   public void changeToStartScreen() {
@@ -99,6 +112,13 @@ public class TrainingLoggerController {
   public void changeToNewExerciseScreen() {
     mainVbox.getChildren().clear();
     mainVbox.getChildren().add(newExerciseScreen);
+  }
+
+  public void changeToRecordScreen() {
+    SessionLogger currentSessionLogger = this.trainingLoggerAccess.getSessionLogger();
+    this.recordScreenController.updateRecordOverview(currentSessionLogger);
+    mainVbox.getChildren().clear();
+    mainVbox.getChildren().add(this.recordScreen);
   }
 
   public void addSessionToSessionLogger(Session session) {

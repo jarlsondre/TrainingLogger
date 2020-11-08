@@ -80,5 +80,11 @@
                 }
             ]
         }
-    ]
+    ],
+    "records" : {
+        "Serverbasert Benkpress" : 100.0,
+        "Serverbasert Knebøy" : 130.0,
+        "Serverbasert Markløft" : 120.0,
+        "Serverbasert Bulgarsk utfall" : 150
+    }
 }
