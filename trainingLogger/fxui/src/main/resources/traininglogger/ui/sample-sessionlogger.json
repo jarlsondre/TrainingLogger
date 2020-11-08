@@ -80,5 +80,11 @@
                 }
             ]
         }
-    ]
+    ],
+    "records" : {
+        "Lokal Benkpress": 100.0,
+        "Lokal Knebøy": 130.0,
+        "Lokal Markløft": 120.0,
+        "Lokal Bulgarsk utfall": 150
+    }
 }
