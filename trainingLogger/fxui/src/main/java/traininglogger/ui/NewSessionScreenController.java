@@ -39,7 +39,7 @@ public class NewSessionScreenController {
 
   private VBox putExerciseInABox(Exercise exercise) {
     VBox exerciseBox = new VBox();
-    String exerciseAsString = exercise.getName() + ": \n";
+    String exerciseAsString = exercise.getName() + ":\n";
     for (Set set : exercise) {
       exerciseAsString += set.getWeight() + " kg x " + set.getRepetitions() + "\n";
     }
