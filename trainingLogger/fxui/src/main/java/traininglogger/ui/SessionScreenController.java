@@ -57,6 +57,10 @@ public class SessionScreenController {
       }
       sessionAsString += "\n";
     }
+    if (!session.getDescription().equals("")) {
+      sessionAsString += "Beskrivelse: \n";
+      sessionAsString += session.getDescription();
+    }
     Label sessionInALabel = new Label(sessionAsString);
     sessionBox.getChildren().add(sessionInALabel);
     return sessionBox;
