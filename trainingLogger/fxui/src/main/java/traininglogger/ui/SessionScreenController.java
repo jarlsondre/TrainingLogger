@@ -35,6 +35,10 @@ public class SessionScreenController {
     }
   }
 
+  /**
+   * Oppdaterer sessionOverviewVbox til å innholde
+   * de nåværende Sessionobjektene i sessionLogger-objektet.
+   */
   public void updateSessionOverview(SessionLogger sessionLogger) {
     this.sessionOverviewVbox.getChildren().clear();
     for (Session session : sessionLogger) {

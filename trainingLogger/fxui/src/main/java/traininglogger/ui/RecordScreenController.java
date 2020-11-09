@@ -25,6 +25,9 @@ public class RecordScreenController {
     }
   }
 
+  /**
+   * Oppdaterer recordOverviewVbox til å innholde de nyeste rekordene.
+   */
   public void updateRecordOverview(SessionLogger sessionLogger) {
     recordOverviewVbox.getChildren().clear();
     for (String name : sessionLogger.getRecords().keySet()) {
