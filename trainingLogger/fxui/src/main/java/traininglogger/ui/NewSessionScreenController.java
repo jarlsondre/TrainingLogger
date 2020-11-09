@@ -85,6 +85,7 @@ public class NewSessionScreenController {
   @FXML
   private void addSessionButtonHandler() throws IOException {
     this.session.setDescription(descriptionArea.getText());
+    descriptionArea.clear();
     mainController.addSessionToSessionLogger(this.session);
     this.session = new Session();
     updateExerciseOverview();
