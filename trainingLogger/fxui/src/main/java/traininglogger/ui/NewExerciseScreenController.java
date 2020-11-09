@@ -103,11 +103,16 @@ public class NewExerciseScreenController {
       repsTextField.setText("");
       if (this.addExerciseButton.isDisabled() && (! theTextFieldIsBlank)) {
         this.addExerciseButton.setDisable(false);
-      }
-    } catch (Exception e) {
-      Label errorLabel = new Label("Input må være et heltall");
+       }
+    }
+    catch (NumberFormatException exception) {
+        System.out.println(exception);
+        Label errorLabel = new Label("Input må være et heltall");
+        addSetVbox.getChildren().add(0, errorLabel);
+    }
+    catch (IllegalArgumentException e) {
+      Label errorLabel = new Label("Input kan ikke være større enn 1000");
       addSetVbox.getChildren().add(0, errorLabel);
-      System.out.println("Input må være heltall");
     }
   }
 
