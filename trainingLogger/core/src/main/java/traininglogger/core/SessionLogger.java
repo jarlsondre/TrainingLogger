@@ -25,6 +25,9 @@ public class SessionLogger implements Iterable<Session> {
     records = new HashMap<>();
   }
 
+  /**
+   * Oppdaterer "records" med nye øvelser fra et Session-objekt.
+   */
   public void updateRecordsWithSession(Session session) {
     for (Exercise exercise : session) {
       String name = exercise.getName();

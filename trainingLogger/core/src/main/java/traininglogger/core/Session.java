@@ -49,6 +49,9 @@ public class Session implements Iterable<Exercise> {
     return this.description;
   }
 
+  /**
+   * Legger til en beskrivelse av treningsøkta.
+   */
   public void setDescription(String description) {
     if (description.length() > 60) {
       throw new IllegalArgumentException("The description can only contain 60 letters.");
