@@ -38,7 +38,7 @@ public class SessionScreenController {
   public void updateSessionOverview(SessionLogger sessionLogger) {
     this.sessionOverviewVbox.getChildren().clear();
     for (Session session : sessionLogger) {
-      VBox box = putSessionInABox(session);
+      VBox box = putSessionInBox(session);
       TitledPane titledPane = new TitledPane(session.getDateAsString(), box);
       titledPane.setAlignment(Pos.CENTER_LEFT);
       titledPane.setExpanded(false);
@@ -47,7 +47,7 @@ public class SessionScreenController {
     }
   }
 
-  private VBox putSessionInABox(Session session) {
+  private VBox putSessionInBox(Session session) {
     VBox sessionBox = new VBox();
     String sessionAsString = "";
     for (Exercise exercise : session) {
@@ -57,8 +57,8 @@ public class SessionScreenController {
       }
       sessionAsString += "\n";
     }
-    Label sessionInALabel = new Label(sessionAsString);
-    sessionBox.getChildren().add(sessionInALabel);
+    Label sessionInLabel = new Label(sessionAsString);
+    sessionBox.getChildren().add(sessionInLabel);
     return sessionBox;
   }
 }

@@ -11,6 +11,7 @@ import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 import traininglogger.core.Set;
 
+
 public class NewSessionScreenController {
 
   @FXML
@@ -29,7 +30,7 @@ public class NewSessionScreenController {
   public void updateExerciseOverview() {
     this.exerciseOverviewVbox.getChildren().clear();
     for (Exercise exercise : this.session) {
-      VBox box = putExerciseInABox(exercise);
+      VBox box = putExerciseInBox(exercise);
       TitledPane titledPane = new TitledPane(exercise.getName(), box);
       titledPane.setAlignment(Pos.CENTER_LEFT);
       titledPane.setExpanded(false);
@@ -37,15 +38,15 @@ public class NewSessionScreenController {
     }
   }
 
-  private VBox putExerciseInABox(Exercise exercise) {
+  private VBox putExerciseInBox(Exercise exercise) {
     VBox exerciseBox = new VBox();
     String exerciseAsString = exercise.getName() + ":\n";
     for (Set set : exercise) {
       exerciseAsString += set.getWeight() + " kg x " + set.getRepetitions() + "\n";
     }
     exerciseAsString += "\n";
-    Label exerciseInALabel = new Label(exerciseAsString);
-    exerciseBox.getChildren().add(exerciseInALabel);
+    Label exerciseInLabel = new Label(exerciseAsString);
+    exerciseBox.getChildren().add(exerciseInLabel);
     return exerciseBox;
   }
 
@@ -76,7 +77,7 @@ public class NewSessionScreenController {
   }
 
   /**
-   * Funksjon som legger til nåværende økt i 'tidligere økter'
+   * Funksjon som legger til nåværende økt i 'tidligere økter.'
    */
   @FXML
   private void addSessionButtonHandler() throws IOException {

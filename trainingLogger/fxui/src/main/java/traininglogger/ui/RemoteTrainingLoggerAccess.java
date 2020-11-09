@@ -7,16 +7,16 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
-
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 import traininglogger.json.TrainingLoggerModule;
 
+
 public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
 
-  private SessionLogger sessionLogger;
   private final URI endpointBaseUri;
-  private ObjectMapper objectMapper;
+  private SessionLogger sessionLogger;
+  private final ObjectMapper objectMapper;
 
   public RemoteTrainingLoggerAccess(URI endpointBaseUri) {
     this.endpointBaseUri = endpointBaseUri;
@@ -27,7 +27,8 @@ public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
   @Override
   public SessionLogger getSessionLogger() {
     if (this.sessionLogger == null) {
-      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri).header("Accept", "application/json").GET().build();
+      HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
+          .header("Accept", "application/json").GET().build();
       try {
         final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
             HttpResponse.BodyHandlers.ofString());
@@ -44,7 +45,8 @@ public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
   public void addSession(Session session) {
     try {
       String json = this.objectMapper.writeValueAsString(session);
-      HttpRequest request = HttpRequest.newBuilder(this.endpointBaseUri).header("Accept", "application/json")
+      HttpRequest request = HttpRequest.newBuilder(this.endpointBaseUri)
+          .header("Accept", "application/json")
           .header("Content-Type", "application/json").PUT(BodyPublishers.ofString(json)).build();
       final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
           HttpResponse.BodyHandlers.ofString());
@@ -61,7 +63,8 @@ public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
   @Override
   public void deleteAll() {
     try {
-      HttpRequest request = HttpRequest.newBuilder(this.endpointBaseUri).header("Accept", "application/json").DELETE()
+      HttpRequest request = HttpRequest.newBuilder(this.endpointBaseUri)
+          .header("Accept", "application/json").DELETE()
           .build();
       final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
           HttpResponse.BodyHandlers.ofString());
