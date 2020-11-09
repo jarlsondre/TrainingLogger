@@ -141,6 +141,7 @@ public class TrainingLoggerTest extends ApplicationTest {
         addSet(10, 160, repsTextField, weightTextField);
         addSet(10, 170, repsTextField, weightTextField);
         clickOn(addExerciseButton);
+        clickOn("#descriptionArea").write("Markløft var tungt, knebøy var lett");
         Button addSessionButton = lookup("Legg til økten").query();
         clickOn(addSessionButton);
 
@@ -155,7 +156,7 @@ public class TrainingLoggerTest extends ApplicationTest {
 
         // Sjekker om dataene er like de vi skrev inn
         assertEquals("Knebøy:" + "\n" + "122.5kg x 10" + "\n" + "140.0kg x 10" + "\n" + "140.0kg x 10" + "\n" + "\n" +
-                "Markløft:" + "\n" + "160.0kg x 10" + "\n" + "170.0kg x 10\n" + "\n", lastSessionString);
+                "Markløft:" + "\n" + "160.0kg x 10" + "\n" + "170.0kg x 10\n" + "\n" + "Beskrivelse: \n" + "Markløft var tungt, knebøy var lett" , lastSessionString);
     }
 
 

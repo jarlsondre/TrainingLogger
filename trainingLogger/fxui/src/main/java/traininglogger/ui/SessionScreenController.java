@@ -57,7 +57,9 @@ public class SessionScreenController {
       }
       sessionAsString += "\n";
     }
-    if (!session.getDescription().equals("")) {
+    System.out.println(session);
+    System.out.println(session.getDescription());
+    if (!session.getDescription().equals("")){
       sessionAsString += "Beskrivelse: \n";
       sessionAsString += session.getDescription();
     }
