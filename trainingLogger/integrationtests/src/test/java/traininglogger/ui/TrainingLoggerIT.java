@@ -30,7 +30,7 @@ public class TrainingLoggerIT extends ApplicationTest {
 
   @BeforeEach
   public void setupItems() throws URISyntaxException {
-    try (Reader reader = new InputStreamReader(getClass().getResourceAsStream("it-traininglogger.json"))) {
+    try (Reader reader = new InputStreamReader(getClass().getResourceAsStream("it-traininglogger.json"))) { //TODO: Hva er vitsen med reader? Se om Hallvard endrer!
       String port = System.getProperty("traininglogger.port");
       assertNotNull(port, "No traininglogger.port system property set");
       URI baseUri = new URI("http://localhost:" + port + "/traininglogger/");
