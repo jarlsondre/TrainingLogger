@@ -13,8 +13,7 @@ import traininglogger.json.TrainingLoggerModule;
 @Produces(MediaType.APPLICATION_JSON)
 public class TrainingLoggerModuleObjectMapperProvider implements ContextResolver<ObjectMapper> {
 
-  private final ObjectMapper objectMapper = new ObjectMapper()
-      .registerModule(new TrainingLoggerModule());
+  private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new TrainingLoggerModule());
 
   @Override
   public ObjectMapper getContext(final Class<?> type) {

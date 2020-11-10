@@ -9,13 +9,13 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+
 import javafx.fxml.FXML;
 import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 import traininglogger.core.Set;
 import traininglogger.json.TrainingLoggerPersistence;
-
 
 public class AppController {
 
@@ -50,8 +50,7 @@ public class AppController {
       }
     }
     if (trainingLoggerAccess == null) {
-      DirectTrainingLoggerAccess directAccess =
-          new DirectTrainingLoggerAccess(getInitialSessionLogger());
+      DirectTrainingLoggerAccess directAccess = new DirectTrainingLoggerAccess(getInitialSessionLogger());
       directAccess.setUserSessionLoggerPath(userSessionLoggerPath);
       trainingLoggerAccess = directAccess;
     }
@@ -66,14 +65,13 @@ public class AppController {
     // prøv å lese fil fra hjemmeområdet først:
     if (userSessionLoggerPath != null) {
       try {
-        reader = new FileReader(Paths.get(System.getProperty("user.home"),
-            userSessionLoggerPath).toFile(),
+        reader = new FileReader(Paths.get(System.getProperty("user.home"), userSessionLoggerPath).toFile(),
             StandardCharsets.UTF_8);
       } catch (IOException ioex) {
         System.err.println("Fant ingen " + userSessionLoggerPath + " på hjemmeområdet");
       }
     }
-
+    
     if (reader == null && sampleSessionLoggerResource != null) {
       // prøv vedlagt eksempelfil i stedet:
       URL url = getClass().getResource(sampleSessionLoggerResource);

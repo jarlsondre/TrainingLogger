@@ -1,24 +1,26 @@
 package traininglogger.core;
 
-import java.util.Iterator;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import java.util.Iterator;
 
 public class SessionLoggerTest {
 
   @Test
-  public void addDelateSessionTest() {
-    Session session = new Session();
-    SessionLogger sessionLogger = new SessionLogger();
-    sessionLogger.addSession(session);
+  public void addDelateSessionTest(){
+    Session session = new Session(); 
+    SessionLogger sessionLogger = new SessionLogger(); 
+    sessionLogger.addSession(session); 
     assertTrue(sessionLogger.iterator().hasNext());
     sessionLogger.deleteAll();
     assertFalse(sessionLogger.iterator().hasNext());
   }
 
   @Test
-  public void sessionIteratorTest() {
+  public void sessionIteratorTest(){
     Session session1 = new Session();
     Session session2 = new Session();
     Session session3 = new Session();
@@ -29,8 +31,8 @@ public class SessionLoggerTest {
     sessionLogger.addSession(session2);
     sessionLogger.addSession(session3);
     sessionLogger.addSession(session4);
-    Iterator<Session> iterator = sessionLogger.iterator();
-    for (int i = 0; i < 4; i++) {
+    Iterator<Session> iterator = sessionLogger.iterator(); 
+    for(int i = 0; i < 4; i++){
       assertTrue(iterator.hasNext());
       assertTrue(ComparisonHelper.equalSession(sessions[i], iterator.next()));
     }

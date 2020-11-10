@@ -1,6 +1,7 @@
 package traininglogger.ui;
 
 import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,22 +9,28 @@ import javafx.scene.layout.VBox;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 
-
 public class TrainingLoggerController {
+
+  private TrainingLoggerAccess trainingLoggerAccess;
 
   @FXML
   VBox mainVbox;
+
   @FXML
   Node sessionScreen;
+
   @FXML
   Node startScreen;
+
   @FXML
   Node newSessionScreen;
+
   @FXML
   Node newExerciseScreen;
+
   @FXML
   Node recordScreen;
-  private TrainingLoggerAccess trainingLoggerAccess;
+
   private SessionScreenController sessionScreenController;
   private NewSessionScreenController newSessionScreenController;
   private RecordScreenController recordScreenController;
@@ -38,8 +45,7 @@ public class TrainingLoggerController {
     // Load StartScreen Node
     FXMLLoader loader = new FXMLLoader();
     try {
-      this.startScreen = loader.load(getClass()
-          .getResource("StartScreen.fxml").openStream());
+      this.startScreen = loader.load(getClass().getResource("StartScreen.fxml").openStream());
       StartScreenController controller = loader.getController();
       controller.setMainController(this);
     } catch (IOException ex) {
@@ -48,8 +54,7 @@ public class TrainingLoggerController {
     // Load Log Screen Node and Controller. Register this as main Controller.
     loader = new FXMLLoader();
     try {
-      this.sessionScreen = loader.load(getClass()
-          .getResource("SessionScreen.fxml").openStream());
+      this.sessionScreen = loader.load(getClass().getResource("SessionScreen.fxml").openStream());
       this.sessionScreenController = loader.getController();
       this.sessionScreenController.setMainController(this);
     } catch (Exception e) {
@@ -59,8 +64,7 @@ public class TrainingLoggerController {
     // Controller.
     loader = new FXMLLoader();
     try {
-      this.newSessionScreen = loader.load(getClass()
-          .getResource("NewSessionScreen.fxml").openStream());
+      this.newSessionScreen = loader.load(getClass().getResource("NewSessionScreen.fxml").openStream());
       this.newSessionScreenController = loader.getController();
       this.newSessionScreenController.setMainController(this);
     } catch (IOException ex) {
@@ -69,8 +73,7 @@ public class TrainingLoggerController {
     // Load New Exercise Screen Node and Controller. Register controllers.
     loader = new FXMLLoader();
     try {
-      this.newExerciseScreen = loader.load(getClass()
-          .getResource("NewExerciseScreen.fxml").openStream());
+      this.newExerciseScreen = loader.load(getClass().getResource("NewExerciseScreen.fxml").openStream());
       NewExerciseScreenController newExerciseScreenController = loader.getController();
       newExerciseScreenController.setMainController(this);
       newExerciseScreenController.setNewSessionScreenController(this.newSessionScreenController);
@@ -80,8 +83,7 @@ public class TrainingLoggerController {
     // Load Record Screen Node and Controller.
     loader = new FXMLLoader();
     try {
-      this.recordScreen = loader.load(getClass()
-          .getResource("RecordScreen.fxml").openStream());
+      this.recordScreen = loader.load(getClass().getResource("RecordScreen.fxml").openStream());
       this.recordScreenController = loader.getController();
       this.recordScreenController.setMainController(this);
     } catch (IOException ex) {
