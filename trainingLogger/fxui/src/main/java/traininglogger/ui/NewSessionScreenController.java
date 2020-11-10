@@ -43,12 +43,13 @@ public class NewSessionScreenController {
 
   private VBox putExerciseInABox(Exercise exercise) {
     VBox exerciseBox = new VBox();
-    String exerciseAsString = exercise.getName() + ":\n";
+    StringBuffer exerciseAsString = new StringBuffer(exercise.getName() + ":\n");
     for (Set set : exercise) {
-      exerciseAsString += set.getWeight() + " kg x " + set.getRepetitions() + "\n";
+      exerciseAsString.append(set.getWeight() + " kg x " + set.getRepetitions() + "\n");
     }
-    exerciseAsString += "\n";
-    Label exerciseInALabel = new Label(exerciseAsString);
+    exerciseAsString.append("\n");
+    String finalString = exerciseAsString.toString();
+    Label exerciseInALabel = new Label(finalString);
     exerciseBox.getChildren().add(exerciseInALabel);
     return exerciseBox;
   }

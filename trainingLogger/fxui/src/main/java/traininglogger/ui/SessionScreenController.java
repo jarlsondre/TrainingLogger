@@ -49,21 +49,20 @@ public class SessionScreenController {
 
   private VBox putSessionInABox(Session session) {
     VBox sessionBox = new VBox();
-    String sessionAsString = "";
+    StringBuffer sessionAsString = new StringBuffer();
     for (Exercise exercise : session) {
-      sessionAsString += exercise.getName() + ":\n";
+      sessionAsString.append(exercise.getName() + ":\n");
       for (Set set : exercise) {
-        sessionAsString += set.getWeight() + "kg x " + set.getRepetitions() + "\n";
+        sessionAsString.append(set.getWeight() + "kg x " + set.getRepetitions() + "\n");
       }
-      sessionAsString += "\n";
+      sessionAsString.append("\n");
     }
-    System.out.println(session);
-    System.out.println(session.getDescription());
     if (!session.getDescription().equals("")){
-      sessionAsString += "Beskrivelse: \n";
-      sessionAsString += session.getDescription();
+      sessionAsString.append("Beskrivelse: \n");
+      sessionAsString.append(session.getDescription());
     }
-    Label sessionInALabel = new Label(sessionAsString);
+    String finalString = sessionAsString.toString();
+    Label sessionInALabel = new Label(finalString);
     sessionBox.getChildren().add(sessionInALabel);
     return sessionBox;
   }
