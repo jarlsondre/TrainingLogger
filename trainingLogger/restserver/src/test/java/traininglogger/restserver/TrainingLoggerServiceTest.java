@@ -32,7 +32,7 @@ public class TrainingLoggerServiceTest extends JerseyTest {
   @Override
   protected ResourceConfig configure() {
     final TrainingLoggerConfig config = new TrainingLoggerConfig();
-    if (shouldLog()) {
+    if (shouldLog()) { //TODO: Hva er vitsen når shouldLog() returnerer false? Sjekk om Hallvard endrer dette!
       enable(TestProperties.LOG_TRAFFIC);
       enable(TestProperties.DUMP_ENTITY);
       config.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, "WARNING");
@@ -70,9 +70,15 @@ public class TrainingLoggerServiceTest extends JerseyTest {
       SessionLogger sessionLogger = objectMapper.readValue(getResponse.readEntity(String.class), SessionLogger.class);
       Iterator<Session> it = sessionLogger.iterator();
       assertTrue(it.hasNext());
+      // TODO: Test litt mer.
     } catch (JsonProcessingException e) {
       fail(e.getMessage());
     }
   }
+
+  //TODO: Skulle gjerne testa DELETE og PUT også. To problemer:
+  // 1. Hallvard har ikke noe eksempel.
+  // 2. Både PUT og DELETE lagrer server-sessionlogger.json til hjemmeområdet. Dette må enten omgås på et eller annet vis,
+  // eller så må testene "rydde opp etter seg". Se om du har fått svar på piazza.
 
 }
