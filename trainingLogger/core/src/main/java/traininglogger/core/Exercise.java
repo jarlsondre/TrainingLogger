@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class Exercise implements Iterable<Set> {
 
-  private List<Set> sets = new ArrayList<>();
+  private final List<Set> sets = new ArrayList<>();
   private String name;
 
   /**
@@ -21,7 +21,7 @@ public class Exercise implements Iterable<Set> {
   public Exercise() {
 
   }
-  
+
   /**
    * Konstruktør som instansierer objektet med navn på øvelsen og en array med sett.
    *
@@ -29,16 +29,16 @@ public class Exercise implements Iterable<Set> {
    * @param sets En array med set som objektet skal bestå av.
    */
   public Exercise(String name, Set... sets) {
-      this.setName(name);
-      this.addSets(sets);
+    this.setName(name);
+    this.addSets(sets);
   }
 
   /**
-   * Metode for å legge til sett til exercise-objektet. 
+   * Metode for å legge til sett til exercise-objektet.
    *
    * @param sets Tar inn et array av sett.
    */
-  public void addSets(Set...sets) {
+  public void addSets(Set... sets) {
     this.sets.addAll(Arrays.asList(sets));
   }
 
@@ -57,12 +57,12 @@ public class Exercise implements Iterable<Set> {
    * @param name øvelsens nye navn
    */
   public void setName(String name) {
-      Pattern p = Pattern.compile("[a-zA-ZæøåÆØÅ ]*");
-      Matcher m = p.matcher(name);
-      if ((name.length() > 40) || !m.matches()) {
-          throw new IllegalArgumentException("Illegalname: " + name);
-      }
-      this.name = name;
+    Pattern p = Pattern.compile("[a-zA-ZæøåÆØÅ ]*");
+    Matcher m = p.matcher(name);
+    if ((name.length() > 40) || !m.matches()) {
+      throw new IllegalArgumentException("Illegalname: " + name);
+    }
+    this.name = name;
   }
 
   @Override
