@@ -73,7 +73,7 @@ public class TrainingLoggerServiceTest extends JerseyTest {
       SessionLogger sessionLogger = objectMapper.readValue(getResponse.readEntity(String.class), SessionLogger.class);
       Iterator<Session> it = sessionLogger.iterator();
       assertTrue(it.hasNext());
-      // TODO: Test litt mer.
+      // TODO: Test litt mer. Det er sessionloggeren som ligger i default-sessionlogger.json som er returnert.
     } catch (JsonProcessingException e) {
       fail(e.getMessage());
     }
