@@ -5,10 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,15 +26,11 @@ public class TrainingLoggerIT extends ApplicationTest {
 
   @BeforeEach
   public void setupItems() throws URISyntaxException {
-    try (Reader reader = new InputStreamReader(getClass().getResourceAsStream("it-traininglogger.json"))) { //TODO: Hva er vitsen med reader? Se om Hallvard endrer!
       String port = System.getProperty("traininglogger.port");
       assertNotNull(port, "No traininglogger.port system property set");
       URI baseUri = new URI("http://localhost:" + port + "/traininglogger/");
       System.out.println("Base RemoteTrainingLoggerAcces URI: " + baseUri);
       this.controller.setTrainingLoggerAccess(new RemoteTrainingLoggerAccess(baseUri));
-    } catch (IOException ioe) {
-      fail(ioe.getMessage());
-    }
   }
 
   @Test
