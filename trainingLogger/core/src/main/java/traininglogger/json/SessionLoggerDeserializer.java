@@ -27,7 +27,7 @@ public class SessionLoggerDeserializer extends JsonDeserializer<SessionLogger> {
 
   @Override
   public SessionLogger deserialize(JsonParser parser, DeserializationContext ctxt)
-      throws IOException, JsonProcessingException {
+      throws IOException {
     TreeNode treeNode = parser.getCodec().readTree(parser);
     return deserialize((JsonNode) treeNode);
   }

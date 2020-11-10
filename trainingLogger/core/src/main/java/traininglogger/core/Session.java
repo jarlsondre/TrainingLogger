@@ -22,9 +22,9 @@ import java.util.List;
 public class Session implements Iterable<Exercise> {
 
   private final DateTimeFormatter dateTimeFormatter; // kan endre hvis klokkeslett trengs
+  private final List<Exercise> exercises = new ArrayList<>();
   private String description;
   private LocalDateTime date;
-  private final List<Exercise> exercises = new ArrayList<>();
 
   // Konstruktor som ikke tar inn beskrivelse.
   public Session() {

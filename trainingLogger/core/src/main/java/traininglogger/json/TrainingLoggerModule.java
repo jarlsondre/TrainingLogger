@@ -102,7 +102,7 @@ public class TrainingLoggerModule extends SimpleModule {
       System.out.println(sessionLoggerAsJsonString);
     } catch (JsonProcessingException e) {
       System.err.println("Funka ikke.");
-    } 
+    }
   }
 
 }

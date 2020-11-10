@@ -7,7 +7,6 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -17,8 +16,8 @@ import traininglogger.restapi.TrainingLoggerService;
 
 public class TrainingLoggerConfig extends ResourceConfig {
 
-  private SessionLogger sessionLogger;
   private static String backupFile = "server-sessionlogger.json";
+  private SessionLogger sessionLogger;
 
   /**
    * Initialize this TrainingLoggerConfig.
@@ -45,20 +44,13 @@ public class TrainingLoggerConfig extends ResourceConfig {
     this(getInitialSessionLogger());
   }
 
-  public SessionLogger getSessionLogger() {
-    return this.sessionLogger;
-  }
-
-  public void setSessionLogger(SessionLogger sessionLogger) {
-    this.sessionLogger = sessionLogger;
-  }
-
   private static SessionLogger getInitialSessionLogger() {
     Reader reader = null;
     TrainingLoggerPersistence trainingLoggerPersistence = new TrainingLoggerPersistence();
     // let etter backup-data først:
     try {
-      reader = new FileReader(Paths.get(System.getProperty("user.home"), backupFile).toFile(), StandardCharsets.UTF_8);
+      reader = new FileReader(Paths.get(System.getProperty("user.home"),
+          backupFile).toFile(), StandardCharsets.UTF_8);
     } catch (IOException ioex) {
       System.err.println("Fant ingen " + backupFile + " på hjemmeområdet");
     }
@@ -77,10 +69,11 @@ public class TrainingLoggerConfig extends ResourceConfig {
       try {
         initialSessionLogger = trainingLoggerPersistence.readSessionLogger(reader);
       } catch (IOException e) {
-        System.out.println("Kunne ikke deserialisere fra Reader, så returnerer en helt ny SessionLogger (" + e + ")");
+        System.out.println("Kunne ikke deserialisere fra Reader," +
+            " så returnerer en helt ny SessionLogger (" + e + ")");
       } finally {
         try {
-            reader.close();
+          reader.close();
         } catch (IOException e) {
           System.err.println("Klarte ikke å lukke reader" + "(" + e + ")");
         }
@@ -91,6 +84,14 @@ public class TrainingLoggerConfig extends ResourceConfig {
       initialSessionLogger = new SessionLogger();
     }
     return initialSessionLogger;
+  }
+
+  public SessionLogger getSessionLogger() {
+    return this.sessionLogger;
+  }
+
+  public void setSessionLogger(SessionLogger sessionLogger) {
+    this.sessionLogger = sessionLogger;
   }
 
 }

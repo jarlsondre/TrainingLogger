@@ -15,8 +15,8 @@ import traininglogger.json.TrainingLoggerModule;
 public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
 
   private final URI endpointBaseUri;
-  private SessionLogger sessionLogger;
   private final ObjectMapper objectMapper;
+  private SessionLogger sessionLogger;
 
   public RemoteTrainingLoggerAccess(URI endpointBaseUri) {
     this.endpointBaseUri = endpointBaseUri;

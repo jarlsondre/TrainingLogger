@@ -7,28 +7,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="400.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="traininglogger.ui.NewSessionScreenController">
-   <children>
-      <Label layoutX="111.0" layoutY="48.0" text="Ny økt">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <ToolBar prefHeight="40.0" prefWidth="311.0">
-         <items>
-            <Button fx:id="backToStartScreenButton" mnemonicParsing="false" onAction="#switchToStartScreen" text="Startskjerm" />
-         </items>
-      </ToolBar>
-      <Button fx:id="addSessionButton" layoutX="108.0" layoutY="361.0" mnemonicParsing="false" onAction="#addSessionButtonHandler" text="Legg til økten" disable="true" />
-      <ScrollPane layoutY="98.0" prefHeight="255.0" prefWidth="311.0">
-         <content>
-            <VBox alignment="TOP_CENTER" prefWidth="308.0">
-               <VBox fx:id="exerciseOverviewVbox" alignment="TOP_CENTER">
-               </VBox>
-               <Button fx:id="newExerciseButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToNewExerciseScreen" text="Legg til øvelse" />
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="308.0"
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="traininglogger.ui.NewSessionScreenController">
+    <Label layoutX="111.0" layoutY="48.0" text="Ny økt">
+        <font>
+            <Font size="28.0"/>
+        </font>
+    </Label>
+    <ToolBar prefHeight="40.0" prefWidth="311.0">
+        <Button fx:id="backToStartScreenButton" mnemonicParsing="false" onAction="#switchToStartScreen"
+                text="Startskjerm"/>
+    </ToolBar>
+    <Button fx:id="addSessionButton" layoutX="108.0" layoutY="361.0" mnemonicParsing="false"
+            onAction="#addSessionButtonHandler" text="Legg til økten" disable="true"/>
+    <ScrollPane layoutY="98.0" prefHeight="255.0" prefWidth="311.0">
+        <VBox alignment="TOP_CENTER" prefWidth="308.0">
+            <VBox fx:id="exerciseOverviewVbox" alignment="TOP_CENTER">
             </VBox>
-         </content>
-      </ScrollPane>
-   </children>
+            <Button fx:id="newExerciseButton" alignment="TOP_LEFT" contentDisplay="CENTER"
+                    mnemonicParsing="false" onAction="#switchToNewExerciseScreen" text="Legg til øvelse"/>
+        </VBox>
+    </ScrollPane>
 </AnchorPane>
