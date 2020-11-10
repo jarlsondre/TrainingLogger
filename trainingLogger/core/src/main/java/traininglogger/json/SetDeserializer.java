@@ -15,7 +15,7 @@ import traininglogger.core.Set;
 public class SetDeserializer extends JsonDeserializer<Set> {
 
   @Override
-  public Set deserialize(JsonParser parser, DeserializationContext ctxt)
+  public Set deserialize(JsonParser parser, DeserializationContext ctxt) 
       throws IOException, JsonProcessingException {
     TreeNode treenode = parser.getCodec().readTree(parser);
     return deserialize((JsonNode) treenode);

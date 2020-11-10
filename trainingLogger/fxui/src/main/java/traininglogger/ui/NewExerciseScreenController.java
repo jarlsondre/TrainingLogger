@@ -1,6 +1,7 @@
 package traininglogger.ui;
 
 import java.io.IOException;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -14,22 +15,28 @@ import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
 import traininglogger.core.Set;
 
-
 public class NewExerciseScreenController {
+
+  private Exercise exercise = new Exercise();
 
   @FXML
   VBox addSetVbox;
+
   @FXML
   HBox addSetHbox;
+
   @FXML
   TextField weightTextField;
+
   @FXML
   TextField repsTextField;
+
   @FXML
   TextField titleTextField;
+
   @FXML
   Button addExerciseButton;
-  private Exercise exercise = new Exercise();
+
   private TrainingLoggerController mainController;
   private NewSessionScreenController newSessionScreenController;
   private boolean theTextFieldIsBlank = true;
@@ -39,16 +46,16 @@ public class NewExerciseScreenController {
     this.titleTextField.textProperty().addListener(new ChangeListener<String>() {
       @Override
       public void changed(ObservableValue<? extends String> observableValue, String oldValue,
-                          String newValue) {
-        boolean setHasBeenAdded = addSetVbox.getChildren().size() > 1;
-        theTextFieldIsBlank = newValue.isBlank();
-        if (theTextFieldIsBlank) {
-          addExerciseButton.setDisable(true);
-        } else {
-          if (setHasBeenAdded) {
-            addExerciseButton.setDisable(false);
-          }
-        }
+          String newValue) {
+            boolean aSetHasBeenAdded = addSetVbox.getChildren().size() > 1;
+            theTextFieldIsBlank = newValue.isBlank();
+            if (theTextFieldIsBlank) {
+              addExerciseButton.setDisable(true);
+            } else {
+              if (aSetHasBeenAdded) {
+                addExerciseButton.setDisable(false);
+              }
+            }
       }
     });
   }
@@ -129,7 +136,7 @@ public class NewExerciseScreenController {
     try {
       Node node = loader.load(getClass().getResource("HboxTemplate.fxml").openStream());
       addSetVbox.getChildren().add(addSetVbox.getChildren().size() - 1, node);
-      HboxTemplateController controller = loader.getController();
+      HboxTemplateController controller = (HboxTemplateController) loader.getController();
       controller.setTextField(weightTextField.getText(), repsTextField.getText());
     } catch (IOException ex) {
       ex.printStackTrace();

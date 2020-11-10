@@ -1,13 +1,16 @@
 package traininglogger.json;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import traininglogger.core.ComparisonHelper;
 import traininglogger.core.Exercise;
 import traininglogger.core.Set;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ModuleTest {
 

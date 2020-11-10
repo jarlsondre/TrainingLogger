@@ -97,12 +97,11 @@ public class TrainingLoggerModule extends SimpleModule {
     sessionLogger.addSession(session2);
 
     try {
-      // fra objekt til json-streng
-      String sessionLoggerAsJsonString = mapper.writeValueAsString(sessionLogger);
+      String sessionLoggerAsJsonString = mapper.writeValueAsString(sessionLogger); // fra objekt til json-streng
       System.out.println(sessionLoggerAsJsonString);
     } catch (JsonProcessingException e) {
       System.err.println("Funka ikke.");
-    }
+    } 
   }
 
 }

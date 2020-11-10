@@ -10,14 +10,14 @@ import traininglogger.core.Set;
 public class ExerciseSerializer extends JsonSerializer<Exercise> {
 
   /* format:
-   * {
-   * "name" : "...",
-   * "sets" :[...]
-   * }
-   */
+     * {
+     * "name" : "...",
+     * "sets" :[...]
+     * }
+     */
 
   @Override
-  public void serialize(Exercise exercise, JsonGenerator gen, SerializerProvider arg2)
+  public void serialize(Exercise exercise, JsonGenerator gen, SerializerProvider arg2) 
       throws IOException {
     gen.writeStartObject();
     gen.writeStringField("name", exercise.getName());
