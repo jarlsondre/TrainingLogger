@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
@@ -18,6 +19,9 @@ public class NewSessionScreenController {
 
   @FXML
   Button addSessionButton;
+
+  @FXML
+  TextArea descriptionArea;
 
   private TrainingLoggerController mainController;
   private Session session = new Session();
@@ -80,6 +84,8 @@ public class NewSessionScreenController {
    */
   @FXML
   private void addSessionButtonHandler() throws IOException {
+    this.session.setDescription(descriptionArea.getText());
+    descriptionArea.clear();
     mainController.addSessionToSessionLogger(this.session);
     this.session = new Session();
     updateExerciseOverview();
