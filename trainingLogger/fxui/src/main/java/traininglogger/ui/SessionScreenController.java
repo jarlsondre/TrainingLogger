@@ -35,10 +35,14 @@ public class SessionScreenController {
     }
   }
 
+  /**
+   * Oppdaterer sessionOverviewVbox til å innholde
+   * de nåværende Sessionobjektene i sessionLogger-objektet.
+   */
   public void updateSessionOverview(SessionLogger sessionLogger) {
     this.sessionOverviewVbox.getChildren().clear();
     for (Session session : sessionLogger) {
-      VBox box = putSessionInABox(session);
+      VBox box = putSessionInBox(session);
       TitledPane titledPane = new TitledPane(session.getDateAsString(), box);
       titledPane.setAlignment(Pos.CENTER_LEFT);
       titledPane.setExpanded(false);
@@ -47,7 +51,7 @@ public class SessionScreenController {
     }
   }
 
-  private VBox putSessionInABox(Session session) {
+  private VBox putSessionInBox(Session session) {
     VBox sessionBox = new VBox();
     String sessionAsString = "";
     for (Exercise exercise : session) {

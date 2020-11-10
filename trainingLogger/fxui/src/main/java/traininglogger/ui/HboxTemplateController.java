@@ -7,7 +7,7 @@ public class HboxTemplateController {
 
   @FXML
   TextField weightTextField;
-  
+
   @FXML
   TextField repsTextField;
 
