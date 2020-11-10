@@ -37,4 +37,6 @@ public class TrainingLoggerIT extends ApplicationTest {
   public void testController_initial() {
     assertNotNull(this.controller);
   }
+
+  // TODO: Gjenta UI-testene, bare at nå kjører vi mot server.
 }
