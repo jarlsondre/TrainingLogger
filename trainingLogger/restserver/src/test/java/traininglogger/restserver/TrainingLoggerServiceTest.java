@@ -64,6 +64,8 @@ public class TrainingLoggerServiceTest extends JerseyTest {
     super.tearDown();
   }
 
+  // TODO: Potensielt "farlig" test. Antar at det er sessionloggeren i default-sessionlogger.json som returneres. Hvis man bruker appen
+  // og lagrer en annen sessionlogger så vil denne i stedet returneres og testen feile. 
   @Test
   public void testGet_sessionLogger() {
     Response getResponse = target(TrainingLoggerService.TRAINING_LOGGER_SERVICE_PATH)
