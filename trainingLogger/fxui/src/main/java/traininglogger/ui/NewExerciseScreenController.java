@@ -97,10 +97,22 @@ public class NewExerciseScreenController {
       if (this.addExerciseButton.isDisabled() && (!theTextFieldIsBlank)) {
         this.addExerciseButton.setDisable(false);
       }
-    } catch (Exception e) {
-      Label errorLabel = new Label("Input må være et heltall");
-      addSetVbox.getChildren().add(0, errorLabel);
-      System.out.println("Input må være heltall");
+    } catch (Exception exception) {
+        if (addSetVbox.getChildren().get(0) instanceof Label) {
+          addSetVbox.getChildren().remove(0);
+        }
+        String errorLabelString = "";
+        if (exception instanceof NumberFormatException) {
+          if (exception.getMessage().equals("empty String")) {
+            errorLabelString = "Begge feltene må være utfylte";
+          } else {
+            errorLabelString = "Vekt må være et desimaltall og reps et heltall";
+          }
+        } else if (exception instanceof IllegalArgumentException) {
+          errorLabelString = "Input kan ikke være større enn 1000";
+        }
+        Label errorLabel = new Label(errorLabelString);
+        addSetVbox.getChildren().add(0, errorLabel);
     }
   }
 

@@ -5,38 +5,84 @@
       "date": "28/10/2020 19:27",
       "exercises": [
         {
-          "name": "Lokal Benkpress",
-          "sets": [
-            {
-              "repetitions": 5,
-              "weight": 100.0
-            },
-            {
-              "repetitions": 5,
-              "weight": 97.5
-            },
-            {
-              "repetitions": 5,
-              "weight": 87.5
-            }
-          ]
+            "stringDescription": "",
+            "date": "28/10/2020 19:27",
+            "exercises": [
+                {
+                    "name": "Lokal Benkpress",
+                    "sets": [
+                        {
+                            "repetitions": 5,
+                            "weight": 100.0
+                        },
+                        {
+                            "repetitions": 5,
+                            "weight": 97.5
+                        },
+                        {
+                            "repetitions": 5,
+                            "weight": 87.5
+                        }
+                    ]
+                },
+                {
+                    "name": "Lokal Knebøy",
+                    "sets": [
+                        {
+                            "repetitions": 8,
+                            "weight": 130.0
+                        },
+                        {
+                            "repetitions": 8,
+                            "weight": 127.5
+                        },
+                        {
+                            "repetitions": 7,
+                            "weight": 125.0
+                        }
+                    ]
+                }
+            ]
         },
         {
-          "name": "Lokal Knebøy",
-          "sets": [
-            {
-              "repetitions": 8,
-              "weight": 130.0
-            },
-            {
-              "repetitions": 8,
-              "weight": 127.5
-            },
-            {
-              "repetitions": 7,
-              "weight": 125.0
-            }
-          ]
+            "stringDescription": "",
+            "date": "28/10/2020 19:27",
+            "exercises": [
+                {
+                    "name": "Lokal Markløft",
+                    "sets": [
+                        {
+                            "repetitions": 8,
+                            "weight": 120.0
+                        },
+                        {
+                            "repetitions": 10,
+                            "weight": 97.5
+                        },
+                        {
+                            "repetitions": 15,
+                            "weight": 87.5
+                        }
+                    ]
+                },
+                {
+                    "name": "Lokal Bulgarsk utfall",
+                    "sets": [
+                        {
+                            "repetitions": 4,
+                            "weight": 150.0
+                        },
+                        {
+                            "repetitions": 10,
+                            "weight": 127.5
+                        },
+                        {
+                            "repetitions": 12,
+                            "weight": 125.0
+                        }
+                    ]
+                }
+            ]
         }
       ]
     },

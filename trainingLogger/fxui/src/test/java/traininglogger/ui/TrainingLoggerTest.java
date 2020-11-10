@@ -84,9 +84,43 @@ public class TrainingLoggerTest extends ApplicationTest {
     repsTextField = lookup("#repsTextField").query();
     weightTextField = lookup("#weightTextField").query();
 
-    if (!repsTextField.getText().equals("10")) {
-      System.out.println(repsTextField.getText());
-      fail("Reps-boksen inneholdt ikke riktig informasjon etter at settet ble lagt til");
+    /**
+     * Tester om koden kræsjer dersom man forsøker å legge til en økt og om informasjonen som
+     * blir lagret er riktig
+     */
+    @Test
+    public void addSessionTest() {
+        // Legger til en session
+        TextField nameTextField = lookup("#titleTextField").query();
+        TextField repsTextField = lookup("#repsTextField").query();
+        TextField weightTextField = lookup("#weightTextField").query();
+        clickOn(nameTextField).write("Knebøy");
+        addSet(10, 122.5, repsTextField, weightTextField);
+        addSet(10, 140, repsTextField, weightTextField);
+        addSet(10, 140, repsTextField, weightTextField);
+        Button addExerciseButton = lookup("Legg til øvelse").query();
+        clickOn(addExerciseButton);
+        clickOn("Legg til øvelse");
+        clickOn(nameTextField).write("Markløft");
+        addSet(10, 160, repsTextField, weightTextField);
+        addSet(10, 170, repsTextField, weightTextField);
+        clickOn(addExerciseButton);
+        clickOn("#descriptionArea").write("Markløft var tungt, knebøy var lett");
+        Button addSessionButton = lookup("Legg til økten").query();
+        clickOn(addSessionButton);
+
+        // Henter ut dataene som har blitt lagret inne i "tidligere økter"
+        clickOn("Tidligere økter");
+        VBox vBox = lookup("#sessionOverviewVbox").query();
+        TitledPane lastSessionTitledPane = (TitledPane) vBox.getChildren().get(0);
+        clickOn(lastSessionTitledPane);
+        VBox lastSessionVbox  = ((VBox) lastSessionTitledPane.getContent());
+        Label lastSessionLabel = (Label) lastSessionVbox.getChildren().get(0);
+        String lastSessionString = lastSessionLabel.getText();
+
+        // Sjekker om dataene er like de vi skrev inn
+        assertEquals("Knebøy:" + "\n" + "122.5kg x 10" + "\n" + "140.0kg x 10" + "\n" + "140.0kg x 10" + "\n" + "\n" +
+                "Markløft:" + "\n" + "160.0kg x 10" + "\n" + "170.0kg x 10\n" + "\n" + "Beskrivelse: \n" + "Markløft var tungt, knebøy var lett" , lastSessionString);
     }
     if (!weightTextField.getText().equals("100")) {
       fail("vekt-boksen inneholdt ikke riktig informasjon etter at settet ble lagt til");
