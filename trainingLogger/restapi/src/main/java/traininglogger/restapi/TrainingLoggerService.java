@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -16,7 +15,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 import traininglogger.json.TrainingLoggerPersistence;
@@ -32,6 +30,7 @@ public class TrainingLoggerService {
 
   @Inject
   private SessionLogger sessionLogger;
+  private TrainingLoggerPersistence trainingLoggerPersistence = null;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
@@ -56,8 +55,6 @@ public class TrainingLoggerService {
     saveSessionLogger();
     return true;
   }
-
-  private TrainingLoggerPersistence trainingLoggerPersistence = null;
 
   private void saveSessionLogger() {
     if (trainingLoggerPersistence == null) {

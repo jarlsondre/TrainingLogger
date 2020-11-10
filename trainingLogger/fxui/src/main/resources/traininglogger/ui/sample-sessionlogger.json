@@ -1,5 +1,9 @@
 {
-    "sessions": [
+  "sessions": [
+    {
+      "stringDescription": null,
+      "date": "28/10/2020 19:27",
+      "exercises": [
         {
             "stringDescription": "",
             "date": "28/10/2020 19:27",
@@ -80,11 +84,53 @@
                 }
             ]
         }
-    ],
-    "records" : {
-        "Lokal Benkpress": 100.0,
-        "Lokal Knebøy": 130.0,
-        "Lokal Markløft": 120.0,
-        "Lokal Bulgarsk utfall": 150
+      ]
+    },
+    {
+      "stringDescription": null,
+      "date": "28/10/2020 19:27",
+      "exercises": [
+        {
+          "name": "Lokal Markløft",
+          "sets": [
+            {
+              "repetitions": 8,
+              "weight": 120.0
+            },
+            {
+              "repetitions": 10,
+              "weight": 97.5
+            },
+            {
+              "repetitions": 15,
+              "weight": 87.5
+            }
+          ]
+        },
+        {
+          "name": "Lokal Bulgarsk utfall",
+          "sets": [
+            {
+              "repetitions": 4,
+              "weight": 150.0
+            },
+            {
+              "repetitions": 10,
+              "weight": 127.5
+            },
+            {
+              "repetitions": 12,
+              "weight": 125.0
+            }
+          ]
+        }
+      ]
     }
+  ],
+  "records": {
+    "Lokal Benkpress": 100.0,
+    "Lokal Knebøy": 130.0,
+    "Lokal Markløft": 120.0,
+    "Lokal Bulgarsk utfall": 150
+  }
 }

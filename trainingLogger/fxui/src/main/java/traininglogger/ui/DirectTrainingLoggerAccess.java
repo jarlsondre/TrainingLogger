@@ -6,15 +6,16 @@ import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 import traininglogger.json.TrainingLoggerPersistence;
 
+
 public class DirectTrainingLoggerAccess implements TrainingLoggerAccess {
 
-  private SessionLogger sessionLogger;
+  private final SessionLogger sessionLogger;
   private String userSessionLoggerPath;
+  private TrainingLoggerPersistence trainingLoggerPersistence = null;
 
   public DirectTrainingLoggerAccess(SessionLogger sessionLogger) {
     this.sessionLogger = sessionLogger;
@@ -40,8 +41,6 @@ public class DirectTrainingLoggerAccess implements TrainingLoggerAccess {
   public SessionLogger getSessionLogger() {
     return this.sessionLogger;
   }
-
-  private TrainingLoggerPersistence trainingLoggerPersistence = null;
 
   private void saveSessionLogger() {
     if (userSessionLoggerPath != null) {

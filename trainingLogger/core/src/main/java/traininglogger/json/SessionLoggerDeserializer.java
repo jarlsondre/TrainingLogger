@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 
@@ -28,7 +27,7 @@ public class SessionLoggerDeserializer extends JsonDeserializer<SessionLogger> {
 
   @Override
   public SessionLogger deserialize(JsonParser parser, DeserializationContext ctxt)
-      throws IOException, JsonProcessingException {
+      throws IOException {
     TreeNode treeNode = parser.getCodec().readTree(parser);
     return deserialize((JsonNode) treeNode);
   }
