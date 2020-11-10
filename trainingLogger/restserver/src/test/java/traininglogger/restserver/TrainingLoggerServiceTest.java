@@ -3,6 +3,10 @@ package traininglogger.restserver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -32,7 +36,8 @@ public class TrainingLoggerServiceTest extends JerseyTest {
   @Override
   protected ResourceConfig configure() {
     final TrainingLoggerConfig config = new TrainingLoggerConfig();
-    if (shouldLog()) { //TODO: Hva er vitsen når shouldLog() returnerer false? Sjekk om Hallvard endrer dette!
+    if (shouldLog()) { // TODO: Hva er vitsen når shouldLog() returnerer false? Sjekk om Hallvard
+                       // endrer dette!
       enable(TestProperties.LOG_TRAFFIC);
       enable(TestProperties.DUMP_ENTITY);
       config.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, "WARNING");
@@ -40,13 +45,12 @@ public class TrainingLoggerServiceTest extends JerseyTest {
     return config;
   }
 
-   @Override
+  @Override
   protected TestContainerFactory getTestContainerFactory() throws TestContainerException {
     return new GrizzlyTestContainerFactory();
   }
 
   private ObjectMapper objectMapper;
-
 
   @Override
   @BeforeEach
@@ -63,8 +67,7 @@ public class TrainingLoggerServiceTest extends JerseyTest {
   @Test
   public void testGet_sessionLogger() {
     Response getResponse = target(TrainingLoggerService.TRAINING_LOGGER_SERVICE_PATH)
-        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8")
-        .get();
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").get();
     assertEquals(200, getResponse.getStatus());
     try {
       SessionLogger sessionLogger = objectMapper.readValue(getResponse.readEntity(String.class), SessionLogger.class);
@@ -76,9 +79,29 @@ public class TrainingLoggerServiceTest extends JerseyTest {
     }
   }
 
-  //TODO: Skulle gjerne testa DELETE og PUT også. To problemer:
-  // 1. Hallvard har ikke noe eksempel.
-  // 2. Både PUT og DELETE lagrer server-sessionlogger.json til hjemmeområdet. Dette må enten omgås på et eller annet vis,
-  // eller så må testene "rydde opp etter seg". Se om du har fått svar på piazza.
+  // TODO: Endre hackete løsning?
+  // Problemet er at deleteAll() skriver det som er tenkt å være brukerens data til fil. Skulle helst ha 
+  // kunnet styre at det under testing lagres i en annen fil, slik at man ikke risikerer å skrive over 
+  // faktiske brukerdata.
+  // Prøvde å utvide TrainingLoggerConfig og TrainingLoggerService slik at man kunne styre hvilket filnavn 
+  // saveSessionLogger() lagret under, men feila...
+  // Løser nå problemet ved å slette den genererte fila etter testen.
+  @Test
+  public void testDelete_deleteAll() {
+    Response getResponse = target(TrainingLoggerService.TRAINING_LOGGER_SERVICE_PATH)
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").delete();
+    assertEquals(200, getResponse.getStatus());
+    try {
+      Boolean deleted = objectMapper.readValue(getResponse.readEntity(String.class), Boolean.class);
+      assertTrue(deleted);
+      Path path = Paths.get(System.getProperty("user.home"), "server-sessionlogger.json");
+      File testGeneratedFile = new File(path.toString());
+      testGeneratedFile.delete();
+    } catch (JsonProcessingException e) {
+      fail(e.getMessage());
+    }
+  }
 
+  // TODO: Skulle gjerne testa PUT også, men Hallvard har ikke noe eksempel og jeg prioriterer å ikke bruke 
+  // mer tid på å prøve og finne ut av det selv.
 }
