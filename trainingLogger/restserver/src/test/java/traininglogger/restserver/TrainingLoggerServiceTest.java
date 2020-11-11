@@ -1,6 +1,7 @@
 package traininglogger.restserver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -19,17 +20,19 @@ import org.glassfish.jersey.test.TestProperties;
 import org.glassfish.jersey.test.grizzly.GrizzlyTestContainerFactory;
 import org.glassfish.jersey.test.spi.TestContainerException;
 import org.glassfish.jersey.test.spi.TestContainerFactory;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import traininglogger.core.Exercise;
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
 import traininglogger.restapi.TrainingLoggerService;
 
 public class TrainingLoggerServiceTest extends JerseyTest {
 
-  private static String testPath = "user-data.json";
+  private static String testPath = "restserver-test-sessionlogger.json";
 
   protected boolean shouldLog() {
     return false;
@@ -37,7 +40,7 @@ public class TrainingLoggerServiceTest extends JerseyTest {
 
   @Override
   protected ResourceConfig configure() {
-    final TrainingLoggerConfig config = new TrainingLoggerConfig();
+    final TrainingLoggerConfig config = new TrainingLoggerConfig(testPath);
     if (shouldLog()) { // TODO: Hva er vitsen når shouldLog() returnerer false? Sjekk om Hallvard
                        // endrer dette!
       enable(TestProperties.LOG_TRAFFIC);
@@ -66,8 +69,6 @@ public class TrainingLoggerServiceTest extends JerseyTest {
     super.tearDown();
   }
 
-  // TODO: Potensielt "farlig" test. Antar at det er sessionloggeren i default-sessionlogger.json som returneres. Hvis man bruker appen
-  // og lagrer en annen sessionlogger så vil denne i stedet returneres og testen feile. 
   @Test
   public void testGet_sessionLogger() {
     Response getResponse = target(TrainingLoggerService.TRAINING_LOGGER_SERVICE_PATH)
@@ -75,21 +76,21 @@ public class TrainingLoggerServiceTest extends JerseyTest {
     assertEquals(200, getResponse.getStatus());
     try {
       SessionLogger sessionLogger = objectMapper.readValue(getResponse.readEntity(String.class), SessionLogger.class);
-      Iterator<Session> it = sessionLogger.iterator();
-      assertTrue(it.hasNext());
-      // TODO: Test litt mer. Det er sessionloggeren som ligger i default-sessionlogger.json som er returnert.
+      assertEquals(sessionLogger.getRecords().get("RESTpress"), 100.0);
+      Iterator<Session> sessionIterator = sessionLogger.iterator();
+      assertTrue(sessionIterator.hasNext());
+      Session session = sessionIterator.next();
+      assertEquals("Restitusjon er viktig!", session.getDescription());
+      assertFalse(sessionIterator.hasNext());
+      Iterator<Exercise> exerciseIterator = session.iterator();
+      assertTrue(exerciseIterator.hasNext());
+      Exercise exercise = exerciseIterator.next();
+      assertEquals(exercise.getName(), "RESTpress");
     } catch (JsonProcessingException e) {
       fail(e.getMessage());
     }
   }
 
-  // TODO: Endre hackete løsning?
-  // Problemet er at deleteAll() skriver det som er tenkt å være brukerens data til fil. Skulle helst ha 
-  // kunnet styre at det under testing lagres i en annen fil, slik at man ikke risikerer å skrive over 
-  // faktiske brukerdata.
-  // Prøvde å utvide TrainingLoggerConfig og TrainingLoggerService slik at man kunne styre hvilket filnavn 
-  // saveSessionLogger() lagret under, men feila...
-  // Løser nå problemet ved å slette den genererte fila etter testen.
   @Test
   public void testDelete_deleteAll() {
     Response getResponse = target(TrainingLoggerService.TRAINING_LOGGER_SERVICE_PATH)
@@ -98,14 +99,19 @@ public class TrainingLoggerServiceTest extends JerseyTest {
     try {
       Boolean deleted = objectMapper.readValue(getResponse.readEntity(String.class), Boolean.class);
       assertTrue(deleted);
-      Path path = Paths.get(System.getProperty("user.home"), testPath);
-      File testGeneratedFile = new File(path.toString());
-      testGeneratedFile.delete();
     } catch (JsonProcessingException e) {
       fail(e.getMessage());
     }
   }
 
-  // TODO: Skulle gjerne testa PUT også, men Hallvard har ikke noe eksempel og jeg prioriterer å ikke bruke 
+  @AfterAll
+  public static void deleteGeneratedFiles() {
+    Path path = Paths.get(System.getProperty("user.home"), testPath);
+    File testGeneratedFile = new File(path.toString());
+    testGeneratedFile.delete();
+  }
+
+  // TODO: Skulle gjerne testa PUT også, men Hallvard har ikke noe eksempel og jeg
+  // prioriterer å ikke bruke
   // mer tid på å prøve og finne ut av det selv.
 }
