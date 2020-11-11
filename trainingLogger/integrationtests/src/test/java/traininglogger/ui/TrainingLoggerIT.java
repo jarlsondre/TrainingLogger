@@ -3,8 +3,12 @@ package traininglogger.ui;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,5 +42,43 @@ public class TrainingLoggerIT extends ApplicationTest {
     assertNotNull(this.controller);
   }
 
-  // TODO: Gjenta UI-testene, bare at nå kjører vi mot server.
+  // TODO: Gjenta UI-testene, eventuelt lag en "Scenarie"-test.
+
+  /**
+   * Tester om det kommer flere bokser å skrive inn info på dersom man trykker på
+   * 'legg til', i tillegg til om koden kræsjer
+   */
+  @Test
+  public void addSetTest() {
+    clickOn("#newSessionButton");
+    clickOn("#newExerciseButton");
+    // Legger inn info og trykker på knappen
+    TextField repsTextField = lookup("#repsTextField").query();
+    TextField weightTextField = lookup("#weightTextField").query();
+    Button addSetButton = lookup("#addSetHbox > .button").query();
+    clickOn(weightTextField).write("100");
+    clickOn(repsTextField).write("10");
+    clickOn(addSetButton);
+
+    // Sjekker at de gamle boksene er tomme
+    if (!repsTextField.getText().equals("")) {
+      fail("Reps-boksen ble ikke tømt etter at man trykte på legg til sett");
+    }
+    if (!weightTextField.getText().equals("")) {
+      fail("vekt-boksen ble ikke tømt etter at man trykte på legg til sett");
+    }
+
+    // Sjekker at det har kommet nye bokser som inneholder informasjonen vi la inn
+    repsTextField = lookup("#repsTextField").query();
+    weightTextField = lookup("#weightTextField").query();
+
+    if (!repsTextField.getText().equals("10")) {
+      System.out.println(repsTextField.getText());
+      fail("Reps-boksen inneholdt ikke riktig informasjon etter at settet ble lagt til");
+    }
+    if (!weightTextField.getText().equals("100")) {
+      fail("vekt-boksen inneholdt ikke riktig informasjon etter at settet ble lagt til");
+    }
+  }
+
 }
