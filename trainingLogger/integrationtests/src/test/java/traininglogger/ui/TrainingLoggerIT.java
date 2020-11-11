@@ -9,8 +9,13 @@ import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -18,6 +23,7 @@ import org.testfx.framework.junit5.ApplicationTest;
 public class TrainingLoggerIT extends ApplicationTest {
 
   private TrainingLoggerController controller;
+  private static String testPath = "user-data.json";
 
   @Override
   public void start(final Stage stage) throws Exception {
@@ -30,11 +36,11 @@ public class TrainingLoggerIT extends ApplicationTest {
 
   @BeforeEach
   public void setupItems() throws URISyntaxException {
-      String port = System.getProperty("traininglogger.port");
-      assertNotNull(port, "No traininglogger.port system property set");
-      URI baseUri = new URI("http://localhost:" + port + "/traininglogger/");
-      System.out.println("Base RemoteTrainingLoggerAcces URI: " + baseUri);
-      this.controller.setTrainingLoggerAccess(new RemoteTrainingLoggerAccess(baseUri));
+    String port = System.getProperty("traininglogger.port");
+    assertNotNull(port, "No traininglogger.port system property set");
+    URI baseUri = new URI("http://localhost:" + port + "/traininglogger/");
+    System.out.println("Base RemoteTrainingLoggerAcces URI: " + baseUri);
+    this.controller.setTrainingLoggerAccess(new RemoteTrainingLoggerAccess(baseUri));
   }
 
   @Test
@@ -79,6 +85,13 @@ public class TrainingLoggerIT extends ApplicationTest {
     if (!weightTextField.getText().equals("100")) {
       fail("vekt-boksen inneholdt ikke riktig informasjon etter at settet ble lagt til");
     }
+  }
+
+  @AfterAll
+  public static void deleteFiles() {
+    Path pathToGeneratedFile = Paths.get(System.getProperty("user.home"), testPath);
+    File generatedFile = new File(pathToGeneratedFile.toString());
+    generatedFile.delete();
   }
 
 }
