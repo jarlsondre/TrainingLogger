@@ -29,6 +29,8 @@ import traininglogger.restapi.TrainingLoggerService;
 
 public class TrainingLoggerServiceTest extends JerseyTest {
 
+  private static String testPath = "user-data.json";
+
   protected boolean shouldLog() {
     return false;
   }
@@ -96,7 +98,7 @@ public class TrainingLoggerServiceTest extends JerseyTest {
     try {
       Boolean deleted = objectMapper.readValue(getResponse.readEntity(String.class), Boolean.class);
       assertTrue(deleted);
-      Path path = Paths.get(System.getProperty("user.home"), "server-sessionlogger.json");
+      Path path = Paths.get(System.getProperty("user.home"), testPath);
       File testGeneratedFile = new File(path.toString());
       testGeneratedFile.delete();
     } catch (JsonProcessingException e) {

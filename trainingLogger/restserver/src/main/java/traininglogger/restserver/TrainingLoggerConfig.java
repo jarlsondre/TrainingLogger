@@ -18,7 +18,7 @@ import traininglogger.restapi.TrainingLoggerService;
 public class TrainingLoggerConfig extends ResourceConfig {
 
   private SessionLogger sessionLogger;
-  private static String backupFile = "server-sessionlogger.json";
+  private static String userData = "user-data.json";
 
   /**
    * Initialize this TrainingLoggerConfig.
@@ -56,11 +56,11 @@ public class TrainingLoggerConfig extends ResourceConfig {
   private static SessionLogger getInitialSessionLogger() {
     Reader reader = null;
     TrainingLoggerPersistence trainingLoggerPersistence = new TrainingLoggerPersistence();
-    // let etter backup-data først:
+    // let etter bruker-data først:
     try {
-      reader = new FileReader(Paths.get(System.getProperty("user.home"), backupFile).toFile(), StandardCharsets.UTF_8);
+      reader = new FileReader(Paths.get(System.getProperty("user.home"), userData).toFile(), StandardCharsets.UTF_8);
     } catch (IOException ioex) {
-      System.err.println("Fant ingen " + backupFile + " på hjemmeområdet");
+      System.err.println("Fant ingen " + userData + " på hjemmeområdet");
     }
     // Hvis det ikke funka, bruk medølgende eksempelfil:
     URL url = TrainingLoggerConfig.class.getResource("default-sessionlogger.json");
