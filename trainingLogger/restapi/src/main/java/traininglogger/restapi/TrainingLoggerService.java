@@ -26,11 +26,12 @@ public class TrainingLoggerService {
 
   private static final Logger LOG = LoggerFactory.getLogger(TrainingLoggerService.class);
 
-  private static String backupFile = "server-sessionlogger.json";
-
   @Inject
   private SessionLogger sessionLogger;
   private TrainingLoggerPersistence trainingLoggerPersistence = null;
+
+  @Inject
+  private String pathToSaveTo;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
@@ -60,11 +61,11 @@ public class TrainingLoggerService {
     if (trainingLoggerPersistence == null) {
       trainingLoggerPersistence = new TrainingLoggerPersistence();
     }
-    java.nio.file.Path path = Paths.get(System.getProperty("user.home"), backupFile);
+    java.nio.file.Path path = Paths.get(System.getProperty("user.home"), pathToSaveTo);
     try (Writer writer = new FileWriter(path.toFile(), StandardCharsets.UTF_8)) {
       trainingLoggerPersistence.writeSessionLogger(this.sessionLogger, writer);
     } catch (IOException e) {
-      System.err.println("Fikk ikke skrevet til " + backupFile + " på hjemmeområdet");
+      System.err.println("Fikk ikke skrevet til " + pathToSaveTo + " på hjemmeområdet");
     }
   }
 }

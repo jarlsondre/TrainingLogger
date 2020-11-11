@@ -1,0 +1,30 @@
+{
+    "sessions": [
+        {
+            "stringDescription": "Restitusjon er viktig!",
+            "date": "28/10/2020 19:29",
+            "exercises": [
+                {
+                    "name": "RESTpress",
+                    "sets": [
+                        {
+                            "repetitions": 5,
+                            "weight": 100.0
+                        },
+                        {
+                            "repetitions": 5,
+                            "weight": 97.5
+                        },
+                        {
+                            "repetitions": 5,
+                            "weight": 87.5
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "records": {
+        "RESTpress": 100.0
+    }
+}
