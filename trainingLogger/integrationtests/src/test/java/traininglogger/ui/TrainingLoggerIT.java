@@ -87,6 +87,8 @@ public class TrainingLoggerIT extends ApplicationTest {
     }
   }
 
+  // TODO: Denne metoden er bare nødvendig dersom UI-testene vi kjører ender med at data lagres til fil:
+
   @AfterAll
   public static void deleteFiles() {
     Path pathToGeneratedFile = Paths.get(System.getProperty("user.home"), testPath);
