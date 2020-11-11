@@ -26,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TrainingLoggerTest extends ApplicationTest {
 
   private TrainingLoggerController controller;
+  private static String testPath = "fxui-test-sessionlogger.json";
 
   @Override
   public void start(Stage stage) throws Exception {
@@ -40,7 +41,7 @@ public class TrainingLoggerTest extends ApplicationTest {
   @BeforeEach
   public void setupItems() {
     DirectTrainingLoggerAccess access = new DirectTrainingLoggerAccess(new SessionLogger());
-    access.setUserSessionLoggerPath("testlogger.json");
+    access.setUserSessionLoggerPath(testPath);
     this.controller.setTrainingLoggerAccess(access);
     clickOn("#newSessionButton");
     clickOn("#newExerciseButton");
@@ -183,8 +184,8 @@ public class TrainingLoggerTest extends ApplicationTest {
 
   @AfterAll
   public static void deleteFiles() {
-    Path path = Paths.get(System.getProperty("user.home"), "testlogger.json");
-    File f = new File(path.toString());
-    f.delete();
+    Path pathToGeneratedFile = Paths.get(System.getProperty("user.home"), testPath);
+    File generatedFile = new File(pathToGeneratedFile.toString());
+    generatedFile.delete();
   }
 }
