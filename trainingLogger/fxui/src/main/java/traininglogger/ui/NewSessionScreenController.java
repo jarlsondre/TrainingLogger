@@ -34,7 +34,7 @@ public class NewSessionScreenController {
   public void updateExerciseOverview() {
     this.exerciseOverviewVbox.getChildren().clear();
     for (Exercise exercise : this.session) {
-      VBox box = putExerciseInBox(exercise);
+      VBox box = putExerciseInABox(exercise);
       TitledPane titledPane = new TitledPane(exercise.getName(), box);
       titledPane.setAlignment(Pos.CENTER_LEFT);
       titledPane.setExpanded(false);
@@ -42,15 +42,16 @@ public class NewSessionScreenController {
     }
   }
 
-  private VBox putExerciseInBox(Exercise exercise) {
+  private VBox putExerciseInABox(Exercise exercise) {
     VBox exerciseBox = new VBox();
-    String exerciseAsString = exercise.getName() + ":\n";
+    StringBuffer exerciseAsString = new StringBuffer(exercise.getName() + ":\n");
     for (Set set : exercise) {
-      exerciseAsString += set.getWeight() + " kg x " + set.getRepetitions() + "\n";
+      exerciseAsString.append(set.getWeight() + " kg x " + set.getRepetitions() + "\n");
     }
-    exerciseAsString += "\n";
-    Label exerciseInLabel = new Label(exerciseAsString);
-    exerciseBox.getChildren().add(exerciseInLabel);
+    exerciseAsString.append("\n");
+    String finalString = exerciseAsString.toString();
+    Label exerciseInALabel = new Label(finalString);
+    exerciseBox.getChildren().add(exerciseInALabel);
     return exerciseBox;
   }
 

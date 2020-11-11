@@ -7,6 +7,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -16,16 +17,18 @@ import traininglogger.restapi.TrainingLoggerService;
 
 public class TrainingLoggerConfig extends ResourceConfig {
 
-  private static String backupFile = "server-sessionlogger.json";
   private SessionLogger sessionLogger;
+  private String pathToSaveTo;
+  private static String userData = "user-data.json";
 
   /**
    * Initialize this TrainingLoggerConfig.
    *
    * @param sessionLogger sessionLogger instance to serve
    */
-  public TrainingLoggerConfig(SessionLogger sessionLogger) {
+  public TrainingLoggerConfig(SessionLogger sessionLogger, String path) {
     setSessionLogger(sessionLogger);
+    setPathToSaveTo(path);
     register(TrainingLoggerService.class);
     register(TrainingLoggerModuleObjectMapperProvider.class);
     register(JacksonFeature.class);
@@ -35,32 +38,63 @@ public class TrainingLoggerConfig extends ResourceConfig {
         bind(TrainingLoggerConfig.this.sessionLogger);
       }
     });
+    register(new AbstractBinder() {
+      @Override
+      protected void configure() {
+        bind(TrainingLoggerConfig.this.pathToSaveTo);
+      }
+    });
   }
 
   /**
-   * Initialize this TrainingLoggerConfig with a default SessionLogger.
+   * Initialize this TrainingLoggerConfig with an initial SessionLogger.
    */
   public TrainingLoggerConfig() {
-    this(getInitialSessionLogger());
+    this(getInitialSessionLogger(userData), userData);
   }
 
-  private static SessionLogger getInitialSessionLogger() {
+  public TrainingLoggerConfig(String path) {
+    this(getInitialSessionLogger(path), path);
+  }
+
+  public SessionLogger getSessionLogger() {
+    return this.sessionLogger;
+  }
+
+  public void setSessionLogger(SessionLogger sessionLogger) {
+    this.sessionLogger = sessionLogger;
+  }
+
+  public void setPathToSaveTo(String path) {
+    this.pathToSaveTo = path;
+  }
+
+  private static SessionLogger getInitialSessionLogger(String path) {
     Reader reader = null;
     TrainingLoggerPersistence trainingLoggerPersistence = new TrainingLoggerPersistence();
-    // let etter backup-data først:
-    try {
-      reader = new FileReader(Paths.get(System.getProperty("user.home"),
-          backupFile).toFile(), StandardCharsets.UTF_8);
-    } catch (IOException ioex) {
-      System.err.println("Fant ingen " + backupFile + " på hjemmeområdet");
-    }
-    // Hvis det ikke funka, bruk medølgende eksempelfil:
-    URL url = TrainingLoggerConfig.class.getResource("default-sessionlogger.json");
-    if ((reader == null) && (url != null)) {
+    // Kjører vi i testsammenheng?
+    if (!path.equals(userData)) {
+      URL url = TrainingLoggerConfig.class.getResource(path);
       try {
         reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8);
       } catch (IOException e) {
-        System.out.println("Kunne ikke lese default-sessionlogger.json. (" + e + ")");
+        System.out.println("Kunne ikke lese restserver-test-sessionlogger.json. (" + e + ")");
+      }
+    } else {
+      // Hvis ikke - let etter lagret brukerdata først:
+      try {
+        reader = new FileReader(Paths.get(System.getProperty("user.home"), userData).toFile(), StandardCharsets.UTF_8);
+      } catch (IOException ioex) {
+        System.err.println("Fant ingen " + userData + " på hjemmeområdet");
+      }
+      // Hvis man ikke fant noe, bruk medølgende eksempelfil:
+      URL url = TrainingLoggerConfig.class.getResource("default-sessionlogger.json");
+      if ((reader == null) && (url != null)) {
+        try {
+          reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+          System.out.println("Kunne ikke lese default-sessionlogger.json. (" + e + ")");
+        }
       }
     }
 
@@ -69,8 +103,7 @@ public class TrainingLoggerConfig extends ResourceConfig {
       try {
         initialSessionLogger = trainingLoggerPersistence.readSessionLogger(reader);
       } catch (IOException e) {
-        System.out.println("Kunne ikke deserialisere fra Reader," +
-            " så returnerer en helt ny SessionLogger (" + e + ")");
+        System.out.println("Kunne ikke deserialisere fra Reader, så returnerer en helt ny SessionLogger (" + e + ")");
       } finally {
         try {
           reader.close();
@@ -84,14 +117,6 @@ public class TrainingLoggerConfig extends ResourceConfig {
       initialSessionLogger = new SessionLogger();
     }
     return initialSessionLogger;
-  }
-
-  public SessionLogger getSessionLogger() {
-    return this.sessionLogger;
-  }
-
-  public void setSessionLogger(SessionLogger sessionLogger) {
-    this.sessionLogger = sessionLogger;
   }
 
 }
