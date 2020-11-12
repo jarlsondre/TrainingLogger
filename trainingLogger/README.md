@@ -4,6 +4,90 @@ Training Logger er en applikasjon som lar deg loggføre gjennomførte treninger 
 
 ## Beskrivelse
 
+```plantuml
+
+
+class Session {
+    - final DateTimeFormatter dateTimeFormatter 
+    - final List<Exercise> exercises
+    - String description 
+    - LocalDateTime date
+    
+    + Session(String d, Exercise... e) 
+    + void AddExercises(Exercise... e)
+    + Iterator<Exercise> iterator()
+}
+
+class Exercise {
+    - final List<Set> sets 
+    - String name
+    
+    + Exercise(String name, Set... sets)
+    + void AddSets(Set... sets)
+    + Iterator<Set> iterator()
+}
+
+class Set {
+    - final int repetitions
+    - final double weight 
+    
+    + Set(int r, double w)
+}
+
+class SessionLogger {
+    - final List<Session> sessions 
+    - final Map<String, Double> records 
+    
+    + SessionLogger(List<Session> s, Map<String, Double> r)
+    + void updateRecordWithSession(Session session)
+    + void delateRecords() 
+    + Iterator<Session> iterator()
+    + void delateAll()
+}
+
+class TrainingLoggerModule {
+    -static final String name
+    +TrainingLoggerModule()
+}
+
+class SesssionLoggerSerializer {
+    +void serialize(SessionLogger logger, JsonGenerator gen, SerializerProvider provider)
+}
+class SessionSerializer {
+    +void serialize(Session s, JsonGenerator gen, SerializerProvider provider)
+}
+class ExerciseSerializer {
+    +void serialize(Exercise e, JsonGenerator gen, SerializerProvider provider)
+}
+class SetSerializer {
+    +void serialize(Set s, JsonGenerator gen, SerializerProvider provider)
+}
+class SesssionLoggerDeserializer
+class SessionDeserializer
+class ExerciseDeserializer
+class SetDeserializer
+class TrainingLoggerPersistence
+
+
+TrainingLoggerModule --> SesssionLoggerSerializer
+TrainingLoggerModule --> SessionSerializer
+TrainingLoggerModule --> ExerciseSerializer
+TrainingLoggerModule --> SetSerializer
+TrainingLoggerModule --> SesssionLoggerDeserializer
+TrainingLoggerModule --> SessionDeserializer
+TrainingLoggerModule --> ExerciseDeserializer
+TrainingLoggerModule --> SetDeserializer
+
+SessionLogger -> "*" Session
+SessionLogger .. TrainingLoggerModule
+TrainingLoggerModule .. TrainingLoggerPersistence
+Session -> "*" Exercise
+Exercise -> "*" Set
+
+
+```
+
+
 ### Grunnidè
 
 Grunnidèen til applikasjonen er en applikasjon som kan brukes både før trening, under trening og etter trening; man skal kunne planlegge en økt, 
