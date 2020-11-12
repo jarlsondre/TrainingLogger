@@ -19,7 +19,7 @@
     <ScrollPane layoutY="89.0" prefHeight="275.0" prefWidth="308.0">
         <VBox fx:id="addSetVbox" prefHeight="273.0" prefWidth="306.0">
             <HBox fx:id="addSetHbox" alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="266.0"
-                  spacing="35.0">
+                  spacing="10.0">
                 <HBox spacing="10.0">
                     <HBox alignment="CENTER_LEFT" spacing="5.0">
                         <Label text="Vekt">
@@ -46,7 +46,7 @@
                         </TextField>
                     </HBox>
                 </HBox>
-                <Button mnemonicParsing="false" onAction="#addSetButtonHandler" text="legg til"/>
+                <Button mnemonicParsing="false" onAction="#addSetButtonHandler" text="Legg til"/>
                 <padding>
                     <Insets left="10.0"/>
                 </padding>
