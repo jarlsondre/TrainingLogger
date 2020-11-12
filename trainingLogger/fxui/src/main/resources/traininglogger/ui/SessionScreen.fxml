@@ -20,6 +20,6 @@
         <Button mnemonicParsing="false" onAction="#deleteButtonHandler" text="Slett alle økter"/>
     </ToolBar>
     <ScrollPane layoutY="100.0" prefHeight="300.0" prefWidth="308.0">
-        <VBox fx:id="sessionOverviewVbox" prefHeight="298.0" prefWidth="306.0"/>
+        <VBox fx:id="sessionOverviewVbox" prefWidth="306.0"/>
     </ScrollPane>
 </AnchorPane>
