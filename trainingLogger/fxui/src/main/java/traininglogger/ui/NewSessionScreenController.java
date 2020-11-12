@@ -73,6 +73,17 @@ public class NewSessionScreenController {
   }
 
   @FXML
+  private void switchToStartScreenWithDelete() throws IOException {
+    try {
+      mainController.changeToStartScreen();
+      this.session = new Session();
+      resetScreen();
+    } catch (Exception e) {
+      System.out.println("Kunne ikke bytte fra New Session Screen til Start Screen");
+    }
+  }
+
+  @FXML
   private void switchToNewExerciseScreen() throws IOException {
     try {
       mainController.changeToNewExerciseScreen();
@@ -87,11 +98,15 @@ public class NewSessionScreenController {
   @FXML
   private void addSessionButtonHandler() throws IOException {
     this.session.setDescription(descriptionArea.getText());
-    descriptionArea.clear();
     mainController.addSessionToSessionLogger(this.session);
     this.session = new Session();
-    updateExerciseOverview();
-    this.addSessionButton.setDisable(true);
+    resetScreen();
     mainController.changeToStartScreen();
+  }
+
+  private void resetScreen(){
+    descriptionArea.clear();
+    this.addSessionButton.setDisable(true);
+    updateExerciseOverview();
   }
 }
