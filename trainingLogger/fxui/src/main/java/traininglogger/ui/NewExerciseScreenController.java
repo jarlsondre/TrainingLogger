@@ -117,9 +117,11 @@ public class NewExerciseScreenController {
   }
 
   private void resetInputFields() {
-    Node temp = addSetVbox.getChildren().get(addSetVbox.getChildren().size() - 1);
-    addSetVbox.getChildren().clear();
-    addSetVbox.getChildren().add(temp);
+    while (addSetVbox.getChildren().size() > 1) {
+      addSetVbox.getChildren().remove(0); 
+    }
+    weightTextField.setText("");
+    repsTextField.setText("");
     titleTextField.setText("");
   }
 
