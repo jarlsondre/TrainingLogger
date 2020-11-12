@@ -9,14 +9,14 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="308.0"
             xmlns="http://javafx.com/javafx/11.0.1" fx:controller="traininglogger.ui.RecordScreenController">
-    <Label layoutX="58.0" layoutY="47.0" prefHeight="40.0" prefWidth="180.0" text="Personlige rekorder">
+    <Label TextAlignment="LEFT" layoutX="2.0" layoutY="47.0" prefHeight="40.0" text="Rekorder">
         <font>
             <Font size="28.0"/>
         </font>
     </Label>
     <ToolBar prefHeight="40.0" prefWidth="308.0">
         <Button mnemonicParsing="false" onAction="#switchToStartScreen" prefHeight="25.0" prefWidth="119.0"
-                text="Gå til startskjerm"/>
+                text="Startskjerm"/>
     </ToolBar>
     <ScrollPane layoutY="100.0" prefHeight="300.0" prefWidth="308.0">
         <VBox fx:id="recordOverviewVbox" prefHeight="298.0" prefWidth="306.0"/>
