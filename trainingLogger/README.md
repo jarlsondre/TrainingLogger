@@ -87,6 +87,49 @@ Exercise -> "*" Set
 
 ```
 
+### Pakkediagram 
+
+```plantuml 
+
+skinparam Padding 20
+
+    
+component "core-modul" {
+    package core
+    package json
+}
+
+component "fxui-modul" {
+  package ui
+}
+
+component "integrationTests-modul" {
+  package webapp
+}
+
+component "restapi-modul" {
+  package restapi
+}
+
+component "restserver-modul" {
+    package restserver
+  
+}
+
+
+restserver ..> restapi
+restserver ..> core
+restapi ..> core
+restapi ..> json
+ui ..> core
+ui ..> json
+
+
+
+
+
+```
+
 
 ### Grunnidè
 
