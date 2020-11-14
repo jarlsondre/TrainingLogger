@@ -61,13 +61,13 @@ public class SessionScreenController {
       }
       sessionAsString.append("\n");
     }
-    if (!session.getDescription().equals("")){
+    if (!session.getDescription().equals("")) {
       sessionAsString.append("Beskrivelse: \n");
       sessionAsString.append(session.getDescription());
     }
     String finalString = sessionAsString.toString();
-    Label sessionInALabel = new Label(finalString);
-    sessionBox.getChildren().add(sessionInALabel);
+    Label sessionInLabel = new Label(finalString);
+    sessionBox.getChildren().add(sessionInLabel);
     return sessionBox;
   }
 }

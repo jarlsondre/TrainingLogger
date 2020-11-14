@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 import traininglogger.core.Exercise;
 import traininglogger.core.Set;
 
-
 public class NewExerciseScreenController {
 
   @FXML
@@ -38,8 +37,7 @@ public class NewExerciseScreenController {
   void initialize() {
     this.titleTextField.textProperty().addListener(new ChangeListener<String>() {
       @Override
-      public void changed(ObservableValue<? extends String> observableValue, String oldValue,
-                          String newValue) {
+      public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
         boolean setHasBeenAdded = addSetVbox.getChildren().size() > 1;
         theTextFieldIsBlank = newValue.isBlank();
         if (theTextFieldIsBlank) {
@@ -98,27 +96,27 @@ public class NewExerciseScreenController {
         this.addExerciseButton.setDisable(false);
       }
     } catch (Exception exception) {
-        if (addSetVbox.getChildren().get(0) instanceof Label) {
-          addSetVbox.getChildren().remove(0);
+      if (addSetVbox.getChildren().get(0) instanceof Label) {
+        addSetVbox.getChildren().remove(0);
+      }
+      String errorLabelString = "";
+      if (exception instanceof NumberFormatException) {
+        if (exception.getMessage().equals("empty String")) {
+          errorLabelString = "Begge feltene må være utfylte";
+        } else {
+          errorLabelString = "Vekt må være et desimaltall og reps et heltall";
         }
-        String errorLabelString = "";
-        if (exception instanceof NumberFormatException) {
-          if (exception.getMessage().equals("empty String")) {
-            errorLabelString = "Begge feltene må være utfylte";
-          } else {
-            errorLabelString = "Vekt må være et desimaltall og reps et heltall";
-          }
-        } else if (exception instanceof IllegalArgumentException) {
-          errorLabelString = "Input kan ikke være større enn 1000";
-        }
-        Label errorLabel = new Label(errorLabelString);
-        addSetVbox.getChildren().add(0, errorLabel);
+      } else if (exception instanceof IllegalArgumentException) {
+        errorLabelString = "Input kan ikke være større enn 1000";
+      }
+      Label errorLabel = new Label(errorLabelString);
+      addSetVbox.getChildren().add(0, errorLabel);
     }
   }
 
   private void resetInputFields() {
     while (addSetVbox.getChildren().size() > 1) {
-      addSetVbox.getChildren().remove(0); 
+      addSetVbox.getChildren().remove(0);
     }
     weightTextField.setText("");
     repsTextField.setText("");
