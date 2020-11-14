@@ -31,6 +31,10 @@ public class NewSessionScreenController {
     this.mainController = main;
   }
 
+  /**
+   * Oppdaterer oversikten over øvelser slik at GUIet er konsistent med det underliggende Session-objektet.
+   * 
+   */
   public void updateExerciseOverview() {
     this.exerciseOverviewVbox.getChildren().clear();
     for (Exercise exercise : this.session) {
@@ -54,6 +58,12 @@ public class NewSessionScreenController {
     exerciseBox.getChildren().add(exerciseInLabel);
     return exerciseBox;
   }
+
+  /**
+   * Legger til en øvelse (Exercise) i den pågående treningsøkta (Session) og oppdaterer den grafiske oversikten.
+   *
+   * @param exercise øvelsen som skal legges til
+   */
 
   public void addExerciseToSession(Exercise exercise) {
     this.session.addExercises(exercise);

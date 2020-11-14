@@ -18,6 +18,12 @@ public class RemoteTrainingLoggerAccess implements TrainingLoggerAccess {
   private final ObjectMapper objectMapper;
   private SessionLogger sessionLogger;
 
+  /**
+   * Konstruerer en ny RemoteTrainingLoggerAccess med gitt URI som endepunkt.
+   *
+   * @param endpointBaseUri URI som instansen henvender seg til i HTTP-forespørsler
+   */
+
   public RemoteTrainingLoggerAccess(URI endpointBaseUri) {
     this.endpointBaseUri = endpointBaseUri;
     this.objectMapper = new ObjectMapper().registerModule(new TrainingLoggerModule());

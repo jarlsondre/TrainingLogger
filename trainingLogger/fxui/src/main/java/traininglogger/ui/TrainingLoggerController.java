@@ -94,12 +94,18 @@ public class TrainingLoggerController {
     mainVbox.getChildren().add(this.startScreen);
   }
 
+  /**
+   * Endrer skjermbildet til "Ny øvelse".
+   */
   public void changeToNewSessionScreen() {
     this.newSessionScreenController.updateExerciseOverview();
     mainVbox.getChildren().clear();
     mainVbox.getChildren().add(this.newSessionScreen);
   }
 
+  /**
+   * Endrer skjermbildet til "Tidligere økter".
+   */
   public void changeToSessionScreen() {
     SessionLogger currentSessionLogger = this.trainingLoggerAccess.getSessionLogger();
     this.sessionScreenController.updateSessionOverview(currentSessionLogger);
@@ -112,6 +118,9 @@ public class TrainingLoggerController {
     mainVbox.getChildren().add(newExerciseScreen);
   }
 
+  /**
+   * Endrer skjermbildet til "Rekorder".
+   */
   public void changeToRecordScreen() {
     SessionLogger currentSessionLogger = this.trainingLoggerAccess.getSessionLogger();
     this.recordScreenController.updateRecordOverview(currentSessionLogger);
@@ -125,11 +134,11 @@ public class TrainingLoggerController {
 
   public void setTrainingLoggerAccess(TrainingLoggerAccess trainingLoggerAccess) {
     this.trainingLoggerAccess = trainingLoggerAccess;
-    // TODO: Se tilsvarende metode hos Hallvard
-    // (TodoModellController.setTodoModelAccess())
-    // Trenger vi siste linja?
   }
 
+  /**
+   * Sletter alle gjennomførte treningsøkter og oppdaterer den grafiske oversikten.
+   */
   public void deleteLog() {
     this.trainingLoggerAccess.deleteAll();
     SessionLogger currentSessionLogger = this.trainingLoggerAccess.getSessionLogger();
