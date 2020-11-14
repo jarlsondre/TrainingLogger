@@ -39,7 +39,13 @@ public class TrainingLoggerService {
     return this.sessionLogger;
   }
 
-  @PUT // Burde denne være POST?
+  /**
+   * Legger til en ny treningsøkt (Session) i SessionLoggeren og lagrer tilstanden.
+   *
+   * @param session treningsøkta som skal legges til
+   * @return true bekrefter oppdateringen
+   */
+  @PUT
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public boolean addSession(Session session) {
@@ -48,6 +54,12 @@ public class TrainingLoggerService {
     saveSessionLogger();
     return true;
   }
+
+  /**
+   * Sletter alle treningsøkter (Session) som ligger lagret i SessionLoggeren og lagrer tilstanden.
+   *
+   * @return true bekrefter oppdateringen
+   */
 
   @DELETE
   @Produces(MediaType.APPLICATION_JSON)
