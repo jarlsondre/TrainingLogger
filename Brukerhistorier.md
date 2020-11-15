@@ -1,5 +1,5 @@
 # Brukerhistorier 
-Dette er brukerhistoriene som hører til applikasjonen. For å se retningslinjene som ble 
+Dette er brukerhistoriene som hører til applikasjonen. For å se retningslinjene som 
 disse baserer seg på, se [smidige metoder](smidige_metoder.md). I disse brukerhistoriene 
 omtales brukeren med navnet Jarl for enkelhets skyld. 
 
@@ -38,7 +38,7 @@ Det er viktig at Jarl kan velge en tidligere øvelse eller legge til en ny øvel
 
 ## Brukerhistorie 4: Løpetrening
 Som en utøver ønsker Jarl å kunne loggføre løpeturene han har på en oversiktlig måte slik at han kan få 
-en oversikt over både styrketreninen sin og løpetreningen sin på samme applikasjon. 
+en oversikt over både styrketreningen sin og løpetreningen sin på samme applikasjon. 
 
 **Viktig å se:**  
 Det er viktig at Jarl kan se en oversikt over tidligere løpeturer der det under hver tur står hvor mange kilometer han løp, 
