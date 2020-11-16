@@ -10,7 +10,6 @@ allow_mixing
 
 Title Klassediagram
 
-
 Package Core-modul {
 
 class Session {
@@ -115,28 +114,60 @@ Exercise -> "*" Set
 Package fxui-modul {
 
 
-Class App
+Class App {
+
+    + void start()
+}
 Class AppController
-Class DirectTrainingLoggerAccess
+Class DirectTrainingLoggerAccess {
+    void addSession(session Session)
+    void deleteAll()
+    SessionLogger getSessionLogger()
+    - void saveSessionLogger()
+}
 Class HBoxTemplateController
-Class NewSessionScreenController
 Class SessionScreenController
 Class StartScreenController
 Class RecordScreenController
-Class NewExerciseScreenController
-Class RemoteTrainingLoggerAccess
-Class RemoteApp
-Interface TrainingLoggerAccess
-Class TrainingLoggerController
+Class NewSessionScreenController {
+    - Session session
+}
+Class NewExerciseScreenController {
+    - Exercise exercise
+}
+Class RemoteTrainingLoggerAccess {
+    void addSession(session Session)
+    void deleteAll()
+    SessionLogger getSessionLogger()
+}
+Class RemoteApp {
+    
+    + void start()
+}
+Interface TrainingLoggerAccess {
+    void addSession(session Session)
+    void deleteAll()
+    SessionLogger getSessionLogger()
+}
+Class TrainingLoggerController {
+    
+    + void changeToStartScreen
+    + void changeToNewSessionScreen
+    + void changeToSessionScreen
+    + void changeToNewExerciseScreen
+    + void changeToRecordScreen
+    
+}
 
 App --> AppController
 RemoteApp --> AppController
 
 AppController --> TrainingLoggerController
 
-TrainingLoggerController <--> StartScreenController
+TrainingLoggerController <-- StartScreenController
 TrainingLoggerController <--> NewSessionScreenController
-TrainingLoggerController <--> NewExerciseScreenController
+NewExerciseScreenController -left-> NewSessionScreenController
+TrainingLoggerController <-- NewExerciseScreenController
 TrainingLoggerController <--> SessionScreenController
 TrainingLoggerController <--> RecordScreenController
 TrainingLoggerController ---> TrainingLoggerAccess
@@ -145,10 +176,6 @@ TrainingLoggerAccess --> RemoteTrainingLoggerAccess
 TrainingLoggerAccess --> DirectTrainingLoggerAccess
 
 
-RecordScreenController --> HBoxTemplateController
-StartScreenController --> HBoxTemplateController
-NewSessionScreenController --> HBoxTemplateController
-SessionScreenController --> HBoxTemplateController
 NewExerciseScreenController --> HBoxTemplateController
 
 }
