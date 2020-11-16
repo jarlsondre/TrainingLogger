@@ -9,6 +9,8 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
+
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -104,14 +106,24 @@ public class TrainingLoggerServiceTest extends JerseyTest {
     }
   }
 
+  @Test
+  public void testPut_addSession() {
+    Session session = new Session();
+    Response getResponse = target(TrainingLoggerService.TRAINING_LOGGER_SERVICE_PATH)
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8").put(Entity.entity(session, MediaType.APPLICATION_JSON));
+    assertEquals(200, getResponse.getStatus());
+    try {
+      Boolean added = objectMapper.readValue(getResponse.readEntity(String.class), Boolean.class);
+      assertTrue(added);
+    } catch (JsonProcessingException e) {
+      fail(e.getMessage());
+    }
+  }
+
   @AfterAll
   public static void deleteGeneratedFiles() {
     Path path = Paths.get(System.getProperty("user.home"), testPath);
     File testGeneratedFile = new File(path.toString());
     testGeneratedFile.delete();
   }
-
-  // TODO: Skulle gjerne testa PUT også, men Hallvard har ikke noe eksempel og jeg
-  // prioriterer å ikke bruke
-  // mer tid på å prøve og finne ut av det selv.
 }
