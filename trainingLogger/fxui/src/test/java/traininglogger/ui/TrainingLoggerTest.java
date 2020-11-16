@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
@@ -172,6 +173,48 @@ public class TrainingLoggerTest extends ApplicationTest {
       fail(
           "Koden kræsjet da testen prøvde å skrive inn feil input. Dette skal i stedet håndteres ved en feilmelding på UI-et");
     }
+  }
+
+  @Test
+  public void recordTest(){
+    String name = "Knebøy";
+    String record  = "150.0";
+    TextField nameTextField = lookup("#titleTextField").query();
+    TextField repsTextField = lookup("#repsTextField").query();
+    TextField weightTextField = lookup("#weightTextField").query();
+    clickOn(nameTextField).write(name);
+    addSet(10, 122.5, repsTextField, weightTextField);
+    addSet(10, 140, repsTextField, weightTextField);
+    addSet(10, Double.parseDouble(record), repsTextField, weightTextField);
+    Button addExerciseButton = lookup("Legg til øvelse").query();
+    clickOn(addExerciseButton);
+    clickOn("#addSessionButton");
+
+
+    clickOn("#recordButton");
+    VBox vbox = lookup("#recordOverviewVbox").query();
+    HBox hbox = (HBox) vbox.getChildren().get(0);
+    String string = ((Label)hbox.getChildren().get(0)).getText();
+    assertEquals(string, name + ": " + record);
+    Button startScreen = lookup("Startskjerm").queryButton();
+    clickOn(startScreen);
+
+    clickOn("#newSessionButton");
+    clickOn("#newExerciseButton");
+
+    String newRecord  = "200.0";
+    clickOn(nameTextField).write(name);
+    addSet(10, 122.5, repsTextField, weightTextField);
+    addSet(10, 140, repsTextField, weightTextField);
+    addSet(10, Double.parseDouble(newRecord), repsTextField, weightTextField);
+    clickOn(addExerciseButton);
+    clickOn("#addSessionButton");
+
+    clickOn("#recordButton");
+    vbox = lookup("#recordOverviewVbox").query();
+    hbox = (HBox) vbox.getChildren().get(0);
+    string = ((Label)hbox.getChildren().get(0)).getText();
+    assertEquals(string, name + ": " + newRecord);
   }
 
   private void addSet(int repetitions, double weight, TextField repsTextField, TextField weightTextField) {
