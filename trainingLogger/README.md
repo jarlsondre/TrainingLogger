@@ -172,8 +172,8 @@ TrainingLoggerController <--> SessionScreenController
 TrainingLoggerController <--> RecordScreenController
 TrainingLoggerController ---> TrainingLoggerAccess
 
-TrainingLoggerAccess --> RemoteTrainingLoggerAccess
-TrainingLoggerAccess --> DirectTrainingLoggerAccess
+TrainingLoggerAccess ..|> RemoteTrainingLoggerAccess
+TrainingLoggerAccess ..|> DirectTrainingLoggerAccess
 
 
 NewExerciseScreenController --> HBoxTemplateController
@@ -185,55 +185,60 @@ SetSerializer -[hidden]down- RemoteApp
 
 ```
 
-### Pakkediagram 
 
 ```plantuml 
 
+
 Title Pakkediagram
 
-skinparam Padding 10
+Skinparam Padding 15
 
-    
-component "core-modul" {
+
+component integrationTests-modul as IntModul{
+  package webapp
+}    
+
+component "core-modul" as CoreModul {
     package core
     package json
 }
 
-component "fxui-modul" {
+component fxui-modul as FXModul {
   package ui
 }
 
-component "integrationTests-modul" {
-  package webapp
-}
 
-component "restapi-modul" {
+
+component restapi-modul as APIModul{
   package restapi
 }
 
-component "restserver-modul" {
+component restserver-modul as ServerModul {
     package restserver
   
 }
 
-package "javafx" 
-package "fxml"
-package "javax"
-package "jersey"
+package javafx
+package fxml
+package javax
+package jersey
 
 
-restserver ...> restapi
-restserver ...> core
-restapi ...> core
-restapi ...> json
-ui ...> core
-ui ...> json
+restserver ..> restapi
+restserver ..> core
+restapi ..> core
+restapi ..> json
+ui ..> core
+ui ..> json
 
-ui ..> javafx
-ui ..> fxml
-restserver ..> jersey 
-restserver ..> javax
-restapi ..> javax
+FXModul ...> javafx
+FXModul ...> fxml
+ServerModul ...> jersey 
+ServerModul ...> javax
+APIModul ...> javax
+
+CoreModul -[hidden]down-- IntModul
+
 
 
 ```
