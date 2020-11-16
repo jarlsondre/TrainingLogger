@@ -6,7 +6,12 @@ Training Logger er en applikasjon som lar deg loggføre gjennomførte treninger 
 
 ```plantuml
 
-Title Diagram av Core-modulen
+allow_mixing
+
+Title Klassediagram
+
+
+Package Core-modul {
 
 class Session {
     - final DateTimeFormatter dateTimeFormatter 
@@ -50,6 +55,11 @@ class TrainingLoggerModule {
     -static final String name
     +TrainingLoggerModule()
 }
+note left
+    Merk: serialize- og deserializeklassene sine metoder
+    tar inn flere argumenter som ikke er skrevet opp
+    for ryddigheten i diagrammet sin skyld
+end note
 
 class SesssionLoggerSerializer {
     +void serialize()
@@ -80,19 +90,15 @@ class TrainingLoggerPersistence
 
 
 
-TrainingLoggerModule ---> SesssionLoggerSerializer
-TrainingLoggerModule ---> SessionSerializer
-TrainingLoggerModule ---> ExerciseSerializer
-TrainingLoggerModule ---> SetSerializer
-TrainingLoggerModule ---> SesssionLoggerDeserializer
-TrainingLoggerModule ---> SessionDeserializer
-TrainingLoggerModule ---> ExerciseDeserializer
-TrainingLoggerModule ---> SetDeserializer
-note right on link
-    Merk: serialize- og deserializeklassene sine metoder
-    tar inn flere argumenter som ikke er skrevet opp
-    for ryddigheten i diagrammet sin skyld
-end note
+TrainingLoggerModule --> SesssionLoggerSerializer
+TrainingLoggerModule --> SessionSerializer
+TrainingLoggerModule --> ExerciseSerializer
+TrainingLoggerModule --> SetSerializer
+TrainingLoggerModule --> SesssionLoggerDeserializer
+TrainingLoggerModule --> SessionDeserializer
+TrainingLoggerModule --> ExerciseDeserializer
+TrainingLoggerModule --> SetDeserializer
+
 
 
 SessionLogger -> "*" Session
@@ -102,11 +108,12 @@ Session -> "*" Exercise
 Exercise -> "*" Set
 
 
-```
+}
 
-```plantuml
 
-Title Diagram av fxui-modulen
+
+Package fxui-modul {
+
 
 Class App
 Class AppController
@@ -119,9 +126,11 @@ Class RecordScreenController
 Class NewExerciseScreenController
 Class RemoteTrainingLoggerAccess
 Class RemoteApp
-Class TrainingLoggerAccess
+Interface TrainingLoggerAccess
 Class TrainingLoggerController
 
+App --> AppController
+RemoteApp --> AppController
 
 AppController --> TrainingLoggerController
 
@@ -130,6 +139,11 @@ TrainingLoggerController <--> NewSessionScreenController
 TrainingLoggerController <--> NewExerciseScreenController
 TrainingLoggerController <--> SessionScreenController
 TrainingLoggerController <--> RecordScreenController
+TrainingLoggerController ---> TrainingLoggerAccess
+
+TrainingLoggerAccess --> RemoteTrainingLoggerAccess
+TrainingLoggerAccess --> DirectTrainingLoggerAccess
+
 
 RecordScreenController --> HBoxTemplateController
 StartScreenController --> HBoxTemplateController
@@ -137,8 +151,9 @@ NewSessionScreenController --> HBoxTemplateController
 SessionScreenController --> HBoxTemplateController
 NewExerciseScreenController --> HBoxTemplateController
 
+}
 
-
+SetSerializer -[hidden]down- RemoteApp
 
 
 ```
@@ -173,12 +188,12 @@ component "restserver-modul" {
 }
 
 
-restserver ..> restapi
-restserver ..> core
-restapi ..> core
-restapi ..> json
-ui ..> core
-ui ..> json
+restserver ...> restapi
+restserver ...> core
+restapi ...> core
+restapi ...> json
+ui ...> core
+ui ...> json
 
 
 
