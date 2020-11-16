@@ -14,6 +14,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.util.WaitForAsyncUtils;
 
 import traininglogger.core.SessionLogger;
 import traininglogger.core.Set;
@@ -45,6 +46,14 @@ public class TrainingLoggerTest extends ApplicationTest {
     access.setUserSessionLoggerPath(testPath);
     this.controller.setTrainingLoggerAccess(access);
     clickOn("#newSessionButton");
+    try {
+      Thread.sleep(2000);
+      WaitForAsyncUtils.waitForFxEvents();
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
     clickOn("#newExerciseButton");
   }
 
