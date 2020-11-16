@@ -189,7 +189,9 @@ SetSerializer -[hidden]down- RemoteApp
 
 ```plantuml 
 
-skinparam Padding 20
+Title Pakkediagram
+
+skinparam Padding 10
 
     
 component "core-modul" {
@@ -214,6 +216,11 @@ component "restserver-modul" {
   
 }
 
+package "javafx" 
+package "fxml"
+package "javax"
+package "jersey"
+
 
 restserver ...> restapi
 restserver ...> core
@@ -222,8 +229,11 @@ restapi ...> json
 ui ...> core
 ui ...> json
 
-
-
+ui ..> javafx
+ui ..> fxml
+restserver ..> jersey 
+restserver ..> javax
+restapi ..> javax
 
 
 ```
