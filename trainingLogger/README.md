@@ -6,6 +6,7 @@ Training Logger er en applikasjon som lar deg loggføre gjennomførte treninger 
 
 ```plantuml
 
+Title Diagram av Core-modulen
 
 class Session {
     - final DateTimeFormatter dateTimeFormatter 
@@ -51,38 +52,93 @@ class TrainingLoggerModule {
 }
 
 class SesssionLoggerSerializer {
-    +void serialize(SessionLogger logger, JsonGenerator gen, SerializerProvider provider)
+    +void serialize()
 }
 class SessionSerializer {
-    +void serialize(Session s, JsonGenerator gen, SerializerProvider provider)
+    +void serialize()
 }
 class ExerciseSerializer {
-    +void serialize(Exercise e, JsonGenerator gen, SerializerProvider provider)
+    +void serialize()
 }
 class SetSerializer {
-    +void serialize(Set s, JsonGenerator gen, SerializerProvider provider)
+    +void serialize()
 }
-class SesssionLoggerDeserializer
-class SessionDeserializer
-class ExerciseDeserializer
-class SetDeserializer
-class TrainingLoggerPersistence
+class SesssionLoggerDeserializer {
+    + SessionLogger deserialize()
+}
+class SessionDeserializer {
+    + Session deserialize()
+}
+class ExerciseDeserializer {
+    + Exercise deserialize()
+}
+class SetDeserializer {
+    + Set deserialize()
+}
+class TrainingLoggerPersistence 
 
 
-TrainingLoggerModule --> SesssionLoggerSerializer
-TrainingLoggerModule --> SessionSerializer
-TrainingLoggerModule --> ExerciseSerializer
-TrainingLoggerModule --> SetSerializer
-TrainingLoggerModule --> SesssionLoggerDeserializer
-TrainingLoggerModule --> SessionDeserializer
-TrainingLoggerModule --> ExerciseDeserializer
-TrainingLoggerModule --> SetDeserializer
+
+
+TrainingLoggerModule ---> SesssionLoggerSerializer
+TrainingLoggerModule ---> SessionSerializer
+TrainingLoggerModule ---> ExerciseSerializer
+TrainingLoggerModule ---> SetSerializer
+TrainingLoggerModule ---> SesssionLoggerDeserializer
+TrainingLoggerModule ---> SessionDeserializer
+TrainingLoggerModule ---> ExerciseDeserializer
+TrainingLoggerModule ---> SetDeserializer
+note right on link
+    Merk: serialize- og deserializeklassene sine metoder
+    tar inn flere argumenter som ikke er skrevet opp
+    for ryddigheten i diagrammet sin skyld
+end note
+
 
 SessionLogger -> "*" Session
 SessionLogger .. TrainingLoggerModule
-TrainingLoggerModule .. TrainingLoggerPersistence
+TrainingLoggerModule -> TrainingLoggerPersistence
 Session -> "*" Exercise
 Exercise -> "*" Set
+
+
+```
+
+```plantuml
+
+Title Diagram av fxui-modulen
+
+Class App
+Class AppController
+Class DirectTrainingLoggerAccess
+Class HBoxTemplateController
+Class NewSessionScreenController
+Class SessionScreenController
+Class StartScreenController
+Class RecordScreenController
+Class NewExerciseScreenController
+Class RemoteTrainingLoggerAccess
+Class RemoteApp
+Class TrainingLoggerAccess
+Class TrainingLoggerController
+
+
+AppController --> TrainingLoggerController
+
+TrainingLoggerController <--> StartScreenController
+TrainingLoggerController <--> NewSessionScreenController
+TrainingLoggerController <--> NewExerciseScreenController
+TrainingLoggerController <--> SessionScreenController
+TrainingLoggerController <--> RecordScreenController
+
+RecordScreenController --> HBoxTemplateController
+StartScreenController --> HBoxTemplateController
+NewSessionScreenController --> HBoxTemplateController
+SessionScreenController --> HBoxTemplateController
+NewExerciseScreenController --> HBoxTemplateController
+
+
+
 
 
 ```
