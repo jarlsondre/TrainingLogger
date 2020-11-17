@@ -4,22 +4,7 @@ Training Logger er en applikasjon som lar deg loggføre gjennomførte treninger 
 
 ## Beskrivelse
 
-### Sekvensdiagram med PlantUML
-Under kan man se et sekvensdiagram av en bestemt interaksjon med applikasjonen. Interaksjonen er som følger: 
 
-> Brukeren er inne på skjermen for å legge til en øvelse til en tom økt. Brukeren skriver inn "Benkpress" som navn på 
-øvelsen og legger inn ett sett på 60kg med 5 repetisjoner. Deretter trykker brukeren på "legg til øvelse" og så på "legg til økten".
-
-Diagrammet viser interaksjonen mellom de forskjellige klassene etterhvert som de to knappene trykkes på: 
-
-```plantuml
-
-Title Sekvensdiagram
-
-Jarl -> Bendik: Hei på deg :) 
-
-
-```
 
 
 ### Grunnidè
@@ -270,6 +255,93 @@ SetSerializer -[hidden]down- RemoteApp
 
 ```
 
+### Sekvensdiagram med PlantUML
+Under kan man se et sekvensdiagram av en bestemt interaksjon med applikasjonen. Interaksjonen er som følger: 
+
+> Brukeren er inne på skjermen for å legge til en øvelse til en tom økt. Brukeren skriver inn "Benkpress" som navn på 
+øvelsen og legger inn ett sett på 60kg med 5 repetisjoner. Deretter trykker brukeren på "legg til øvelse" og så på "legg til økten".
+
+Diagrammet viser interaksjonen mellom de forskjellige klassene etterhvert som de to knappene trykkes på: 
+
+```plantuml
+
+Title Sekvensdiagram
+
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+skinparam maxmessagesize 60
+skinparam sequenceParticipant underline
+
+actor Bruker
+participant "NewExerciseScreenController" as NewExerciseScreenController
+participant "TrainingLoggerController" as TrainingLoggerController
+participant "NewSessionScreenController" as NewSessionScreenController
+participant "NewSessionScreenController" as NewSessionScreenController
+participant "Exercise1" as exercise1
+participant "Exercise2" as exercise2
+participant "Session1" as session1
+participant "Session2" as session2
+participant "RemoteTrainingLoggerAccess" as RemoteAccess
+participant "RESTserver" as server
+
+activate TrainingLoggerController
+activate NewExerciseScreenController
+activate exercise1
+activate NewSessionScreenController
+activate session1
+
+Bruker -> NewExerciseScreenController: Trykker på "Legg til øvelse"
+
+NewExerciseScreenController -> exercise1: setName(getText())
+
+NewExerciseScreenController -> NewSessionScreenController: addExerciseToSession(exercise)
+
+NewSessionScreenController -> session1: addExercises(Exercise1)
+
+NewExerciseScreenController -> exercise2: new Exercise()
+deactivate exercise1
+activate exercise2
+
+NewExerciseScreenController -> NewExerciseScreenController: resetInputFields()
+
+NewExerciseScreenController -> TrainingLoggerController: changeToNewSessionScreen()
+
+TrainingLoggerController -> NewSessionScreenController: updateExerciseOverview()
+
+TrainingLoggerController -> TrainingLoggerController: getChildren().clear()
+deactivate NewExerciseScreenController
+
+TrainingLoggerController -> TrainingLoggerController: getChildren().add(this.newSessionScreen)
+
+TrainingLoggerController -> Bruker: Viser skjerm for ny økt
+
+Bruker -> NewSessionScreenController: trykker på "Legg til økten"
+
+NewSessionScreenController -> session1: setDescription()
+
+NewSessionScreenController -> TrainingLoggerController: addSessionToSessionLogger(Session1)
+
+TrainingLoggerController -> RemoteAccess: addSession(Session1)
+
+RemoteAccess -> server: PUT, Session1
+
+server -> RemoteAccess: True
+
+NewSessionScreenController -> session2: new Session()
+activate session2
+deactivate session1
+
+NewSessionScreenController -> NewSessionScreenController: resetScreen()
+
+NewSessionScreenController -> TrainingLoggerController: changeToStartScreen()
+
+TrainingLoggerController -> TrainingLoggerController: mainVbox.getChildren().clear()
+deactivate NewSessionScreenController
+TrainingLoggerController -> TrainingLoggerController: mainVbox.getChildren().add(this.startScreen)
+
+TrainingLoggerController -> Bruker: Viser startskjerm
+
+```
 
 
 
