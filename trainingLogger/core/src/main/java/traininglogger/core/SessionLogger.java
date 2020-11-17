@@ -65,8 +65,4 @@ public class SessionLogger implements Iterable<Session> {
     this.sessions.clear();
     this.deleteRecords();
   }
-
-  public String toString() {
-    return this.sessions.toString();
-  }
 }

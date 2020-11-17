@@ -48,9 +48,4 @@ public class Set {
   public double getWeight() {
     return this.weight;
   }
-
-  @Override
-  public String toString() {
-    return "repetitions: " + repetitions + ", weight: " + weight;
-  }
 }

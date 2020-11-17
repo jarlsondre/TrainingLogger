@@ -105,8 +105,4 @@ public class Session implements Iterable<Exercise> {
   public Iterator<Exercise> iterator() {
     return this.exercises.iterator();
   }
-
-  public String toString() {
-    return this.getDateAsString() + this.exercises.toString();
-  }
 }

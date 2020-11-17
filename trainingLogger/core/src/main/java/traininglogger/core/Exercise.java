@@ -66,11 +66,6 @@ public class Exercise implements Iterable<Set> {
   }
 
   @Override
-  public String toString() {
-    return this.name + sets.toString();
-  }
-
-  @Override
   public Iterator<Set> iterator() {
     return this.sets.iterator();
   }
