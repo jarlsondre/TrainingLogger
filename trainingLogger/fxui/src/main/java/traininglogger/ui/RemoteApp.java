@@ -17,6 +17,7 @@ public class RemoteApp extends Application {
   public void start(final Stage stage) throws IOException {
     Scene scene = new Scene(new FXMLLoader(App.class.getResource("RemoteApp.fxml")).load());
     stage.setScene(scene);
+    stage.setTitle("Training Logger");
     stage.show();
   }
 
