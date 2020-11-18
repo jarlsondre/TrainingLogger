@@ -87,11 +87,7 @@ public class AppController {
         System.err.println("Fant ikke innebygget " + sampleSessionLoggerResource);
       }
     }
-
-    if (reader == null) {
-      // TODO: use embedded String (se Hallvard sin TodoAppController!)
-    }
-
+    
     SessionLogger sessionLogger = null;
     try {
       TrainingLoggerPersistence trainingLoggerPersistence = new TrainingLoggerPersistence();

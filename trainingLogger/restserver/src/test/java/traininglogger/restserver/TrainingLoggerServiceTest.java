@@ -43,8 +43,7 @@ public class TrainingLoggerServiceTest extends JerseyTest {
   @Override
   protected ResourceConfig configure() {
     final TrainingLoggerConfig config = new TrainingLoggerConfig(testPath);
-    if (shouldLog()) { // TODO: Hva er vitsen når shouldLog() returnerer false? Sjekk om Hallvard
-                       // endrer dette!
+    if (shouldLog()) {
       enable(TestProperties.LOG_TRAFFIC);
       enable(TestProperties.DUMP_ENTITY);
       config.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, "WARNING");

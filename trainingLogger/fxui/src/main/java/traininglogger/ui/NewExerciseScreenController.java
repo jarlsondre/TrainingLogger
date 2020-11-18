@@ -156,6 +156,6 @@ public class NewExerciseScreenController {
 
   public Exercise getExercise() {
     return this.exercise;
-  } // TODO: Denne metoden brukes bare i test. Beholde?
+  }
 
 }
