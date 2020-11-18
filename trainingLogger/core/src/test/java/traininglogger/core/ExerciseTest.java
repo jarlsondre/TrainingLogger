@@ -27,11 +27,8 @@ public class ExerciseTest {
     } catch (IllegalArgumentException e) {
       // Do nothing
     }
-    try {
-      ex.setName("Benkpress");  // Prøver å sette et gyldig navn
-    } catch (IllegalArgumentException e) {
-      fail("Fikk ikke lov til å sette gyldig navn.");
-    }
+    ex.setName("Benkpress");  // Prøver å sette et gyldig navn
+
   }
 
   //Tester at settene kommer i korrekt rekkefølge og at iteratoren fungerer som den skal.
