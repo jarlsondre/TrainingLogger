@@ -72,7 +72,17 @@ public class NewExerciseScreenController {
 
   @FXML
   private void addExerciseButtonHandler() throws IOException {
-    this.exercise.setName(this.titleTextField.getText());
+    if (addSetVbox.getChildren().get(0) instanceof Label) {
+      addSetVbox.getChildren().remove(0);
+    }
+    try {
+      this.exercise.setName(this.titleTextField.getText());
+    } catch (Exception e) {
+      Label errorLabel = new Label("Navn kan ikke inneholde spesialtegn eller tall!");
+      addSetVbox.getChildren().add(0, errorLabel);
+      this.addExerciseButton.setDisable(true);
+      return;
+    }
     this.newSessionScreenController.addExerciseToSession(this.exercise);
     this.exercise = new Exercise();
     resetInputFields();
