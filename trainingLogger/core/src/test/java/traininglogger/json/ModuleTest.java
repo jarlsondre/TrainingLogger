@@ -11,6 +11,9 @@ import traininglogger.core.SessionLogger;
 import traininglogger.core.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+import java.util.Iterator;
+
 public class ModuleTest {
 
   private static ObjectMapper mapper;
@@ -76,11 +79,12 @@ public class ModuleTest {
       fail();
     }
   }
-
-  private final static String sessionLoggerWithOneSession = "{\"sessions\":[{\"stringDescription\":\"Uten trening gir livet ingen mening!\",\"date\":\"12/12/1989 15:15\",\"exercises\":[{\"name\":\"Testpress\",\"sets\":[{\"repetitions\":5,\"weight\":100.0},{\"repetitions\":5,\"weight\":97.5},{\"repetitions\":5,\"weight\":87.5}]},{\"name\":\"Testbøy\",\"sets\":[{\"repetitions\":8,\"weight\":130.0},{\"repetitions\":8,\"weight\":127.5},{\"repetitions\":7,\"weight\":125.0}]}]}],\"records\":{\"Testpress\":100.0,\"Testbøy\":130.0}}";
+  // Bruker konkatinering fordi gitpod-IDEen slår seg vrang hvis strengen står på én linje:
+  private final static String sessionLoggerWithOneSession = "{\"sessions\":[{\"stringDescription\":\"Uten trening gir livet ingen mening!\",\"date\":\"12/12/1989 15:15\",\"exercises\":[{\"name\":\"Testpress\",\"sets\":[{\"repetitions\":5,\"weight\":100.0},"
+      + "{\"repetitions\":5,\"weight\":97.5},{\"repetitions\":5,\"weight\":87.5}]},{\"name\":\"Testbøy\",\"sets\":[{\"repetitions\":8,\"weight\":130.0},{\"repetitions\":8,\"weight\":127.5},{\"repetitions\":7,\"weight\":125.0}]}]}],\"records\":{\"Testpress\":100.0,\"Testbøy\":130.0}}";
 
   @Test
-  public void testSerializers(){
+  public void testSerializers() {
     Session session = new Session();
 
     Set set0 = new Set(5, 100);
@@ -115,9 +119,50 @@ public class ModuleTest {
     } catch (JsonProcessingException e) {
       fail();
     }
-
-
-
   }
 
+  @Test
+  public void testDeserializers() {
+     try {
+       SessionLogger sessionLogger = mapper.readValue(sessionLoggerWithOneSession, SessionLogger.class);
+       assertEquals(sessionLogger.getRecords().get("Testpress"), 100);
+       assertEquals(sessionLogger.getRecords().get("Testbøy"), 130);
+
+       assertTrue(sessionLogger.iterator().hasNext());
+       Session session = sessionLogger.iterator().next();
+       assertEquals(session.getDate(), LocalDateTime.of(1989, 12, 12, 15, 15));
+       assertEquals(session.getDescription(), "Uten trening gir livet ingen mening!");
+
+       assertTrue(session.iterator().hasNext());
+       Iterator<Exercise> sessionIterator = session.iterator();
+
+       Exercise exercise1 = sessionIterator.next();
+       assertEquals(exercise1.getName(), "Testpress");
+
+       assertTrue(exercise1.iterator().hasNext());
+       Iterator<Set> exerciseIterator = exercise1.iterator();
+
+       Set set0 = exerciseIterator.next();
+       assertEquals(5, set0.getRepetitions());
+       assertEquals(100, set0.getWeight());
+       assertTrue(exerciseIterator.hasNext());
+
+       Set set1 = exerciseIterator.next();
+       assertEquals(5, set1.getRepetitions());
+       assertEquals(97.5, set1.getWeight());
+       assertTrue(exerciseIterator.hasNext());
+
+       Set set2 = exerciseIterator.next();
+       assertEquals(5, set2.getRepetitions());
+       assertEquals(87.5, set2.getWeight());
+       assertFalse(exerciseIterator.hasNext());
+
+       assertTrue(sessionIterator.hasNext());
+       Exercise exercise2 = sessionIterator.next();
+       assertEquals("Testbøy", exercise2.getName());
+       assertFalse(sessionIterator.hasNext());
+    } catch (JsonProcessingException e) {
+      fail();
+    }
+  }
 }
