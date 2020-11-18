@@ -4,7 +4,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -19,6 +22,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class TrainingLoggerIT extends ApplicationTest {
 
@@ -48,46 +54,44 @@ public class TrainingLoggerIT extends ApplicationTest {
     assertNotNull(this.controller);
   }
 
-  // TODO: Gjenta UI-testene, eventuelt lag en "Scenarie"-test.
 
   /**
-   * Tester om det kommer flere bokser å skrive inn info på dersom man trykker på
-   * 'legg til', i tillegg til om koden kræsjer
+   * Tester et scenario hvor brukeren legger inn et sett og trykker på "legg til øvelse" og deretter "legg til økten". 
+   * Testen sjekker om det brukeren skrev inn stemmer med det som kommer opp på "tidliger økter"-skjermen. 
    */
   @Test
-  public void addSetTest() {
+  public void ScenarioTest() {
     clickOn("#newSessionButton");
     clickOn("#newExerciseButton");
-    // Legger inn info og trykker på knappen
+
+    // Legger til en session
+    TextField nameTextField = lookup("#titleTextField").query();
     TextField repsTextField = lookup("#repsTextField").query();
     TextField weightTextField = lookup("#weightTextField").query();
-    Button addSetButton = lookup("#addSetHbox > .button").query();
+    clickOn(nameTextField).write("Knebøy");
     clickOn(weightTextField).write("100");
-    clickOn(repsTextField).write("10");
+    clickOn(repsTextField).write("5");
+    Button addSetButton = lookup("#addSetHbox > .button").query();
     clickOn(addSetButton);
+    Button addExerciseButton = lookup("Legg til øvelse").query();
+    clickOn(addExerciseButton);
+    clickOn("#descriptionArea").write("Knebøy var lett");
+    Button addSessionButton = lookup("Legg til økten").query();
+    clickOn(addSessionButton);
 
-    // Sjekker at de gamle boksene er tomme
-    if (!repsTextField.getText().equals("")) {
-      fail("Reps-boksen ble ikke tømt etter at man trykte på legg til sett");
-    }
-    if (!weightTextField.getText().equals("")) {
-      fail("vekt-boksen ble ikke tømt etter at man trykte på legg til sett");
-    }
+    // Henter ut dataene som har blitt lagret inne i "tidligere økter"
+    clickOn("#earlierSessionsButton");
+    VBox vBox = lookup("#sessionOverviewVbox").query();
+    TitledPane lastSessionTitledPane = (TitledPane) vBox.getChildren().get(0);
+    clickOn(lastSessionTitledPane);
+    VBox lastSessionVbox = ((VBox) lastSessionTitledPane.getContent());
+    Label lastSessionLabel = (Label) lastSessionVbox.getChildren().get(0);
+    String lastSessionString = lastSessionLabel.getText();
 
-    // Sjekker at det har kommet nye bokser som inneholder informasjonen vi la inn
-    repsTextField = lookup("#repsTextField").query();
-    weightTextField = lookup("#weightTextField").query();
-
-    if (!repsTextField.getText().equals("10")) {
-      System.out.println(repsTextField.getText());
-      fail("Reps-boksen inneholdt ikke riktig informasjon etter at settet ble lagt til");
-    }
-    if (!weightTextField.getText().equals("100")) {
-      fail("vekt-boksen inneholdt ikke riktig informasjon etter at settet ble lagt til");
-    }
+    // Sjekker om dataene er like de vi skrev inn
+    assertEquals("Knebøy:" + "\n" + "100.0kg x 5" + "\n" + "\n" + "Beskrivelse: \n"
+        + "Knebøy var lett", lastSessionString);
   }
-
-  // TODO: Denne metoden er bare nødvendig dersom UI-testene vi kjører ender med at data lagres til fil:
 
   @AfterAll
   public static void deleteFiles() {
