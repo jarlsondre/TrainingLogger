@@ -37,6 +37,10 @@ annet kunne holde styr på rundetider, ukentlige kilometer, tempo og personlige 
 ## Logisk struktur
 
 ### Pakkediagram med plantUML: 
+Applikasjonen består av fem ulike moduler som er koblet sammen med hverandre og med andre biblioteker. Core-modulen inneholder alt som har
+med kjernelogikk å gjøre, som i vårt tilfelle er håndtering av økter, øvelser og sett. fxui-modulen bruker denne logikken samt sin egen logikk 
+for å vise et brukergrensesnitt med riktig funksjonalitet. Restserveren kommuniserer med kjerneklassene gjennom RESTapi-et for å håndtere 
+lagring på en fjern lokasjon. Denne koblingen er illustrert i diagrammet under. 
 
 ```plantuml 
 
@@ -90,6 +94,10 @@ CoreModul -[hidden]down-- IntModul
 
 
 ### Klassediagram med plantUML: 
+Applikasjonen benytter seg av samhandling mellom mange klasser i forskjellige moduler. I diagrammet under kan man se 
+en oversikt over de viktigste klassene og hvordan disse klassene henger sammen med hverandre. Man kan se et hierarki av 
+kjerneklassene, samt hvordan disse er koblet opp mot serialisererne. I tillegg kan man se et hierarki av kontrollere 
+som brukes blant annet for å kunne bytte skjerm på en god måte.
 
 ```plantuml
 
