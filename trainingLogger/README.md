@@ -5,12 +5,12 @@ Training Logger er en applikasjon som lar deg loggføre gjennomførte treninger 
 ## Beskrivelse
 
 
-### Grunnidè
+### Grunnidé
 
-**Merk:** Dette er idèen som motiverer til videre utvikling av applikasjonen og skal ikke nødvendigvis fullføres i løpet av dette prosjektet. 
+**Merk:** Dette er idéen som motiverer til videre utvikling av applikasjonen og skal ikke nødvendigvis fullføres i løpet av dette prosjektet. 
 
-Grunnidèen til applikasjonen er en applikasjon som kan brukes både før trening, under trening og etter trening; man skal kunne planlegge en økt, 
-endre en økt og i ettertid bruke informasjonen til økten for å forbedre neste trening. Det langsiktige bildet av grunnidèen er som 
+Grunnidéen til applikasjonen er en applikasjon som kan brukes både før trening, under trening og etter trening; man skal kunne planlegge en økt, 
+endre en økt og i ettertid bruke informasjonen til økten for å forbedre neste trening. Det langsiktige bildet av grunnidéen er som 
 følger: 
 
 I applikasjonen skal man komme til et vindu hvor man kan se tidligere økter. Her kan man utføre følgende handlinger:
