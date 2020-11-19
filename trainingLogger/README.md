@@ -353,10 +353,26 @@ TrainingLoggerController -> Bruker: Viser startskjerm
 
 
 
-## Tidligere utseende av applikasjonen
-Dette er et bilde av hvordan applikasjonen ser ut ved gruppeinnlevering 1. 
+## Utseende av applikasjonen ved prosjektslutt
+Utseendet til applikasjonen kan sees fra skjermbildene under:  
+Startskjerm:  
+![Startskjerm](images/startskjerm.png "Startskjerm")
 
-![Eksempel](resources/LoggEksempel.png)
+Tidligere økter:  
+![Tidligere økter](images/tidligere_okter1.png "Tidligere økter")
+![Tidligere økter](images/tidligere_okter2.png "Tidligere økter")
+
+Ny økt:  
+![Ny økt](images/ny_okt1.png "Ny økt")
+
+Ny øvelse:  
+![Ny øvelse](images/ny_ovelse1.png "Ny øvelse")
+
+Rekorder:  
+![Rekorder](images/rekorder.png "Rekorder")
+
+
+
 
 ## Tenkt utseende til sluttprodukt
 
