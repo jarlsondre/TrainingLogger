@@ -21,6 +21,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.util.WaitForAsyncUtils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,6 +62,13 @@ public class TrainingLoggerIT extends ApplicationTest {
   @Test
   public void ScenarioTest() {
     clickOn("#newSessionButton");
+    try {
+      Thread.sleep(2000);
+      WaitForAsyncUtils.waitForFxEvents();
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     clickOn("#newExerciseButton");
 
     // Legger til en session

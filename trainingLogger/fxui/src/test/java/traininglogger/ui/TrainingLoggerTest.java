@@ -47,9 +47,9 @@ public class TrainingLoggerTest extends ApplicationTest {
     this.controller.setTrainingLoggerAccess(access);
     clickOn("#newSessionButton");
     try {
-      Thread.sleep(500);
+      Thread.sleep(2000);
       WaitForAsyncUtils.waitForFxEvents();
-      Thread.sleep(500);
+      Thread.sleep(2000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
