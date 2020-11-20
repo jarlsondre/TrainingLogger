@@ -19,4 +19,9 @@ public class StartScreenController {
   private void switchToNewSessionScreen() {
     mainController.changeToNewSessionScreen();
   }
+
+  @FXML
+  private void switchToRecordScreen() {
+    mainController.changeToRecordScreen();
+  }
 }

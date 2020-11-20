@@ -5,43 +5,36 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
-
-<HBox fx:id="addSetHbox" alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="266.0" spacing="35.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="traininglogger.ui.HboxTemplateController">
-<children>
-    <HBox spacing="15.0">
-        <children>
-            <HBox alignment="CENTER_LEFT" spacing="5.0">
-                <children>
-                    <Label text="Vekt">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <TextField fx:id="weightTextField" editable="false" prefHeight="35.0" prefWidth="59.0">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </TextField>
-                </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="5.0">
-                <children>
-                    <Label text="Reps">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <TextField fx:id="repsTextField" editable="false" prefHeight="35.0" prefWidth="50.0">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </TextField>
-                </children>
-            </HBox>
-        </children>
+<HBox xmlns:fx="http://javafx.com/fxml/1" fx:id="addSetHbox" alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="266.0"
+      spacing="35.0" xmlns="http://javafx.com/javafx/11.0.1"
+      fx:controller="traininglogger.ui.HboxTemplateController">
+    <HBox spacing="10.0">
+        <HBox alignment="CENTER_LEFT" spacing="5.0">
+            <Label text="Vekt">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+            <TextField fx:id="weightTextField" editable="false" prefHeight="35.0" prefWidth="59.0">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </TextField>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" spacing="5.0">
+            <Label text="Reps">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+            <TextField fx:id="repsTextField" editable="false" prefHeight="35.0" prefWidth="50.0">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </TextField>
+        </HBox>
     </HBox>
-</children>
-<padding>
-    <Insets left="10.0" />
-</padding>
+    <padding>
+        <Insets left="10.0"/>
+    </padding>
 </HBox>

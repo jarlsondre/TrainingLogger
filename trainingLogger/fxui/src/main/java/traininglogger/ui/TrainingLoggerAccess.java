@@ -5,10 +5,10 @@ import traininglogger.core.SessionLogger;
 
 public interface TrainingLoggerAccess {
 
-  public void addSession(Session session);
+  void addSession(Session session);
 
-  public void deleteAll();
+  void deleteAll();
 
-  public SessionLogger getSessionLogger();
+  SessionLogger getSessionLogger();
 
 }

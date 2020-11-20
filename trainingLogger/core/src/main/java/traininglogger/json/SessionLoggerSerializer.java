@@ -18,6 +18,7 @@ public class SessionLoggerSerializer extends JsonSerializer<SessionLogger> {
       gen.writeObject(session);
     }
     gen.writeEndArray();
+    gen.writeObjectField("records", logger.getRecords());
     gen.writeEndObject();
   }
 }

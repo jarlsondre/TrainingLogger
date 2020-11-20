@@ -1,5 +1,10 @@
 package traininglogger.restapi;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -10,12 +15,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import traininglogger.core.Session;
 import traininglogger.core.SessionLogger;
-
-
-
+import traininglogger.json.TrainingLoggerPersistence;
 
 @Path(TrainingLoggerService.TRAINING_LOGGER_SERVICE_PATH)
 public class TrainingLoggerService {
@@ -26,6 +28,10 @@ public class TrainingLoggerService {
 
   @Inject
   private SessionLogger sessionLogger;
+  private TrainingLoggerPersistence trainingLoggerPersistence = null;
+
+  @Inject
+  private String pathToSaveTo;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
@@ -33,26 +39,45 @@ public class TrainingLoggerService {
     return this.sessionLogger;
   }
 
-  @PUT // Burde denne være POST?
+  /**
+   * Legger til en ny treningsøkt (Session) i SessionLoggeren og lagrer tilstanden.
+   *
+   * @param session treningsøkta som skal legges til
+   * @return true bekrefter oppdateringen
+   */
+  @PUT
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public boolean addSession(Session session) {
     LOG.debug("addSession({})", session);
     this.sessionLogger.addSession(session);
+    saveSessionLogger();
     return true;
   }
+
+  /**
+   * Sletter alle treningsøkter (Session) som ligger lagret i SessionLoggeren og lagrer tilstanden.
+   *
+   * @return true bekrefter oppdateringen
+   */
 
   @DELETE
   @Produces(MediaType.APPLICATION_JSON)
   public boolean deleteAll() {
     this.sessionLogger.deleteAll();
+    saveSessionLogger();
     return true;
   }
 
-
-
-
-
-
-
+  private void saveSessionLogger() {
+    if (trainingLoggerPersistence == null) {
+      trainingLoggerPersistence = new TrainingLoggerPersistence();
+    }
+    java.nio.file.Path path = Paths.get(System.getProperty("user.home"), pathToSaveTo);
+    try (Writer writer = new FileWriter(path.toFile(), StandardCharsets.UTF_8)) {
+      trainingLoggerPersistence.writeSessionLogger(this.sessionLogger, writer);
+    } catch (IOException e) {
+      System.err.println("Fikk ikke skrevet til " + pathToSaveTo + " på hjemmeområdet");
+    }
+  }
 }

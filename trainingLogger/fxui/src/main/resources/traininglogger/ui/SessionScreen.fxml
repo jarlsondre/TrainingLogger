@@ -7,24 +7,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="400.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="traininglogger.ui.SessionScreenController">
-   <children>
-      <Label layoutX="58.0" layoutY="47.0" prefHeight="40.0" prefWidth="180.0" text="Tidligere økter">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <ToolBar prefHeight="40.0" prefWidth="308.0">
-         <items>
-            <Button fx:id="startScreenButton" mnemonicParsing="false" onAction="#switchToStartScreen" prefHeight="25.0" prefWidth="119.0" text="Gå til startskjerm" />
-            <Button mnemonicParsing="false" onAction="#deleteButtonHandler" text="Slett alle økter" />
-         </items>
-      </ToolBar>
-      <ScrollPane layoutY="100.0" prefHeight="300.0" prefWidth="308.0">
-         <content>
-            <VBox fx:id="sessionOverviewVbox" prefHeight="298.0" prefWidth="306.0" />
-         </content>
-      </ScrollPane>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="308.0"
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="traininglogger.ui.SessionScreenController">
+    <Label TextAlignment="LEFT" layoutX="30.0" layoutY="47.0" prefHeight="40.0" text="Tidligere økter">
+        <font>
+            <Font size="28.0"/>
+        </font>
+    </Label>
+    <ToolBar prefHeight="40.0" prefWidth="308.0">
+        <Button fx:id="startScreenButton" mnemonicParsing="false" onAction="#switchToStartScreen"
+                prefHeight="25.0" prefWidth="119.0" text="Startskjerm"/>
+        <Button mnemonicParsing="false" onAction="#deleteButtonHandler" text="Slett alle økter"/>
+    </ToolBar>
+    <ScrollPane layoutY="100.0" prefHeight="300.0" prefWidth="308.0">
+        <VBox fx:id="sessionOverviewVbox" prefWidth="306.0"/>
+    </ScrollPane>
 </AnchorPane>
+

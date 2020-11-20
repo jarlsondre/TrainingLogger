@@ -35,10 +35,14 @@ public class SessionScreenController {
     }
   }
 
+  /**
+   * Oppdaterer sessionOverviewVbox til å innholde
+   * de nåværende Sessionobjektene i sessionLogger-objektet.
+   */
   public void updateSessionOverview(SessionLogger sessionLogger) {
     this.sessionOverviewVbox.getChildren().clear();
     for (Session session : sessionLogger) {
-      VBox box = putSessionInABox(session);
+      VBox box = putSessionInBox(session);
       TitledPane titledPane = new TitledPane(session.getDateAsString(), box);
       titledPane.setAlignment(Pos.CENTER_LEFT);
       titledPane.setExpanded(false);
@@ -47,18 +51,23 @@ public class SessionScreenController {
     }
   }
 
-  private VBox putSessionInABox(Session session) {
+  private VBox putSessionInBox(Session session) {
     VBox sessionBox = new VBox();
-    String sessionAsString = "";
+    StringBuffer sessionAsString = new StringBuffer();
     for (Exercise exercise : session) {
-      sessionAsString += exercise.getName() + ": \n";
+      sessionAsString.append(exercise.getName() + ":\n");
       for (Set set : exercise) {
-        sessionAsString += set.getWeight() + "kg x " + set.getRepetitions() + "\n";
+        sessionAsString.append(set.getWeight() + "kg x " + set.getRepetitions() + "\n");
       }
-      sessionAsString += "\n";
+      sessionAsString.append("\n");
     }
-    Label sessionInALabel = new Label(sessionAsString);
-    sessionBox.getChildren().add(sessionInALabel);
+    if (!session.getDescription().equals("")) {
+      sessionAsString.append("Beskrivelse: \n");
+      sessionAsString.append(session.getDescription());
+    }
+    String finalString = sessionAsString.toString();
+    Label sessionInLabel = new Label(finalString);
+    sessionBox.getChildren().add(sessionInLabel);
     return sessionBox;
   }
 }

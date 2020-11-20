@@ -13,12 +13,20 @@ public class Set {
   private final double weight;
 
   /**
-   * Konstruerer et Set med et gitt antall repetisjoner og en gitt vekt i kg.
+   * Konstruerer et Set med et gitt antall repetisjoner og en gitt vekt i kg. Maksimal
+   * vekt som kan legges inn er 1000kg og maksimalt antall repetisjoner som kan legges
+   * inn er 1000
    *
    * @param repetitions antallet repetisjoner
    * @param weight      antallet kilo
    */
   public Set(int repetitions, double weight) {
+    if (repetitions > 1000) {
+      throw new IllegalArgumentException("Antall repetisjoner kan ikke være høyere enn 1000");
+    }
+    if (weight > 1000) {
+      throw new IllegalArgumentException("Vekt kan ikke være over 1000kg");
+    }
     this.repetitions = repetitions;
     this.weight = weight;
   }
@@ -39,10 +47,5 @@ public class Set {
    */
   public double getWeight() {
     return this.weight;
-  }
-
-  @Override
-  public String toString() {
-    return "repetitions: " + repetitions + ", weight: " + weight;
   }
 }

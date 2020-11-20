@@ -4,10 +4,13 @@ Training Logger er en applikasjon som lar deg loggføre gjennomførte treninger 
 
 ## Beskrivelse
 
-### Grunnidè
 
-Grunnidèen til applikasjonen er en applikasjon som kan brukes både før trening, under trening og etter trening; man skal kunne planlegge en økt, 
-endre en økt og i ettertid bruke informasjonen til økten for å forbedre neste trening. Det langsiktige bildet av grunnidèen er som 
+### Grunnidé
+
+**Merk:** Dette er idéen som motiverer til videre utvikling av applikasjonen og skal ikke nødvendigvis fullføres i løpet av dette prosjektet. 
+
+Grunnidéen til applikasjonen er en applikasjon som kan brukes både før trening, under trening og etter trening; man skal kunne planlegge en økt, 
+endre en økt og i ettertid bruke informasjonen til økten for å forbedre neste trening. Det langsiktige bildet av grunnidéen er som 
 følger: 
 
 I applikasjonen skal man komme til et vindu hvor man kan se tidligere økter. Her kan man utføre følgende handlinger:
@@ -34,56 +37,340 @@ annet kunne holde styr på rundetider, ukentlige kilometer, tempo og personlige 
 ## Logisk struktur
 
 ### Pakkediagram med plantUML: 
+Applikasjonen består av fem ulike moduler som er koblet sammen med hverandre og med andre biblioteker. Core-modulen inneholder alt som har
+med kjernelogikk å gjøre, som i vårt tilfelle er håndtering av økter, øvelser og sett. fxui-modulen bruker denne logikken samt sin egen logikk 
+for å vise et brukergrensesnitt med riktig funksjonalitet. Restserveren kommuniserer med kjerneklassene gjennom RESTapi-et for å håndtere 
+lagring på en fjern lokasjon. Denne koblingen er illustrert i diagrammet under. 
 
-![PakkediagramPUML](resources/PakkeDiagramPUML.png) 
+```plantuml 
+
+Title Pakkediagram
+
+Skinparam Padding 15
+
+component integrationTests-modul as IntModul{
+  package webapp
+}    
+
+component "core-modul" as CoreModul {
+    package core
+    package json
+}
+
+component fxui-modul as FXModul {
+  package ui
+}
+
+component restapi-modul as APIModul{
+  package restapi
+}
+
+component restserver-modul as ServerModul {
+    package restserver
+  
+}
+
+package javafx
+package fxml
+package javax
+package jersey
+
+restserver ..> restapi
+restserver ..> core
+restapi ..> core
+restapi ..> json
+ui ..> core
+ui ..> json
+
+FXModul ...> javafx
+FXModul ...> fxml
+ServerModul ...> jersey 
+ServerModul ...> javax
+APIModul ...> javax
+
+CoreModul -[hidden]down-- IntModul
+
+```
+
 
 ### Klassediagram med plantUML: 
+Applikasjonen benytter seg av samhandling mellom mange klasser i forskjellige moduler. I diagrammet under kan man se 
+en oversikt over de viktigste klassene og hvordan disse klassene henger sammen med hverandre. Man kan se et hierarki av 
+kjerneklassene, samt hvordan disse er koblet opp mot serialisererne. I tillegg kan man se et hierarki av kontrollere 
+som brukes blant annet for å kunne bytte skjerm på en god måte.
 
-![KlassediagramPUML](resources/KlasseDiagramPUML.png) 
+```plantuml
 
-Applikasjonen er bygget opp med en typisk trelagsstruktur. De tre arkitekutrlagene domenelogikk, brukergrensesnitt og persistens 
-er håndtert i de tre pakkene traningLogger.core, .ui og .json. Nedenfor følger en konseptuell beskrivelse av de tre pakkene, deres tilhørende klasser 
-og hvordan disse binder appen sammen til en enhet. 
 
-Vedlagt er også klassediagram. Rød markering er private attributter og prikkete linjer er 
-forbindelser til klasser utenfor sin egen pakke.
+Title Klassediagram
 
-### traningLogger.core
+Package Core-modul {
 
-Består av klassene Session og SessionLogger. Et Session-objekt representerer en enkelt 
-treningsøkt, mens SessionLogger er en container-klasse for Session-objekter. SessionLogger er også ansvarlig 
-for å binde domenelaget sammen med UI-laget og persisenslaget via sine koblinger til ui.AppController og json.FileHandler.
+class Session {
+    - final DateTimeFormatter dateTimeFormatter 
+    - final List<Exercise> exercises
+    - String description 
+    - LocalDateTime date
+    
+    + Session(String d, Exercise... e) 
+    + void AddExercises(Exercise... e)
+    + Iterator<Exercise> iterator()
+}
 
-Klassediagram:
+class Exercise {
+    - final List<Set> sets 
+    - String name
+    
+    + Exercise(String name, Set... sets)
+    + void AddSets(Set... sets)
+    + Iterator<Set> iterator()
+}
 
-![KlassediagramCore](resources/KlasseDiagramCore.png)
+class Set {
+    - final int repetitions
+    - final double weight 
+    
+    + Set(int r, double w)
+}
 
-### trainingLogger.json
+class SessionLogger {
+    - final List<Session> sessions 
+    - final Map<String, Double> records 
+    
+    + SessionLogger(List<Session> s, Map<String, Double> r)
+    + void updateRecordWithSession(Session session)
+    + void delateRecords() 
+    + Iterator<Session> iterator()
+    + void delateAll()
+}
 
-Består av klassene SessionSerializer, SessionDeserializer, TraingingLoggerModule og FileHandler. FileHandler håndterer operasjonene:
-- Skrive liste med sessions til json formatert fil
-- Lese ut listeobjektet fra json formatert fil
+class TrainingLoggerModule {
+    -static final String name
+    +TrainingLoggerModule()
+}
+note left
+    Merk: serialize- og deserializeklassene sine metoder
+    tar inn flere argumenter som ikke er skrevet opp
+    for ryddigheten i diagrammet sin skyld
+end note
 
-SessionSerializer og SessionDeserializer konverterer henholdsvis Sessions til JSON format og JSON format til Sessions.
-TrainingLoggerModule tar vare på hvilken serialiserer og deserialiserer som hører til Session klassen.
+class SesssionLoggerSerializer {
+    +void serialize()
+}
+class SessionSerializer {
+    +void serialize()
+}
+class ExerciseSerializer {
+    +void serialize()
+}
+class SetSerializer {
+    +void serialize()
+}
+class SesssionLoggerDeserializer {
+    + SessionLogger deserialize()
+}
+class SessionDeserializer {
+    + Session deserialize()
+}
+class ExerciseDeserializer {
+    + Exercise deserialize()
+}
+class SetDeserializer {
+    + Set deserialize()
+}
+class TrainingLoggerPersistence 
 
-Klassediagram:
+TrainingLoggerModule --> SesssionLoggerSerializer
+TrainingLoggerModule --> SessionSerializer
+TrainingLoggerModule --> ExerciseSerializer
+TrainingLoggerModule --> SetSerializer
+TrainingLoggerModule --> SesssionLoggerDeserializer
+TrainingLoggerModule --> SessionDeserializer
+TrainingLoggerModule --> ExerciseDeserializer
+TrainingLoggerModule --> SetDeserializer
 
-![KlassediagramJson](resources/KlasseDiagramJson.png)
+SessionLogger -> "*" Session
+SessionLogger .. TrainingLoggerModule
+TrainingLoggerModule -> TrainingLoggerPersistence
+Session -> "*" Exercise
+Exercise -> "*" Set
+}
 
-### traningLogger.ui
+Package fxui-modul {
 
-Består av klassene App og AppController. App er hovedklassen som applikasjonen kjøres fra. AppController 
-binder UI-laget sammen med domenelaget via sin kobling til core.SessionLogger.
+Class App {
 
-Klassediagram:
+    + void start()
+}
+Class AppController
+Class DirectTrainingLoggerAccess {
+    void addSession(session Session)
+    void deleteAll()
+    SessionLogger getSessionLogger()
+    - void saveSessionLogger()
+}
+Class HBoxTemplateController
+Class SessionScreenController
+Class StartScreenController
+Class RecordScreenController
+Class NewSessionScreenController {
+    - Session session
+}
+Class NewExerciseScreenController {
+    - Exercise exercise
+}
+Class RemoteTrainingLoggerAccess {
+    void addSession(session Session)
+    void deleteAll()
+    SessionLogger getSessionLogger()
+}
+Class RemoteApp {
+    
+    + void start()
+}
+Interface TrainingLoggerAccess {
+    void addSession(session Session)
+    void deleteAll()
+    SessionLogger getSessionLogger()
+}
+Class TrainingLoggerController {
+    
+    + void changeToStartScreen
+    + void changeToNewSessionScreen
+    + void changeToSessionScreen
+    + void changeToNewExerciseScreen
+    + void changeToRecordScreen
+}
 
-![KlassediagramUi](resources/KlasseDiagramUi.png)
+App --> AppController
+RemoteApp --> AppController
 
-## Tidligere utseende av applikasjonen
-Dette er et bilde av hvordan applikasjonen ser ut ved gruppeinnlevering 1. 
+AppController --> TrainingLoggerController
 
-![Eksempel](resources/LoggEksempel.png)
+TrainingLoggerController <-- StartScreenController
+TrainingLoggerController <--> NewSessionScreenController
+NewExerciseScreenController -left-> NewSessionScreenController
+TrainingLoggerController <-- NewExerciseScreenController
+TrainingLoggerController <--> SessionScreenController
+TrainingLoggerController <--> RecordScreenController
+TrainingLoggerController ---> TrainingLoggerAccess
+TrainingLoggerAccess ..|> RemoteTrainingLoggerAccess
+TrainingLoggerAccess ..|> DirectTrainingLoggerAccess
+NewExerciseScreenController --> HBoxTemplateController
+}
+
+SetSerializer -[hidden]down- RemoteApp
+
+```
+
+### Sekvensdiagram med PlantUML
+Under kan man se et sekvensdiagram av en bestemt interaksjon med applikasjonen. Interaksjonen er som følger: 
+
+> Brukeren er inne på skjermen for å legge til en øvelse til en tom økt. Brukeren skriver inn "Benkpress" som navn på 
+øvelsen og legger inn ett sett på 60kg med 5 repetisjoner. Deretter trykker brukeren på "legg til øvelse" og så på "legg til økten".
+
+Diagrammet viser interaksjonen mellom de forskjellige klassene etterhvert som de to knappene trykkes på: 
+
+```plantuml
+
+Title Sekvensdiagram
+
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+skinparam maxmessagesize 60
+skinparam sequenceParticipant underline
+
+actor Bruker
+participant "NewExerciseScreenController" as NewExerciseScreenController
+participant "TrainingLoggerController" as TrainingLoggerController
+participant "NewSessionScreenController" as NewSessionScreenController
+participant "NewSessionScreenController" as NewSessionScreenController
+participant "Exercise1" as exercise1
+participant "Exercise2" as exercise2
+participant "Session1" as session1
+participant "Session2" as session2
+participant "RemoteTrainingLoggerAccess" as RemoteAccess
+participant "RESTserver" as server
+
+activate TrainingLoggerController
+activate NewExerciseScreenController
+activate exercise1
+activate NewSessionScreenController
+activate session1
+
+Bruker -> NewExerciseScreenController: Trykker på "Legg til øvelse"
+
+NewExerciseScreenController -> exercise1: setName(getText())
+
+NewExerciseScreenController -> NewSessionScreenController: addExerciseToSession(exercise)
+
+NewSessionScreenController -> session1: addExercises(Exercise1)
+
+NewExerciseScreenController -> exercise2: new Exercise()
+deactivate exercise1
+activate exercise2
+
+NewExerciseScreenController -> NewExerciseScreenController: resetInputFields()
+
+NewExerciseScreenController -> TrainingLoggerController: changeToNewSessionScreen()
+
+TrainingLoggerController -> NewSessionScreenController: updateExerciseOverview()
+
+TrainingLoggerController -> TrainingLoggerController: getChildren().clear()
+deactivate NewExerciseScreenController
+
+TrainingLoggerController -> TrainingLoggerController: getChildren().add(this.newSessionScreen)
+
+TrainingLoggerController -> Bruker: Viser skjerm for ny økt
+
+Bruker -> NewSessionScreenController: trykker på "Legg til økten"
+
+NewSessionScreenController -> session1: setDescription()
+
+NewSessionScreenController -> TrainingLoggerController: addSessionToSessionLogger(Session1)
+
+TrainingLoggerController -> RemoteAccess: addSession(Session1)
+
+RemoteAccess -> server: PUT, Session1
+
+server -> RemoteAccess: True
+
+NewSessionScreenController -> session2: new Session()
+activate session2
+deactivate session1
+
+NewSessionScreenController -> NewSessionScreenController: resetScreen()
+
+NewSessionScreenController -> TrainingLoggerController: changeToStartScreen()
+
+TrainingLoggerController -> TrainingLoggerController: mainVbox.getChildren().clear()
+deactivate NewSessionScreenController
+TrainingLoggerController -> TrainingLoggerController: mainVbox.getChildren().add(this.startScreen)
+
+TrainingLoggerController -> Bruker: Viser startskjerm
+
+```
+
+
+
+## Utseende av applikasjonen ved prosjektslutt
+Utseendet til applikasjonen kan sees fra skjermbildene under:
+
+**Startskjerm og rekorder:**  
+![Startskjerm](images/startskjerm.png "Startskjerm")
+![Rekorder](images/rekorder.png "Rekorder")
+
+**Tidligere økter:**  
+![Tidligere økter](images/tidligere_okter1.png "Tidligere økter")
+![Tidligere økter](images/tidligere_okter2.png "Tidligere økter")
+
+**Ny økt og ny øvelse**  
+![Ny økt](images/ny_okt1.png "Ny økt")
+![Ny øvelse](images/ny_ovelse1.png "Ny øvelse")
+
+
+
+
 
 ## Tenkt utseende til sluttprodukt
 
