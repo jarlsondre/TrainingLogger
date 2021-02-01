@@ -37,7 +37,7 @@ public class SessionLogger implements Iterable<Session> {
       }
       if (records.containsKey(name) && (maxWeight > records.get(name))) {
         records.replace(name, maxWeight);
-      } else {
+      } else if (!records.containsKey(name)){
         records.put(name, maxWeight);
       }
     }
